@@ -1,0 +1,31 @@
+{
+  "name": "matiux/ddd-starter-pack",
+  "license": "MIT",
+  "description": "Basic DDD structure",
+  "require": {
+    "php": ">=7.1",
+    "ramsey/uuid": "^3.7"
+  },
+  "require-dev": {
+  },
+  "authors": [
+    {
+      "name": "Matteo Galacci",
+      "email": "m.galacci@gmail.com"
+    }
+  ],
+  "autoload": {
+    "psr-4": {
+      "DddStarterPack\\": "src/Matiux/DddStarterPack"
+    }
+  },
+  "autoload-dev": {
+    "psr-4": {
+    }
+  },
+  "config": {
+    "platform": {
+      "php": "7.1.8"
+    }
+  }
+}
