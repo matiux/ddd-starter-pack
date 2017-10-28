@@ -4,7 +4,8 @@
   "description": "Basic DDD structure",
   "require": {
     "php": ">=7.1",
-    "ramsey/uuid": "^3.7"
+    "ramsey/uuid": "^3.7",
+    "jms/serializer-bundle": "^2.2"
   },
   "require-dev": {
   },

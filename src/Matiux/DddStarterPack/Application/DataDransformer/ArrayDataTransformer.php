@@ -4,6 +4,8 @@ namespace DddStarterPack\Application\DataTtansformer;
 
 abstract class ArrayDataTransformer implements DataTransformer
 {
+    protected $model;
+
     /**
      * @param \Traversable $domainModelCollection
      * @param int $total
