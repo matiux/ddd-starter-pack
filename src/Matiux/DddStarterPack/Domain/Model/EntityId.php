@@ -6,9 +6,9 @@ use Ramsey\Uuid\Uuid;
 
 abstract class EntityId
 {
-    private $id;
+    protected $id;
 
-    private function __construct(?string $anId = null)
+    protected function __construct(?string $anId = null)
     {
         $this->verifyInputId($anId);
 
@@ -30,7 +30,7 @@ abstract class EntityId
         return $this->id() === $entity->id()->id();
     }
 
-    private function verifyInputId($anId)
+    protected function verifyInputId($anId)
     {
         if (is_object($anId)) {
             throw new \InvalidArgumentException("Entity id input must be scalar type");
