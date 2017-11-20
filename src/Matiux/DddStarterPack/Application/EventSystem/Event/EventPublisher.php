@@ -1,17 +1,19 @@
 <?php
 
-namespace DddStarterPack\Domain\Event;
+namespace DddStarterPack\Application\EventSystem\Event;
 
-class DomainEventPublisher
+use DddStarterPack\Common\EventSystem\Subscriber\EventSubscriber;
+
+class EventPublisher
 {
     /**
-     * @var DomainEventSubscriber[]
+     * @var EventSubscriber[]
      */
     private $subscribers;
 
     private static $instance = null;
 
-    public static function instance(): DomainEventPublisher
+    public static function instance(): EventPublisher
     {
         if (null === static::$instance) {
 
@@ -31,7 +33,7 @@ class DomainEventPublisher
         throw new \BadMethodCallException('Clone is not supported');
     }
 
-    public function subscribe(DomainEventSubscriber $aDomainEventSubscribe)
+    public function subscribe(EventSubscriber $aDomainEventSubscribe)
     {
         $domainEventSubscribeClass = get_class($aDomainEventSubscribe);
 
@@ -47,7 +49,7 @@ class DomainEventPublisher
 
     }
 
-    public function publish(DomainEvent $anEvent)
+    public function publish(Event $anEvent)
     {
         foreach ($this->subscribers as $aSubscriber) {
 

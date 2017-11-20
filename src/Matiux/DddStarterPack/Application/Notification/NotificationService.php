@@ -2,10 +2,16 @@
 
 namespace DddStarterPack\Application\Notification;
 
-use DddStarterPack\Domain\Event\EventStore;
+use DddStarterPack\Common\EventSystem\Event\EventStore;
 use DddStarterPack\Domain\Model\Event\StoredEvent;
 use JMS\Serializer\SerializerBuilder;
 
+/**
+ * This class takes care of sending messages to a queue
+ *
+ * Class NotificationService
+ * @package DddStarterPack\Application\Notification
+ */
 class NotificationService
 {
     private $eventStore;
@@ -23,8 +29,8 @@ class NotificationService
     public function publishNotifications($exchangeName)
     {
         /**
-         * $notifications contiene tutti gli eventi non ancora pubblicati presi da EventStore,
-         * partendo dall'id dell'ultimo evento pubblicato (quello più recente per intenderci)
+         * $notifications contains all the events that have not yet been published,
+         * starting from the id of the last published event (the most recent one)
          */
         $notifications = $this->listUnpublishedNotifications(
             $this->publishedMessageTracker->mostRecentPublishedMessageId($exchangeName)

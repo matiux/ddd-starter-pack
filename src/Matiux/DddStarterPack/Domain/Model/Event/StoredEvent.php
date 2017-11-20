@@ -8,7 +8,7 @@ use DddStarterPack\Domain\Event\DomainEvent;
  * Questa entitità rappresenta un evento persistito
  *
  * Class StoredEvent
- * @package DddStarterPack\Domain\Model\Event
+ * @package DddStarterPack\Domain\Model\EventSystem
  */
 class StoredEvent implements DomainEvent
 {

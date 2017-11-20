@@ -2,7 +2,9 @@
 
 namespace DddStarterPack\Domain\Event;
 
-interface DomainEvent
+use DddStarterPack\Common\EventSystem\Event\Event;
+
+interface DomainEvent extends Event
 {
-    public function occurredOn(): \DateTimeImmutable;
+
 }

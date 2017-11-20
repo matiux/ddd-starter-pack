@@ -6,7 +6,7 @@ namespace DddStarterPack\Domain\Model\Event;
  * Questa entitità rappresenta un evento pubblicato in coda
  *
  * Class PublishedMessage
- * @package DddStarterPack\Domain\Model\Event
+ * @package DddStarterPack\Domain\Model\EventSystem
  */
 class PublishedMessage
 {
