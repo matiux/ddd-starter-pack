@@ -18,7 +18,7 @@ class InMemoryEventStore implements EventStore
     {
         $events = array_filter($this->events, function (StoredEvent $storedEvent) use ($anEventId) {
 
-            return $storedEvent->eventId() >= $anEventId;
+            return $storedEvent->eventId() > $anEventId;
         });
 
         return $events;

@@ -5,6 +5,7 @@ namespace Tests\DddStarterPack\Application\Notification\InMemory;
 use DddStarterPack\Application\Notification\PublishedMessageTracker;
 use DddStarterPack\Domain\Model\Event\PublishedMessage;
 use DddStarterPack\Domain\Model\Event\StoredEvent;
+use ReflectionObject;
 
 class InMemoryPublishedMessageTracker implements PublishedMessageTracker
 {
@@ -24,12 +25,25 @@ class InMemoryPublishedMessageTracker implements PublishedMessageTracker
             return null;
         }
 
-        array_walk($this->publishedMessages, function (PublishedMessage $publishedMessage) {
+        $messageTracked = array_filter($this->publishedMessages, function (PublishedMessage $publishedMessage) use ($exchangeName) {
 
-            $reflectionPublishedMessage = new \ReflectionClass($publishedMessage);
+            $r = new ReflectionObject($publishedMessage);
+            $p = $r->getProperty('exchangeName');
+            $p->setAccessible(true);
 
+            $check = $p->getValue($publishedMessage) == $exchangeName;
 
+            return $check;
         });
+
+        $messageTracked = reset($messageTracked);
+
+        if (!$messageTracked) {
+
+            return null;
+        }
+
+        return $messageTracked->mostRecentPublishedMessageId();
     }
 
     /**
@@ -46,25 +60,32 @@ class InMemoryPublishedMessageTracker implements PublishedMessageTracker
     {
         $maxId = $notification->eventId();
 
-        /**
-         * TODO
-         * finire la versione IN MEMORY
-         */
+        $publishedMessage = array_filter($this->publishedMessages, function (PublishedMessage $publishedMessage) use ($exchangeName) {
 
-        $maxId = $notification->eventId();
+            $r = new ReflectionObject($publishedMessage);
+            $p = $r->getProperty('exchangeName');
+            $p->setAccessible(true);
 
-        $publishedMessage = $this->findOneByExchangeName($exchangeName);
+            $check = $p->getValue($publishedMessage) == $exchangeName;
 
-        if (null === $publishedMessage) {
+            return $check;
+
+        });
+
+        if (empty($publishedMessage)) {
 
             $publishedMessage = new PublishedMessage(
                 $exchangeName,
                 $maxId
             );
+
+        } else {
+
+            $publishedMessage = reset($publishedMessage);
         }
 
         $publishedMessage->updateMostRecentPublishedMessageId($maxId);
 
-        $this->getEntityManager()->persist($publishedMessage);
+        $this->publishedMessages[] = $publishedMessage;
     }
 }

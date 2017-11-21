@@ -44,7 +44,7 @@ class PersistAllAventSubscriberTest extends TestCase
         $this->subscriber->handle(new FakeEvent(Uuid::uuid4()));
         $this->subscriber->handle(new FakeEvent(Uuid::uuid4()));
 
-        $events = $this->eventStore->allStoredEventsSince(1);
+        $events = $this->eventStore->allStoredEventsSince(0);
 
         $this->assertCount(2, $events);
     }
