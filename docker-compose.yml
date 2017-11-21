@@ -1,0 +1,12 @@
+version: '3'
+
+services:
+  php:
+    #build: ./docker/php/7.1-fpm
+    image: matiux/php:7.1-fpm
+    tty: true # -t option in docker
+    stdin_open: true # -i option in docker
+    volumes:
+      - ./:/var/www/app
+    environment:
+      - APP_ENV=${APP_ENV}

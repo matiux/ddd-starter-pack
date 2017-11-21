@@ -1,8 +1,9 @@
 <?php
 
-namespace DddStarterPack\Application\EventSystem\Event;
+namespace DddStarterPack\Application\Event\Publisher;
 
-use DddStarterPack\Common\EventSystem\Subscriber\EventSubscriber;
+use DddStarterPack\Application\Event\Subscriber\EventSubscriber;
+use DddStarterPack\Domain\Model\Event\Event;
 
 class EventPublisher
 {
@@ -33,18 +34,18 @@ class EventPublisher
         throw new \BadMethodCallException('Clone is not supported');
     }
 
-    public function subscribe(EventSubscriber $aDomainEventSubscribe)
+    public function subscribe(EventSubscriber $eventSubscriber)
     {
-        $domainEventSubscribeClass = get_class($aDomainEventSubscribe);
+        $eventSubscribeClass = get_class($eventSubscriber);
 
-        $found = (bool)array_filter($this->subscribers, function ($v) use ($domainEventSubscribeClass) {
+        $found = (bool)array_filter($this->subscribers, function ($v) use ($eventSubscribeClass) {
 
-            return get_class($v) === $domainEventSubscribeClass;
+            return get_class($v) === $eventSubscribeClass;
         });
 
         if (!$found) {
 
-            $this->subscribers[] = $aDomainEventSubscribe;
+            $this->subscribers[] = $eventSubscriber;
         }
 
     }

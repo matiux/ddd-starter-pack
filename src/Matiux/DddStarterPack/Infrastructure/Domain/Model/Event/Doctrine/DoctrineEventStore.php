@@ -1,8 +1,8 @@
 <?php
 
-namespace DddStarterPack\Infrastructure\Common\EventSystem\Event\Doctrine;
+namespace DddStarterPack\Infrastructure\Domain\Model\Event\Doctrine;
 
-use DddStarterPack\Common\EventSystem\Event\EventStore;
+use DddStarterPack\Domain\Model\Event\EventStore;
 use DddStarterPack\Domain\Model\Event\StoredEvent;
 use Doctrine\ORM\EntityRepository;
 use JMS\Serializer\SerializerBuilder;
@@ -49,5 +49,10 @@ class DoctrineEventStore extends EntityRepository implements EventStore
     public function setSerializer(Serializer $serializer)
     {
         $this->serializer = $serializer;
+    }
+
+    public function nextId(): int
+    {
+
     }
 }

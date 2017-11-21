@@ -1,0 +1,13 @@
+#!/usr/bin/env bash
+
+# Set environment variables for dev
+
+export APP_ENV=${APP_ENV:-dev}
+
+#echo $APP_ENV
+
+if [ $# -gt 0 ]; then
+    docker-compose "$@"
+else
+    docker-compose ps
+fi

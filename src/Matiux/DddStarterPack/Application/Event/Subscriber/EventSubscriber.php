@@ -1,8 +1,8 @@
 <?php
 
-namespace DddStarterPack\Application\EventSystem\Subscriber;
+namespace DddStarterPack\Application\Event\Subscriber;
 
-use DddStarterPack\Application\EventSystem\Event\Event;
+use DddStarterPack\Domain\Model\Event\Event;
 
 interface EventSubscriber
 {

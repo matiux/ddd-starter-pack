@@ -1,12 +1,12 @@
 <?php
 
-namespace DddStarterPack\Application\EventSystem\Event;
-
-use DddStarterPack\Domain\Model\Event\StoredEvent;
+namespace DddStarterPack\Domain\Model\Event;
 
 interface EventStore
 {
     public function append(StoredEvent $storedEvent);
 
     public function allStoredEventsSince($anEventId);
+
+    public function nextId(): int;
 }

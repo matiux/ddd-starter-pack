@@ -2,7 +2,7 @@
 
 namespace DddStarterPack\Application\Notification;
 
-use DddStarterPack\Common\EventSystem\Event\EventStore;
+use DddStarterPack\Domain\Model\Event\EventStore;
 use DddStarterPack\Domain\Model\Event\StoredEvent;
 use JMS\Serializer\SerializerBuilder;
 

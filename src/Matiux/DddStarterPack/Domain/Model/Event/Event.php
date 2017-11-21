@@ -1,6 +1,6 @@
 <?php
 
-namespace DddStarterPack\Application\EventSystem\Event;
+namespace DddStarterPack\Domain\Model\Event;
 
 interface Event
 {
