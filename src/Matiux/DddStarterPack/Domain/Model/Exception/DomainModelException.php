@@ -4,7 +4,7 @@ namespace DddStarterPack\Domain\Model\Exception;
 
 use Throwable;
 
-abstract class DomainModelErrorException extends \Exception
+abstract class DomainModelException extends \Exception
 {
     const message = 'An error has occured';
 
@@ -15,8 +15,13 @@ abstract class DomainModelErrorException extends \Exception
         parent::__construct($message, $code, $previous);
     }
 
-    public static function errorMessage($message)
+    public static function errorMessage(string $details, bool $append = true): string
     {
-        return static::message . " [$message]";
+        $message =
+            $append
+                ? static::message . " [$details]"
+                : $details;
+
+        return $message;
     }
 }

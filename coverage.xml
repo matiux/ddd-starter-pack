@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<coverage generated="1511275839">
-  <project timestamp="1511275839">
+<coverage generated="1511482007">
+  <project timestamp="1511482007">
     <package name="DddStarterPack\Application\DataTtansformer">
       <file name="/var/www/app/src/Matiux/DddStarterPack/Application/DataDransformer/ArrayCollectionDataTransformer.php">
         <class name="ArrayCollectionDataTransformer" namespace="DddStarterPack\Application\DataTtansformer">
