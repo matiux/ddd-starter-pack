@@ -1,6 +1,6 @@
 <?php
 
-namespace DddStarterPack\Domain\Model\Exception\Repository;
+namespace DddStarterPack\Domain\Model\Repository;
 
 interface FilterableRepository
 {

@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<coverage generated="1511798080">
-  <project timestamp="1511798080">
+<coverage generated="1511800374">
+  <project timestamp="1511800374">
     <package name="DddStarterPack\Application\DataTransformer">
       <file name="/var/www/Misc/DddStarterPack/src/Matiux/DddStarterPack/Application/DataTransformer/ArrayCollectionDataTransformer.php">
         <class name="DddStarterPack\Application\DataTransformer\ArrayCollectionDataTransformer" namespace="DddStarterPack\Application\DataTransformer">
@@ -585,7 +585,7 @@
       </file>
     </package>
     <file name="/var/www/Misc/DddStarterPack/src/Matiux/DddStarterPack/Domain/Model/Repository/FilterableRepository.php">
-      <metrics loc="10" ncloc="10" classes="0" methods="0" coveredmethods="0" conditionals="0" coveredconditionals="0" statements="0" coveredstatements="0" elements="0" coveredelements="0"/>
+      <metrics loc="12" ncloc="12" classes="0" methods="0" coveredmethods="0" conditionals="0" coveredconditionals="0" statements="0" coveredstatements="0" elements="0" coveredelements="0"/>
     </file>
     <package name="DddStarterPack\Infrastructure\Application\Notification">
       <file name="/var/www/Misc/DddStarterPack/src/Matiux/DddStarterPack/Infrastructure/Application/Notification/AmazonSqsMessageProducer.php">
@@ -690,6 +690,6 @@
         <metrics loc="58" ncloc="53" classes="1" methods="5" coveredmethods="0" conditionals="0" coveredconditionals="0" statements="24" coveredstatements="0" elements="29" coveredelements="0"/>
       </file>
     </package>
-    <metrics files="41" loc="1273" ncloc="1118" classes="24" methods="91" coveredmethods="19" conditionals="0" coveredconditionals="0" statements="366" coveredstatements="69" elements="457" coveredelements="88"/>
+    <metrics files="41" loc="1275" ncloc="1120" classes="24" methods="91" coveredmethods="19" conditionals="0" coveredconditionals="0" statements="366" coveredstatements="69" elements="457" coveredelements="88"/>
   </project>
 </coverage>
