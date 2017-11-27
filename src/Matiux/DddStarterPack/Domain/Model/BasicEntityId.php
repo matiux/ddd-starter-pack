@@ -25,9 +25,9 @@ abstract class BasicEntityId implements EntityId
         return $this->id;
     }
 
-    public function equals(IdentifiableDomainObject $entity): bool
+    public function equals(EntityId $entityId): bool
     {
-        return $this->id() === $entity->id()->id();
+        return $this->id() === $entityId->id();
     }
 
     private function verifyInputId($anId)

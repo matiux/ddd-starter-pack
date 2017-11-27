@@ -8,7 +8,7 @@ interface EntityId
 
     public function id(): string;
 
-    public function equals(IdentifiableDomainObject $entity): bool;
+    public function equals(EntityId $entityId): bool;
 
     public function __toString();
 }
