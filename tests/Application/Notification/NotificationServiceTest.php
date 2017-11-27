@@ -2,12 +2,11 @@
 
 namespace Tests\DddStarterPack\Application\Notification;
 
-use DddStarterPack\Application\Event\Subscriber\PersistAllEventSubscriber;
 use DddStarterPack\Application\Notification\MessageProducer;
 use DddStarterPack\Application\Notification\NotificationService;
-use DddStarterPack\Application\Notification\PublishedMessageTracker;
 use DddStarterPack\Domain\Model\Event\EventStore;
 use DddStarterPack\Domain\Model\Event\StoredEvent;
+use DddStarterPack\Domain\Model\Message\PublishedMessageTracker;
 use PHPUnit\Framework\TestCase;
 use Ramsey\Uuid\Uuid;
 use Tests\DddStarterPack\Application\Notification\InMemory\InMemoryPublishedMessageTracker;

@@ -2,9 +2,9 @@
 
 namespace Tests\DddStarterPack\Application\Notification\InMemory;
 
-use DddStarterPack\Application\Notification\PublishedMessageTracker;
-use DddStarterPack\Domain\Model\Event\PublishedMessage;
 use DddStarterPack\Domain\Model\Event\StoredEvent;
+use DddStarterPack\Domain\Model\Message\PublishedMessage;
+use DddStarterPack\Domain\Model\Message\PublishedMessageTracker;
 use ReflectionObject;
 
 class InMemoryPublishedMessageTracker implements PublishedMessageTracker

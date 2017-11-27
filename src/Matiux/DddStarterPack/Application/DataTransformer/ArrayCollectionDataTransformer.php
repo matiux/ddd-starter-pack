@@ -1,6 +1,6 @@
 <?php
 
-namespace DddStarterPack\Application\DataTtansformer;
+namespace DddStarterPack\Application\DataTransformer;
 
 use DddStarterPack\Domain\Model\IdentifiableDomainObject;
 

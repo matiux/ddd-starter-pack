@@ -4,6 +4,7 @@ namespace DddStarterPack\Application\Notification;
 
 use DddStarterPack\Domain\Model\Event\EventStore;
 use DddStarterPack\Domain\Model\Event\StoredEvent;
+use DddStarterPack\Domain\Model\Message\PublishedMessageTracker;
 use JMS\Serializer\SerializerBuilder;
 
 /**
