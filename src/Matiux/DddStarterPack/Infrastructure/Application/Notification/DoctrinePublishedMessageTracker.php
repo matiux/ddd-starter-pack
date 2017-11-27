@@ -2,9 +2,9 @@
 
 namespace DddStarterPack\Infrastructure\Application\Notification;
 
-use DddStarterPack\Domain\Model\Event\PublishedMessage;
+use DddStarterPack\Domain\Model\Message\PublishedMessage;
+use DddStarterPack\Domain\Model\Message\PublishedMessageTracker;
 use Doctrine\ORM\EntityRepository;
-use DddStarterPack\Application\Notification\PublishedMessageTracker;
 use DddStarterPack\Domain\Model\Event\StoredEvent;
 
 class DoctrinePublishedMessageTracker extends EntityRepository implements PublishedMessageTracker

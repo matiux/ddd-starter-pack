@@ -6,22 +6,25 @@ use Throwable;
 
 abstract class DomainModelException extends \Exception
 {
-    const message = 'An error has occured';
+    const MESSAGE = 'An error has occured';
 
-    public function __construct($message = "", $code = 500, Throwable $previous = null)
+    public function __construct(string $message = "", int $code = 500, Throwable $previous = null)
     {
-        $message = $message ?: static::message;
+        $message = $message ?: static::MESSAGE;
 
         parent::__construct($message, $code, $previous);
     }
 
-    public static function errorMessage(string $details, bool $append = true): string
+    public function toArray()
     {
-        $message =
-            $append
-                ? static::message . " [$details]"
-                : $details;
+        $a['code'] = $this->getCode();
+        $a['message'] = $this->getMessage();
 
-        return $message;
+        return $a;
+    }
+
+    public function toJson(): string
+    {
+        return json_encode($this->toArray());
     }
 }

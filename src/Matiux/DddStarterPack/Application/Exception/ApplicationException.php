@@ -6,17 +6,25 @@ use Throwable;
 
 abstract class ApplicationException extends \Exception
 {
-    const message = 'An error was occured';
+    const MESSAGE = 'An error has occured';
 
-    public function __construct($message = "", $code = 500, Throwable $previous = null)
+    public function __construct(string $message = "", int $code = 500, Throwable $previous = null)
     {
-        $message = $message ?: static::message;
+        $message = $message ?: static::MESSAGE;
 
         parent::__construct($message, $code, $previous);
     }
 
-    public static function errorMessage($message)
+    public function toArray()
     {
-        return static::message . " [$message]";
+        $a['code'] = $this->getCode();
+        $a['message'] = $this->getMessage();
+
+        return $a;
+    }
+
+    public function toJson(): string
+    {
+        return json_encode($this->toArray());
     }
 }

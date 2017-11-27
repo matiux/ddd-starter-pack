@@ -1,6 +1,6 @@
 <?php
 
-namespace DddStarterPack\Application\Notification;
+namespace DddStarterPack\Domain\Model\Message;
 
 use DddStarterPack\Domain\Model\Event\StoredEvent;
 

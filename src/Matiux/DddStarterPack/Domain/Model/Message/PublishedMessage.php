@@ -1,6 +1,6 @@
 <?php
 
-namespace DddStarterPack\Domain\Model\Event;
+namespace DddStarterPack\Domain\Model\Message;
 
 /**
  * Questa entitità rappresenta l'ultimo evento pubblicato in coda

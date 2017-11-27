@@ -6,7 +6,7 @@ use Throwable;
 
 abstract class DomainModelNotFoundException extends DomainModelException
 {
-    const message = 'Model not found';
+    const MESSAGE = 'Model not found';
 
     public function __construct($message = "", $code = 404, Throwable $previous = null)
     {
