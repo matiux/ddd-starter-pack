@@ -6,18 +6,38 @@ class InMemoryMessageQueue
 {
     private $messages = [];
 
-    public function popMessage()
+    public function __construct()
     {
-        return array_pop($this->messages);
+        $this->messages['default'] = [];
     }
 
-    public function appendMessage($message)
+    public function popMessage(string $queue = 'default'): ?string
     {
-        array_unshift($this->messages, $message);
+        if (array_key_exists($queue, $this->messages)) {
+
+            return array_pop($this->messages[$queue]);
+        }
+
+        throw new \InvalidArgumentException("Queue '$queue' doesn't exists");
     }
 
-    public function count()
+    public function appendMessage($message, string $queue = 'default')
     {
-        return count($this->messages);
+        if (array_key_exists($queue, $this->messages)) {
+
+            array_unshift($this->messages[$queue], $message);
+        }
+
+        throw new \InvalidArgumentException("Queue '$queue' doesn't exists");
+    }
+
+    public function count(string $queue = 'default')
+    {
+        if (array_key_exists($queue, $this->messages)) {
+
+            return count($this->messages[$queue]);
+        }
+
+        throw new \InvalidArgumentException("Queue '$queue' doesn't exists");
     }
 }

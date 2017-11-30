@@ -10,7 +10,6 @@ class InMemoryMessageConsumer implements MessageConsumer
 
     public function __construct(InMemoryMessageQueue $messageQueue)
     {
-
         $this->messageQueue = $messageQueue;
     }
 
