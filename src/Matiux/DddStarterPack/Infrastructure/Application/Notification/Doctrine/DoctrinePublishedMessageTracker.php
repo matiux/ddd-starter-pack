@@ -1,6 +1,6 @@
 <?php
 
-namespace DddStarterPack\Infrastructure\Application\Notification;
+namespace DddStarterPack\Infrastructure\Application\Notification\Doctrine;
 
 use DddStarterPack\Domain\Model\Message\PublishedMessage;
 use DddStarterPack\Domain\Model\Message\PublishedMessageTracker;

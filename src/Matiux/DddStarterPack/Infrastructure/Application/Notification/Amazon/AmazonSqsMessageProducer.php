@@ -1,6 +1,6 @@
 <?php
 
-namespace DddStarterPack\Infrastructure\Application\Notification;
+namespace DddStarterPack\Infrastructure\Application\Notification\Amazon;
 
 use DddStarterPack\Application\Notification\MessageProducer;
 

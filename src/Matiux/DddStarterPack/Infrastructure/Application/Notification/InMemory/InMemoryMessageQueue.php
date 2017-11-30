@@ -1,8 +1,8 @@
 <?php
 
-namespace Tests\DddStarterPack\Application\Notification;
+namespace DddStarterPack\Infrastructure\Application\Notification\InMemory;
 
-class QueueMock
+class InMemoryMessageQueue
 {
     private $messages = [];
 
