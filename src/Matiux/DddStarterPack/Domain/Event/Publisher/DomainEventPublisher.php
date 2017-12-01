@@ -1,9 +1,9 @@
 <?php
 
-namespace DddStarterPack\Domain\Service\EventPublisher;
+namespace DddStarterPack\Domain\Event\Publisher;
 
+use DddStarterPack\Domain\Event\Subscriber\EventSubscriber;
 use DddStarterPack\Domain\Model\Event\DomainEvent;
-use DddStarterPack\Domain\Service\EventSubscriber\EventSubscriber;
 
 class DomainEventPublisher
 {

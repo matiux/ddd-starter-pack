@@ -2,7 +2,7 @@
 
 namespace Tests\DddStarterPack\Fake\Infrastructure\Serializer;
 
-use DddStarterPack\Application\Serializer\Serializer;
+use DddStarterPack\Domain\Event\Subscriber\Serializer;
 use JMS\Serializer\SerializerBuilder;
 use phpDocumentor\Reflection\Types\Scalar;
 

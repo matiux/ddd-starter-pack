@@ -1,8 +1,7 @@
 <?php
 
-namespace DddStarterPack\Domain\Service\EventSubscriber;
+namespace DddStarterPack\Domain\Event\Subscriber;
 
-use DddStarterPack\Application\Serializer\Serializer;
 use DddStarterPack\Domain\Model\Event\DomainEvent;
 use DddStarterPack\Domain\Model\Event\EventStore;
 use DddStarterPack\Domain\Model\Event\StoredEventFactory;

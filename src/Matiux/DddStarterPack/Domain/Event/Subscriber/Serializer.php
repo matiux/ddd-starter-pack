@@ -1,6 +1,6 @@
 <?php
 
-namespace DddStarterPack\Application\Serializer;
+namespace DddStarterPack\Domain\Event\Subscriber;
 
 use phpDocumentor\Reflection\Types\Scalar;
 

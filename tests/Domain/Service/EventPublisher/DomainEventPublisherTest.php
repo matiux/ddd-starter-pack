@@ -2,7 +2,7 @@
 
 namespace Tests\DddStarterPack\Domain\Service\EventPublisher;
 
-use DddStarterPack\Domain\Service\EventPublisher\DomainEventPublisher;
+use DddStarterPack\Domain\Event\Publisher\DomainEventPublisher;
 use PHPUnit\Framework\TestCase;
 use Ramsey\Uuid\Uuid;
 use Tests\DddStarterPack\Fake\Domain\Model\Event\FakeDomainEvent;
@@ -26,7 +26,7 @@ class DomainEventPublisherTest extends TestCase
     {
         $eventPublisher = DomainEventPublisher::instance();
 
-        $subscriber = \Mockery::mock('DddStarterPack\Domain\Service\EventSubscriber\EventSubscriber');
+        $subscriber = \Mockery::mock('DddStarterPack\Domain\Event\Subscriber\EventSubscriber');
         $subscriber->shouldReceive('isSubscribedTo')
             ->with(\Mockery::type('DddStarterPack\Domain\Model\Event\DomainEvent'))
             ->once()
