@@ -1,22 +1,22 @@
 <?php
 
-namespace Tests\DddStarterPack\Application\Event\Publisher;
+namespace Tests\DddStarterPack\Domain\Service\EventPublisher;
 
-use DddStarterPack\Application\Event\Publisher\EventPublisher;
+use DddStarterPack\Domain\Service\EventPublisher\DomainEventPublisher;
 use PHPUnit\Framework\TestCase;
 use Ramsey\Uuid\Uuid;
 use Tests\DddStarterPack\Fake\Domain\Model\Event\FakeEvent;
 
-class EventPublisherTest extends TestCase
+class DomainEventPublisherTest extends TestCase
 {
     /**
      * @test
      */
     public function it_should_be_instantiable_by_static_method()
     {
-        $eventPublisher = EventPublisher::instance();
+        $eventPublisher = DomainEventPublisher::instance();
 
-        $this->assertInstanceOf(EventPublisher::class, $eventPublisher);
+        $this->assertInstanceOf(DomainEventPublisher::class, $eventPublisher);
     }
 
     /**
@@ -24,9 +24,9 @@ class EventPublisherTest extends TestCase
      */
     public function it_should_not_accept_two_equal_event_subscriber()
     {
-        $eventPublisher = EventPublisher::instance();
+        $eventPublisher = DomainEventPublisher::instance();
 
-        $subscriber = \Mockery::mock('DddStarterPack\Application\Event\Subscriber\EventSubscriber');
+        $subscriber = \Mockery::mock('DddStarterPack\Domain\Service\EventSubscriber\EventSubscriber');
         $subscriber->shouldReceive('isSubscribedTo')
             ->with(\Mockery::type('DddStarterPack\Domain\Model\Event\Event'))
             ->once()
@@ -51,7 +51,7 @@ class EventPublisherTest extends TestCase
      */
     public function it_should_not_be_cloned()
     {
-        $eventPublisher = EventPublisher::instance();
+        $eventPublisher = DomainEventPublisher::instance();
 
         $clone = clone $eventPublisher;
     }

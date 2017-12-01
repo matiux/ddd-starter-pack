@@ -1,6 +1,6 @@
 <?php
 
-namespace DddStarterPack\Application\Event\Subscriber;
+namespace DddStarterPack\Domain\Service\EventSubscriber;
 
 use DddStarterPack\Domain\Model\Event\Event;
 

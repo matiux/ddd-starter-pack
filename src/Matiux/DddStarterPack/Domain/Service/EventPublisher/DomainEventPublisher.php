@@ -1,11 +1,11 @@
 <?php
 
-namespace DddStarterPack\Application\Event\Publisher;
+namespace DddStarterPack\Domain\Service\EventPublisher;
 
-use DddStarterPack\Application\Event\Subscriber\EventSubscriber;
 use DddStarterPack\Domain\Model\Event\Event;
+use DddStarterPack\Domain\Service\EventSubscriber\EventSubscriber;
 
-class EventPublisher
+class DomainEventPublisher
 {
     /**
      * @var EventSubscriber[]
@@ -14,7 +14,7 @@ class EventPublisher
 
     private static $instance = null;
 
-    public static function instance(): EventPublisher
+    public static function instance(): DomainEventPublisher
     {
         if (null === static::$instance) {
 
