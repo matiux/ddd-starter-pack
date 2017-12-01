@@ -2,7 +2,7 @@
 
 namespace DddStarterPack\Domain\Model\Event;
 
-interface Event
+interface DomainEvent
 {
     public function occurredOn(): \DateTimeImmutable;
 }

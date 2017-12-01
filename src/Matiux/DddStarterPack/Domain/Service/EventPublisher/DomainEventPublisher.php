@@ -2,7 +2,7 @@
 
 namespace DddStarterPack\Domain\Service\EventPublisher;
 
-use DddStarterPack\Domain\Model\Event\Event;
+use DddStarterPack\Domain\Model\Event\DomainEvent;
 use DddStarterPack\Domain\Service\EventSubscriber\EventSubscriber;
 
 class DomainEventPublisher
@@ -50,7 +50,7 @@ class DomainEventPublisher
 
     }
 
-    public function publish(Event $anEvent)
+    public function publish(DomainEvent $anEvent)
     {
         foreach ($this->subscribers as $aSubscriber) {
 

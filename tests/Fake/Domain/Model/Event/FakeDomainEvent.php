@@ -2,9 +2,9 @@
 
 namespace Tests\DddStarterPack\Fake\Domain\Model\Event;
 
-use DddStarterPack\Domain\Model\Event\Event;
+use DddStarterPack\Domain\Model\Event\DomainEvent;
 
-class FakeEvent implements Event
+class FakeDomainEvent implements DomainEvent
 {
     private $entityId;
     private $occuredOn;

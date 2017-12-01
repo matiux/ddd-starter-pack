@@ -3,7 +3,7 @@
 namespace DddStarterPack\Infrastructure\Domain\Model\Event\Doctrine;
 
 use DddStarterPack\Domain\Model\Event\EventStore;
-use DddStarterPack\Domain\Model\Event\StoredEvent;
+use DddStarterPack\Domain\Model\Event\StoredDomainEvent;
 use Doctrine\ORM\EntityRepository;
 use JMS\Serializer\SerializerBuilder;
 
@@ -11,7 +11,7 @@ class DoctrineEventStore extends EntityRepository implements EventStore
 {
     private $serializer;
 
-    public function append(StoredEvent $storedEvent)
+    public function append(StoredDomainEvent $storedEvent)
     {
         $this->getEntityManager()->persist($storedEvent);
     }

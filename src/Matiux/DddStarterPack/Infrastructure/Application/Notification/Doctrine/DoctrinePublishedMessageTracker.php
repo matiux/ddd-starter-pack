@@ -5,7 +5,7 @@ namespace DddStarterPack\Infrastructure\Application\Notification\Doctrine;
 use DddStarterPack\Domain\Model\Message\PublishedMessage;
 use DddStarterPack\Domain\Model\Message\PublishedMessageTracker;
 use Doctrine\ORM\EntityRepository;
-use DddStarterPack\Domain\Model\Event\StoredEvent;
+use DddStarterPack\Domain\Model\Event\StoredDomainEvent;
 
 class DoctrinePublishedMessageTracker extends EntityRepository implements PublishedMessageTracker
 {
@@ -36,10 +36,10 @@ class DoctrinePublishedMessageTracker extends EntityRepository implements Publis
      * o magari può essere comodo nel caso in cui sia necessario ripubblicarlo
      *
      * @param string $exchangeName
-     * @param StoredEvent $notification
+     * @param StoredDomainEvent $notification
      * @return null
      */
-    public function trackMostRecentPublishedMessage(string $exchangeName, StoredEvent $notification)
+    public function trackMostRecentPublishedMessage(string $exchangeName, StoredDomainEvent $notification)
     {
         if (!$notification) {
 

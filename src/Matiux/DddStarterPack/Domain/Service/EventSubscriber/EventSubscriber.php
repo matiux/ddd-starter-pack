@@ -2,11 +2,11 @@
 
 namespace DddStarterPack\Domain\Service\EventSubscriber;
 
-use DddStarterPack\Domain\Model\Event\Event;
+use DddStarterPack\Domain\Model\Event\DomainEvent;
 
 interface EventSubscriber
 {
-    public function handle(Event $anEvent);
+    public function handle(DomainEvent $anEvent);
 
-    public function isSubscribedTo(Event $aDomainEvent): bool;
+    public function isSubscribedTo(DomainEvent $aDomainEvent): bool;
 }

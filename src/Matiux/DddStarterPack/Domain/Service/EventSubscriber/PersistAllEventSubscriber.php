@@ -3,7 +3,7 @@
 namespace DddStarterPack\Domain\Service\EventSubscriber;
 
 use DddStarterPack\Application\Serializer\Serializer;
-use DddStarterPack\Domain\Model\Event\Event;
+use DddStarterPack\Domain\Model\Event\DomainEvent;
 use DddStarterPack\Domain\Model\Event\EventStore;
 use DddStarterPack\Domain\Model\Event\StoredEventFactory;
 
@@ -20,7 +20,7 @@ class PersistAllEventSubscriber implements EventSubscriber
         $this->storedEventFactory = $storedEventFactory;
     }
 
-    public function handle(Event $anEvent)
+    public function handle(DomainEvent $anEvent)
     {
         $serializedEvents = $this->serializer->serialize($anEvent, 'json');
 
@@ -29,7 +29,7 @@ class PersistAllEventSubscriber implements EventSubscriber
         $this->eventStore->append($storedEvent);
     }
 
-    public function isSubscribedTo(Event $aDomainEvent): bool
+    public function isSubscribedTo(DomainEvent $aDomainEvent): bool
     {
         return true;
     }

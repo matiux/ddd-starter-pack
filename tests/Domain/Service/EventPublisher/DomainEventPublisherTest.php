@@ -5,7 +5,7 @@ namespace Tests\DddStarterPack\Domain\Service\EventPublisher;
 use DddStarterPack\Domain\Service\EventPublisher\DomainEventPublisher;
 use PHPUnit\Framework\TestCase;
 use Ramsey\Uuid\Uuid;
-use Tests\DddStarterPack\Fake\Domain\Model\Event\FakeEvent;
+use Tests\DddStarterPack\Fake\Domain\Model\Event\FakeDomainEvent;
 
 class DomainEventPublisherTest extends TestCase
 {
@@ -28,18 +28,18 @@ class DomainEventPublisherTest extends TestCase
 
         $subscriber = \Mockery::mock('DddStarterPack\Domain\Service\EventSubscriber\EventSubscriber');
         $subscriber->shouldReceive('isSubscribedTo')
-            ->with(\Mockery::type('DddStarterPack\Domain\Model\Event\Event'))
+            ->with(\Mockery::type('DddStarterPack\Domain\Model\Event\DomainEvent'))
             ->once()
             ->andReturn(true);
 
         $subscriber->shouldReceive('handle')
-            ->with(\Mockery::type('DddStarterPack\Domain\Model\Event\Event'))
+            ->with(\Mockery::type('DddStarterPack\Domain\Model\Event\DomainEvent'))
             ->once();
 
         $eventPublisher->subscribe($subscriber);
         $eventPublisher->subscribe($subscriber);
 
-        $eventPublisher->publish(new FakeEvent(Uuid::uuid4()));
+        $eventPublisher->publish(new FakeDomainEvent(Uuid::uuid4()));
 
         $this->assertNotNull($eventPublisher);
     }

@@ -5,12 +5,12 @@ namespace Tests\DddStarterPack\Application\Notification;
 use DddStarterPack\Application\Notification\MessageProducer;
 use DddStarterPack\Application\Notification\NotificationService;
 use DddStarterPack\Domain\Model\Event\EventStore;
-use DddStarterPack\Domain\Model\Event\StoredEvent;
+use DddStarterPack\Domain\Model\Event\StoredDomainEvent;
 use DddStarterPack\Domain\Model\Message\PublishedMessageTracker;
 use PHPUnit\Framework\TestCase;
 use Ramsey\Uuid\Uuid;
 use Tests\DddStarterPack\Application\Notification\InMemory\InMemoryPublishedMessageTracker;
-use Tests\DddStarterPack\Fake\Domain\Model\Event\FakeEvent;
+use Tests\DddStarterPack\Fake\Domain\Model\Event\FakeDomainEvent;
 use Tests\DddStarterPack\Fake\Infrastructure\Domain\Model\Event\InMemory\InMemoryEventStore;
 use Tests\DddStarterPack\Fake\Infrastructure\Domain\Model\Event\InMemory\InMemoryStoredEventFactory;
 use Tests\DddStarterPack\Fake\Infrastructure\Serializer\FakeEventSerializer;
@@ -28,7 +28,7 @@ class NotificationServiceTest extends TestCase
     private $eventStore;
 
     /**
-     * @var StoredEvent
+     * @var StoredDomainEvent
      */
     private $storedEvent01;
 
@@ -43,8 +43,8 @@ class NotificationServiceTest extends TestCase
 
         $this->eventStore = new InMemoryEventStore();
 
-        $event01 = new FakeEvent(Uuid::uuid4());
-        $event02 = new FakeEvent(Uuid::uuid4());
+        $event01 = new FakeDomainEvent(Uuid::uuid4());
+        $event02 = new FakeDomainEvent(Uuid::uuid4());
 
         $storedEventFactory = new InMemoryStoredEventFactory($this->eventStore);
 

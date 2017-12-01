@@ -2,7 +2,7 @@
 
 namespace Tests\DddStarterPack\Application\Notification\InMemory;
 
-use DddStarterPack\Domain\Model\Event\StoredEvent;
+use DddStarterPack\Domain\Model\Event\StoredDomainEvent;
 use DddStarterPack\Domain\Model\Message\PublishedMessage;
 use DddStarterPack\Domain\Model\Message\PublishedMessageTracker;
 use ReflectionObject;
@@ -53,10 +53,10 @@ class InMemoryPublishedMessageTracker implements PublishedMessageTracker
      * o magari può essere comodo nel caso in cui sia necessario ripubblicarlo
      *
      * @param string $exchangeName
-     * @param StoredEvent $notification
+     * @param StoredDomainEvent $notification
      * @return null
      */
-    public function trackMostRecentPublishedMessage(string $exchangeName, StoredEvent $notification)
+    public function trackMostRecentPublishedMessage(string $exchangeName, StoredDomainEvent $notification)
     {
         $maxId = $notification->eventId();
 
