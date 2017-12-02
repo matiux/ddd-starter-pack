@@ -4,7 +4,9 @@ namespace DddStarterPack\Domain\Model\Event;
 
 interface EventStore
 {
-    public function append(StoredDomainEvent $storedEvent);
+    public function add(StoredDomainEvent $storedEvent);
+
+    public function addBulk(BulkDomainEvent $bulkDomainEvent);
 
     public function allStoredEventsSince($anEventId);
 
