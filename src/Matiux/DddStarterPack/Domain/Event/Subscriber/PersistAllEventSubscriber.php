@@ -4,7 +4,7 @@ namespace DddStarterPack\Domain\Event\Subscriber;
 
 use DddStarterPack\Domain\Model\Event\DomainEvent;
 use DddStarterPack\Domain\Model\Event\EventStore;
-use DddStarterPack\Domain\Model\Event\StoredEventFactory;
+use DddStarterPack\Domain\Model\Event\StoredDomainEventFactory;
 
 class PersistAllEventSubscriber implements EventSubscriber
 {
@@ -12,7 +12,7 @@ class PersistAllEventSubscriber implements EventSubscriber
     private $serializer;
     private $storedEventFactory;
 
-    public function __construct(EventStore $anEventStore, Serializer $serializer, StoredEventFactory $storedEventFactory)
+    public function __construct(EventStore $anEventStore, Serializer $serializer, StoredDomainEventFactory $storedEventFactory)
     {
         $this->eventStore = $anEventStore;
         $this->serializer = $serializer;

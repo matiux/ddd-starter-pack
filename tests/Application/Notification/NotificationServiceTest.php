@@ -12,7 +12,7 @@ use Ramsey\Uuid\Uuid;
 use Tests\DddStarterPack\Application\Notification\InMemory\InMemoryPublishedMessageTracker;
 use Tests\DddStarterPack\Fake\Domain\Model\Event\FakeDomainEvent;
 use Tests\DddStarterPack\Fake\Infrastructure\Domain\Model\Event\InMemory\InMemoryEventStore;
-use Tests\DddStarterPack\Fake\Infrastructure\Domain\Model\Event\InMemory\InMemoryStoredEventFactory;
+use Tests\DddStarterPack\Fake\Infrastructure\Domain\Model\Event\InMemory\InMemoryStoredDomainEventFactory;
 use Tests\DddStarterPack\Fake\Infrastructure\Serializer\FakeEventSerializer;
 
 class NotificationServiceTest extends TestCase
@@ -46,7 +46,7 @@ class NotificationServiceTest extends TestCase
         $event01 = new FakeDomainEvent(Uuid::uuid4());
         $event02 = new FakeDomainEvent(Uuid::uuid4());
 
-        $storedEventFactory = new InMemoryStoredEventFactory($this->eventStore);
+        $storedEventFactory = new InMemoryStoredDomainEventFactory($this->eventStore);
 
         $this->storedEvent01 = $storedEventFactory->build(get_class($event01), $event01->occurredOn(), (new FakeEventSerializer())->serialize($event01, 'json'));
         $this->eventStore->append($this->storedEvent01);

@@ -4,9 +4,9 @@ namespace Tests\DddStarterPack\Fake\Infrastructure\Domain\Model\Event\InMemory;
 
 use DddStarterPack\Domain\Model\Event\EventStore;
 use DddStarterPack\Domain\Model\Event\StoredDomainEvent;
-use DddStarterPack\Domain\Model\Event\StoredEventFactory;
+use DddStarterPack\Domain\Model\Event\StoredDomainEventFactory;
 
-class InMemoryStoredEventFactory implements StoredEventFactory
+class InMemoryStoredDomainEventFactory implements StoredDomainEventFactory
 {
     private $eventStore;
 

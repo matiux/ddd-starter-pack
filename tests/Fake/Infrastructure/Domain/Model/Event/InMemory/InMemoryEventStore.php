@@ -2,6 +2,7 @@
 
 namespace Tests\DddStarterPack\Fake\Infrastructure\Domain\Model\Event\InMemory;
 
+use DddStarterPack\Domain\Model\Event\BulkDomainEvent;
 use DddStarterPack\Domain\Model\Event\EventStore;
 use DddStarterPack\Domain\Model\Event\StoredDomainEvent;
 
@@ -35,5 +36,15 @@ class InMemoryEventStore implements EventStore
         });
 
         return $greatesId + 1;
+    }
+
+    public function add(StoredDomainEvent $storedEvent)
+    {
+
+    }
+
+    public function addBulk(BulkDomainEvent $bulkDomainEvent)
+    {
+
     }
 }
