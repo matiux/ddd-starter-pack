@@ -8,12 +8,12 @@ namespace DddStarterPack\Domain\Model\Event;
  * Class StoredEvent
  * @package DddStarterPack\Domain\Model\EventSystem
  */
-class StoredDomainEvent implements DomainEvent
+abstract class BasicStoredDomainEvent implements DomainEvent
 {
-    private $eventId;
-    private $eventBody;
-    private $occurredOn;
-    private $typeName;
+    protected $eventId;
+    protected $eventBody;
+    protected $occurredOn;
+    protected $typeName;
 
     public function __construct(?int $eventId, string $aTypeName, \DateTimeImmutable $anOccurredOn, string $anEventBody)
     {
