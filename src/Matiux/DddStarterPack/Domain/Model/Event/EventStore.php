@@ -14,5 +14,5 @@ interface EventStore
 
     public function nextId(): int;
 
-    public function setSerializer(Serializer);
+    public function setSerializer($serializer);
 }
