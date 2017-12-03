@@ -4,7 +4,7 @@ namespace DddStarterPack\Domain\Model\Event;
 
 interface EventStore
 {
-    public function add(BasicDomainEvent $storedEvent);
+    public function add(DomainEvent $storedEvent);
 
     public function addBulk(\ArrayObject $bulkEvents);
 
