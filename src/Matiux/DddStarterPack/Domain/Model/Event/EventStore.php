@@ -2,6 +2,8 @@
 
 namespace DddStarterPack\Domain\Model\Event;
 
+use DddStarterPack\Domain\Event\Subscriber\Serializer;
+
 interface EventStore
 {
     public function add(DomainEvent $storedEvent);
@@ -11,4 +13,6 @@ interface EventStore
     public function allStoredEventsSince($anEventId): \ArrayObject;
 
     public function nextId(): int;
+
+    public function setSerializer(Serializer);
 }
