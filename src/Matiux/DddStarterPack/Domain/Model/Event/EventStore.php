@@ -10,7 +10,7 @@ interface EventStore
 
     public function allStoredEventsSince(?int $anEventId): \ArrayObject;
 
-    public function nextId(): int;
+    public function nextId(): ?int;
 
     public function setSerializer($serializer);
 }
