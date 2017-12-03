@@ -6,7 +6,7 @@ interface EventStore
 {
     public function add(BasicDomainEvent $storedEvent);
 
-    //public function addBulk(BulkDomainEvent $bulkDomainEvent);
+    public function addBulk(\ArrayObject $bulkEvents);
 
     public function allStoredEventsSince($anEventId): \ArrayObject;
 
