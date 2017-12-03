@@ -8,7 +8,7 @@ interface EventStore
 
     //public function addBulk(BulkDomainEvent $bulkDomainEvent);
 
-    public function allStoredEventsSince($anEventId);
+    public function allStoredEventsSince($anEventId): \ArrayObject;
 
     public function nextId(): int;
 }
