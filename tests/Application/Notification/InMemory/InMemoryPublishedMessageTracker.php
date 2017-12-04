@@ -2,7 +2,7 @@
 
 namespace Tests\DDDStarterPack\Application\Notification\InMemory;
 
-use DddStarterPack\Domain\Model\Event\StoredDomainEvent;
+use DDDStarterPack\Domain\Model\Event\StoredDomainEvent;
 use DDDStarterPack\Domain\Model\Message\PublishedMessage;
 use DDDStarterPack\Domain\Model\Message\PublishedMessageTracker;
 use ReflectionObject;

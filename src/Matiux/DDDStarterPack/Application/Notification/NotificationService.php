@@ -3,7 +3,7 @@
 namespace DDDStarterPack\Application\Notification;
 
 use DDDStarterPack\Domain\Model\Event\EventStore;
-use DddStarterPack\Domain\Model\Event\StoredDomainEvent;
+use DDDStarterPack\Domain\Model\Event\StoredDomainEvent;
 use DDDStarterPack\Domain\Model\Message\PublishedMessageTracker;
 use JMS\Serializer\SerializerBuilder;
 

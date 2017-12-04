@@ -2,7 +2,7 @@
 
 namespace DDDStarterPack\Domain\Model\Message;
 
-use DddStarterPack\Domain\Model\Event\StoredDomainEvent;
+use DDDStarterPack\Domain\Model\Event\StoredDomainEvent;
 
 interface PublishedMessageTracker
 {

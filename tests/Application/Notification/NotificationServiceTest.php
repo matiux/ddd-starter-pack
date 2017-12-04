@@ -5,7 +5,7 @@ namespace Tests\DDDStarterPack\Application\Notification;
 use DDDStarterPack\Application\Notification\MessageProducer;
 use DDDStarterPack\Application\Notification\NotificationService;
 use DDDStarterPack\Domain\Model\Event\EventStore;
-use DddStarterPack\Domain\Model\Event\StoredDomainEvent;
+use DDDStarterPack\Domain\Model\Event\StoredDomainEvent;
 use DDDStarterPack\Domain\Model\Message\PublishedMessageTracker;
 use PHPUnit\Framework\TestCase;
 use Ramsey\Uuid\Uuid;
