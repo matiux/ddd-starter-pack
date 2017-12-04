@@ -28,12 +28,12 @@
   ],
   "autoload": {
     "psr-4": {
-      "DddStarterPack\\": "src/Matiux/DddStarterPack"
+      "DDDStarterPack\\": "src/Matiux/DDDStarterPack"
     }
   },
   "autoload-dev": {
     "psr-4": {
-      "Tests\\DddStarterPack\\": "tests"
+      "Tests\\DDDStarterPack\\": "tests"
     }
   },
   "config": {

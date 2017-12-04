@@ -1,28 +1,23 @@
 <?php
 
-namespace Tests\DddStarterPack\Fake\Infrastructure\Domain\Model\Event\InMemory;
+namespace Tests\DDDStarterPack\Fake\Infrastructure\Domain\Model\Event\InMemory;
 
-use DddStarterPack\Domain\Model\Event\BulkDomainEvent;
-use DddStarterPack\Domain\Model\Event\EventStore;
-use DddStarterPack\Domain\Model\Event\StoredDomainEvent;
+use DDDStarterPack\Domain\Model\Event\DomainEvent;
+use DDDStarterPack\Domain\Model\Event\EventStore;
+use DDDStarterPack\Domain\Model\Event\StoredDomainEvent;
 
 class InMemoryEventStore implements EventStore
 {
     private $events = [];
 
-    public function append(StoredDomainEvent $storedEvent)
-    {
-        $this->events[] = $storedEvent;
-    }
-
-    public function allStoredEventsSince($anEventId)
+    public function allStoredEventsSince(?int $anEventId): \ArrayObject
     {
         $events = array_filter($this->events, function (StoredDomainEvent $storedEvent) use ($anEventId) {
 
             return $storedEvent->eventId() > $anEventId;
         });
 
-        return $events;
+        return new \ArrayObject($events);
     }
 
     public function nextId(): int
@@ -38,12 +33,17 @@ class InMemoryEventStore implements EventStore
         return $greatesId + 1;
     }
 
-    public function add(StoredDomainEvent $storedEvent)
+    public function add(DomainEvent $storedEvent)
+    {
+        $this->events[] = $storedEvent;
+    }
+
+    public function addBulk(\ArrayObject $bulkEvents)
     {
 
     }
 
-    public function addBulk(BulkDomainEvent $bulkDomainEvent)
+    public function setSerializer($serializer)
     {
 
     }

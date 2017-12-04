@@ -1,8 +1,8 @@
 <?php
 
-namespace Tests\DddStarterPack\Fake\Domain\Model\Event;
+namespace Tests\DDDStarterPack\Fake\Domain\Model\Event;
 
-use DddStarterPack\Domain\Model\Event\DomainEvent;
+use DDDStarterPack\Domain\Model\Event\DomainEvent;
 
 class FakeDomainEvent implements DomainEvent
 {

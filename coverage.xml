@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<coverage generated="1512174252">
-  <project timestamp="1512174252">
-    <package name="DddStarterPack\Application\DataTransformer">
-      <file name="/var/www/Projects/DddStarterPack/src/Matiux/DddStarterPack/Application/DataTransformer/ArrayCollectionDataTransformer.php">
-        <class name="ArrayCollectionDataTransformer" namespace="DddStarterPack\Application\DataTransformer">
+<coverage generated="1512426873">
+  <project timestamp="1512426873">
+    <package name="DDDStarterPack\Application\DataTransformer">
+      <file name="/var/www/Projects/DddStarterPack/src/Matiux/DDDStarterPack/Application/DataTransformer/ArrayCollectionDataTransformer.php">
+        <class name="ArrayCollectionDataTransformer" namespace="DDDStarterPack\Application\DataTransformer">
           <metrics complexity="1" methods="1" coveredmethods="0" conditionals="0" coveredconditionals="0" statements="3" coveredstatements="0" elements="4" coveredelements="0"/>
         </class>
         <line num="15" type="method" name="write" visibility="public" complexity="1" crap="2" count="0"/>
@@ -12,8 +12,8 @@
         <line num="18" type="stmt" count="0"/>
         <metrics loc="19" ncloc="15" classes="1" methods="1" coveredmethods="0" conditionals="0" coveredconditionals="0" statements="3" coveredstatements="0" elements="4" coveredelements="0"/>
       </file>
-      <file name="/var/www/Projects/DddStarterPack/src/Matiux/DddStarterPack/Application/DataTransformer/ArrayDataTransformer.php">
-        <class name="ArrayDataTransformer" namespace="DddStarterPack\Application\DataTransformer">
+      <file name="/var/www/Projects/DddStarterPack/src/Matiux/DDDStarterPack/Application/DataTransformer/ArrayDataTransformer.php">
+        <class name="ArrayDataTransformer" namespace="DDDStarterPack\Application\DataTransformer">
           <metrics complexity="1" methods="1" coveredmethods="0" conditionals="0" coveredconditionals="0" statements="3" coveredstatements="0" elements="4" coveredelements="0"/>
         </class>
         <line num="14" type="method" name="writeCollection" visibility="public" complexity="1" crap="2" count="0"/>
@@ -22,8 +22,8 @@
         <line num="17" type="stmt" count="0"/>
         <metrics loc="18" ncloc="13" classes="1" methods="1" coveredmethods="0" conditionals="0" coveredconditionals="0" statements="3" coveredstatements="0" elements="4" coveredelements="0"/>
       </file>
-      <file name="/var/www/Projects/DddStarterPack/src/Matiux/DddStarterPack/Application/DataTransformer/JsonDataTransformer.php">
-        <class name="JsonDataTransformer" namespace="DddStarterPack\Application\DataTransformer">
+      <file name="/var/www/Projects/DddStarterPack/src/Matiux/DDDStarterPack/Application/DataTransformer/JsonDataTransformer.php">
+        <class name="JsonDataTransformer" namespace="DDDStarterPack\Application\DataTransformer">
           <metrics complexity="4" methods="2" coveredmethods="0" conditionals="0" coveredconditionals="0" statements="7" coveredstatements="0" elements="9" coveredelements="0"/>
         </class>
         <line num="20" type="method" name="write" visibility="public" complexity="1" crap="2" count="0"/>
@@ -37,8 +37,8 @@
         <line num="35" type="stmt" count="0"/>
         <metrics loc="36" ncloc="27" classes="1" methods="2" coveredmethods="0" conditionals="0" coveredconditionals="0" statements="7" coveredstatements="0" elements="9" coveredelements="0"/>
       </file>
-      <file name="/var/www/Projects/DddStarterPack/src/Matiux/DddStarterPack/Application/DataTransformer/NoTransformationDataTransformer.php">
-        <class name="NoTransformationDataTransformer" namespace="DddStarterPack\Application\DataTransformer">
+      <file name="/var/www/Projects/DddStarterPack/src/Matiux/DDDStarterPack/Application/DataTransformer/NoTransformationDataTransformer.php">
+        <class name="NoTransformationDataTransformer" namespace="DDDStarterPack\Application\DataTransformer">
           <metrics complexity="3" methods="3" coveredmethods="0" conditionals="0" coveredconditionals="0" statements="9" coveredstatements="0" elements="12" coveredelements="0"/>
         </class>
         <line num="15" type="method" name="write" visibility="public" complexity="1" crap="2" count="0"/>
@@ -56,12 +56,12 @@
         <metrics loc="37" ncloc="25" classes="1" methods="3" coveredmethods="0" conditionals="0" coveredconditionals="0" statements="9" coveredstatements="0" elements="12" coveredelements="0"/>
       </file>
     </package>
-    <file name="/var/www/Projects/DddStarterPack/src/Matiux/DddStarterPack/Application/DataTransformer/DataTransformer.php">
+    <file name="/var/www/Projects/DddStarterPack/src/Matiux/DDDStarterPack/Application/DataTransformer/DataTransformer.php">
       <metrics loc="26" ncloc="14" classes="0" methods="0" coveredmethods="0" conditionals="0" coveredconditionals="0" statements="0" coveredstatements="0" elements="0" coveredelements="0"/>
     </file>
-    <package name="DddStarterPack\Application\Exception">
-      <file name="/var/www/Projects/DddStarterPack/src/Matiux/DddStarterPack/Application/Exception/ApplicationException.php">
-        <class name="ApplicationException" namespace="DddStarterPack\Application\Exception">
+    <package name="DDDStarterPack\Application\Exception">
+      <file name="/var/www/Projects/DddStarterPack/src/Matiux/DDDStarterPack/Application/Exception/ApplicationException.php">
+        <class name="ApplicationException" namespace="DDDStarterPack\Application\Exception">
           <metrics complexity="4" methods="3" coveredmethods="0" conditionals="0" coveredconditionals="0" statements="12" coveredstatements="0" elements="15" coveredelements="0"/>
         </class>
         <line num="11" type="method" name="__construct" visibility="public" complexity="2" crap="6" count="0"/>
@@ -82,15 +82,15 @@
         <metrics loc="30" ncloc="30" classes="1" methods="3" coveredmethods="0" conditionals="0" coveredconditionals="0" statements="12" coveredstatements="0" elements="15" coveredelements="0"/>
       </file>
     </package>
-    <file name="/var/www/Projects/DddStarterPack/src/Matiux/DddStarterPack/Application/Notification/MessageConsumer.php">
+    <file name="/var/www/Projects/DddStarterPack/src/Matiux/DDDStarterPack/Application/Notification/MessageConsumer.php">
       <metrics loc="12" ncloc="12" classes="0" methods="0" coveredmethods="0" conditionals="0" coveredconditionals="0" statements="0" coveredstatements="0" elements="0" coveredelements="0"/>
     </file>
-    <file name="/var/www/Projects/DddStarterPack/src/Matiux/DddStarterPack/Application/Notification/MessageProducer.php">
+    <file name="/var/www/Projects/DddStarterPack/src/Matiux/DDDStarterPack/Application/Notification/MessageProducer.php">
       <metrics loc="18" ncloc="18" classes="0" methods="0" coveredmethods="0" conditionals="0" coveredconditionals="0" statements="0" coveredstatements="0" elements="0" coveredelements="0"/>
     </file>
-    <package name="DddStarterPack\Application\Notification">
-      <file name="/var/www/Projects/DddStarterPack/src/Matiux/DddStarterPack/Application/Notification/NotificationService.php">
-        <class name="NotificationService" namespace="DddStarterPack\Application\Notification" fullPackage="DddStarterPack" package="DddStarterPack">
+    <package name="DDDStarterPack\Application\Notification">
+      <file name="/var/www/Projects/DddStarterPack/src/Matiux/DDDStarterPack/Application/Notification/NotificationService.php">
+        <class name="NotificationService" namespace="DDDStarterPack\Application\Notification" fullPackage="DDDStarterPack" package="DDDStarterPack">
           <metrics complexity="9" methods="5" coveredmethods="4" conditionals="0" coveredconditionals="0" statements="34" coveredstatements="31" elements="39" coveredelements="35"/>
         </class>
         <line num="23" type="method" name="__construct" visibility="public" complexity="1" crap="1" count="2"/>
@@ -135,12 +135,12 @@
         <metrics loc="110" ncloc="94" classes="1" methods="5" coveredmethods="4" conditionals="0" coveredconditionals="0" statements="34" coveredstatements="31" elements="39" coveredelements="35"/>
       </file>
     </package>
-    <file name="/var/www/Projects/DddStarterPack/src/Matiux/DddStarterPack/Application/Service/ApplicationService.php">
+    <file name="/var/www/Projects/DddStarterPack/src/Matiux/DDDStarterPack/Application/Service/ApplicationService.php">
       <metrics loc="8" ncloc="8" classes="0" methods="0" coveredmethods="0" conditionals="0" coveredconditionals="0" statements="0" coveredstatements="0" elements="0" coveredelements="0"/>
     </file>
-    <package name="DddStarterPack\Application\Service">
-      <file name="/var/www/Projects/DddStarterPack/src/Matiux/DddStarterPack/Application/Service/TransactionalApplicationService.php">
-        <class name="TransactionalApplicationService" namespace="DddStarterPack\Application\Service">
+    <package name="DDDStarterPack\Application\Service">
+      <file name="/var/www/Projects/DddStarterPack/src/Matiux/DDDStarterPack/Application/Service/TransactionalApplicationService.php">
+        <class name="TransactionalApplicationService" namespace="DDDStarterPack\Application\Service">
           <metrics complexity="3" methods="3" coveredmethods="0" conditionals="0" coveredconditionals="0" statements="7" coveredstatements="0" elements="10" coveredelements="0"/>
         </class>
         <line num="10" type="method" name="__construct" visibility="public" complexity="1" crap="2" count="0"/>
@@ -156,12 +156,12 @@
         <metrics loc="25" ncloc="25" classes="1" methods="3" coveredmethods="0" conditionals="0" coveredconditionals="0" statements="7" coveredstatements="0" elements="10" coveredelements="0"/>
       </file>
     </package>
-    <file name="/var/www/Projects/DddStarterPack/src/Matiux/DddStarterPack/Application/Service/TransactionalSession.php">
+    <file name="/var/www/Projects/DddStarterPack/src/Matiux/DDDStarterPack/Application/Service/TransactionalSession.php">
       <metrics loc="8" ncloc="8" classes="0" methods="0" coveredmethods="0" conditionals="0" coveredconditionals="0" statements="0" coveredstatements="0" elements="0" coveredelements="0"/>
     </file>
-    <package name="DddStarterPack\Domain\Event\Publisher">
-      <file name="/var/www/Projects/DddStarterPack/src/Matiux/DddStarterPack/Domain/Event/Publisher/DomainEventPublisher.php">
-        <class name="DomainEventPublisher" namespace="DddStarterPack\Domain\Event\Publisher">
+    <package name="DDDStarterPack\Domain\Event\Publisher">
+      <file name="/var/www/Projects/DddStarterPack/src/Matiux/DDDStarterPack/Domain/Event/Publisher/DomainEventPublisher.php">
+        <class name="DomainEventPublisher" namespace="DDDStarterPack\Domain\Event\Publisher">
           <metrics complexity="10" methods="6" coveredmethods="6" conditionals="0" coveredconditionals="0" statements="13" coveredstatements="13" elements="19" coveredelements="19"/>
         </class>
         <line num="17" type="method" name="instance" visibility="public" complexity="2" crap="2" count="3"/>
@@ -189,12 +189,12 @@
         <metrics loc="63" ncloc="60" classes="1" methods="6" coveredmethods="6" conditionals="0" coveredconditionals="0" statements="16" coveredstatements="16" elements="22" coveredelements="22"/>
       </file>
     </package>
-    <file name="/var/www/Projects/DddStarterPack/src/Matiux/DddStarterPack/Domain/Event/Subscriber/EventSubscriber.php">
+    <file name="/var/www/Projects/DddStarterPack/src/Matiux/DDDStarterPack/Domain/Event/Subscriber/EventSubscriber.php">
       <metrics loc="12" ncloc="12" classes="0" methods="0" coveredmethods="0" conditionals="0" coveredconditionals="0" statements="0" coveredstatements="0" elements="0" coveredelements="0"/>
     </file>
-    <package name="DddStarterPack\Domain\Event\Subscriber">
-      <file name="/var/www/Projects/DddStarterPack/src/Matiux/DddStarterPack/Domain/Event/Subscriber/PersistAllEventSubscriber.php">
-        <class name="PersistAllEventSubscriber" namespace="DddStarterPack\Domain\Event\Subscriber">
+    <package name="DDDStarterPack\Domain\Event\Subscriber">
+      <file name="/var/www/Projects/DddStarterPack/src/Matiux/DDDStarterPack/Domain/Event/Subscriber/PersistAllEventSubscriber.php">
+        <class name="PersistAllEventSubscriber" namespace="DDDStarterPack\Domain\Event\Subscriber">
           <metrics complexity="3" methods="3" coveredmethods="0" conditionals="0" coveredconditionals="0" statements="13" coveredstatements="0" elements="16" coveredelements="0"/>
         </class>
         <line num="15" type="method" name="__construct" visibility="public" complexity="1" crap="2" count="0"/>
@@ -216,20 +216,12 @@
         <metrics loc="35" ncloc="35" classes="1" methods="3" coveredmethods="0" conditionals="0" coveredconditionals="0" statements="13" coveredstatements="0" elements="16" coveredelements="0"/>
       </file>
     </package>
-    <file name="/var/www/Projects/DddStarterPack/src/Matiux/DddStarterPack/Domain/Event/Subscriber/Serializer.php">
+    <file name="/var/www/Projects/DddStarterPack/src/Matiux/DDDStarterPack/Domain/Event/Subscriber/Serializer.php">
       <metrics loc="27" ncloc="12" classes="0" methods="0" coveredmethods="0" conditionals="0" coveredconditionals="0" statements="0" coveredstatements="0" elements="0" coveredelements="0"/>
     </file>
-    <package name="Matiux\DddStarterPack\Domain\Model">
-      <file name="/var/www/Projects/DddStarterPack/src/Matiux/DddStarterPack/Domain/Model/BaseModel.php">
-        <class name="BaseModel" namespace="Matiux\DddStarterPack\Domain\Model">
-          <metrics complexity="0" methods="0" coveredmethods="0" conditionals="0" coveredconditionals="0" statements="0" coveredstatements="0" elements="0" coveredelements="0"/>
-        </class>
-        <metrics loc="7" ncloc="7" classes="0" methods="0" coveredmethods="0" conditionals="0" coveredconditionals="0" statements="0" coveredstatements="0" elements="0" coveredelements="0"/>
-      </file>
-    </package>
-    <package name="DddStarterPack\Domain\Model">
-      <file name="/var/www/Projects/DddStarterPack/src/Matiux/DddStarterPack/Domain/Model/BasicEntityId.php">
-        <class name="BasicEntityId" namespace="DddStarterPack\Domain\Model">
+    <package name="DDDStarterPack\Domain\Model">
+      <file name="/var/www/Projects/DddStarterPack/src/Matiux/DDDStarterPack/Domain/Model/BasicEntityId.php">
+        <class name="BasicEntityId" namespace="DDDStarterPack\Domain\Model">
           <metrics complexity="10" methods="6" coveredmethods="0" conditionals="0" coveredconditionals="0" statements="21" coveredstatements="0" elements="27" coveredelements="0"/>
         </class>
         <line num="11" type="method" name="__construct" visibility="private" complexity="3" crap="12" count="0"/>
@@ -261,8 +253,8 @@
         <line num="46" type="stmt" count="0"/>
         <metrics loc="47" ncloc="44" classes="1" methods="6" coveredmethods="0" conditionals="0" coveredconditionals="0" statements="21" coveredstatements="0" elements="27" coveredelements="0"/>
       </file>
-      <file name="/var/www/Projects/DddStarterPack/src/Matiux/DddStarterPack/Domain/Model/LoggingInfo.php">
-        <class name="LoggingInfo" namespace="DddStarterPack\Domain\Model">
+      <file name="/var/www/Projects/DddStarterPack/src/Matiux/DDDStarterPack/Domain/Model/LoggingInfo.php">
+        <class name="LoggingInfo" namespace="DDDStarterPack\Domain\Model">
           <metrics complexity="7" methods="4" coveredmethods="0" conditionals="0" coveredconditionals="0" statements="12" coveredstatements="0" elements="16" coveredelements="0"/>
         </class>
         <line num="11" type="method" name="getUpdatingDate" visibility="public" complexity="2" crap="6" count="0"/>
@@ -284,12 +276,12 @@
         <metrics loc="30" ncloc="30" classes="1" methods="4" coveredmethods="0" conditionals="0" coveredconditionals="0" statements="12" coveredstatements="0" elements="16" coveredelements="0"/>
       </file>
     </package>
-    <file name="/var/www/Projects/DddStarterPack/src/Matiux/DddStarterPack/Domain/Model/EntityId.php">
+    <file name="/var/www/Projects/DddStarterPack/src/Matiux/DDDStarterPack/Domain/Model/EntityId.php">
       <metrics loc="14" ncloc="14" classes="0" methods="0" coveredmethods="0" conditionals="0" coveredconditionals="0" statements="0" coveredstatements="0" elements="0" coveredelements="0"/>
     </file>
-    <package name="DddStarterPack\Domain\Model\Event">
-      <file name="/var/www/Projects/DddStarterPack/src/Matiux/DddStarterPack/Domain/Model/Event/BasicDomainEvent.php">
-        <class name="BasicDomainEvent" namespace="DddStarterPack\Domain\Model\Event">
+    <package name="DDDStarterPack\Domain\Model\Event">
+      <file name="/var/www/Projects/DddStarterPack/src/Matiux/DDDStarterPack/Domain/Model/Event/BasicDomainEvent.php">
+        <class name="BasicDomainEvent" namespace="DDDStarterPack\Domain\Model\Event">
           <metrics complexity="2" methods="2" coveredmethods="0" conditionals="0" coveredconditionals="0" statements="6" coveredstatements="0" elements="8" coveredelements="0"/>
         </class>
         <line num="9" type="method" name="__construct" visibility="public" complexity="1" crap="2" count="0"/>
@@ -302,8 +294,8 @@
         <line num="17" type="stmt" count="0"/>
         <metrics loc="18" ncloc="18" classes="1" methods="2" coveredmethods="0" conditionals="0" coveredconditionals="0" statements="6" coveredstatements="0" elements="8" coveredelements="0"/>
       </file>
-      <file name="/var/www/Projects/DddStarterPack/src/Matiux/DddStarterPack/Domain/Model/Event/StoredDomainEvent.php">
-        <class name="StoredDomainEvent" namespace="DddStarterPack\Domain\Model\Event" fullPackage="DddStarterPack" package="DddStarterPack">
+      <file name="/var/www/Projects/DddStarterPack/src/Matiux/DDDStarterPack/Domain/Model/Event/BasicStoredDomainEvent.php">
+        <class name="BasicStoredDomainEvent" namespace="DDDStarterPack\Domain\Model\Event" fullPackage="DDDStarterPack" package="DDDStarterPack">
           <metrics complexity="7" methods="5" coveredmethods="4" conditionals="0" coveredconditionals="0" statements="9" coveredstatements="8" elements="14" coveredelements="12"/>
         </class>
         <line num="18" type="method" name="__construct" visibility="public" complexity="2" crap="2" count="2"/>
@@ -323,21 +315,21 @@
         <metrics loc="45" ncloc="39" classes="1" methods="5" coveredmethods="4" conditionals="0" coveredconditionals="0" statements="9" coveredstatements="8" elements="14" coveredelements="12"/>
       </file>
     </package>
-    <file name="/var/www/Projects/DddStarterPack/src/Matiux/DddStarterPack/Domain/Model/Event/BulkDomainEvent.php">
-      <metrics loc="7" ncloc="7" classes="0" methods="0" coveredmethods="0" conditionals="0" coveredconditionals="0" statements="0" coveredstatements="0" elements="0" coveredelements="0"/>
-    </file>
-    <file name="/var/www/Projects/DddStarterPack/src/Matiux/DddStarterPack/Domain/Model/Event/DomainEvent.php">
+    <file name="/var/www/Projects/DddStarterPack/src/Matiux/DDDStarterPack/Domain/Model/Event/DomainEvent.php">
       <metrics loc="8" ncloc="8" classes="0" methods="0" coveredmethods="0" conditionals="0" coveredconditionals="0" statements="0" coveredstatements="0" elements="0" coveredelements="0"/>
     </file>
-    <file name="/var/www/Projects/DddStarterPack/src/Matiux/DddStarterPack/Domain/Model/Event/EventStore.php">
-      <metrics loc="14" ncloc="14" classes="0" methods="0" coveredmethods="0" conditionals="0" coveredconditionals="0" statements="0" coveredstatements="0" elements="0" coveredelements="0"/>
+    <file name="/var/www/Projects/DddStarterPack/src/Matiux/DDDStarterPack/Domain/Model/Event/EventStore.php">
+      <metrics loc="16" ncloc="16" classes="0" methods="0" coveredmethods="0" conditionals="0" coveredconditionals="0" statements="0" coveredstatements="0" elements="0" coveredelements="0"/>
     </file>
-    <file name="/var/www/Projects/DddStarterPack/src/Matiux/DddStarterPack/Domain/Model/Event/StoredDomainEventFactory.php">
+    <file name="/var/www/Projects/DddStarterPack/src/Matiux/DDDStarterPack/Domain/Model/Event/StoredDomainEvent.php">
+      <metrics loc="12" ncloc="12" classes="0" methods="0" coveredmethods="0" conditionals="0" coveredconditionals="0" statements="0" coveredstatements="0" elements="0" coveredelements="0"/>
+    </file>
+    <file name="/var/www/Projects/DddStarterPack/src/Matiux/DDDStarterPack/Domain/Model/Event/StoredDomainEventFactory.php">
       <metrics loc="8" ncloc="8" classes="0" methods="0" coveredmethods="0" conditionals="0" coveredconditionals="0" statements="0" coveredstatements="0" elements="0" coveredelements="0"/>
     </file>
-    <package name="DddStarterPack\Domain\Model\Exception">
-      <file name="/var/www/Projects/DddStarterPack/src/Matiux/DddStarterPack/Domain/Model/Exception/DomainModelAuthException.php">
-        <class name="DomainModelAuthException" namespace="DddStarterPack\Domain\Model\Exception">
+    <package name="DDDStarterPack\Domain\Model\Exception">
+      <file name="/var/www/Projects/DddStarterPack/src/Matiux/DDDStarterPack/Domain/Model/Exception/DomainModelAuthException.php">
+        <class name="DomainModelAuthException" namespace="DDDStarterPack\Domain\Model\Exception">
           <metrics complexity="1" methods="1" coveredmethods="0" conditionals="0" coveredconditionals="0" statements="3" coveredstatements="0" elements="4" coveredelements="0"/>
         </class>
         <line num="11" type="method" name="__construct" visibility="public" complexity="1" crap="2" count="0"/>
@@ -346,8 +338,8 @@
         <line num="14" type="stmt" count="0"/>
         <metrics loc="15" ncloc="15" classes="1" methods="1" coveredmethods="0" conditionals="0" coveredconditionals="0" statements="3" coveredstatements="0" elements="4" coveredelements="0"/>
       </file>
-      <file name="/var/www/Projects/DddStarterPack/src/Matiux/DddStarterPack/Domain/Model/Exception/DomainModelException.php">
-        <class name="DomainModelException" namespace="DddStarterPack\Domain\Model\Exception">
+      <file name="/var/www/Projects/DddStarterPack/src/Matiux/DDDStarterPack/Domain/Model/Exception/DomainModelException.php">
+        <class name="DomainModelException" namespace="DDDStarterPack\Domain\Model\Exception">
           <metrics complexity="4" methods="3" coveredmethods="0" conditionals="0" coveredconditionals="0" statements="12" coveredstatements="0" elements="15" coveredelements="0"/>
         </class>
         <line num="11" type="method" name="__construct" visibility="public" complexity="2" crap="6" count="0"/>
@@ -367,8 +359,8 @@
         <line num="29" type="stmt" count="0"/>
         <metrics loc="30" ncloc="30" classes="1" methods="3" coveredmethods="0" conditionals="0" coveredconditionals="0" statements="12" coveredstatements="0" elements="15" coveredelements="0"/>
       </file>
-      <file name="/var/www/Projects/DddStarterPack/src/Matiux/DddStarterPack/Domain/Model/Exception/DomainModelNotFoundException.php">
-        <class name="DomainModelNotFoundException" namespace="DddStarterPack\Domain\Model\Exception">
+      <file name="/var/www/Projects/DddStarterPack/src/Matiux/DDDStarterPack/Domain/Model/Exception/DomainModelNotFoundException.php">
+        <class name="DomainModelNotFoundException" namespace="DDDStarterPack\Domain\Model\Exception">
           <metrics complexity="1" methods="1" coveredmethods="0" conditionals="0" coveredconditionals="0" statements="3" coveredstatements="0" elements="4" coveredelements="0"/>
         </class>
         <line num="11" type="method" name="__construct" visibility="public" complexity="1" crap="2" count="0"/>
@@ -378,15 +370,15 @@
         <metrics loc="15" ncloc="15" classes="1" methods="1" coveredmethods="0" conditionals="0" coveredconditionals="0" statements="3" coveredstatements="0" elements="4" coveredelements="0"/>
       </file>
     </package>
-    <file name="/var/www/Projects/DddStarterPack/src/Matiux/DddStarterPack/Domain/Model/IdentifiableDomainObject.php">
+    <file name="/var/www/Projects/DddStarterPack/src/Matiux/DDDStarterPack/Domain/Model/IdentifiableDomainObject.php">
       <metrics loc="11" ncloc="8" classes="0" methods="0" coveredmethods="0" conditionals="0" coveredconditionals="0" statements="0" coveredstatements="0" elements="0" coveredelements="0"/>
     </file>
-    <file name="/var/www/Projects/DddStarterPack/src/Matiux/DddStarterPack/Domain/Model/LoggableDomainObject.php">
+    <file name="/var/www/Projects/DddStarterPack/src/Matiux/DDDStarterPack/Domain/Model/LoggableDomainObject.php">
       <metrics loc="14" ncloc="14" classes="0" methods="0" coveredmethods="0" conditionals="0" coveredconditionals="0" statements="0" coveredstatements="0" elements="0" coveredelements="0"/>
     </file>
-    <package name="DddStarterPack\Domain\Model\Message">
-      <file name="/var/www/Projects/DddStarterPack/src/Matiux/DddStarterPack/Domain/Model/Message/PublishedMessage.php">
-        <class name="PublishedMessage" namespace="DddStarterPack\Domain\Model\Message" fullPackage="DddStarterPack" package="DddStarterPack">
+    <package name="DDDStarterPack\Domain\Model\Message">
+      <file name="/var/www/Projects/DddStarterPack/src/Matiux/DDDStarterPack/Domain/Model/Message/PublishedMessage.php">
+        <class name="PublishedMessage" namespace="DDDStarterPack\Domain\Model\Message" fullPackage="DDDStarterPack" package="DDDStarterPack">
           <metrics complexity="4" methods="4" coveredmethods="3" conditionals="0" coveredconditionals="0" statements="7" coveredstatements="6" elements="11" coveredelements="9"/>
         </class>
         <line num="19" type="method" name="__construct" visibility="public" complexity="1" crap="1" count="2"/>
@@ -403,18 +395,18 @@
         <metrics loc="42" ncloc="33" classes="1" methods="4" coveredmethods="3" conditionals="0" coveredconditionals="0" statements="7" coveredstatements="6" elements="11" coveredelements="9"/>
       </file>
     </package>
-    <file name="/var/www/Projects/DddStarterPack/src/Matiux/DddStarterPack/Domain/Model/Message/PublishedMessageTracker.php">
+    <file name="/var/www/Projects/DddStarterPack/src/Matiux/DDDStarterPack/Domain/Model/Message/PublishedMessageTracker.php">
       <metrics loc="29" ncloc="12" classes="0" methods="0" coveredmethods="0" conditionals="0" coveredconditionals="0" statements="0" coveredstatements="0" elements="0" coveredelements="0"/>
     </file>
-    <package name="DddStarterPack\Domain\Model\Repository">
-      <file name="/var/www/Projects/DddStarterPack/src/Matiux/DddStarterPack/Domain/Model/Repository/AndCriteria.php">
-        <class name="AndCriteria" namespace="DddStarterPack\Domain\Model\Repository">
+    <package name="DDDStarterPack\Domain\Model\Repository">
+      <file name="/var/www/Projects/DddStarterPack/src/Matiux/DDDStarterPack/Domain/Model/Repository/AndCriteria.php">
+        <class name="AndCriteria" namespace="DDDStarterPack\Domain\Model\Repository">
           <metrics complexity="0" methods="0" coveredmethods="0" conditionals="0" coveredconditionals="0" statements="0" coveredstatements="0" elements="0" coveredelements="0"/>
         </class>
         <metrics loc="8" ncloc="8" classes="0" methods="0" coveredmethods="0" conditionals="0" coveredconditionals="0" statements="0" coveredstatements="0" elements="0" coveredelements="0"/>
       </file>
-      <file name="/var/www/Projects/DddStarterPack/src/Matiux/DddStarterPack/Domain/Model/Repository/Criteria.php">
-        <class name="Criteria" namespace="DddStarterPack\Domain\Model\Repository">
+      <file name="/var/www/Projects/DddStarterPack/src/Matiux/DDDStarterPack/Domain/Model/Repository/Criteria.php">
+        <class name="Criteria" namespace="DDDStarterPack\Domain\Model\Repository">
           <metrics complexity="8" methods="7" coveredmethods="0" conditionals="0" coveredconditionals="0" statements="27" coveredstatements="0" elements="34" coveredelements="0"/>
         </class>
         <line num="12" type="method" name="add" visibility="public" complexity="1" crap="2" count="0"/>
@@ -453,8 +445,8 @@
         <line num="57" type="stmt" count="0"/>
         <metrics loc="58" ncloc="55" classes="1" methods="7" coveredmethods="0" conditionals="0" coveredconditionals="0" statements="27" coveredstatements="0" elements="34" coveredelements="0"/>
       </file>
-      <file name="/var/www/Projects/DddStarterPack/src/Matiux/DddStarterPack/Domain/Model/Repository/Criterion.php">
-        <class name="Criterion" namespace="DddStarterPack\Domain\Model\Repository">
+      <file name="/var/www/Projects/DddStarterPack/src/Matiux/DDDStarterPack/Domain/Model/Repository/Criterion.php">
+        <class name="Criterion" namespace="DDDStarterPack\Domain\Model\Repository">
           <metrics complexity="4" methods="4" coveredmethods="0" conditionals="0" coveredconditionals="0" statements="14" coveredstatements="0" elements="18" coveredelements="0"/>
         </class>
         <line num="11" type="method" name="__construct" visibility="public" complexity="1" crap="2" count="0"/>
@@ -477,8 +469,8 @@
         <line num="31" type="stmt" count="0"/>
         <metrics loc="32" ncloc="32" classes="1" methods="4" coveredmethods="0" conditionals="0" coveredconditionals="0" statements="14" coveredstatements="0" elements="18" coveredelements="0"/>
       </file>
-      <file name="/var/www/Projects/DddStarterPack/src/Matiux/DddStarterPack/Domain/Model/Repository/ModelCriteria.php">
-        <class name="ModelCriteria" namespace="DddStarterPack\Domain\Model\Repository">
+      <file name="/var/www/Projects/DddStarterPack/src/Matiux/DDDStarterPack/Domain/Model/Repository/ModelCriteria.php">
+        <class name="ModelCriteria" namespace="DDDStarterPack\Domain\Model\Repository">
           <metrics complexity="9" methods="8" coveredmethods="0" conditionals="0" coveredconditionals="0" statements="24" coveredstatements="0" elements="32" coveredelements="0"/>
         </class>
         <line num="19" type="method" name="setPage" visibility="public" complexity="1" crap="2" count="0"/>
@@ -515,8 +507,8 @@
         <line num="63" type="stmt" count="0"/>
         <metrics loc="64" ncloc="52" classes="1" methods="8" coveredmethods="0" conditionals="0" coveredconditionals="0" statements="24" coveredstatements="0" elements="32" coveredelements="0"/>
       </file>
-      <file name="/var/www/Projects/DddStarterPack/src/Matiux/DddStarterPack/Domain/Model/Repository/ModelCriteriaBuilder.php">
-        <class name="ModelCriteriaBuilder" namespace="DddStarterPack\Domain\Model\Repository">
+      <file name="/var/www/Projects/DddStarterPack/src/Matiux/DDDStarterPack/Domain/Model/Repository/ModelCriteriaBuilder.php">
+        <class name="ModelCriteriaBuilder" namespace="DDDStarterPack\Domain\Model\Repository">
           <metrics complexity="13" methods="8" coveredmethods="0" conditionals="0" coveredconditionals="0" statements="51" coveredstatements="0" elements="59" coveredelements="0"/>
         </class>
         <line num="14" type="method" name="__construct" visibility="private" complexity="1" crap="2" count="0"/>
@@ -580,14 +572,14 @@
         <line num="99" type="stmt" count="0"/>
         <metrics loc="100" ncloc="100" classes="1" methods="8" coveredmethods="0" conditionals="0" coveredconditionals="0" statements="51" coveredstatements="0" elements="59" coveredelements="0"/>
       </file>
-      <file name="/var/www/Projects/DddStarterPack/src/Matiux/DddStarterPack/Domain/Model/Repository/OrCriteria.php">
-        <class name="OrCriteria" namespace="DddStarterPack\Domain\Model\Repository">
+      <file name="/var/www/Projects/DddStarterPack/src/Matiux/DDDStarterPack/Domain/Model/Repository/OrCriteria.php">
+        <class name="OrCriteria" namespace="DDDStarterPack\Domain\Model\Repository">
           <metrics complexity="0" methods="0" coveredmethods="0" conditionals="0" coveredconditionals="0" statements="0" coveredstatements="0" elements="0" coveredelements="0"/>
         </class>
         <metrics loc="7" ncloc="7" classes="0" methods="0" coveredmethods="0" conditionals="0" coveredconditionals="0" statements="0" coveredstatements="0" elements="0" coveredelements="0"/>
       </file>
-      <file name="/var/www/Projects/DddStarterPack/src/Matiux/DddStarterPack/Domain/Model/Repository/Sorting.php">
-        <class name="Sorting" namespace="DddStarterPack\Domain\Model\Repository">
+      <file name="/var/www/Projects/DddStarterPack/src/Matiux/DDDStarterPack/Domain/Model/Repository/Sorting.php">
+        <class name="Sorting" namespace="DDDStarterPack\Domain\Model\Repository">
           <metrics complexity="3" methods="3" coveredmethods="0" conditionals="0" coveredconditionals="0" statements="10" coveredstatements="0" elements="13" coveredelements="0"/>
         </class>
         <line num="10" type="method" name="__construct" visibility="public" complexity="1" crap="2" count="0"/>
@@ -606,12 +598,12 @@
         <metrics loc="25" ncloc="25" classes="1" methods="3" coveredmethods="0" conditionals="0" coveredconditionals="0" statements="10" coveredstatements="0" elements="13" coveredelements="0"/>
       </file>
     </package>
-    <file name="/var/www/Projects/DddStarterPack/src/Matiux/DddStarterPack/Domain/Model/Repository/FilterableRepository.php">
+    <file name="/var/www/Projects/DddStarterPack/src/Matiux/DDDStarterPack/Domain/Model/Repository/FilterableRepository.php">
       <metrics loc="10" ncloc="10" classes="0" methods="0" coveredmethods="0" conditionals="0" coveredconditionals="0" statements="0" coveredstatements="0" elements="0" coveredelements="0"/>
     </file>
-    <package name="DddStarterPack\Infrastructure\Application\Notification\Amazon">
-      <file name="/var/www/Projects/DddStarterPack/src/Matiux/DddStarterPack/Infrastructure/Application/Notification/Amazon/AmazonSqsMessageProducer.php">
-        <class name="AmazonSqsMessageProducer" namespace="DddStarterPack\Infrastructure\Application\Notification\Amazon">
+    <package name="DDDStarterPack\Infrastructure\Application\Notification\Amazon">
+      <file name="/var/www/Projects/DddStarterPack/src/Matiux/DDDStarterPack/Infrastructure/Application/Notification/Amazon/AmazonSqsMessageProducer.php">
+        <class name="AmazonSqsMessageProducer" namespace="DDDStarterPack\Infrastructure\Application\Notification\Amazon">
           <metrics complexity="3" methods="3" coveredmethods="0" conditionals="0" coveredconditionals="0" statements="25" coveredstatements="0" elements="28" coveredelements="0"/>
         </class>
         <line num="14" type="method" name="open" visibility="public" complexity="1" crap="2" count="0"/>
@@ -645,9 +637,9 @@
         <metrics loc="46" ncloc="43" classes="1" methods="3" coveredmethods="0" conditionals="0" coveredconditionals="0" statements="25" coveredstatements="0" elements="28" coveredelements="0"/>
       </file>
     </package>
-    <package name="DddStarterPack\Infrastructure\Application\Notification\Doctrine">
-      <file name="/var/www/Projects/DddStarterPack/src/Matiux/DddStarterPack/Infrastructure/Application/Notification/Doctrine/DoctrinePublishedMessageTracker.php">
-        <class name="DoctrinePublishedMessageTracker" namespace="DddStarterPack\Infrastructure\Application\Notification\Doctrine">
+    <package name="DDDStarterPack\Infrastructure\Application\Notification\Doctrine">
+      <file name="/var/www/Projects/DddStarterPack/src/Matiux/DDDStarterPack/Infrastructure/Application/Notification/Doctrine/DoctrinePublishedMessageTracker.php">
+        <class name="DoctrinePublishedMessageTracker" namespace="DDDStarterPack\Infrastructure\Application\Notification\Doctrine">
           <metrics complexity="6" methods="2" coveredmethods="0" conditionals="0" coveredconditionals="0" statements="22" coveredstatements="0" elements="24" coveredelements="0"/>
         </class>
         <line num="19" type="method" name="mostRecentPublishedMessageId" visibility="public" complexity="3" crap="12" count="0"/>
@@ -677,9 +669,9 @@
         <metrics loc="65" ncloc="47" classes="1" methods="2" coveredmethods="0" conditionals="0" coveredconditionals="0" statements="22" coveredstatements="0" elements="24" coveredelements="0"/>
       </file>
     </package>
-    <package name="DddStarterPack\Infrastructure\Application\Notification\InMemory">
-      <file name="/var/www/Projects/DddStarterPack/src/Matiux/DddStarterPack/Infrastructure/Application/Notification/InMemory/InMemoryMessageConsumer.php">
-        <class name="InMemoryMessageConsumer" namespace="DddStarterPack\Infrastructure\Application\Notification\InMemory">
+    <package name="DDDStarterPack\Infrastructure\Application\Notification\InMemory">
+      <file name="/var/www/Projects/DddStarterPack/src/Matiux/DDDStarterPack/Infrastructure/Application/Notification/InMemory/InMemoryMessageConsumer.php">
+        <class name="InMemoryMessageConsumer" namespace="DDDStarterPack\Infrastructure\Application\Notification\InMemory">
           <metrics complexity="4" methods="4" coveredmethods="0" conditionals="0" coveredconditionals="0" statements="11" coveredstatements="0" elements="15" coveredelements="0"/>
         </class>
         <line num="11" type="method" name="__construct" visibility="public" complexity="1" crap="2" count="0"/>
@@ -699,8 +691,8 @@
         <line num="31" type="stmt" count="0"/>
         <metrics loc="32" ncloc="32" classes="1" methods="4" coveredmethods="0" conditionals="0" coveredconditionals="0" statements="11" coveredstatements="0" elements="15" coveredelements="0"/>
       </file>
-      <file name="/var/www/Projects/DddStarterPack/src/Matiux/DddStarterPack/Infrastructure/Application/Notification/InMemory/InMemoryMessageProducer.php">
-        <class name="InMemoryMessageProducer" namespace="DddStarterPack\Infrastructure\Application\Notification\InMemory">
+      <file name="/var/www/Projects/DddStarterPack/src/Matiux/DDDStarterPack/Infrastructure/Application/Notification/InMemory/InMemoryMessageProducer.php">
+        <class name="InMemoryMessageProducer" namespace="DDDStarterPack\Infrastructure\Application\Notification\InMemory">
           <metrics complexity="4" methods="4" coveredmethods="0" conditionals="0" coveredconditionals="0" statements="21" coveredstatements="0" elements="25" coveredelements="0"/>
         </class>
         <line num="11" type="method" name="__construct" visibility="public" complexity="1" crap="2" count="0"/>
@@ -730,8 +722,8 @@
         <line num="42" type="stmt" count="0"/>
         <metrics loc="43" ncloc="43" classes="1" methods="4" coveredmethods="0" conditionals="0" coveredconditionals="0" statements="21" coveredstatements="0" elements="25" coveredelements="0"/>
       </file>
-      <file name="/var/www/Projects/DddStarterPack/src/Matiux/DddStarterPack/Infrastructure/Application/Notification/InMemory/InMemoryMessageQueue.php">
-        <class name="InMemoryMessageQueue" namespace="DddStarterPack\Infrastructure\Application\Notification\InMemory">
+      <file name="/var/www/Projects/DddStarterPack/src/Matiux/DDDStarterPack/Infrastructure/Application/Notification/InMemory/InMemoryMessageQueue.php">
+        <class name="InMemoryMessageQueue" namespace="DDDStarterPack\Infrastructure\Application\Notification\InMemory">
           <metrics complexity="8" methods="4" coveredmethods="0" conditionals="0" coveredconditionals="0" statements="21" coveredstatements="0" elements="25" coveredelements="0"/>
         </class>
         <line num="9" type="method" name="__construct" visibility="public" complexity="1" crap="2" count="0"/>
@@ -762,9 +754,9 @@
         <metrics loc="43" ncloc="43" classes="1" methods="4" coveredmethods="0" conditionals="0" coveredconditionals="0" statements="21" coveredstatements="0" elements="25" coveredelements="0"/>
       </file>
     </package>
-    <package name="DddStarterPack\Infrastructure\Domain\Model\Event\Doctrine">
-      <file name="/var/www/Projects/DddStarterPack/src/Matiux/DddStarterPack/Infrastructure/Domain/Model/Event/Doctrine/DoctrineEventStore.php">
-        <class name="DoctrineEventStore" namespace="DddStarterPack\Infrastructure\Domain\Model\Event\Doctrine">
+    <package name="DDDStarterPack\Infrastructure\Domain\Model\Event\Doctrine">
+      <file name="/var/www/Projects/DddStarterPack/src/Matiux/DDDStarterPack/Infrastructure/Domain/Model/Event/Doctrine/DoctrineEventStore.php">
+        <class name="DoctrineEventStore" namespace="DDDStarterPack\Infrastructure\Domain\Model\Event\Doctrine">
           <metrics complexity="11" methods="7" coveredmethods="0" conditionals="0" coveredconditionals="0" statements="42" coveredstatements="0" elements="49" coveredelements="0"/>
         </class>
         <line num="15" type="method" name="append" visibility="public" complexity="1" crap="2" count="0"/>
@@ -819,6 +811,6 @@
         <metrics loc="82" ncloc="73" classes="1" methods="7" coveredmethods="0" conditionals="0" coveredconditionals="0" statements="42" coveredstatements="0" elements="49" coveredelements="0"/>
       </file>
     </package>
-    <metrics files="47" loc="1453" ncloc="1294" classes="28" methods="107" coveredmethods="17" conditionals="0" coveredconditionals="0" statements="445" coveredstatements="61" elements="552" coveredelements="78"/>
+    <metrics files="46" loc="1453" ncloc="1294" classes="28" methods="107" coveredmethods="17" conditionals="0" coveredconditionals="0" statements="445" coveredstatements="61" elements="552" coveredelements="78"/>
   </project>
 </coverage>

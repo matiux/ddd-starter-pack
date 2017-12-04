@@ -1,10 +1,10 @@
 <?php
 
-namespace Tests\DddStarterPack\Application\Notification\InMemory;
+namespace Tests\DDDStarterPack\Application\Notification\InMemory;
 
 use DddStarterPack\Domain\Model\Event\StoredDomainEvent;
-use DddStarterPack\Domain\Model\Message\PublishedMessage;
-use DddStarterPack\Domain\Model\Message\PublishedMessageTracker;
+use DDDStarterPack\Domain\Model\Message\PublishedMessage;
+use DDDStarterPack\Domain\Model\Message\PublishedMessageTracker;
 use ReflectionObject;
 
 class InMemoryPublishedMessageTracker implements PublishedMessageTracker

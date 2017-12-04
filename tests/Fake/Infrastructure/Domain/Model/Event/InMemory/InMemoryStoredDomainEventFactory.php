@@ -1,10 +1,11 @@
 <?php
 
-namespace Tests\DddStarterPack\Fake\Infrastructure\Domain\Model\Event\InMemory;
+namespace Tests\DDDStarterPack\Fake\Infrastructure\Domain\Model\Event\InMemory;
 
-use DddStarterPack\Domain\Model\Event\EventStore;
-use DddStarterPack\Domain\Model\Event\StoredDomainEvent;
-use DddStarterPack\Domain\Model\Event\StoredDomainEventFactory;
+use DDDStarterPack\Domain\Model\Event\EventStore;
+use DDDStarterPack\Domain\Model\Event\StoredDomainEvent;
+use DDDStarterPack\Domain\Model\Event\StoredDomainEventFactory;
+use Tests\DDDStarterPack\Fake\Domain\Model\Event\StoredEvent;
 
 class InMemoryStoredDomainEventFactory implements StoredDomainEventFactory
 {
@@ -17,7 +18,7 @@ class InMemoryStoredDomainEventFactory implements StoredDomainEventFactory
 
     public function build(string $eventType, \DateTimeImmutable $occuredOn, string $serializedEvent): StoredDomainEvent
     {
-        $storedEvent = new StoredDomainEvent($this->eventStore->nextId(), $eventType, $occuredOn, $serializedEvent);
+        $storedEvent = new StoredEvent($this->eventStore->nextId(), $eventType, $occuredOn, $serializedEvent);
 
         return $storedEvent;
     }

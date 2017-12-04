@@ -1,8 +1,8 @@
 <?php
 
-namespace Tests\DddStarterPack\Fake\Infrastructure\Serializer;
+namespace Tests\DDDStarterPack\Fake\Infrastructure\Serializer;
 
-use DddStarterPack\Domain\Event\Subscriber\Serializer;
+use DDDStarterPack\Domain\Event\Subscriber\Serializer;
 use JMS\Serializer\SerializerBuilder;
 use phpDocumentor\Reflection\Types\Scalar;
 

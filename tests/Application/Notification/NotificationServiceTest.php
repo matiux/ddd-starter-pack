@@ -1,19 +1,19 @@
 <?php
 
-namespace Tests\DddStarterPack\Application\Notification;
+namespace Tests\DDDStarterPack\Application\Notification;
 
-use DddStarterPack\Application\Notification\MessageProducer;
-use DddStarterPack\Application\Notification\NotificationService;
-use DddStarterPack\Domain\Model\Event\EventStore;
+use DDDStarterPack\Application\Notification\MessageProducer;
+use DDDStarterPack\Application\Notification\NotificationService;
+use DDDStarterPack\Domain\Model\Event\EventStore;
 use DddStarterPack\Domain\Model\Event\StoredDomainEvent;
-use DddStarterPack\Domain\Model\Message\PublishedMessageTracker;
+use DDDStarterPack\Domain\Model\Message\PublishedMessageTracker;
 use PHPUnit\Framework\TestCase;
 use Ramsey\Uuid\Uuid;
-use Tests\DddStarterPack\Application\Notification\InMemory\InMemoryPublishedMessageTracker;
-use Tests\DddStarterPack\Fake\Domain\Model\Event\FakeDomainEvent;
-use Tests\DddStarterPack\Fake\Infrastructure\Domain\Model\Event\InMemory\InMemoryEventStore;
-use Tests\DddStarterPack\Fake\Infrastructure\Domain\Model\Event\InMemory\InMemoryStoredDomainEventFactory;
-use Tests\DddStarterPack\Fake\Infrastructure\Serializer\FakeEventSerializer;
+use Tests\DDDStarterPack\Application\Notification\InMemory\InMemoryPublishedMessageTracker;
+use Tests\DDDStarterPack\Fake\Domain\Model\Event\FakeDomainEvent;
+use Tests\DDDStarterPack\Fake\Infrastructure\Domain\Model\Event\InMemory\InMemoryEventStore;
+use Tests\DDDStarterPack\Fake\Infrastructure\Domain\Model\Event\InMemory\InMemoryStoredDomainEventFactory;
+use Tests\DDDStarterPack\Fake\Infrastructure\Serializer\FakeEventSerializer;
 
 class NotificationServiceTest extends TestCase
 {
@@ -49,10 +49,10 @@ class NotificationServiceTest extends TestCase
         $storedEventFactory = new InMemoryStoredDomainEventFactory($this->eventStore);
 
         $this->storedEvent01 = $storedEventFactory->build(get_class($event01), $event01->occurredOn(), (new FakeEventSerializer())->serialize($event01, 'json'));
-        $this->eventStore->append($this->storedEvent01);
+        $this->eventStore->add($this->storedEvent01);
 
         $storedEvent02 = $storedEventFactory->build(get_class($event01), $event01->occurredOn(), (new FakeEventSerializer())->serialize($event02, 'json'));
-        $this->eventStore->append($storedEvent02);
+        $this->eventStore->add($storedEvent02);
 
         $this->publishedMessageTracker = new InMemoryPublishedMessageTracker();
     }
@@ -93,7 +93,7 @@ class NotificationServiceTest extends TestCase
 
     private function messageProducerMock()
     {
-        $messageProducer = \Mockery::mock('DddStarterPack\Application\Notification\MessageProducer');
+        $messageProducer = \Mockery::mock('DDDStarterPack\Application\Notification\MessageProducer');
         $messageProducer->shouldReceive('open')
             ->with(\Mockery::type('string'));
 
