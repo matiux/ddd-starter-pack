@@ -52,7 +52,7 @@ abstract class BasicDoctrinePublishedMessageTracker extends EntityRepository
 
         if (null === $publishedMessage) {
 
-            $publishedMessage = new PublishedMessage($exchangeName, $maxId);
+            $publishedMessage = new PublishedMessage(null, $exchangeName, $maxId);
         }
 
         $publishedMessage->updateMostRecentPublishedMessageId($maxId);

@@ -14,8 +14,9 @@ abstract class BasicPublishedMessage
     protected $exchangeName;
     protected $mostRecentPublishedMessageId;
 
-    public function __construct(string $exchangeName, int $aMostRecentPublishedMessageId)
+    public function __construct(?int $trackerId, string $exchangeName, int $aMostRecentPublishedMessageId)
     {
+        $this->trackerId = $trackerId;
         $this->exchangeName = $exchangeName;
         $this->mostRecentPublishedMessageId = $aMostRecentPublishedMessageId;
     }
@@ -37,4 +38,10 @@ abstract class BasicPublishedMessage
     {
         return $this->trackerId;
     }
+
+    public function exchangeName(): string
+    {
+        return $this->exchangeName;
+    }
+
 }
