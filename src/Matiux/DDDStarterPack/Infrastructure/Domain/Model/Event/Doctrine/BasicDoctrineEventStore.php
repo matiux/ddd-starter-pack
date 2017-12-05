@@ -2,15 +2,26 @@
 
 namespace DDDStarterPack\Infrastructure\Domain\Model\Event\Doctrine;
 
-use DDDStarterPack\Domain\Model\Event\BulkDomainEvent;
+
+use DDDStarterPack\Domain\Event\Subscriber\Serializer;
 use DDDStarterPack\Domain\Model\Event\DomainEvent;
-use DDDStarterPack\Domain\Model\Event\EventStore;
+use DDDStarterPack\Domain\Model\Event\StoredDomainEventFactory;
 use Doctrine\ORM\EntityRepository;
 use JMS\Serializer\SerializerBuilder;
+use Doctrine\Common\Persistence\Mapping\ClassMetadata;
 
-class BasicDoctrineEventStore extends EntityRepository implements EventStore
+abstract class BasicDoctrineEventStore extends EntityRepository
 {
-    private $serializer;
+    protected $serializer;
+
+    protected $storedDomainEventFactory;
+
+    public function __construct($em, ClassMetadata $class, StoredDomainEventFactory $storedDomainEventFactory)
+    {
+        parent::__construct($em, $class);
+
+        $this->storedDomainEventFactory = $storedDomainEventFactory;
+    }
 
     public function allStoredEventsSince(?int $anEventId): \ArrayObject
     {
@@ -28,7 +39,9 @@ class BasicDoctrineEventStore extends EntityRepository implements EventStore
 
         //$sql = $query->getQuery()->getSQL();
 
-        return $query->getQuery()->getResult();
+        $results = $query->getQuery()->getResult();
+
+        return new \ArrayObject($results);
     }
 
     private function serializer()
@@ -47,31 +60,35 @@ class BasicDoctrineEventStore extends EntityRepository implements EventStore
         $this->serializer = $serializer;
     }
 
-    public function nextId(): int
+    public function nextId(): ?int
     {
-
+        return null;
     }
 
-    public function add(DomainEvent $storedEvent)
+    public function add(DomainEvent $domainEvent)
     {
+        $serializedEvent = $this->serializer()->serialize($domainEvent, 'json');
+
+        $storedEvent = $this->storedDomainEventFactory->build(
+            $this->nextId(),
+            get_class($domainEvent),
+            $domainEvent->occurredOn(),
+            $serializedEvent
+        );
+
         $this->getEntityManager()->persist($storedEvent);
     }
 
     public function addBulk(\ArrayObject $bulkEvents)
     {
-        $batchSize = 20;
-        for ($i = 1; $i <= 10000; ++$i) {
-            $user = new CmsUser;
-            $user->setStatus('user');
-            $user->setUsername('user' . $i);
-            $user->setName('Mr.Smith-' . $i);
-            $em->persist($user);
-            if (($i % $batchSize) === 0) {
-                $em->flush();
-                $em->clear(); // Detaches all objects from Doctrine!
+        foreach ($bulkEvents as $domainEvent) {
+
+            if ($domainEvent instanceof DomainEvent) {
+
+                $this->add($domainEvent);
             }
         }
-        $em->flush(); //Persist objects that did not make up an entire batch
-        $em->clear();
+
+        $this->getEntityManager()->flush();
     }
 }

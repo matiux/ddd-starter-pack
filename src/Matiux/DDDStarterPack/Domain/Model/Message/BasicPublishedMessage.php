@@ -8,13 +8,13 @@ namespace DDDStarterPack\Domain\Model\Message;
  * Class PublishedMessage
  * @package DDDStarterPack\Domain\Model\EventSystem
  */
-class BasicPublishedMessage
+abstract class BasicPublishedMessage
 {
-    private $trackerId = null;
+    protected $trackerId = null;
 
-    private $exchangeName;
+    protected $exchangeName;
 
-    private $mostRecentPublishedMessageId;
+    protected $mostRecentPublishedMessageId;
 
     public function __construct(string $exchangeName, int $aMostRecentPublishedMessageId)
     {

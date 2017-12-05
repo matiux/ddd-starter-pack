@@ -1,11 +1,12 @@
 <?php
 
-namespace Tests\DDDStarterPack\Domain\Notification\InMemory;
+namespace Tests\DDDStarterPack\Infrastructure\Domain\Model\Message\InMemory;
 
 use DDDStarterPack\Domain\Model\Event\StoredDomainEvent;
 use DDDStarterPack\Domain\Model\Message\BasicPublishedMessage;
 use DDDStarterPack\Domain\Model\Message\PublishedMessageTracker;
 use ReflectionObject;
+use Tests\DDDStarterPack\Infrastructure\Domain\Model\Message\FakePublishedMessage;
 
 class InMemoryPublishedMessageTracker implements PublishedMessageTracker
 {
@@ -74,7 +75,7 @@ class InMemoryPublishedMessageTracker implements PublishedMessageTracker
 
         if (empty($publishedMessage)) {
 
-            $publishedMessage = new BasicPublishedMessage(
+            $publishedMessage = new FakePublishedMessage(
                 $exchangeName,
                 $maxId
             );

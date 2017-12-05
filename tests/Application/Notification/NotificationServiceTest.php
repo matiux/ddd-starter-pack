@@ -9,11 +9,12 @@ use DDDStarterPack\Domain\Model\Event\StoredDomainEvent;
 use DDDStarterPack\Domain\Model\Message\PublishedMessageTracker;
 use PHPUnit\Framework\TestCase;
 use Ramsey\Uuid\Uuid;
-use Tests\DDDStarterPack\Application\Notification\InMemory\InMemoryPublishedMessageTracker;
-use Tests\DDDStarterPack\Fake\Domain\Model\Event\FakeDomainEvent;
-use Tests\DDDStarterPack\Fake\Infrastructure\Domain\Model\Event\InMemory\InMemoryEventStore;
-use Tests\DDDStarterPack\Fake\Infrastructure\Domain\Model\Event\InMemory\InMemoryStoredDomainEventFactory;
-use Tests\DDDStarterPack\Fake\Infrastructure\Serializer\FakeEventSerializer;
+use Tests\DDDStarterPack\Infrastructure\Domain\Event\FakeEventSerializer;
+use Tests\DDDStarterPack\Infrastructure\Domain\Model\Event\FakeDomainEvent;
+use Tests\DDDStarterPack\Infrastructure\Domain\Model\Event\InMemoryEventStore;
+use Tests\DDDStarterPack\Infrastructure\Domain\Model\Event\InMemoryStoredDomainEventFactory;
+use Tests\DDDStarterPack\Infrastructure\Domain\Model\Message\InMemory\InMemoryPublishedMessageTracker;
+
 
 class NotificationServiceTest extends TestCase
 {
@@ -48,10 +49,20 @@ class NotificationServiceTest extends TestCase
 
         $storedEventFactory = new InMemoryStoredDomainEventFactory($this->eventStore);
 
-        $this->storedEvent01 = $storedEventFactory->build(get_class($event01), $event01->occurredOn(), (new FakeEventSerializer())->serialize($event01, 'json'));
+        $this->storedEvent01 = $storedEventFactory->build(
+            $event01->entityId(),
+            get_class($event01),
+            $event01->occurredOn(),
+            (new FakeEventSerializer())->serialize($event01, 'json')
+        );
         $this->eventStore->add($this->storedEvent01);
 
-        $storedEvent02 = $storedEventFactory->build(get_class($event01), $event01->occurredOn(), (new FakeEventSerializer())->serialize($event02, 'json'));
+        $storedEvent02 = $storedEventFactory->build(
+            $event02->entityId(),
+            get_class($event02),
+            $event02->occurredOn(),
+            (new FakeEventSerializer())->serialize($event02, 'json')
+        );
         $this->eventStore->add($storedEvent02);
 
         $this->publishedMessageTracker = new InMemoryPublishedMessageTracker();

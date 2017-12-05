@@ -25,7 +25,7 @@ class PersistAllEventSubscriber implements EventSubscriber
 
         $storedEvent = $this->storedEventFactory->build(get_class($anEvent), $anEvent->occurredOn(), $serializedEvents);
 
-        $this->eventStore->append($storedEvent);
+        $this->eventStore->add($storedEvent);
     }
 
     public function isSubscribedTo(DomainEvent $aDomainEvent): bool

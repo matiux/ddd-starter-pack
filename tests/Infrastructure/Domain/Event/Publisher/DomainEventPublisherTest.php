@@ -1,11 +1,11 @@
 <?php
 
-namespace Tests\DDDStarterPack\Domain\Service\EventPublisher;
+namespace Tests\DDDStarterPack\Infrastructure\Domain\Event\Publisher;
 
 use DDDStarterPack\Domain\Event\Publisher\DomainEventPublisher;
 use PHPUnit\Framework\TestCase;
 use Ramsey\Uuid\Uuid;
-use Tests\DDDStarterPack\Fake\Domain\Model\Event\FakeDomainEvent;
+use Tests\DDDStarterPack\Infrastructure\Domain\Model\Event\FakeDomainEvent;
 
 class DomainEventPublisherTest extends TestCase
 {

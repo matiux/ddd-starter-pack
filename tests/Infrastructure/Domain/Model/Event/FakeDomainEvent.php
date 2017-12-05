@@ -1,6 +1,6 @@
 <?php
 
-namespace Tests\DDDStarterPack\Fake\Domain\Model\Event;
+namespace Tests\DDDStarterPack\Infrastructure\Domain\Model\Event;
 
 use DDDStarterPack\Domain\Model\Event\DomainEvent;
 
