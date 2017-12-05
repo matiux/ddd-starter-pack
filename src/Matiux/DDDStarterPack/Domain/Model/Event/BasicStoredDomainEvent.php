@@ -8,7 +8,7 @@ namespace DDDStarterPack\Domain\Model\Event;
  * Class StoredEvent
  * @package DDDStarterPack\Domain\Model\EventSystem
  */
-abstract class BasicStoredDomainEvent
+class BasicStoredDomainEvent
 {
     protected $eventId;
     protected $eventBody;

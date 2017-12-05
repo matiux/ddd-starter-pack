@@ -3,7 +3,7 @@
 namespace DDDStarterPack\Infrastructure\Domain\Model\Event\Doctrine;
 
 
-use DDDStarterPack\Domain\Event\Subscriber\Serializer;
+use DDDStarterPack\Domain\Event\Serializer;
 use DDDStarterPack\Domain\Model\Event\DomainEvent;
 use DDDStarterPack\Domain\Model\Event\StoredDomainEventFactory;
 use Doctrine\ORM\EntityRepository;
@@ -15,13 +15,6 @@ abstract class BasicDoctrineEventStore extends EntityRepository
     protected $serializer;
 
     protected $storedDomainEventFactory;
-
-    public function __construct($em, ClassMetadata $class, StoredDomainEventFactory $storedDomainEventFactory)
-    {
-        parent::__construct($em, $class);
-
-        $this->storedDomainEventFactory = $storedDomainEventFactory;
-    }
 
     public function allStoredEventsSince(?int $anEventId): \ArrayObject
     {
@@ -58,6 +51,11 @@ abstract class BasicDoctrineEventStore extends EntityRepository
     public function setSerializer(Serializer $serializer)
     {
         $this->serializer = $serializer;
+    }
+
+    public function setStoredDomainEventFactory(StoredDomainEventFactory $storedDomainEventFactory)
+    {
+        $this->storedDomainEventFactory = $storedDomainEventFactory;
     }
 
     public function nextId(): ?int
