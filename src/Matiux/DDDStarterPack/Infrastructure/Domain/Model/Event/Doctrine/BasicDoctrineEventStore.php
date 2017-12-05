@@ -16,7 +16,7 @@ abstract class BasicDoctrineEventStore extends EntityRepository
 
     protected $storedDomainEventFactory;
 
-    public function allStoredEventsSince(?int $anEventId): \ArrayObject
+    public function allStoredEventsSince(?int $anEventId, ?int $limit = null): \ArrayObject
     {
         $query = $this->createQueryBuilder('e');
 

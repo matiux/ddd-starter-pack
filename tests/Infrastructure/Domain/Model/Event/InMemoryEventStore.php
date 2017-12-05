@@ -10,7 +10,7 @@ class InMemoryEventStore implements EventStore
 {
     private $events = [];
 
-    public function allStoredEventsSince(?int $anEventId): \ArrayObject
+    public function allStoredEventsSince(?int $anEventId, ?int $limit = null): \ArrayObject
     {
         $events = array_filter($this->events, function (StoredDomainEvent $storedEvent) use ($anEventId) {
 

@@ -10,7 +10,7 @@ interface EventStore
 
     public function addBulk(\ArrayObject $bulkEvents);
 
-    public function allStoredEventsSince(?int $anEventId): \ArrayObject;
+    public function allStoredEventsSince(?int $anEventId, ?int $limit = null): \ArrayObject;
 
     public function nextId(): ?int;
 
