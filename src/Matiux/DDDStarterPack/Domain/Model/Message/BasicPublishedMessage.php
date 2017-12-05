@@ -11,9 +11,7 @@ namespace DDDStarterPack\Domain\Model\Message;
 abstract class BasicPublishedMessage
 {
     protected $trackerId = null;
-
     protected $exchangeName;
-
     protected $mostRecentPublishedMessageId;
 
     public function __construct(string $exchangeName, int $aMostRecentPublishedMessageId)

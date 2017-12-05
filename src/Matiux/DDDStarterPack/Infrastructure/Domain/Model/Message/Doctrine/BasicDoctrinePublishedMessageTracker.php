@@ -2,12 +2,12 @@
 
 namespace DDDStarterPack\Infrastructure\Domain\Model\Message\Doctrine;
 
+use DDDStarterPack\Domain\Model\Event\BasicStoredDomainEvent;
 use DDDStarterPack\Domain\Model\Message\BasicPublishedMessage;
-use DDDStarterPack\Domain\Model\Message\PublishedMessageTracker;
+use DddStarterPack\Domain\Model\Message\PublishedMessage;
 use Doctrine\ORM\EntityRepository;
-use DDDStarterPack\Domain\Model\Event\StoredDomainEvent;
 
-class BasicDoctrinePublishedMessageTracker extends EntityRepository implements PublishedMessageTracker
+abstract class BasicDoctrinePublishedMessageTracker extends EntityRepository
 {
     /**
      * Ritorna l'ID dell'ultimo PublishedMessage
@@ -36,10 +36,10 @@ class BasicDoctrinePublishedMessageTracker extends EntityRepository implements P
      * o magari può essere comodo nel caso in cui sia necessario ripubblicarlo
      *
      * @param string $exchangeName
-     * @param StoredDomainEvent $notification
+     * @param BasicStoredDomainEvent $notification
      * @return null
      */
-    public function trackMostRecentPublishedMessage(string $exchangeName, StoredDomainEvent $notification)
+    public function trackMostRecentPublishedMessage(string $exchangeName, BasicStoredDomainEvent $notification)
     {
         if (!$notification) {
 
@@ -52,10 +52,7 @@ class BasicDoctrinePublishedMessageTracker extends EntityRepository implements P
 
         if (null === $publishedMessage) {
 
-            $publishedMessage = new BasicPublishedMessage(
-                $exchangeName,
-                $maxId
-            );
+            $publishedMessage = new PublishedMessage($exchangeName, $maxId);
         }
 
         $publishedMessage->updateMostRecentPublishedMessageId($maxId);
