@@ -8,7 +8,7 @@ namespace DDDStarterPack\Domain\Model\Message;
  * Class PublishedMessage
  * @package DDDStarterPack\Domain\Model\EventSystem
  */
-class PublishedMessage
+class BasicPublishedMessage
 {
     private $trackerId = null;
 

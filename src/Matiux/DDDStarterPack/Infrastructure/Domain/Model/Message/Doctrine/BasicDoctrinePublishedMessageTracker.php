@@ -1,13 +1,13 @@
 <?php
 
-namespace DDDStarterPack\Infrastructure\Application\Notification\Doctrine;
+namespace DDDStarterPack\Infrastructure\Domain\Model\Message\Doctrine;
 
-use DDDStarterPack\Domain\Model\Message\PublishedMessage;
+use DDDStarterPack\Domain\Model\Message\BasicPublishedMessage;
 use DDDStarterPack\Domain\Model\Message\PublishedMessageTracker;
 use Doctrine\ORM\EntityRepository;
 use DDDStarterPack\Domain\Model\Event\StoredDomainEvent;
 
-class DoctrinePublishedMessageTracker extends EntityRepository implements PublishedMessageTracker
+class BasicDoctrinePublishedMessageTracker extends EntityRepository implements PublishedMessageTracker
 {
     /**
      * Ritorna l'ID dell'ultimo PublishedMessage
@@ -18,7 +18,7 @@ class DoctrinePublishedMessageTracker extends EntityRepository implements Publis
      */
     public function mostRecentPublishedMessageId(string $exchangeName): ?int
     {
-        /** @var $messageTracked PublishedMessage */
+        /** @var $messageTracked BasicPublishedMessage */
         $messageTracked = $this->findOneByExchangeName($exchangeName);
 
         if (!$messageTracked) {
@@ -52,7 +52,7 @@ class DoctrinePublishedMessageTracker extends EntityRepository implements Publis
 
         if (null === $publishedMessage) {
 
-            $publishedMessage = new PublishedMessage(
+            $publishedMessage = new BasicPublishedMessage(
                 $exchangeName,
                 $maxId
             );

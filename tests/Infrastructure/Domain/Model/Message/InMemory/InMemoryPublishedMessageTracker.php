@@ -1,9 +1,9 @@
 <?php
 
-namespace Tests\DDDStarterPack\Application\Notification\InMemory;
+namespace Tests\DDDStarterPack\Domain\Notification\InMemory;
 
 use DDDStarterPack\Domain\Model\Event\StoredDomainEvent;
-use DDDStarterPack\Domain\Model\Message\PublishedMessage;
+use DDDStarterPack\Domain\Model\Message\BasicPublishedMessage;
 use DDDStarterPack\Domain\Model\Message\PublishedMessageTracker;
 use ReflectionObject;
 
@@ -25,7 +25,7 @@ class InMemoryPublishedMessageTracker implements PublishedMessageTracker
             return null;
         }
 
-        $messageTracked = array_filter($this->publishedMessages, function (PublishedMessage $publishedMessage) use ($exchangeName) {
+        $messageTracked = array_filter($this->publishedMessages, function (BasicPublishedMessage $publishedMessage) use ($exchangeName) {
 
             $r = new ReflectionObject($publishedMessage);
             $p = $r->getProperty('exchangeName');
@@ -60,7 +60,7 @@ class InMemoryPublishedMessageTracker implements PublishedMessageTracker
     {
         $maxId = $notification->eventId();
 
-        $publishedMessage = array_filter($this->publishedMessages, function (PublishedMessage $publishedMessage) use ($exchangeName) {
+        $publishedMessage = array_filter($this->publishedMessages, function (BasicPublishedMessage $publishedMessage) use ($exchangeName) {
 
             $r = new ReflectionObject($publishedMessage);
             $p = $r->getProperty('exchangeName');
@@ -74,7 +74,7 @@ class InMemoryPublishedMessageTracker implements PublishedMessageTracker
 
         if (empty($publishedMessage)) {
 
-            $publishedMessage = new PublishedMessage(
+            $publishedMessage = new BasicPublishedMessage(
                 $exchangeName,
                 $maxId
             );

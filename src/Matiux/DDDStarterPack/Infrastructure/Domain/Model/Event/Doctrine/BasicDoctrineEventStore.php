@@ -3,21 +3,16 @@
 namespace DDDStarterPack\Infrastructure\Domain\Model\Event\Doctrine;
 
 use DDDStarterPack\Domain\Model\Event\BulkDomainEvent;
+use DDDStarterPack\Domain\Model\Event\DomainEvent;
 use DDDStarterPack\Domain\Model\Event\EventStore;
-use DDDStarterPack\Domain\Model\Event\StoredDomainEvent;
 use Doctrine\ORM\EntityRepository;
 use JMS\Serializer\SerializerBuilder;
 
-class DoctrineEventStore extends EntityRepository implements EventStore
+class BasicDoctrineEventStore extends EntityRepository implements EventStore
 {
     private $serializer;
 
-    public function append(StoredDomainEvent $storedEvent)
-    {
-        $this->getEntityManager()->persist($storedEvent);
-    }
-
-    public function allStoredEventsSince($anEventId)
+    public function allStoredEventsSince(?int $anEventId): \ArrayObject
     {
         $query = $this->createQueryBuilder('e');
 
@@ -57,12 +52,12 @@ class DoctrineEventStore extends EntityRepository implements EventStore
 
     }
 
-    public function add(StoredDomainEvent $storedEvent)
+    public function add(DomainEvent $storedEvent)
     {
-
+        $this->getEntityManager()->persist($storedEvent);
     }
 
-    public function addBulk(BulkDomainEvent $bulkDomainEvent)
+    public function addBulk(\ArrayObject $bulkEvents)
     {
         $batchSize = 20;
         for ($i = 1; $i <= 10000; ++$i) {
