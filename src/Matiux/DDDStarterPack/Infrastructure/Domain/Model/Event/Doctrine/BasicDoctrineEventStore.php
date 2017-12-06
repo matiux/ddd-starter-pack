@@ -51,7 +51,7 @@ abstract class BasicDoctrineEventStore extends EntityRepository
         return $this->serializer;
     }
 
-    public function setSerializer(Serializer $serializer)
+    public function setSerializer($serializer)
     {
         $this->serializer = $serializer;
     }

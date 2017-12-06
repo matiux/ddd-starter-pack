@@ -3,6 +3,7 @@
 namespace DDDStarterPack\Infrastructure\Domain\Model\Message\Doctrine;
 
 use DDDStarterPack\Domain\Model\Event\BasicStoredDomainEvent;
+use DDDStarterPack\Domain\Model\Event\StoredDomainEventInterface;
 use DDDStarterPack\Domain\Model\Message\BasicPublishedMessage;
 use DDDStarterPack\Domain\Model\Message\PublishedMessageFactory;
 use Doctrine\ORM\EntityRepository;
@@ -41,10 +42,10 @@ abstract class BasicDoctrinePublishedMessageTracker extends EntityRepository
      * o magari può essere comodo nel caso in cui sia necessario ripubblicarlo
      *
      * @param string $exchangeName
-     * @param BasicStoredDomainEvent $notification
+     * @param StoredDomainEventInterface $notification
      * @return null
      */
-    public function trackMostRecentPublishedMessage(string $exchangeName, BasicStoredDomainEvent $notification)
+    public function trackMostRecentPublishedMessage(string $exchangeName, StoredDomainEventInterface $notification)
     {
         if (!$notification) {
 
