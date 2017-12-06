@@ -14,9 +14,9 @@ class DomainEventPublisher
 
     private static $instance = null;
 
-    public static function instance(): DomainEventPublisher
+    public static function instance(bool $reset = false): DomainEventPublisher
     {
-        if (null === static::$instance) {
+        if (null === static::$instance or $reset) {
 
             static::$instance = new static();
         }

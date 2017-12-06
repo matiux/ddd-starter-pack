@@ -31,6 +31,10 @@ abstract class BasicDoctrineEventStore extends EntityRepository
             $query->setParameter('eventId', $anEventId);
         }
 
+        if ($limit) {
+            $query->setMaxResults($limit);
+        }
+
         $query->orderBy('e.eventId');
 
         //$sql = $query->getQuery()->getSQL();
