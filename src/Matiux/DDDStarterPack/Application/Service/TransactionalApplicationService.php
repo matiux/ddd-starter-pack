@@ -4,8 +4,8 @@ namespace DDDStarterPack\Application\Service;
 
 class TransactionalApplicationService
 {
-    private $service;
-    private $session;
+    protected $service;
+    protected $session;
 
     public function __construct(ApplicationService $service, TransactionalSession $session)
     {

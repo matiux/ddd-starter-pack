@@ -11,33 +11,33 @@ class InMemoryMessageQueue
         $this->messages['default'] = [];
     }
 
-    public function popMessage(string $queue = 'default'): ?string
+    public function popMessage(string $exchangeName = 'default'): ?string
     {
-        if (array_key_exists($queue, $this->messages)) {
+        if (array_key_exists($exchangeName, $this->messages)) {
 
-            return array_pop($this->messages[$queue]);
+            return array_pop($this->messages[$exchangeName]);
         }
 
-        throw new \InvalidArgumentException("Queue '$queue' doesn't exists");
+        throw new \InvalidArgumentException("Queue '$exchangeName' doesn't exists");
     }
 
-    public function appendMessage($message, string $queue = 'default')
+    public function appendMessage($message, string $exchangeName = 'default')
     {
-        if (array_key_exists($queue, $this->messages)) {
+        if (!array_key_exists($exchangeName, $this->messages)) {
 
-            array_unshift($this->messages[$queue], $message);
+            $this->messages[$exchangeName] = [];
         }
 
-        throw new \InvalidArgumentException("Queue '$queue' doesn't exists");
+        array_unshift($this->messages[$exchangeName], $message);
     }
 
-    public function count(string $queue = 'default')
+    public function count(string $exchangeName = 'default')
     {
-        if (array_key_exists($queue, $this->messages)) {
+        if (array_key_exists($exchangeName, $this->messages)) {
 
-            return count($this->messages[$queue]);
+            return count($this->messages[$exchangeName]);
         }
 
-        throw new \InvalidArgumentException("Queue '$queue' doesn't exists");
+        throw new \InvalidArgumentException("Queue '$exchangeName' doesn't exists");
     }
 }
