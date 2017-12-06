@@ -3,7 +3,7 @@
 namespace DDDStarterPack\Domain\Model\Message;
 
 /**
- * Questa entitità rappresenta l'ultimo evento pubblicato in coda
+ * Questa entitità rappresenta l'ultimo evento pubblicato in coda per un determinato exchangeName
  *
  * Class PublishedMessage
  * @package DDDStarterPack\Domain\Model\EventSystem
@@ -14,7 +14,7 @@ abstract class BasicPublishedMessage
     protected $exchangeName;
     protected $mostRecentPublishedMessageId;
 
-    public function __construct(?int $trackerId, string $exchangeName, int $aMostRecentPublishedMessageId)
+    public function __construct($trackerId, string $exchangeName, int $aMostRecentPublishedMessageId)
     {
         $this->trackerId = $trackerId;
         $this->exchangeName = $exchangeName;

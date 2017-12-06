@@ -4,5 +4,5 @@ namespace DDDStarterPack\Domain\Model\Event;
 
 interface StoredDomainEventFactory
 {
-    public function build($ventID, string $eventType, \DateTimeImmutable $occuredOn, string $serializedEvent): BasicStoredDomainEvent;
+    public function build($eventID, string $eventType, \DateTimeImmutable $occuredOn, string $serializedEvent): StoredDomainEventInterface;
 }

@@ -3,8 +3,8 @@
 namespace Tests\DDDStarterPack\Infrastructure\Domain\Model\Event;
 
 use DDDStarterPack\Domain\Model\Event\EventStore;
-use DDDStarterPack\Domain\Model\Event\StoredDomainEvent;
 use DDDStarterPack\Domain\Model\Event\StoredDomainEventFactory;
+use DDDStarterPack\Domain\Model\Event\StoredDomainEventInterface;
 
 class InMemoryStoredDomainEventFactory implements StoredDomainEventFactory
 {
@@ -15,7 +15,7 @@ class InMemoryStoredDomainEventFactory implements StoredDomainEventFactory
         $this->eventStore = $eventStore;
     }
 
-    public function build($ventID, string $eventType, \DateTimeImmutable $occuredOn, string $serializedEvent): StoredDomainEvent
+    public function build($eventID, string $eventType, \DateTimeImmutable $occuredOn, string $serializedEvent): StoredDomainEventInterface
     {
         $storedEvent = new FakeStoredEvent($this->eventStore->nextId(), $eventType, $occuredOn, $serializedEvent);
 

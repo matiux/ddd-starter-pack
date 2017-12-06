@@ -2,7 +2,7 @@
 
 namespace DDDStarterPack\Domain\Model\Message;
 
-use DDDStarterPack\Domain\Model\Event\BasicStoredDomainEvent;
+use DDDStarterPack\Domain\Model\Event\StoredDomainEventInterface;
 
 interface PublishedMessageTracker
 {
@@ -22,8 +22,8 @@ interface PublishedMessageTracker
      * o magari può essere comodo nel caso in cui sia necessario ripubblicarlo
      *
      * @param string $exchangeName
-     * @param BasicStoredDomainEvent $notification
+     * @param StoredDomainEventInterface $notification
      * @return null
      */
-    public function trackMostRecentPublishedMessage(string $exchangeName, BasicStoredDomainEvent $notification);
+    public function trackMostRecentPublishedMessage(string $exchangeName, StoredDomainEventInterface $notification);
 }

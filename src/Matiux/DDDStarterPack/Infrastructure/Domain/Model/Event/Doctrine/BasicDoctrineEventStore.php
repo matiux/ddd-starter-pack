@@ -14,6 +14,9 @@ abstract class BasicDoctrineEventStore extends EntityRepository
 {
     protected $serializer;
 
+    /**
+     * @var StoredDomainEventFactory
+     */
     protected $storedDomainEventFactory;
 
     public function allStoredEventsSince(?int $anEventId, ?int $limit = null): \ArrayObject

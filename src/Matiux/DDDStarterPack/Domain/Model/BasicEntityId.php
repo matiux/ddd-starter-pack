@@ -4,7 +4,7 @@ namespace DDDStarterPack\Domain\Model;
 
 use Ramsey\Uuid\Uuid;
 
-abstract class BasicEntityId implements EntityId
+abstract class BasicEntityId
 {
     private $id;
 

@@ -2,11 +2,9 @@
 
 namespace DDDStarterPack\Domain\Model\Event;
 
-use DDDStarterPack\Domain\Event\Serializer;
-
 interface EventStore
 {
-    public function add(DomainEvent $storedEvent);
+    public function add(DomainEvent $domainEvent);
 
     public function addBulk(\ArrayObject $bulkEvents);
 
@@ -14,5 +12,7 @@ interface EventStore
 
     public function nextId(): ?int;
 
-    public function setSerializer(Serializer $serializer);
+    public function setSerializer($serializer);
+
+    public function setStoredDomainEventFactory(StoredDomainEventFactory $storedDomainEventFactory);
 }

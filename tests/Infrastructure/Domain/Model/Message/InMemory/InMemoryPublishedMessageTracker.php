@@ -2,7 +2,7 @@
 
 namespace Tests\DDDStarterPack\Infrastructure\Domain\Model\Message\InMemory;
 
-use DDDStarterPack\Domain\Model\Event\StoredDomainEvent;
+use DDDStarterPack\Domain\Model\Event\StoredDomainEventInterface;
 use DDDStarterPack\Domain\Model\Message\BasicPublishedMessage;
 use DDDStarterPack\Domain\Model\Message\PublishedMessageTracker;
 use ReflectionObject;
@@ -54,10 +54,10 @@ class InMemoryPublishedMessageTracker implements PublishedMessageTracker
      * o magari può essere comodo nel caso in cui sia necessario ripubblicarlo
      *
      * @param string $exchangeName
-     * @param StoredDomainEvent $notification
+     * @param StoredDomainEventInterface $notification
      * @return null
      */
-    public function trackMostRecentPublishedMessage(string $exchangeName, StoredDomainEvent $notification)
+    public function trackMostRecentPublishedMessage(string $exchangeName, StoredDomainEventInterface $notification)
     {
         $maxId = $notification->eventId();
 
@@ -76,6 +76,7 @@ class InMemoryPublishedMessageTracker implements PublishedMessageTracker
         if (empty($publishedMessage)) {
 
             $publishedMessage = new FakePublishedMessage(
+                null,
                 $exchangeName,
                 $maxId
             );

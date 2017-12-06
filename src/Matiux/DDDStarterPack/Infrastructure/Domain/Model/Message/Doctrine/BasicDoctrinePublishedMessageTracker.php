@@ -4,11 +4,16 @@ namespace DDDStarterPack\Infrastructure\Domain\Model\Message\Doctrine;
 
 use DDDStarterPack\Domain\Model\Event\BasicStoredDomainEvent;
 use DDDStarterPack\Domain\Model\Message\BasicPublishedMessage;
-use DddStarterPack\Domain\Model\Message\PublishedMessage;
+use DDDStarterPack\Domain\Model\Message\PublishedMessageFactory;
 use Doctrine\ORM\EntityRepository;
 
 abstract class BasicDoctrinePublishedMessageTracker extends EntityRepository
 {
+    /**
+     * @var PublishedMessageFactory
+     */
+    private $publishedMessageFactory;
+
     /**
      * Ritorna l'ID dell'ultimo PublishedMessage
      * Questo repository contine un solo record per exchangeName, che rappresenta l'ultimo evento pubblicato
@@ -52,11 +57,16 @@ abstract class BasicDoctrinePublishedMessageTracker extends EntityRepository
 
         if (null === $publishedMessage) {
 
-            $publishedMessage = new PublishedMessage(null, $exchangeName, $maxId);
+            $publishedMessage = $this->publishedMessageFactory->build(null, $exchangeName, $maxId);
         }
 
         $publishedMessage->updateMostRecentPublishedMessageId($maxId);
 
         $this->getEntityManager()->persist($publishedMessage);
+    }
+
+    public function setPublishedMessageFactory(PublishedMessageFactory $publishedMessageFactory)
+    {
+        $this->publishedMessageFactory = $publishedMessageFactory;
     }
 }

@@ -3,7 +3,7 @@
 namespace DDDStarterPack\Application\Notification;
 
 use DDDStarterPack\Domain\Model\Event\EventStore;
-use DDDStarterPack\Domain\Model\Event\StoredDomainEvent;
+use DDDStarterPack\Domain\Model\Event\StoredDomainEventInterface;
 use DDDStarterPack\Domain\Model\Message\PublishedMessageTracker;
 use JMS\Serializer\SerializerBuilder;
 
@@ -83,7 +83,7 @@ class NotificationService
         return $this->eventStore->allStoredEventsSince($mostRecentPublishedMessageId);
     }
 
-    private function publish($exchangeName, StoredDomainEvent $notification, MessageProducer $messageProducer)
+    private function publish($exchangeName, StoredDomainEventInterface $notification, MessageProducer $messageProducer)
     {
         $serialized = $this->serializer()->serialize($notification, 'json');
 
