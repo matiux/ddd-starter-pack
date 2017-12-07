@@ -21,25 +21,25 @@ abstract class BasicDoctrineEventStore extends EntityRepository
 
     public function allStoredEventsSince(?int $anEventId, ?int $limit = null): \ArrayObject
     {
-        $query = $this->createQueryBuilder('e');
+        $qb = $this->createQueryBuilder('e');
 
         /**
          * Se $anEventId == null, allora il WHERE viene tralasciato e non messo nella query
          */
         if ($anEventId) {
-            $query->where('e.eventId > :eventId');
-            $query->setParameter('eventId', $anEventId);
+            $qb->where('e.eventId > :eventId');
+            $qb->setParameter('eventId', $anEventId);
         }
 
         if ($limit) {
-            $query->setMaxResults($limit);
+            $qb->setMaxResults($limit);
         }
 
-        $query->orderBy('e.eventId');
+        $qb->orderBy('e.eventId');
 
         //$sql = $query->getQuery()->getSQL();
-
-        $results = $query->getQuery()->getResult();
+        $query = $qb->getQuery();
+        $results = $query->getResult();
 
         return new \ArrayObject($results);
     }
