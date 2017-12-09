@@ -2,7 +2,7 @@
 
 namespace DDDStarterPack\Application\Service;
 
-class TransactionalApplicationService
+class TransactionalApplicationService implements ApplicationService
 {
     protected $service;
     protected $session;
