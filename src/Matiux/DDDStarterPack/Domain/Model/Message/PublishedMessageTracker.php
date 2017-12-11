@@ -25,5 +25,5 @@ interface PublishedMessageTracker
      * @param StoredDomainEventInterface $notification
      * @return null
      */
-    public function trackMostRecentPublishedMessage(string $exchangeName, StoredDomainEventInterface $notification);
+    public function trackMostRecentPublishedMessage(string $exchangeName, ?StoredDomainEventInterface $notification);
 }
