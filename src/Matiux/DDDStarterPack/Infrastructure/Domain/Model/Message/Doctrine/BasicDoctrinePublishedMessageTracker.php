@@ -45,7 +45,7 @@ abstract class BasicDoctrinePublishedMessageTracker extends EntityRepository
      * @param StoredDomainEventInterface $notification
      * @return null
      */
-    public function trackMostRecentPublishedMessage(string $exchangeName, StoredDomainEventInterface $notification)
+    public function trackMostRecentPublishedMessage(string $exchangeName, ?StoredDomainEventInterface $notification)
     {
         if (!$notification) {
 
