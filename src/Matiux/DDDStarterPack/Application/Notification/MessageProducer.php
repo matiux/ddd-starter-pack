@@ -4,15 +4,19 @@ namespace DDDStarterPack\Application\Notification;
 
 interface MessageProducer
 {
+    const BATCH_LIMIT = 1;
+
     public function open(string $exchangeName);
 
     public function send(
         string $exchangeName,
-        string $notificationMessage,
+        string $notificationBodyMessage,
         string $notificationType,
         int $notificationId,
         \DateTimeInterface $notificationOccurredOn
     ): MessageProducerResponse;
+
+    public function sendBatch(array $messages): MessageProducerResponse;
 
     public function close($exchangeName);
 }

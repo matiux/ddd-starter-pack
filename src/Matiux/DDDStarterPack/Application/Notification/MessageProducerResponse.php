@@ -6,5 +6,5 @@ interface MessageProducerResponse
 {
     public function getSentMessages(): int;
 
-    public function getInQueueMessages(): int;
+    public function getOriginalResponse();
 }
