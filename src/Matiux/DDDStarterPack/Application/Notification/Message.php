@@ -1,6 +1,6 @@
 <?php
 
-namespace DddStarterPack\Application\Notification;
+namespace DDDStarterPack\Application\Notification;
 
 interface Message
 {
