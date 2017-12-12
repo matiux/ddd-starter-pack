@@ -12,7 +12,7 @@ interface MessageProducer
         string $notificationType,
         int $notificationId,
         \DateTimeInterface $notificationOccurredOn
-    );
+    ): MessageProducerResponse;
 
     public function close($exchangeName);
 }
