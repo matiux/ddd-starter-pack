@@ -3,9 +3,12 @@
 namespace DDDStarterPack\Infrastructure\Application\Notification\Amazon;
 
 use DDDStarterPack\Application\Notification\MessageProducer;
+use DDDStarterPack\Application\Notification\MessageProducerResponse;
 
 class AmazonSqsMessageProducer implements MessageProducer
 {
+    const BATCH_LIMIT = 10;
+
     /**
      * @var SqsClient
      */
@@ -29,7 +32,7 @@ class AmazonSqsMessageProducer implements MessageProducer
         string $notificationType,
         int $notificationId,
         \DateTimeInterface $notificationOccurredOn
-    )
+    ): MessageProducerResponse
     {
         $queueUrl = getenv('AMAZON_SQS_QUEUE_URL');
 
@@ -40,6 +43,11 @@ class AmazonSqsMessageProducer implements MessageProducer
     }
 
     public function close($exchangeName)
+    {
+
+    }
+
+    public function sendBatch(array $messages): MessageProducerResponse
     {
 
     }
