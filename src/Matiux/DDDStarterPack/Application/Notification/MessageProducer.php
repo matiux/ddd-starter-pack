@@ -14,7 +14,7 @@ interface MessageProducer
         \DateTimeInterface $notificationOccurredOn
     ): MessageProducerResponse;
 
-    public function sendBatch(array $messages): MessageProducerResponse;
+    public function sendBatch(\ArrayObject $messages): MessageProducerResponse;
 
     public function close($exchangeName);
 }
