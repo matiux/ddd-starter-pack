@@ -4,8 +4,6 @@ namespace DDDStarterPack\Application\Notification;
 
 interface MessageProducer
 {
-    const BATCH_LIMIT = 1;
-
     public function open(string $exchangeName);
 
     public function send(
