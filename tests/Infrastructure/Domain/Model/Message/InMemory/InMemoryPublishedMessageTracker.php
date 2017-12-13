@@ -57,7 +57,7 @@ class InMemoryPublishedMessageTracker implements PublishedMessageTracker
      * @param StoredDomainEventInterface $notification
      * @return null
      */
-    public function trackMostRecentPublishedMessage(string $exchangeName, StoredDomainEventInterface $notification)
+    public function trackMostRecentPublishedMessage(string $exchangeName, ?StoredDomainEventInterface $notification)
     {
         $maxId = $notification->eventId();
 

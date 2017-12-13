@@ -19,12 +19,20 @@ class NotificationService
     private $publishedMessageTracker;
     private $messageProducer;
     private $serializer;
+    private $notificationMessageFactory;
 
-    public function __construct(EventStore $eventStore, PublishedMessageTracker $publishedMessageTracker, MessageProducer $messageProducer)
+    public function __construct
+    (
+        EventStore $eventStore,
+        PublishedMessageTracker $publishedMessageTracker,
+        MessageProducer $messageProducer,
+        NotificationMessageFactory $notificationMessageFactory
+    )
     {
         $this->eventStore = $eventStore;
         $this->publishedMessageTracker = $publishedMessageTracker;
         $this->messageProducer = $messageProducer;
+        $this->notificationMessageFactory = $notificationMessageFactory;
     }
 
     public function publishNotifications($exchangeName)
@@ -88,11 +96,12 @@ class NotificationService
         $serialized = $this->serializer()->serialize($notification, 'json');
 
         $messageProducer->send(
-            $exchangeName,
-            $serialized,
-            $notification->typeName(),
-            $notification->eventId(),
-            $notification->occurredOn()
+            $this->notificationMessageFactory->build(
+                $exchangeName,
+                $notification->eventId(),
+                $serialized,
+                $notification->typeName(),
+                $notification->occurredOn())
         );
 
         return $notification;

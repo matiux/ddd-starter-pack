@@ -45,7 +45,31 @@ class InMemoryMessageProducer implements MessageProducer
      */
     public function sendBatch(\ArrayObject $messages): MessageProducerResponse
     {
+        if ($messages->count() > self::BATCH_LIMIT) {
 
+            $max = self::BATCH_LIMIT;
+            throw new \InvalidArgumentException("Too many messages in batch. {$messages->count()} on $max permitted");
+        }
+
+        $notifications = array_map(function (Message $notificationBodyMessage) {
+
+            return [
+                'Id' => $notificationBodyMessage->getNotificationId(),
+                'MessageBody' => $notificationBodyMessage->getNotificationBodyMessage(),
+            ];
+
+        }, $messages->getArrayCopy());
+
+        foreach ($notifications as $notification) {
+
+            $this->messageQueue->appendMessage($notification);
+        }
+
+
+        return new InMemoryMessageProducerResponse(
+            $this->messageQueue->count(),
+            null
+        );
     }
 
     public function getBatchLimit(): int

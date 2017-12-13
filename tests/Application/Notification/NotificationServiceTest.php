@@ -3,13 +3,14 @@
 namespace Tests\DDDStarterPack\Application\Notification;
 
 use DDDStarterPack\Application\Notification\MessageProducer;
+use DddStarterPack\Application\Notification\NotificationMessageFactory;
 use DDDStarterPack\Application\Notification\NotificationService;
 use DDDStarterPack\Domain\Model\Event\EventStore;
-use DDDStarterPack\Domain\Model\Event\StoredDomainEvent;
 use DDDStarterPack\Domain\Model\Event\StoredDomainEventInterface;
 use DDDStarterPack\Domain\Model\Message\PublishedMessageTracker;
 use PHPUnit\Framework\TestCase;
 use Ramsey\Uuid\Uuid;
+use Tests\DDDStarterPack\Infrastructure\Application\Notification\InMemoryNotificationMessageFactory;
 use Tests\DDDStarterPack\Infrastructure\Domain\Model\Event\FakeDomainEvent;
 use Tests\DDDStarterPack\Infrastructure\Domain\Model\Event\InMemoryEventStore;
 use Tests\DDDStarterPack\Infrastructure\Domain\Model\Event\InMemoryStoredDomainEventFactory;
@@ -38,9 +39,15 @@ class NotificationServiceTest extends TestCase
      */
     private $messageProducer;
 
+    /**
+     * @var NotificationMessageFactory
+     */
+    private $notificationMessageFactory;
+
     protected function setUp()
     {
         $this->messageProducer = $this->messageProducerMock();
+        $this->notificationMessageFactory = new InMemoryNotificationMessageFactory();
 
         $event01 = new FakeDomainEvent(Uuid::uuid4());
         $event02 = new FakeDomainEvent(Uuid::uuid4());
@@ -65,7 +72,8 @@ class NotificationServiceTest extends TestCase
         $notificationService = new NotificationService(
             $this->eventStore,
             $this->publishedMessageTracker,
-            $this->messageProducer
+            $this->messageProducer,
+            $this->notificationMessageFactory
         );
 
         $published = $notificationService->publishNotifications('channel');
@@ -83,7 +91,8 @@ class NotificationServiceTest extends TestCase
         $notificationService = new NotificationService(
             $this->eventStore,
             $this->publishedMessageTracker,
-            $this->messageProducer
+            $this->messageProducer,
+            $this->notificationMessageFactory
         );
 
         $published = $notificationService->publishNotifications('channel');
@@ -98,13 +107,7 @@ class NotificationServiceTest extends TestCase
             ->with(\Mockery::type('string'));
 
         $messageProducer->shouldReceive('send')
-            ->with(
-                \Mockery::type('string'),
-                \Mockery::type('string'),
-                \Mockery::type('string'),
-                \Mockery::type('int'),
-                \Mockery::type('\DateTimeImmutable')
-            );
+            ->with(\Mockery::type('DDDStarterPack\Application\Notification\Message'));
 
         $messageProducer->shouldReceive('close');
 
