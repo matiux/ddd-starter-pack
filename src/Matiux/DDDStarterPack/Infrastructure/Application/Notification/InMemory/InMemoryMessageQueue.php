@@ -11,7 +11,7 @@ class InMemoryMessageQueue
         $this->messages['default'] = [];
     }
 
-    public function popMessage(string $exchangeName = 'default'): ?string
+    public function popMessage(string $exchangeName = 'default')
     {
         if (array_key_exists($exchangeName, $this->messages)) {
 
