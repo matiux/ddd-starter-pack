@@ -14,5 +14,7 @@ interface MessageProducer
      */
     public function sendBatch(\ArrayObject $messages): MessageProducerResponse;
 
+    public function getBatchLimit(): int;
+
     public function close($exchangeName);
 }
