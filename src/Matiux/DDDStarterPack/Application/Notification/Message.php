@@ -6,7 +6,7 @@ interface Message
 {
     public function getExchangeName(): string;
 
-    public function getNotificationBodyMessagee(): string;
+    public function getNotificationBodyMessage(): string;
 
     public function getNotificationType(): string;
 

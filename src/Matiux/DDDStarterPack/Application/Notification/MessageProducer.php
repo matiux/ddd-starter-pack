@@ -6,14 +6,12 @@ interface MessageProducer
 {
     public function open(string $exchangeName);
 
-    public function send(
-        string $exchangeName,
-        string $notificationBodyMessage,
-        string $notificationType,
-        int $notificationId,
-        \DateTimeInterface $notificationOccurredOn
-    ): MessageProducerResponse;
+    public function send(Message $message): MessageProducerResponse;
 
+    /**
+     * @param \ArrayObject|Message[] $messages
+     * @return MessageProducerResponse
+     */
     public function sendBatch(\ArrayObject $messages): MessageProducerResponse;
 
     public function close($exchangeName);
