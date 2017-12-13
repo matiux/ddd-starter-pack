@@ -2,10 +2,14 @@
 
 namespace DDDStarterPack\Infrastructure\Application\Notification\InMemory;
 
+use DDDStarterPack\Application\Notification\Message;
 use DDDStarterPack\Application\Notification\MessageProducer;
+use DDDStarterPack\Application\Notification\MessageProducerResponse;
 
 class InMemoryMessageProducer implements MessageProducer
 {
+    const BATCH_LIMIT = 10;
+
     private $messageQueue;
 
     public function __construct(InMemoryMessageQueue $messageQueue)
@@ -18,18 +22,12 @@ class InMemoryMessageProducer implements MessageProducer
 
     }
 
-    public function send(
-        string $exchangeName,
-        string $notificationMessage,
-        string $notificationType,
-        int $notificationId,
-        \DateTimeInterface $notificationOccurredOn
-    )
+    public function send(Message $message): MessageProducerResponse
     {
-        $message['body'] = $notificationMessage;
-        $message['type'] = $notificationType;
-        $message['occured_on'] = $notificationOccurredOn;
-        $message['notification_id'] = $notificationId;
+        $message['body'] = $message->getNotificationBodyMessage();
+        $message['type'] = $message->getNotificationType();
+        $message['occured_on'] = $message->getNotificationOccuredOn();
+        $message['notification_id'] = $message->getNotificationId();
 
         $serializedMessage = json_encode($message);
 
@@ -39,5 +37,19 @@ class InMemoryMessageProducer implements MessageProducer
     public function close($exchangeName)
     {
 
+    }
+
+    /**
+     * @param \ArrayObject|Message[] $messages
+     * @return MessageProducerResponse
+     */
+    public function sendBatch(\ArrayObject $messages): MessageProducerResponse
+    {
+
+    }
+
+    public function getBatchLimit(): int
+    {
+        return self::BATCH_LIMIT;
     }
 }
