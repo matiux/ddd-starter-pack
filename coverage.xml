@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<coverage generated="1513775768">
-  <project timestamp="1513775768">
+<coverage generated="1513775935">
+  <project timestamp="1513775935">
     <package name="DDDStarterPack\Application\DataTransformer">
       <file name="/var/www/Misc/MyProjects/DDDStarterPack/src/Matiux/DDDStarterPack/Application/DataTransformer/ArrayCollectionDataTransformer.php">
         <class name="DDDStarterPack\Application\DataTransformer\ArrayCollectionDataTransformer" namespace="DDDStarterPack\Application\DataTransformer">
@@ -785,62 +785,62 @@
         <class name="DDDStarterPack\Infrastructure\Domain\Model\Event\Doctrine\BasicDoctrineEventStore" namespace="DDDStarterPack\Infrastructure\Domain\Model\Event\Doctrine">
           <metrics complexity="15" methods="7" coveredmethods="0" conditionals="0" coveredconditionals="0" statements="48" coveredstatements="0" elements="55" coveredelements="0"/>
         </class>
-        <line num="22" type="method" name="allStoredEventsSince" visibility="public" complexity="5" crap="30" count="0"/>
-        <line num="23" type="stmt" count="0"/>
-        <line num="24" type="stmt" count="0"/>
-        <line num="29" type="stmt" count="0"/>
-        <line num="30" type="stmt" count="0"/>
+        <line num="24" type="method" name="allStoredEventsSince" visibility="public" complexity="5" crap="30" count="0"/>
+        <line num="25" type="stmt" count="0"/>
+        <line num="26" type="stmt" count="0"/>
         <line num="31" type="stmt" count="0"/>
         <line num="32" type="stmt" count="0"/>
+        <line num="33" type="stmt" count="0"/>
         <line num="34" type="stmt" count="0"/>
-        <line num="35" type="stmt" count="0"/>
         <line num="36" type="stmt" count="0"/>
+        <line num="37" type="stmt" count="0"/>
         <line num="38" type="stmt" count="0"/>
-        <line num="41" type="stmt" count="0"/>
-        <line num="42" type="stmt" count="0"/>
+        <line num="40" type="stmt" count="0"/>
+        <line num="43" type="stmt" count="0"/>
         <line num="44" type="stmt" count="0"/>
-        <line num="45" type="stmt" count="0"/>
-        <line num="47" type="method" name="serializer" visibility="private" complexity="2" crap="6" count="0"/>
-        <line num="48" type="stmt" count="0"/>
-        <line num="49" type="stmt" count="0"/>
+        <line num="46" type="stmt" count="0"/>
+        <line num="47" type="stmt" count="0"/>
+        <line num="49" type="method" name="serializer" visibility="private" complexity="2" crap="6" count="0"/>
+        <line num="50" type="stmt" count="0"/>
         <line num="51" type="stmt" count="0"/>
-        <line num="52" type="stmt" count="0"/>
         <line num="53" type="stmt" count="0"/>
+        <line num="54" type="stmt" count="0"/>
         <line num="55" type="stmt" count="0"/>
-        <line num="56" type="stmt" count="0"/>
-        <line num="58" type="method" name="setSerializer" visibility="public" complexity="1" crap="2" count="0"/>
-        <line num="59" type="stmt" count="0"/>
-        <line num="60" type="stmt" count="0"/>
+        <line num="57" type="stmt" count="0"/>
+        <line num="58" type="stmt" count="0"/>
+        <line num="60" type="method" name="setSerializer" visibility="public" complexity="1" crap="2" count="0"/>
         <line num="61" type="stmt" count="0"/>
-        <line num="63" type="method" name="setStoredDomainEventFactory" visibility="public" complexity="1" crap="2" count="0"/>
-        <line num="64" type="stmt" count="0"/>
-        <line num="65" type="stmt" count="0"/>
+        <line num="62" type="stmt" count="0"/>
+        <line num="63" type="stmt" count="0"/>
+        <line num="65" type="method" name="setStoredDomainEventFactory" visibility="public" complexity="1" crap="2" count="0"/>
         <line num="66" type="stmt" count="0"/>
-        <line num="68" type="method" name="nextId" visibility="public" complexity="2" crap="6" count="0"/>
-        <line num="69" type="stmt" count="0"/>
-        <line num="70" type="stmt" count="0"/>
+        <line num="67" type="stmt" count="0"/>
+        <line num="68" type="stmt" count="0"/>
+        <line num="70" type="method" name="nextId" visibility="public" complexity="2" crap="6" count="0"/>
         <line num="71" type="stmt" count="0"/>
-        <line num="73" type="method" name="add" visibility="public" complexity="1" crap="2" count="0"/>
-        <line num="74" type="stmt" count="0"/>
-        <line num="75" type="stmt" count="0"/>
+        <line num="72" type="stmt" count="0"/>
+        <line num="73" type="stmt" count="0"/>
+        <line num="75" type="method" name="add" visibility="public" complexity="1" crap="2" count="0"/>
+        <line num="76" type="stmt" count="0"/>
         <line num="77" type="stmt" count="0"/>
-        <line num="78" type="stmt" count="0"/>
         <line num="79" type="stmt" count="0"/>
         <line num="80" type="stmt" count="0"/>
         <line num="81" type="stmt" count="0"/>
         <line num="82" type="stmt" count="0"/>
+        <line num="83" type="stmt" count="0"/>
         <line num="84" type="stmt" count="0"/>
-        <line num="85" type="stmt" count="0"/>
-        <line num="87" type="method" name="addBulk" visibility="public" complexity="3" crap="12" count="0"/>
-        <line num="88" type="stmt" count="0"/>
-        <line num="89" type="stmt" count="0"/>
+        <line num="86" type="stmt" count="0"/>
+        <line num="87" type="stmt" count="0"/>
+        <line num="89" type="method" name="addBulk" visibility="public" complexity="3" crap="12" count="0"/>
+        <line num="90" type="stmt" count="0"/>
         <line num="91" type="stmt" count="0"/>
         <line num="93" type="stmt" count="0"/>
-        <line num="94" type="stmt" count="0"/>
         <line num="95" type="stmt" count="0"/>
+        <line num="96" type="stmt" count="0"/>
         <line num="97" type="stmt" count="0"/>
-        <line num="98" type="stmt" count="0"/>
-        <metrics loc="99" ncloc="91" classes="1" methods="7" coveredmethods="0" conditionals="0" coveredconditionals="0" statements="48" coveredstatements="0" elements="55" coveredelements="0"/>
+        <line num="99" type="stmt" count="0"/>
+        <line num="100" type="stmt" count="0"/>
+        <metrics loc="101" ncloc="90" classes="1" methods="7" coveredmethods="0" conditionals="0" coveredconditionals="0" statements="48" coveredstatements="0" elements="55" coveredelements="0"/>
       </file>
     </package>
     <package name="DDDStarterPack\Infrastructure\Domain\Model\Message\Doctrine">
@@ -876,6 +876,6 @@
         <metrics loc="73" ncloc="52" classes="1" methods="3" coveredmethods="0" conditionals="0" coveredconditionals="0" statements="22" coveredstatements="0" elements="25" coveredelements="0"/>
       </file>
     </package>
-    <metrics files="53" loc="1620" ncloc="1451" classes="29" methods="115" coveredmethods="17" conditionals="0" coveredconditionals="0" statements="476" coveredstatements="64" elements="591" coveredelements="81"/>
+    <metrics files="53" loc="1622" ncloc="1450" classes="29" methods="115" coveredmethods="17" conditionals="0" coveredconditionals="0" statements="476" coveredstatements="64" elements="591" coveredelements="81"/>
   </project>
 </coverage>
