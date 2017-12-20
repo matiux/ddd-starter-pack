@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<coverage generated="1513158652">
-  <project timestamp="1513158652">
+<coverage generated="1513771208">
+  <project timestamp="1513771208">
     <package name="DDDStarterPack\Application\DataTransformer">
       <file name="/var/www/Misc/MyProjects/DDDStarterPack/src/Matiux/DDDStarterPack/Application/DataTransformer/ArrayCollectionDataTransformer.php">
         <class name="DDDStarterPack\Application\DataTransformer\ArrayCollectionDataTransformer" namespace="DDDStarterPack\Application\DataTransformer">
@@ -205,9 +205,6 @@
         <metrics loc="63" ncloc="60" classes="1" methods="6" coveredmethods="6" conditionals="0" coveredconditionals="0" statements="16" coveredstatements="16" elements="22" coveredelements="22"/>
       </file>
     </package>
-    <file name="/var/www/Misc/MyProjects/DDDStarterPack/src/Matiux/DDDStarterPack/Domain/Event/Serializer.php">
-      <metrics loc="27" ncloc="12" classes="0" methods="0" coveredmethods="0" conditionals="0" coveredconditionals="0" statements="0" coveredstatements="0" elements="0" coveredelements="0"/>
-    </file>
     <file name="/var/www/Misc/MyProjects/DDDStarterPack/src/Matiux/DDDStarterPack/Domain/Event/Subscriber/EventSubscriber.php">
       <metrics loc="12" ncloc="12" classes="0" methods="0" coveredmethods="0" conditionals="0" coveredconditionals="0" statements="0" coveredstatements="0" elements="0" coveredelements="0"/>
     </file>
@@ -625,6 +622,9 @@
     </package>
     <file name="/var/www/Misc/MyProjects/DDDStarterPack/src/Matiux/DDDStarterPack/Domain/Model/Repository/FilterableRepository.php">
       <metrics loc="10" ncloc="10" classes="0" methods="0" coveredmethods="0" conditionals="0" coveredconditionals="0" statements="0" coveredstatements="0" elements="0" coveredelements="0"/>
+    </file>
+    <file name="/var/www/Misc/MyProjects/DDDStarterPack/src/Matiux/DDDStarterPack/Domain/Service/Serializer.php">
+      <metrics loc="27" ncloc="12" classes="0" methods="0" coveredmethods="0" conditionals="0" coveredconditionals="0" statements="0" coveredstatements="0" elements="0" coveredelements="0"/>
     </file>
     <package name="DDDStarterPack\Infrastructure\Application\Notification\Amazon">
       <file name="/var/www/Misc/MyProjects/DDDStarterPack/src/Matiux/DDDStarterPack/Infrastructure/Application/Notification/Amazon/AmazonSqsMessageProducer.php">

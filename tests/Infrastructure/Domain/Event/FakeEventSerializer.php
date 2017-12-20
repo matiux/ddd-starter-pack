@@ -2,7 +2,7 @@
 
 namespace Tests\DDDStarterPack\Infrastructure\Domain\Event;
 
-use DDDStarterPack\Domain\Event\Serializer;
+use DDDStarterPack\Domain\Service\Serializer;
 use JMS\Serializer\SerializerBuilder;
 use phpDocumentor\Reflection\Types\Scalar;
 
