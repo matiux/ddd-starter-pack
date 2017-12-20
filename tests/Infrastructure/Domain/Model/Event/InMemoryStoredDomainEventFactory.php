@@ -15,9 +15,9 @@ class InMemoryStoredDomainEventFactory implements StoredDomainEventFactory
         $this->eventStore = $eventStore;
     }
 
-    public function build($eventID, string $eventType, \DateTimeImmutable $occuredOn, string $serializedEvent): StoredDomainEventInterface
+    public function build($eventID, string $eventType, \DateTimeImmutable $occurredOn, string $serializedEvent): StoredDomainEventInterface
     {
-        $storedEvent = new FakeStoredEvent($this->eventStore->nextId(), $eventType, $occuredOn, $serializedEvent);
+        $storedEvent = new FakeStoredEvent($this->eventStore->nextId(), $eventType, $occurredOn, $serializedEvent);
 
         return $storedEvent;
     }

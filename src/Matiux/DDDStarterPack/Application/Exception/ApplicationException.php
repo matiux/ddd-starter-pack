@@ -6,7 +6,7 @@ use Throwable;
 
 abstract class ApplicationException extends \Exception
 {
-    const MESSAGE = 'An error has occured';
+    const MESSAGE = 'An error has occurred';
 
     public function __construct(string $message = "", int $code = 500, Throwable $previous = null)
     {

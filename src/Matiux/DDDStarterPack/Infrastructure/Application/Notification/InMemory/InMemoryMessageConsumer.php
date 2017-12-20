@@ -18,7 +18,7 @@ class InMemoryMessageConsumer implements MessageConsumer
 
     }
 
-    public function receiveMessage()
+    public function receiveMessage(int $maximumNumberOfMessages = 1)
     {
         $message = $this->messageQueue->popMessage();
 

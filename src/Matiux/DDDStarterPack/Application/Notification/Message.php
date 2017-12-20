@@ -12,5 +12,5 @@ interface Message
 
     public function getNotificationId(): int;
 
-    public function getNotificationOccuredOn(): \DateTimeInterface;
+    public function getNotificationOccurredOn(): \DateTimeInterface;
 }

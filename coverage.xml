@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<coverage generated="1513771208">
-  <project timestamp="1513771208">
+<coverage generated="1513775768">
+  <project timestamp="1513775768">
     <package name="DDDStarterPack\Application\DataTransformer">
       <file name="/var/www/Misc/MyProjects/DDDStarterPack/src/Matiux/DDDStarterPack/Application/DataTransformer/ArrayCollectionDataTransformer.php">
         <class name="DDDStarterPack\Application\DataTransformer\ArrayCollectionDataTransformer" namespace="DDDStarterPack\Application\DataTransformer">

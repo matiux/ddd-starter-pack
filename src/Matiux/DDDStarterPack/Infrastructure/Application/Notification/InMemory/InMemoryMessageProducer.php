@@ -26,7 +26,7 @@ class InMemoryMessageProducer implements MessageProducer
     {
         $message['body'] = $message->getNotificationBodyMessage();
         $message['type'] = $message->getNotificationType();
-        $message['occured_on'] = $message->getNotificationOccuredOn();
+        $message['occurred_on'] = $message->getNotificationOccurredOn();
         $message['notification_id'] = $message->getNotificationId();
 
         $serializedMessage = json_encode($message);
