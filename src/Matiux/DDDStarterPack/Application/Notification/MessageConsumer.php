@@ -6,7 +6,7 @@ interface MessageConsumer
 {
     public function open(string $exchangeName);
 
-    public function receiveMessage();
+    public function receiveMessage(int $numberOfMessages = 1);
 
     public function close($exchangeName);
 }
