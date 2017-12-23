@@ -7,8 +7,8 @@ use DDDStarterPack\Application\Notification\NotificationMessageFactory;
 
 class InMemoryNotificationMessageFactory implements NotificationMessageFactory
 {
-    public function build(string $exchangeName, int $notificationId, string $notificationBodyMessage, string $notificationType, \DateTimeInterface $notificationOccuredOn): Message
+    public function build(string $exchangeName, int $notificationId, string $notificationBodyMessage, string $notificationType, \DateTimeInterface $notificationOccurredOn): Message
     {
-        return new InMemoryMessage($exchangeName, $notificationId, $notificationBodyMessage, $notificationType, $notificationOccuredOn);
+        return new InMemoryMessage($exchangeName, $notificationId, $notificationBodyMessage, $notificationType, $notificationOccurredOn);
     }
 }

@@ -10,15 +10,15 @@ class InMemoryMessage implements Message
     private $notificationId;
     private $notificationBodyMessage;
     private $notificationType;
-    private $occuredOn;
+    private $occurredOn;
 
-    public function __construct(string $exchangeName, int $notificationId, string $notificationBodyMessage, string $notificationType, \DateTimeInterface $occuredOn)
+    public function __construct(string $exchangeName, int $notificationId, string $notificationBodyMessage, string $notificationType, \DateTimeInterface $occurredOn)
     {
         $this->exchangeName = $exchangeName;
         $this->notificationId = $notificationId;
         $this->notificationBodyMessage = $notificationBodyMessage;
         $this->notificationType = $notificationType;
-        $this->occuredOn = $occuredOn;
+        $this->occurredOn = $occurredOn;
     }
 
     public function getExchangeName(): string
@@ -41,8 +41,8 @@ class InMemoryMessage implements Message
         return $this->notificationId;
     }
 
-    public function getNotificationOccuredOn(): \DateTimeInterface
+    public function getNotificationOccurredOn(): \DateTimeInterface
     {
-        return $this->occuredOn;
+        return $this->occurredOn;
     }
 }

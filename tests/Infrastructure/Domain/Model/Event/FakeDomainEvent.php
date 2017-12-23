@@ -7,17 +7,17 @@ use DDDStarterPack\Domain\Model\Event\DomainEvent;
 class FakeDomainEvent implements DomainEvent
 {
     private $entityId;
-    private $occuredOn;
+    private $occurredOn;
 
     public function __construct(string $entityId)
     {
         $this->entityId = $entityId;
-        $this->occuredOn = new \DateTimeImmutable();
+        $this->occurredOn = new \DateTimeImmutable();
     }
 
     public function occurredOn(): \DateTimeImmutable
     {
-        return $this->occuredOn;
+        return $this->occurredOn;
     }
 
     public function entityId()

@@ -1,6 +1,6 @@
 <?php
 
-namespace DDDStarterPack\Domain\Event;
+namespace DDDStarterPack\Domain\Service;
 
 use phpDocumentor\Reflection\Types\Scalar;
 

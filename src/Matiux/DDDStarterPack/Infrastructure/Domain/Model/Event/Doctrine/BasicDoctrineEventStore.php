@@ -2,16 +2,18 @@
 
 namespace DDDStarterPack\Infrastructure\Domain\Model\Event\Doctrine;
 
-
-use DDDStarterPack\Domain\Event\Serializer;
 use DDDStarterPack\Domain\Model\Event\DomainEvent;
 use DDDStarterPack\Domain\Model\Event\StoredDomainEventFactory;
+use DDDStarterPack\Domain\Service\Serializer;
+use Doctrine\Common\Persistence\Mapping\ClassMetadata;
 use Doctrine\ORM\EntityRepository;
 use JMS\Serializer\SerializerBuilder;
-use Doctrine\Common\Persistence\Mapping\ClassMetadata;
 
 abstract class BasicDoctrineEventStore extends EntityRepository
 {
+    /**
+     * @var Serializer
+     */
     protected $serializer;
 
     /**

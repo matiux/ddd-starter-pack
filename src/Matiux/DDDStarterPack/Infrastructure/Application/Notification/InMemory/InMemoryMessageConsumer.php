@@ -18,7 +18,8 @@ class InMemoryMessageConsumer implements MessageConsumer
 
     }
 
-    public function receiveMessage(int $numberOfMessages = 1)
+    public function receiveMessage(int $maximumNumberOfMessages = 1)
+
     {
         $message = $this->messageQueue->popMessage();
 
@@ -26,6 +27,16 @@ class InMemoryMessageConsumer implements MessageConsumer
     }
 
     public function close($exchangeName)
+    {
+
+    }
+
+    public function deleteMessage($messageId)
+    {
+
+    }
+
+    public function deleteMessageBatch(array $messagesId)
     {
 
     }
