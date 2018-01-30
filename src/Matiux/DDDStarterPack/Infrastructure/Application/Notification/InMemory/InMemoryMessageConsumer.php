@@ -19,11 +19,10 @@ class InMemoryMessageConsumer implements MessageConsumer
     }
 
     public function receiveMessage(int $maximumNumberOfMessages = 1)
-
     {
         $message = $this->messageQueue->popMessage();
 
-        return json_decode($message);
+        return [json_decode($message, true)];
     }
 
     public function close($exchangeName)
