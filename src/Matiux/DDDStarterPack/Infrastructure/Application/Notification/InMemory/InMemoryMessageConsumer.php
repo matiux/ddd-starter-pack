@@ -18,11 +18,23 @@ class InMemoryMessageConsumer implements MessageConsumer
 
     }
 
+    /**
+     * TODO Pensare a un formato più agnostico
+     * @param int $maximumNumberOfMessages
+     * @return array
+     */
     public function receiveMessage(int $maximumNumberOfMessages = 1)
     {
-        $message = $this->messageQueue->popMessage();
+        $messageOrig = $this->messageQueue->popMessage();
 
-        return [json_decode($message, true)];
+        $message['Body'] = $messageOrig;
+
+        $messageOrig = json_decode($messageOrig, true);
+        $message['MessageId'] = $messageOrig['event_id'];
+        $message['ReceiptHandle'] = $messageOrig['event_id'];
+        $message['MD5OfBody'] = '...';
+
+        return [$message];
     }
 
     public function close($exchangeName)
