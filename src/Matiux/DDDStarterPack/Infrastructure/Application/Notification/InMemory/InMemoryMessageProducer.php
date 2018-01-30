@@ -51,9 +51,11 @@ class InMemoryMessageProducer implements MessageProducer
             throw new \InvalidArgumentException("Too many messages in batch. {$messages->count()} on $max permitted");
         }
 
-        foreach ($messages->getArrayCopy() as $notification) {
+        $messages = $messages->getArrayCopy();
 
-            $this->messageQueue->appendMessage(json_encode($notification));
+        foreach ($messages as $notification) {
+
+            $this->messageQueue->appendMessage($notification);
         }
 
         return new InMemoryMessageProducerResponse($this->messageQueue->count(), null);

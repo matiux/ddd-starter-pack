@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<coverage generated="1517307651">
-  <project timestamp="1517307651">
+<coverage generated="1517308535">
+  <project timestamp="1517308535">
     <package name="DDDStarterPack\Application\DataTransformer">
       <file name="/var/www/app/src/Matiux/DDDStarterPack/Application/DataTransformer/ArrayCollectionDataTransformer.php">
         <class name="DDDStarterPack\Application\DataTransformer\ArrayCollectionDataTransformer" namespace="DDDStarterPack\Application\DataTransformer">
@@ -721,7 +721,7 @@
       </file>
       <file name="/var/www/app/src/Matiux/DDDStarterPack/Infrastructure/Application/Notification/InMemory/InMemoryMessageProducer.php">
         <class name="DDDStarterPack\Infrastructure\Application\Notification\InMemory\InMemoryMessageProducer" namespace="DDDStarterPack\Infrastructure\Application\Notification\InMemory">
-          <metrics complexity="8" methods="6" coveredmethods="0" conditionals="0" coveredconditionals="0" statements="28" coveredstatements="0" elements="34" coveredelements="0"/>
+          <metrics complexity="8" methods="6" coveredmethods="0" conditionals="0" coveredconditionals="0" statements="29" coveredstatements="0" elements="35" coveredelements="0"/>
         </class>
         <line num="15" type="method" name="__construct" visibility="public" complexity="1" crap="2" count="0"/>
         <line num="16" type="stmt" count="0"/>
@@ -750,14 +750,15 @@
         <line num="52" type="stmt" count="0"/>
         <line num="54" type="stmt" count="0"/>
         <line num="56" type="stmt" count="0"/>
-        <line num="57" type="stmt" count="0"/>
+        <line num="58" type="stmt" count="0"/>
         <line num="59" type="stmt" count="0"/>
-        <line num="60" type="stmt" count="0"/>
-        <line num="62" type="method" name="getBatchLimit" visibility="public" complexity="1" crap="2" count="0"/>
-        <line num="63" type="stmt" count="0"/>
-        <line num="64" type="stmt" count="0"/>
+        <line num="61" type="stmt" count="0"/>
+        <line num="62" type="stmt" count="0"/>
+        <line num="64" type="method" name="getBatchLimit" visibility="public" complexity="1" crap="2" count="0"/>
         <line num="65" type="stmt" count="0"/>
-        <metrics loc="66" ncloc="62" classes="1" methods="6" coveredmethods="0" conditionals="0" coveredconditionals="0" statements="28" coveredstatements="0" elements="34" coveredelements="0"/>
+        <line num="66" type="stmt" count="0"/>
+        <line num="67" type="stmt" count="0"/>
+        <metrics loc="68" ncloc="64" classes="1" methods="6" coveredmethods="0" conditionals="0" coveredconditionals="0" statements="29" coveredstatements="0" elements="35" coveredelements="0"/>
       </file>
       <file name="/var/www/app/src/Matiux/DDDStarterPack/Infrastructure/Application/Notification/InMemory/InMemoryMessageQueue.php">
         <class name="DDDStarterPack\Infrastructure\Application\Notification\InMemory\InMemoryMessageQueue" namespace="DDDStarterPack\Infrastructure\Application\Notification\InMemory">
@@ -916,6 +917,6 @@
         <metrics loc="73" ncloc="52" classes="1" methods="3" coveredmethods="0" conditionals="0" coveredconditionals="0" statements="22" coveredstatements="0" elements="25" coveredelements="0"/>
       </file>
     </package>
-    <metrics files="56" loc="1709" ncloc="1537" classes="31" methods="124" coveredmethods="19" conditionals="0" coveredconditionals="0" statements="492" coveredstatements="71" elements="616" coveredelements="90"/>
+    <metrics files="56" loc="1711" ncloc="1539" classes="31" methods="124" coveredmethods="19" conditionals="0" coveredconditionals="0" statements="493" coveredstatements="71" elements="617" coveredelements="90"/>
   </project>
 </coverage>
