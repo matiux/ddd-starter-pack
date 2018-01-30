@@ -1,6 +1,6 @@
 <?php
 
-namespace Tests\DDDStarterPack\Infrastructure\Application\Notification;
+namespace DDDStarterPack\Infrastructure\Application\Notification\InMemory;
 
 use DDDStarterPack\Application\Notification\Message;
 use DDDStarterPack\Application\Notification\NotificationMessageFactory;
