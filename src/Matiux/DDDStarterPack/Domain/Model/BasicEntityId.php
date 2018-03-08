@@ -8,14 +8,25 @@ abstract class BasicEntityId implements EntityId
 {
     private $id;
 
-    private function __construct(?string $anId = null)
+    protected function __construct($anId = false)
     {
         $this->verifyInputId($anId);
 
-        $this->id = (string)$anId ?: Uuid::uuid4()->toString();
+        if (false === $anId) {
+
+            $this->id = Uuid::uuid4()->toString();
+
+        } else if (null === $anId) {
+
+            $this->id = null;
+
+        } else {
+
+            $this->id = $anId;
+        }
     }
 
-    public static function create(?string $anId = null): EntityId
+    public static function create($anId = false): EntityId
     {
         return new static($anId);
     }
