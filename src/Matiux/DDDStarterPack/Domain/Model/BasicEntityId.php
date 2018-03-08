@@ -41,6 +41,11 @@ abstract class BasicEntityId implements EntityId
         return $this->id() === $entityId->id();
     }
 
+    public function isNull(): bool
+    {
+        return is_null($this->id);
+    }
+
     private function verifyInputId($anId)
     {
         if (is_object($anId)) {
