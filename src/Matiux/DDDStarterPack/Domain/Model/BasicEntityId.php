@@ -31,7 +31,7 @@ abstract class BasicEntityId implements EntityId
         return new static($anId);
     }
 
-    public function id(): string
+    public function id(): ?string
     {
         return $this->id;
     }
@@ -53,11 +53,12 @@ abstract class BasicEntityId implements EntityId
         }
     }
 
-    /**
-     * @return string
-     */
-    public function __toString()
+    public function __toString(): string
     {
+        if (!$this->id()) {
+            return '';
+        }
+
         return $this->id();
     }
 }
