@@ -63,4 +63,14 @@ abstract class BasicEntityId implements EntityId
 
         return $this->id();
     }
+
+    public static function isValidUuid(string $uuid): bool
+    {
+        if (preg_match(self::UUID_PATTERN, $uuid) === 1) {
+
+            return true;
+        }
+
+        return false;
+    }
 }
