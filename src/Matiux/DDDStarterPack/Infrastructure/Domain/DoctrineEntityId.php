@@ -15,7 +15,7 @@ abstract class DoctrineEntityId extends GuidType
 
     private function isValidUuid($value): bool
     {
-        if (is_string($value) && preg_match(BasicEntityId::UUID_PATTERN, $value) === 1) {
+        if (is_string($value) && BasicEntityId::isValidUuid($value)) {
             return true;
         }
 
