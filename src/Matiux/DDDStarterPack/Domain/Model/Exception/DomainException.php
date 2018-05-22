@@ -4,7 +4,7 @@ namespace DDDStarterPack\Domain\Model\Exception;
 
 use Throwable;
 
-abstract class DomainModelException extends \Exception
+abstract class DomainException extends \Exception
 {
     const MESSAGE = 'An error has occurred';
 

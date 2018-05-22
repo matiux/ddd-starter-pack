@@ -2,6 +2,8 @@
 
 namespace DDDStarterPack\Application\Service;
 
+use DDDStarterPack\Application\Exception\ApplicationException;
+use DDDStarterPack\Domain\Model\Exception\DomainException;
 use DDDStarterPack\Application\Exception\TransactionFailedException;
 
 class TransactionalApplicationService implements ApplicationService
@@ -25,6 +27,15 @@ class TransactionalApplicationService implements ApplicationService
         try {
 
             return $this->session->executeAtomically($operation->bindTo($this));
+
+        } catch (ApplicationException $exception) {
+
+            throw $exception;
+
+
+        } catch (DomainException $exception) {
+
+            throw $exception;
 
         } catch (\Throwable $exception) {
 

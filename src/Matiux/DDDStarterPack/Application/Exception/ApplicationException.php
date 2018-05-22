@@ -2,29 +2,9 @@
 
 namespace DDDStarterPack\Application\Exception;
 
-use Throwable;
+use DDDStarterPack\Domain\Model\Exception\DomainException;
 
-abstract class ApplicationException extends \Exception
+abstract class ApplicationException extends DomainException
 {
-    const MESSAGE = 'An error has occurred';
 
-    public function __construct(string $message = "", int $code = 500, Throwable $previous = null)
-    {
-        $message = $message ?: static::MESSAGE;
-
-        parent::__construct($message, $code, $previous);
-    }
-
-    public function toArray()
-    {
-        $a['code'] = $this->getCode();
-        $a['message'] = $this->getMessage();
-
-        return $a;
-    }
-
-    public function toJson(): string
-    {
-        return json_encode($this->toArray());
-    }
 }
