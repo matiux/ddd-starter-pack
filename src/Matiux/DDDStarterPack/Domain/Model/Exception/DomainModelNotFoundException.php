@@ -4,7 +4,7 @@ namespace DDDStarterPack\Domain\Model\Exception;
 
 use Throwable;
 
-abstract class DomainNotFoundException extends DomainException
+abstract class DomainModelNotFoundException extends DomainException
 {
     const MESSAGE = 'Model not found';
 
