@@ -2,9 +2,7 @@
 
 namespace DDDStarterPack\Application\Service;
 
-use DDDStarterPack\Domain\Service\Service;
-
-interface ApplicationService extends Service
+interface ApplicationService
 {
-
+    public function execute($request = null);
 }

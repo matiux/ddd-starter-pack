@@ -5,14 +5,13 @@ namespace DDDStarterPack\Application\Service;
 use DDDStarterPack\Application\Exception\ApplicationException;
 use DDDStarterPack\Domain\Model\Exception\DomainException;
 use DDDStarterPack\Application\Exception\TransactionFailedException;
-use DDDStarterPack\Domain\Service\Service;
 
 class TransactionalApplicationService implements ApplicationService
 {
     protected $service;
     protected $session;
 
-    public function __construct(Service $service, TransactionalSession $session)
+    public function __construct(ApplicationService $service, TransactionalSession $session)
     {
         $this->service = $service;
         $this->session = $session;
