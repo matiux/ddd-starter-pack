@@ -43,7 +43,7 @@ class ModelCriteriaBuilder
         return $this;
     }
 
-    public function withBetweenCriteria(string $field, $from, $to): self
+    public function withBetweenCriterion(string $field, $from, $to): self
     {
         $criterion = new Criterion($field, $from, '>=');
         array_push($this->andCriteria, $criterion);
@@ -54,7 +54,7 @@ class ModelCriteriaBuilder
         return $this;
     }
 
-    public function withAndCriteria(string $field, $value, $operator = '='): ModelCriteriaBuilder
+    public function withAndCriterion(string $field, $value, $operator = '='): ModelCriteriaBuilder
     {
         $criterion = new Criterion($field, $value, $operator);
 
