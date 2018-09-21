@@ -43,6 +43,17 @@ class ModelCriteriaBuilder
         return $this;
     }
 
+    public function withBetweenCriteria(string $field, $from, $to): self
+    {
+        $criterion = new Criterion($field, $from, '>=');
+        array_push($this->andCriteria, $criterion);
+
+        $criterion = new Criterion($field, $to, '<=');
+        array_push($this->andCriteria, $criterion);
+
+        return $this;
+    }
+
     public function withAndCriteria(string $field, $value, $operator = '='): ModelCriteriaBuilder
     {
         $criterion = new Criterion($field, $value, $operator);
