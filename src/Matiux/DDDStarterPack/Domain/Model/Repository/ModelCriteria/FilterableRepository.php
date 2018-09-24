@@ -1,6 +1,6 @@
 <?php
 
-namespace DDDStarterPack\Domain\Model\Repository;
+namespace DDDStarterPack\Domain\Model\Repository\ModelCriteria;
 
 interface FilterableRepository
 {

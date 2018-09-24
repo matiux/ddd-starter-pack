@@ -3,7 +3,7 @@ version: '3'
 services:
   php:
     #build: ./docker/php/7.1-fpm
-    image: matiux/php:7.1-fpm
+    image: matiux/php:7.1-fpm-2.2.0
     tty: true # -t option in docker
     stdin_open: true # -i option in docker
     volumes:
