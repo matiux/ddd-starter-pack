@@ -45,9 +45,9 @@ class FilterParams
 
     public function applyTo($target): void
     {
-        foreach ($this->appliers as $applier) {
+        foreach ($this->appliers as $applierKey => $applier) {
 
-            if ($applier->supports()) {
+            if ($applier->supports($applierKey)) {
 
                 $applier->apply($target, $this);
             }

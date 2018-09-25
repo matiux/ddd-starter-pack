@@ -8,5 +8,5 @@ interface FilterParamsApplier
 
     public function apply($target, FilterParams $filterParams): void;
 
-    public function supports(): bool;
+    public function supports(string $applierKey, array $options = []): bool;
 }
