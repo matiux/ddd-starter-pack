@@ -7,4 +7,6 @@ interface FilterParamsApplier
     public function key(): string;
 
     public function apply($target, FilterParams $filterParams): void;
+
+    public function supports(): bool;
 }

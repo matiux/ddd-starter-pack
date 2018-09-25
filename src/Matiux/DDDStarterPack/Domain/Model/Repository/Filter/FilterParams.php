@@ -43,11 +43,19 @@ class FilterParams
         return $default;
     }
 
-    public function apply($target): void
+    public function applyTo($target): void
     {
         foreach ($this->appliers as $applier) {
 
-            $applier->apply($target, $this);
+            if ($applier->supports()) {
+
+                $applier->apply($target, $this);
+            }
         }
+    }
+
+    public function has($key): bool
+    {
+        return array_key_exists($key, $this->data);
     }
 }
