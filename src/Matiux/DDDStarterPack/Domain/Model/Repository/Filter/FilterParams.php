@@ -47,7 +47,7 @@ class FilterParams
     {
         foreach ($this->appliers as $applierKey => $applier) {
 
-            if ($applier->supports($applierKey)) {
+            if ($applier->supports($this)) {
 
                 $applier->apply($target, $this);
             }
