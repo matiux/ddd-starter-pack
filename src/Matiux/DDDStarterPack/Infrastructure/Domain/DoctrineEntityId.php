@@ -32,10 +32,15 @@ abstract class DoctrineEntityId extends GuidType
             return $value;
         }
 
-        $className = $this->getNamespace() . '\\' . $this->getName();
+        $className = $this->getFQCN();
 
         return $className::create($value);
     }
 
     abstract protected function getNamespace(): string;
+
+    protected function getFQCN(): string
+    {
+        return $this->getNamespace() . '\\' . $this->getName();
+    }
 }

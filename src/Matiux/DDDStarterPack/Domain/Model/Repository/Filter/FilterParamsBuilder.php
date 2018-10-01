@@ -17,7 +17,7 @@ class FilterParamsBuilder
         $key = $applier->key();
 
         if (isset($this->appliers[$key])) {
-            throw new \InvalidArgumentException($key . ' is set yet');
+            throw new \InvalidArgumentException('Applier "' . $key . '" is already set');
         }
 
         $this->appliers[$key] = $applier;

@@ -2,10 +2,6 @@
 
 # Set environment variables for dev
 
-export APP_ENV=${APP_ENV:-dev}
-
-#echo $APP_ENV
-
 if [ "$1" == "enter-root" ]; then
     docker-compose exec php bash
 elif [ "$1" == "enter" ]; then
