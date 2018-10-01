@@ -10,7 +10,11 @@ abstract class DoctrineEntityId extends GuidType
 {
     public function convertToDatabaseValue($value, AbstractPlatform $platform)
     {
-        return $value ? $value->id() : null;
+        if (!$value) {
+            return null;
+        }
+
+        return $value instanceof BasicEntityId ? $value->id() : $value;
     }
 
     private function isValidUuid($value): bool
