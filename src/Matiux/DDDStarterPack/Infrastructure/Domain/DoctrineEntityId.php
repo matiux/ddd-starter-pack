@@ -15,7 +15,11 @@ abstract class DoctrineEntityId extends GuidType
             return null;
         }
 
+<<<<<<< HEAD
         return $value instanceof EntityId ? $value->id() : $value;
+=======
+        return $value instanceof BasicEntityId ? $value->id() : $value;
+>>>>>>> fd866863bc2b54ca41ef7017534309d5efe495b9
     }
 
     private function isValidUuid($value): bool
