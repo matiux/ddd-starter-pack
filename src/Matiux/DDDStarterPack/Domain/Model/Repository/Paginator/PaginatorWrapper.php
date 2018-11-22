@@ -31,7 +31,7 @@ abstract class PaginatorWrapper implements Paginator, \Countable
 
     public function getCurrentPage()
     {
-        $currentPage = 0 === $this->limit ? 1 : ($this->offset / $this->limit) + 1;
+        $currentPage = ($this->offset / $this->limit) + 1;
 
         return $currentPage;
     }
