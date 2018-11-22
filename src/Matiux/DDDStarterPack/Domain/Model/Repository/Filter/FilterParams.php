@@ -7,7 +7,7 @@ class FilterParams
     protected $data;
 
     /** @var array|FilterParamsApplier[] */
-    protected $appliers;
+    protected $appliers = [];
 
     public function __construct(array $appliers, array $data)
     {
