@@ -1,13 +1,1 @@
-#!/usr/bin/env bash
-
-# Set environment variables for dev
-
-if [ "$1" == "enter-root" ]; then
-    docker-compose exec php bash
-elif [ "$1" == "enter" ]; then
-    docker-compose exec -u utente php bash
-elif [ $# -gt 0 ]; then
-    docker-compose "$@"
-else
-    docker-compose ps
-fi
+./docker/dc.sh

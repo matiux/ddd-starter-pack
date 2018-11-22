@@ -5,7 +5,6 @@ namespace Tests\DDDStarterPack\Support\Domain\Model\Repository\Filter;
 use DDDStarterPack\Domain\Model\Repository\Filter\FilterParams;
 use DDDStarterPack\Domain\Model\Repository\Filter\FilterParamsApplier;
 
-
 class DummyFilterParamsApplier implements FilterParamsApplier
 {
     private $key;
@@ -34,5 +33,10 @@ class DummyFilterParamsApplier implements FilterParamsApplier
         $target->add([
             $this->key() => $filterParams->get($this->key())
         ]);
+    }
+
+    public function supports(FilterParams $filterParams): bool
+    {
+        return true;
     }
 }

@@ -3,6 +3,7 @@
 namespace DDDStarterPack\Application\DataTransformer;
 
 use DDDStarterPack\Domain\Model\IdentifiableDomainObject;
+use DDDStarterPack\Domain\Model\Repository\Paginator\Paginator;
 
 interface DataTransformer
 {
@@ -13,11 +14,11 @@ interface DataTransformer
     public function write(IdentifiableDomainObject $domainModel): DataTransformer;
 
     /**
-     * @param \Traversable $domainModelCollection
+     * @param \Traversable|array|Paginator $collection
      * @param int $total
      * @return DataTransformer
      */
-    public function writeCollection(\Traversable $domainModelCollection, int $total = null): DataTransformer;
+    public function writeCollection($collection, int $total = null): DataTransformer;
 
     /**
      * @return mixed

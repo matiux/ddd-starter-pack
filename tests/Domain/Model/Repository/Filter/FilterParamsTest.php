@@ -26,7 +26,7 @@ class FilterParamsTest extends TestCase
 
         $target = new DummyArrayTarget();
 
-        $filterParams->apply($target);
+        $filterParams->applyTo($target);
 
         $this->assertEquals([
             ['a_key' => 'a_value'],

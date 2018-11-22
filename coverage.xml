@@ -1,63 +1,54 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<coverage generated="1537783209">
-  <project timestamp="1537783209">
+<coverage generated="1542919471">
+  <project timestamp="1542919471">
     <package name="DDDStarterPack\Application\DataTransformer">
-      <file name="/var/www/app/src/Matiux/DDDStarterPack/Application/DataTransformer/ArrayCollectionDataTransformer.php">
-        <class name="DDDStarterPack\Application\DataTransformer\ArrayCollectionDataTransformer" namespace="DDDStarterPack\Application\DataTransformer">
+      <file name="/var/www/app/src/Matiux/DDDStarterPack/Application/DataTransformer/CollectionDataTransformer.php">
+        <class name="DDDStarterPack\Application\DataTransformer\CollectionDataTransformer" namespace="DDDStarterPack\Application\DataTransformer">
           <metrics complexity="1" methods="1" coveredmethods="0" conditionals="0" coveredconditionals="0" statements="3" coveredstatements="0" elements="4" coveredelements="0"/>
         </class>
-        <line num="15" type="method" name="write" visibility="public" complexity="1" crap="2" count="0"/>
-        <line num="16" type="stmt" count="0"/>
-        <line num="17" type="stmt" count="0"/>
-        <line num="18" type="stmt" count="0"/>
-        <metrics loc="19" ncloc="15" classes="1" methods="1" coveredmethods="0" conditionals="0" coveredconditionals="0" statements="3" coveredstatements="0" elements="4" coveredelements="0"/>
+        <line num="11" type="method" name="write" visibility="public" complexity="1" crap="2" count="0"/>
+        <line num="12" type="stmt" count="0"/>
+        <line num="13" type="stmt" count="0"/>
+        <line num="14" type="stmt" count="0"/>
+        <metrics loc="15" ncloc="15" classes="1" methods="1" coveredmethods="0" conditionals="0" coveredconditionals="0" statements="3" coveredstatements="0" elements="4" coveredelements="0"/>
       </file>
-      <file name="/var/www/app/src/Matiux/DDDStarterPack/Application/DataTransformer/ArrayDataTransformer.php">
-        <class name="DDDStarterPack\Application\DataTransformer\ArrayDataTransformer" namespace="DDDStarterPack\Application\DataTransformer">
+      <file name="/var/www/app/src/Matiux/DDDStarterPack/Application/DataTransformer/ItemDataTransformer.php">
+        <class name="DDDStarterPack\Application\DataTransformer\ItemDataTransformer" namespace="DDDStarterPack\Application\DataTransformer">
           <metrics complexity="1" methods="1" coveredmethods="0" conditionals="0" coveredconditionals="0" statements="3" coveredstatements="0" elements="4" coveredelements="0"/>
         </class>
-        <line num="14" type="method" name="writeCollection" visibility="public" complexity="1" crap="2" count="0"/>
-        <line num="15" type="stmt" count="0"/>
-        <line num="16" type="stmt" count="0"/>
-        <line num="17" type="stmt" count="0"/>
-        <metrics loc="18" ncloc="13" classes="1" methods="1" coveredmethods="0" conditionals="0" coveredconditionals="0" statements="3" coveredstatements="0" elements="4" coveredelements="0"/>
+        <line num="9" type="method" name="writeCollection" visibility="public" complexity="1" crap="2" count="0"/>
+        <line num="10" type="stmt" count="0"/>
+        <line num="11" type="stmt" count="0"/>
+        <line num="12" type="stmt" count="0"/>
+        <metrics loc="13" ncloc="13" classes="1" methods="1" coveredmethods="0" conditionals="0" coveredconditionals="0" statements="3" coveredstatements="0" elements="4" coveredelements="0"/>
       </file>
-      <file name="/var/www/app/src/Matiux/DDDStarterPack/Application/DataTransformer/JsonDataTransformer.php">
-        <class name="DDDStarterPack\Application\DataTransformer\JsonDataTransformer" namespace="DDDStarterPack\Application\DataTransformer">
-          <metrics complexity="4" methods="2" coveredmethods="0" conditionals="0" coveredconditionals="0" statements="7" coveredstatements="0" elements="9" coveredelements="0"/>
+      <file name="/var/www/app/src/Matiux/DDDStarterPack/Application/DataTransformer/PaginatorDataTransformer.php">
+        <class name="DDDStarterPack\Application\DataTransformer\PaginatorDataTransformer" namespace="DDDStarterPack\Application\DataTransformer">
+          <metrics complexity="4" methods="2" coveredmethods="0" conditionals="0" coveredconditionals="0" statements="16" coveredstatements="0" elements="18" coveredelements="0"/>
         </class>
-        <line num="20" type="method" name="write" visibility="public" complexity="1" crap="2" count="0"/>
-        <line num="21" type="stmt" count="0"/>
-        <line num="22" type="stmt" count="0"/>
-        <line num="23" type="stmt" count="0"/>
-        <line num="30" type="method" name="writeCollection" visibility="public" complexity="3" crap="12" count="0"/>
+        <line num="27" type="method" name="writeCollection" visibility="public" complexity="1" crap="2" count="0"/>
+        <line num="28" type="stmt" count="0"/>
+        <line num="29" type="stmt" count="0"/>
         <line num="31" type="stmt" count="0"/>
         <line num="32" type="stmt" count="0"/>
+        <line num="33" type="stmt" count="0"/>
         <line num="34" type="stmt" count="0"/>
-        <line num="35" type="stmt" count="0"/>
-        <metrics loc="36" ncloc="27" classes="1" methods="2" coveredmethods="0" conditionals="0" coveredconditionals="0" statements="7" coveredstatements="0" elements="9" coveredelements="0"/>
-      </file>
-      <file name="/var/www/app/src/Matiux/DDDStarterPack/Application/DataTransformer/NoTransformationDataTransformer.php">
-        <class name="DDDStarterPack\Application\DataTransformer\NoTransformationDataTransformer" namespace="DDDStarterPack\Application\DataTransformer">
-          <metrics complexity="3" methods="3" coveredmethods="0" conditionals="0" coveredconditionals="0" statements="9" coveredstatements="0" elements="12" coveredelements="0"/>
-        </class>
-        <line num="15" type="method" name="write" visibility="public" complexity="1" crap="2" count="0"/>
-        <line num="16" type="stmt" count="0"/>
-        <line num="17" type="stmt" count="0"/>
-        <line num="18" type="stmt" count="0"/>
-        <line num="25" type="method" name="writeCollection" visibility="public" complexity="1" crap="2" count="0"/>
-        <line num="26" type="stmt" count="0"/>
-        <line num="27" type="stmt" count="0"/>
-        <line num="28" type="stmt" count="0"/>
-        <line num="33" type="method" name="read" visibility="public" complexity="1" crap="2" count="0"/>
-        <line num="34" type="stmt" count="0"/>
-        <line num="35" type="stmt" count="0"/>
         <line num="36" type="stmt" count="0"/>
-        <metrics loc="37" ncloc="25" classes="1" methods="3" coveredmethods="0" conditionals="0" coveredconditionals="0" statements="9" coveredstatements="0" elements="12" coveredelements="0"/>
+        <line num="38" type="stmt" count="0"/>
+        <line num="39" type="stmt" count="0"/>
+        <line num="41" type="method" name="read" visibility="public" complexity="2" crap="6" count="0"/>
+        <line num="42" type="stmt" count="0"/>
+        <line num="43" type="stmt" count="0"/>
+        <line num="45" type="stmt" count="0"/>
+        <line num="46" type="stmt" count="0"/>
+        <line num="47" type="stmt" count="0"/>
+        <line num="49" type="stmt" count="0"/>
+        <line num="50" type="stmt" count="0"/>
+        <metrics loc="53" ncloc="47" classes="1" methods="2" coveredmethods="0" conditionals="0" coveredconditionals="0" statements="16" coveredstatements="0" elements="18" coveredelements="0"/>
       </file>
     </package>
     <file name="/var/www/app/src/Matiux/DDDStarterPack/Application/DataTransformer/DataTransformer.php">
-      <metrics loc="26" ncloc="14" classes="0" methods="0" coveredmethods="0" conditionals="0" coveredconditionals="0" statements="0" coveredstatements="0" elements="0" coveredelements="0"/>
+      <metrics loc="27" ncloc="15" classes="0" methods="0" coveredmethods="0" conditionals="0" coveredconditionals="0" statements="0" coveredstatements="0" elements="0" coveredelements="0"/>
     </file>
     <package name="DDDStarterPack\Application\Exception">
       <file name="/var/www/app/src/Matiux/DDDStarterPack/Application/Exception/ApplicationException.php">
@@ -439,15 +430,69 @@
     <file name="/var/www/app/src/Matiux/DDDStarterPack/Domain/Model/Message/PublishedMessageTracker.php">
       <metrics loc="29" ncloc="12" classes="0" methods="0" coveredmethods="0" conditionals="0" coveredconditionals="0" statements="0" coveredstatements="0" elements="0" coveredelements="0"/>
     </file>
-    <package name="DDDStarterPack\Domain\Model\Repository">
-      <file name="/var/www/app/src/Matiux/DDDStarterPack/Domain/Model/Repository/AndCriteria.php">
-        <class name="DDDStarterPack\Domain\Model\Repository\AndCriteria" namespace="DDDStarterPack\Domain\Model\Repository">
+    <package name="DDDStarterPack\Domain\Model\Repository\Filter">
+      <file name="/var/www/app/src/Matiux/DDDStarterPack/Domain/Model/Repository/Filter/FilterParams.php">
+        <class name="DDDStarterPack\Domain\Model\Repository\Filter\FilterParams" namespace="DDDStarterPack\Domain\Model\Repository\Filter">
+          <metrics complexity="11" methods="6" coveredmethods="3" conditionals="0" coveredconditionals="0" statements="19" coveredstatements="16" elements="25" coveredelements="19"/>
+        </class>
+        <line num="12" type="method" name="__construct" visibility="public" complexity="1" crap="1" count="2"/>
+        <line num="14" type="stmt" count="2"/>
+        <line num="15" type="stmt" count="2"/>
+        <line num="16" type="stmt" count="2"/>
+        <line num="18" type="method" name="setAppliers" visibility="private" complexity="2" crap="2" count="2"/>
+        <line num="20" type="stmt" count="2"/>
+        <line num="21" type="stmt" count="2"/>
+        <line num="23" type="stmt" count="2"/>
+        <line num="25" type="method" name="addApplier" visibility="protected" complexity="2" crap="2.03" count="2"/>
+        <line num="27" type="stmt" count="2"/>
+        <line num="29" type="stmt" count="2"/>
+        <line num="30" type="stmt" count="0"/>
+        <line num="33" type="stmt" count="2"/>
+        <line num="34" type="stmt" count="2"/>
+        <line num="36" type="method" name="get" visibility="public" complexity="2" crap="2.15" count="1"/>
+        <line num="38" type="stmt" count="1"/>
+        <line num="40" type="stmt" count="1"/>
+        <line num="43" type="stmt" count="0"/>
+        <line num="46" type="method" name="applyTo" visibility="public" complexity="3" crap="3" count="1"/>
+        <line num="48" type="stmt" count="1"/>
+        <line num="50" type="stmt" count="1"/>
+        <line num="52" type="stmt" count="1"/>
+        <line num="55" type="stmt" count="1"/>
+        <line num="57" type="method" name="has" visibility="public" complexity="1" crap="2" count="0"/>
+        <line num="59" type="stmt" count="0"/>
+        <metrics loc="61" ncloc="60" classes="1" methods="6" coveredmethods="3" conditionals="0" coveredconditionals="0" statements="19" coveredstatements="16" elements="25" coveredelements="19"/>
+      </file>
+      <file name="/var/www/app/src/Matiux/DDDStarterPack/Domain/Model/Repository/Filter/FilterParamsBuilder.php">
+        <class name="DDDStarterPack\Domain\Model\Repository\Filter\FilterParamsBuilder" namespace="DDDStarterPack\Domain\Model\Repository\Filter">
+          <metrics complexity="4" methods="2" coveredmethods="1" conditionals="0" coveredconditionals="0" statements="10" coveredstatements="9" elements="12" coveredelements="10"/>
+        </class>
+        <line num="11" type="method" name="addApplier" visibility="public" complexity="3" crap="3.03" count="2"/>
+        <line num="13" type="stmt" count="2"/>
+        <line num="14" type="stmt" count="1"/>
+        <line num="17" type="stmt" count="2"/>
+        <line num="19" type="stmt" count="2"/>
+        <line num="20" type="stmt" count="0"/>
+        <line num="23" type="stmt" count="2"/>
+        <line num="24" type="stmt" count="2"/>
+        <line num="26" type="method" name="build" visibility="public" complexity="1" crap="1" count="2"/>
+        <line num="28" type="stmt" count="2"/>
+        <line num="32" type="stmt" count="2"/>
+        <line num="36" type="stmt" count="2"/>
+        <metrics loc="38" ncloc="34" classes="1" methods="2" coveredmethods="1" conditionals="0" coveredconditionals="0" statements="10" coveredstatements="9" elements="12" coveredelements="10"/>
+      </file>
+    </package>
+    <file name="/var/www/app/src/Matiux/DDDStarterPack/Domain/Model/Repository/Filter/FilterParamsApplier.php">
+      <metrics loc="12" ncloc="12" classes="0" methods="0" coveredmethods="0" conditionals="0" coveredconditionals="0" statements="0" coveredstatements="0" elements="0" coveredelements="0"/>
+    </file>
+    <package name="DDDStarterPack\Domain\Model\Repository\ModelCriteria">
+      <file name="/var/www/app/src/Matiux/DDDStarterPack/Domain/Model/Repository/ModelCriteria/AndCriteria.php">
+        <class name="DDDStarterPack\Domain\Model\Repository\ModelCriteria\AndCriteria" namespace="DDDStarterPack\Domain\Model\Repository\ModelCriteria">
           <metrics complexity="0" methods="0" coveredmethods="0" conditionals="0" coveredconditionals="0" statements="0" coveredstatements="0" elements="0" coveredelements="0"/>
         </class>
         <metrics loc="8" ncloc="8" classes="0" methods="0" coveredmethods="0" conditionals="0" coveredconditionals="0" statements="0" coveredstatements="0" elements="0" coveredelements="0"/>
       </file>
-      <file name="/var/www/app/src/Matiux/DDDStarterPack/Domain/Model/Repository/Criteria.php">
-        <class name="DDDStarterPack\Domain\Model\Repository\Criteria" namespace="DDDStarterPack\Domain\Model\Repository">
+      <file name="/var/www/app/src/Matiux/DDDStarterPack/Domain/Model/Repository/ModelCriteria/Criteria.php">
+        <class name="DDDStarterPack\Domain\Model\Repository\ModelCriteria\Criteria" namespace="DDDStarterPack\Domain\Model\Repository\ModelCriteria">
           <metrics complexity="8" methods="7" coveredmethods="0" conditionals="0" coveredconditionals="0" statements="27" coveredstatements="0" elements="34" coveredelements="0"/>
         </class>
         <line num="12" type="method" name="add" visibility="public" complexity="1" crap="2" count="0"/>
@@ -486,8 +531,8 @@
         <line num="57" type="stmt" count="0"/>
         <metrics loc="58" ncloc="55" classes="1" methods="7" coveredmethods="0" conditionals="0" coveredconditionals="0" statements="27" coveredstatements="0" elements="34" coveredelements="0"/>
       </file>
-      <file name="/var/www/app/src/Matiux/DDDStarterPack/Domain/Model/Repository/Criterion.php">
-        <class name="DDDStarterPack\Domain\Model\Repository\Criterion" namespace="DDDStarterPack\Domain\Model\Repository">
+      <file name="/var/www/app/src/Matiux/DDDStarterPack/Domain/Model/Repository/ModelCriteria/Criterion.php">
+        <class name="DDDStarterPack\Domain\Model\Repository\ModelCriteria\Criterion" namespace="DDDStarterPack\Domain\Model\Repository\ModelCriteria">
           <metrics complexity="4" methods="4" coveredmethods="0" conditionals="0" coveredconditionals="0" statements="14" coveredstatements="0" elements="18" coveredelements="0"/>
         </class>
         <line num="11" type="method" name="__construct" visibility="public" complexity="1" crap="2" count="0"/>
@@ -510,8 +555,8 @@
         <line num="31" type="stmt" count="0"/>
         <metrics loc="32" ncloc="32" classes="1" methods="4" coveredmethods="0" conditionals="0" coveredconditionals="0" statements="14" coveredstatements="0" elements="18" coveredelements="0"/>
       </file>
-      <file name="/var/www/app/src/Matiux/DDDStarterPack/Domain/Model/Repository/ModelCriteria.php">
-        <class name="DDDStarterPack\Domain\Model\Repository\ModelCriteria" namespace="DDDStarterPack\Domain\Model\Repository">
+      <file name="/var/www/app/src/Matiux/DDDStarterPack/Domain/Model/Repository/ModelCriteria/ModelCriteria.php">
+        <class name="DDDStarterPack\Domain\Model\Repository\ModelCriteria\ModelCriteria" namespace="DDDStarterPack\Domain\Model\Repository\ModelCriteria">
           <metrics complexity="9" methods="8" coveredmethods="0" conditionals="0" coveredconditionals="0" statements="24" coveredstatements="0" elements="32" coveredelements="0"/>
         </class>
         <line num="19" type="method" name="setPage" visibility="public" complexity="1" crap="2" count="0"/>
@@ -548,8 +593,8 @@
         <line num="63" type="stmt" count="0"/>
         <metrics loc="64" ncloc="52" classes="1" methods="8" coveredmethods="0" conditionals="0" coveredconditionals="0" statements="24" coveredstatements="0" elements="32" coveredelements="0"/>
       </file>
-      <file name="/var/www/app/src/Matiux/DDDStarterPack/Domain/Model/Repository/ModelCriteriaBuilder.php">
-        <class name="DDDStarterPack\Domain\Model\Repository\ModelCriteriaBuilder" namespace="DDDStarterPack\Domain\Model\Repository">
+      <file name="/var/www/app/src/Matiux/DDDStarterPack/Domain/Model/Repository/ModelCriteria/ModelCriteriaBuilder.php">
+        <class name="DDDStarterPack\Domain\Model\Repository\ModelCriteria\ModelCriteriaBuilder" namespace="DDDStarterPack\Domain\Model\Repository\ModelCriteria">
           <metrics complexity="14" methods="9" coveredmethods="0" conditionals="0" coveredconditionals="0" statements="58" coveredstatements="0" elements="67" coveredelements="0"/>
         </class>
         <line num="14" type="method" name="__construct" visibility="private" complexity="1" crap="2" count="0"/>
@@ -621,14 +666,44 @@
         <line num="110" type="stmt" count="0"/>
         <metrics loc="111" ncloc="111" classes="1" methods="9" coveredmethods="0" conditionals="0" coveredconditionals="0" statements="58" coveredstatements="0" elements="67" coveredelements="0"/>
       </file>
-      <file name="/var/www/app/src/Matiux/DDDStarterPack/Domain/Model/Repository/OrCriteria.php">
-        <class name="DDDStarterPack\Domain\Model\Repository\OrCriteria" namespace="DDDStarterPack\Domain\Model\Repository">
+      <file name="/var/www/app/src/Matiux/DDDStarterPack/Domain/Model/Repository/ModelCriteria/OrCriteria.php">
+        <class name="DDDStarterPack\Domain\Model\Repository\ModelCriteria\OrCriteria" namespace="DDDStarterPack\Domain\Model\Repository\ModelCriteria">
           <metrics complexity="0" methods="0" coveredmethods="0" conditionals="0" coveredconditionals="0" statements="0" coveredstatements="0" elements="0" coveredelements="0"/>
         </class>
         <metrics loc="7" ncloc="7" classes="0" methods="0" coveredmethods="0" conditionals="0" coveredconditionals="0" statements="0" coveredstatements="0" elements="0" coveredelements="0"/>
       </file>
-      <file name="/var/www/app/src/Matiux/DDDStarterPack/Domain/Model/Repository/PaginatorWrapper.php">
-        <class name="DDDStarterPack\Domain\Model\Repository\PaginatorWrapper" namespace="DDDStarterPack\Domain\Model\Repository">
+      <file name="/var/www/app/src/Matiux/DDDStarterPack/Domain/Model/Repository/ModelCriteria/Sorting.php">
+        <class name="DDDStarterPack\Domain\Model\Repository\ModelCriteria\Sorting" namespace="DDDStarterPack\Domain\Model\Repository\ModelCriteria">
+          <metrics complexity="3" methods="3" coveredmethods="0" conditionals="0" coveredconditionals="0" statements="10" coveredstatements="0" elements="13" coveredelements="0"/>
+        </class>
+        <line num="10" type="method" name="__construct" visibility="public" complexity="1" crap="2" count="0"/>
+        <line num="11" type="stmt" count="0"/>
+        <line num="12" type="stmt" count="0"/>
+        <line num="13" type="stmt" count="0"/>
+        <line num="14" type="stmt" count="0"/>
+        <line num="16" type="method" name="getField" visibility="public" complexity="1" crap="2" count="0"/>
+        <line num="17" type="stmt" count="0"/>
+        <line num="18" type="stmt" count="0"/>
+        <line num="19" type="stmt" count="0"/>
+        <line num="21" type="method" name="getSorting" visibility="public" complexity="1" crap="2" count="0"/>
+        <line num="22" type="stmt" count="0"/>
+        <line num="23" type="stmt" count="0"/>
+        <line num="24" type="stmt" count="0"/>
+        <metrics loc="25" ncloc="25" classes="1" methods="3" coveredmethods="0" conditionals="0" coveredconditionals="0" statements="10" coveredstatements="0" elements="13" coveredelements="0"/>
+      </file>
+    </package>
+    <file name="/var/www/app/src/Matiux/DDDStarterPack/Domain/Model/Repository/ModelCriteria/FilterableRepository.php">
+      <metrics loc="10" ncloc="10" classes="0" methods="0" coveredmethods="0" conditionals="0" coveredconditionals="0" statements="0" coveredstatements="0" elements="0" coveredelements="0"/>
+    </file>
+    <file name="/var/www/app/src/Matiux/DDDStarterPack/Domain/Model/Repository/ModelCriteria/IdentifiableRepository.php">
+      <metrics loc="10" ncloc="10" classes="0" methods="0" coveredmethods="0" conditionals="0" coveredconditionals="0" statements="0" coveredstatements="0" elements="0" coveredelements="0"/>
+    </file>
+    <file name="/var/www/app/src/Matiux/DDDStarterPack/Domain/Model/Repository/Paginator/Paginator.php">
+      <metrics loc="18" ncloc="18" classes="0" methods="0" coveredmethods="0" conditionals="0" coveredconditionals="0" statements="0" coveredstatements="0" elements="0" coveredelements="0"/>
+    </file>
+    <package name="DDDStarterPack\Domain\Model\Repository\Paginator">
+      <file name="/var/www/app/src/Matiux/DDDStarterPack/Domain/Model/Repository/Paginator/PaginatorWrapper.php">
+        <class name="DDDStarterPack\Domain\Model\Repository\Paginator\PaginatorWrapper" namespace="DDDStarterPack\Domain\Model\Repository\Paginator">
           <metrics complexity="4" methods="4" coveredmethods="0" conditionals="0" coveredconditionals="0" statements="16" coveredstatements="0" elements="20" coveredelements="0"/>
         </class>
         <line num="12" type="method" name="__construct" visibility="public" complexity="1" crap="2" count="0"/>
@@ -653,86 +728,7 @@
         <line num="37" type="stmt" count="0"/>
         <metrics loc="38" ncloc="38" classes="1" methods="4" coveredmethods="0" conditionals="0" coveredconditionals="0" statements="16" coveredstatements="0" elements="20" coveredelements="0"/>
       </file>
-      <file name="/var/www/app/src/Matiux/DDDStarterPack/Domain/Model/Repository/Sorting.php">
-        <class name="DDDStarterPack\Domain\Model\Repository\Sorting" namespace="DDDStarterPack\Domain\Model\Repository">
-          <metrics complexity="3" methods="3" coveredmethods="0" conditionals="0" coveredconditionals="0" statements="10" coveredstatements="0" elements="13" coveredelements="0"/>
-        </class>
-        <line num="10" type="method" name="__construct" visibility="public" complexity="1" crap="2" count="0"/>
-        <line num="11" type="stmt" count="0"/>
-        <line num="12" type="stmt" count="0"/>
-        <line num="13" type="stmt" count="0"/>
-        <line num="14" type="stmt" count="0"/>
-        <line num="16" type="method" name="getField" visibility="public" complexity="1" crap="2" count="0"/>
-        <line num="17" type="stmt" count="0"/>
-        <line num="18" type="stmt" count="0"/>
-        <line num="19" type="stmt" count="0"/>
-        <line num="21" type="method" name="getSorting" visibility="public" complexity="1" crap="2" count="0"/>
-        <line num="22" type="stmt" count="0"/>
-        <line num="23" type="stmt" count="0"/>
-        <line num="24" type="stmt" count="0"/>
-        <metrics loc="25" ncloc="25" classes="1" methods="3" coveredmethods="0" conditionals="0" coveredconditionals="0" statements="10" coveredstatements="0" elements="13" coveredelements="0"/>
-      </file>
     </package>
-    <package name="DDDStarterPack\Domain\Model\Repository\Filter">
-      <file name="/var/www/app/src/Matiux/DDDStarterPack/Domain/Model/Repository/Filter/FilterParams.php">
-        <class name="DDDStarterPack\Domain\Model\Repository\Filter\FilterParams" namespace="DDDStarterPack\Domain\Model\Repository\Filter">
-          <metrics complexity="9" methods="5" coveredmethods="3" conditionals="0" coveredconditionals="0" statements="17" coveredstatements="15" elements="22" coveredelements="18"/>
-        </class>
-        <line num="12" type="method" name="__construct" visibility="public" complexity="1" crap="1" count="2"/>
-        <line num="14" type="stmt" count="2"/>
-        <line num="15" type="stmt" count="2"/>
-        <line num="16" type="stmt" count="2"/>
-        <line num="18" type="method" name="setAppliers" visibility="private" complexity="2" crap="2" count="2"/>
-        <line num="20" type="stmt" count="2"/>
-        <line num="21" type="stmt" count="2"/>
-        <line num="23" type="stmt" count="2"/>
-        <line num="25" type="method" name="addApplier" visibility="protected" complexity="2" crap="2.03" count="2"/>
-        <line num="27" type="stmt" count="2"/>
-        <line num="29" type="stmt" count="2"/>
-        <line num="30" type="stmt" count="0"/>
-        <line num="33" type="stmt" count="2"/>
-        <line num="34" type="stmt" count="2"/>
-        <line num="36" type="method" name="get" visibility="public" complexity="2" crap="2.15" count="1"/>
-        <line num="38" type="stmt" count="1"/>
-        <line num="40" type="stmt" count="1"/>
-        <line num="43" type="stmt" count="0"/>
-        <line num="46" type="method" name="apply" visibility="public" complexity="2" crap="2" count="1"/>
-        <line num="48" type="stmt" count="1"/>
-        <line num="50" type="stmt" count="1"/>
-        <line num="52" type="stmt" count="1"/>
-        <metrics loc="53" ncloc="52" classes="1" methods="5" coveredmethods="3" conditionals="0" coveredconditionals="0" statements="17" coveredstatements="15" elements="22" coveredelements="18"/>
-      </file>
-      <file name="/var/www/app/src/Matiux/DDDStarterPack/Domain/Model/Repository/Filter/FilterParamsBuilder.php">
-        <class name="DDDStarterPack\Domain\Model\Repository\Filter\FilterParamsBuilder" namespace="DDDStarterPack\Domain\Model\Repository\Filter">
-          <metrics complexity="4" methods="2" coveredmethods="1" conditionals="0" coveredconditionals="0" statements="10" coveredstatements="9" elements="12" coveredelements="10"/>
-        </class>
-        <line num="11" type="method" name="addApplier" visibility="public" complexity="3" crap="3.03" count="2"/>
-        <line num="13" type="stmt" count="2"/>
-        <line num="14" type="stmt" count="1"/>
-        <line num="17" type="stmt" count="2"/>
-        <line num="19" type="stmt" count="2"/>
-        <line num="20" type="stmt" count="0"/>
-        <line num="23" type="stmt" count="2"/>
-        <line num="24" type="stmt" count="2"/>
-        <line num="26" type="method" name="build" visibility="public" complexity="1" crap="1" count="2"/>
-        <line num="28" type="stmt" count="2"/>
-        <line num="32" type="stmt" count="2"/>
-        <line num="36" type="stmt" count="2"/>
-        <metrics loc="38" ncloc="34" classes="1" methods="2" coveredmethods="1" conditionals="0" coveredconditionals="0" statements="10" coveredstatements="9" elements="12" coveredelements="10"/>
-      </file>
-    </package>
-    <file name="/var/www/app/src/Matiux/DDDStarterPack/Domain/Model/Repository/Filter/FilterParamsApplier.php">
-      <metrics loc="10" ncloc="10" classes="0" methods="0" coveredmethods="0" conditionals="0" coveredconditionals="0" statements="0" coveredstatements="0" elements="0" coveredelements="0"/>
-    </file>
-    <file name="/var/www/app/src/Matiux/DDDStarterPack/Domain/Model/Repository/FilterableRepository.php">
-      <metrics loc="10" ncloc="10" classes="0" methods="0" coveredmethods="0" conditionals="0" coveredconditionals="0" statements="0" coveredstatements="0" elements="0" coveredelements="0"/>
-    </file>
-    <file name="/var/www/app/src/Matiux/DDDStarterPack/Domain/Model/Repository/IdentifiableRepository.php">
-      <metrics loc="10" ncloc="10" classes="0" methods="0" coveredmethods="0" conditionals="0" coveredconditionals="0" statements="0" coveredstatements="0" elements="0" coveredelements="0"/>
-    </file>
-    <file name="/var/www/app/src/Matiux/DDDStarterPack/Domain/Model/Repository/Paginator.php">
-      <metrics loc="18" ncloc="18" classes="0" methods="0" coveredmethods="0" conditionals="0" coveredconditionals="0" statements="0" coveredstatements="0" elements="0" coveredelements="0"/>
-    </file>
     <file name="/var/www/app/src/Matiux/DDDStarterPack/Domain/Service/Serializer.php">
       <metrics loc="27" ncloc="12" classes="0" methods="0" coveredmethods="0" conditionals="0" coveredconditionals="0" statements="0" coveredstatements="0" elements="0" coveredelements="0"/>
     </file>
@@ -938,28 +934,39 @@
     <package name="DDDStarterPack\Infrastructure\Domain">
       <file name="/var/www/app/src/Matiux/DDDStarterPack/Infrastructure/Domain/DoctrineEntityId.php">
         <class name="DDDStarterPack\Infrastructure\Domain\DoctrineEntityId" namespace="DDDStarterPack\Infrastructure\Domain">
-          <metrics complexity="8" methods="3" coveredmethods="0" conditionals="0" coveredconditionals="0" statements="16" coveredstatements="0" elements="19" coveredelements="0"/>
+          <metrics complexity="12" methods="5" coveredmethods="0" conditionals="0" coveredconditionals="0" statements="25" coveredstatements="0" elements="30" coveredelements="0"/>
         </class>
-        <line num="11" type="method" name="convertToDatabaseValue" visibility="public" complexity="2" crap="6" count="0"/>
-        <line num="12" type="stmt" count="0"/>
+        <line num="12" type="method" name="convertToDatabaseValue" visibility="public" complexity="3" crap="12" count="0"/>
         <line num="13" type="stmt" count="0"/>
         <line num="14" type="stmt" count="0"/>
-        <line num="16" type="method" name="isValidUuid" visibility="private" complexity="3" crap="12" count="0"/>
-        <line num="17" type="stmt" count="0"/>
+        <line num="15" type="stmt" count="0"/>
+        <line num="16" type="stmt" count="0"/>
         <line num="18" type="stmt" count="0"/>
         <line num="19" type="stmt" count="0"/>
-        <line num="20" type="stmt" count="0"/>
+        <line num="21" type="method" name="isValidUuid" visibility="private" complexity="3" crap="12" count="0"/>
         <line num="22" type="stmt" count="0"/>
         <line num="23" type="stmt" count="0"/>
-        <line num="25" type="method" name="convertToPHPValue" visibility="public" complexity="2" crap="6" count="0"/>
-        <line num="26" type="stmt" count="0"/>
+        <line num="24" type="stmt" count="0"/>
+        <line num="25" type="stmt" count="0"/>
         <line num="27" type="stmt" count="0"/>
         <line num="28" type="stmt" count="0"/>
-        <line num="29" type="stmt" count="0"/>
+        <line num="30" type="method" name="convertToPHPValue" visibility="public" complexity="3" crap="12" count="0"/>
         <line num="31" type="stmt" count="0"/>
+        <line num="32" type="stmt" count="0"/>
         <line num="33" type="stmt" count="0"/>
         <line num="34" type="stmt" count="0"/>
-        <metrics loc="37" ncloc="37" classes="1" methods="3" coveredmethods="0" conditionals="0" coveredconditionals="0" statements="16" coveredstatements="0" elements="19" coveredelements="0"/>
+        <line num="36" type="stmt" count="0"/>
+        <line num="38" type="stmt" count="0"/>
+        <line num="39" type="stmt" count="0"/>
+        <line num="43" type="method" name="getFQCN" visibility="protected" complexity="1" crap="2" count="0"/>
+        <line num="44" type="stmt" count="0"/>
+        <line num="45" type="stmt" count="0"/>
+        <line num="46" type="stmt" count="0"/>
+        <line num="48" type="method" name="isCustomValid" visibility="protected" complexity="1" crap="2" count="0"/>
+        <line num="49" type="stmt" count="0"/>
+        <line num="50" type="stmt" count="0"/>
+        <line num="51" type="stmt" count="0"/>
+        <metrics loc="52" ncloc="52" classes="1" methods="5" coveredmethods="0" conditionals="0" coveredconditionals="0" statements="25" coveredstatements="0" elements="30" coveredelements="0"/>
       </file>
     </package>
     <package name="DDDStarterPack\Infrastructure\Domain\Model\Event\Doctrine">
@@ -1058,6 +1065,55 @@
         <metrics loc="73" ncloc="52" classes="1" methods="3" coveredmethods="0" conditionals="0" coveredconditionals="0" statements="22" coveredstatements="0" elements="25" coveredelements="0"/>
       </file>
     </package>
-    <metrics files="63" loc="1967" ncloc="1788" classes="34" methods="139" coveredmethods="23" conditionals="0" coveredconditionals="0" statements="579" coveredstatements="95" elements="718" coveredelements="118"/>
+    <package name="DDDStarterPack\Infrastructure\Domain\Model\Repository\Doctrine">
+      <file name="/var/www/app/src/Matiux/DDDStarterPack/Infrastructure/Domain/Model/Repository/Doctrine/DoctrinePaginatorWrapper.php">
+        <class name="DDDStarterPack\Infrastructure\Domain\Model\Repository\Doctrine\DoctrinePaginatorWrapper" namespace="DDDStarterPack\Infrastructure\Domain\Model\Repository\Doctrine">
+          <metrics complexity="5" methods="4" coveredmethods="0" conditionals="0" coveredconditionals="0" statements="18" coveredstatements="0" elements="22" coveredelements="0"/>
+        </class>
+        <line num="13" type="method" name="count" visibility="public" complexity="1" crap="2" count="0"/>
+        <line num="14" type="stmt" count="0"/>
+        <line num="15" type="stmt" count="0"/>
+        <line num="16" type="stmt" count="0"/>
+        <line num="18" type="method" name="getCurrentPageCollection" visibility="public" complexity="2" crap="6" count="0"/>
+        <line num="19" type="stmt" count="0"/>
+        <line num="20" type="stmt" count="0"/>
+        <line num="22" type="stmt" count="0"/>
+        <line num="23" type="stmt" count="0"/>
+        <line num="25" type="stmt" count="0"/>
+        <line num="27" type="stmt" count="0"/>
+        <line num="28" type="stmt" count="0"/>
+        <line num="30" type="method" name="getTotalPage" visibility="public" complexity="1" crap="2" count="0"/>
+        <line num="31" type="stmt" count="0"/>
+        <line num="32" type="stmt" count="0"/>
+        <line num="34" type="stmt" count="0"/>
+        <line num="36" type="stmt" count="0"/>
+        <line num="37" type="stmt" count="0"/>
+        <line num="39" type="method" name="getTotalResult" visibility="public" complexity="1" crap="2" count="0"/>
+        <line num="40" type="stmt" count="0"/>
+        <line num="41" type="stmt" count="0"/>
+        <line num="42" type="stmt" count="0"/>
+        <metrics loc="43" ncloc="42" classes="1" methods="4" coveredmethods="0" conditionals="0" coveredconditionals="0" statements="18" coveredstatements="0" elements="22" coveredelements="0"/>
+      </file>
+    </package>
+    <file name="/var/www/app/src/Matiux/DDDStarterPack/Infrastructure/Domain/Model/Repository/Doctrine/Filter/DoctrineFilterParamsApplier.php">
+      <metrics loc="9" ncloc="9" classes="0" methods="0" coveredmethods="0" conditionals="0" coveredconditionals="0" statements="0" coveredstatements="0" elements="0" coveredelements="0"/>
+    </file>
+    <package name="DDDStarterPack\Infrastructure\Domain\Model\Repository\Doctrine\Filter">
+      <file name="/var/www/app/src/Matiux/DDDStarterPack/Infrastructure/Domain/Model/Repository/Doctrine/Filter/DoctrineFilterParamsBuilder.php">
+        <class name="DDDStarterPack\Infrastructure\Domain\Model\Repository\Doctrine\Filter\DoctrineFilterParamsBuilder" namespace="DDDStarterPack\Infrastructure\Domain\Model\Repository\Doctrine\Filter">
+          <metrics complexity="2" methods="2" coveredmethods="0" conditionals="0" coveredconditionals="0" statements="6" coveredstatements="0" elements="8" coveredelements="0"/>
+        </class>
+        <line num="10" type="method" name="addApplier" visibility="public" complexity="1" crap="2" count="0"/>
+        <line num="11" type="stmt" count="0"/>
+        <line num="12" type="stmt" count="0"/>
+        <line num="13" type="stmt" count="0"/>
+        <line num="15" type="method" name="doAddApplier" visibility="protected" complexity="1" crap="2" count="0"/>
+        <line num="16" type="stmt" count="0"/>
+        <line num="17" type="stmt" count="0"/>
+        <line num="18" type="stmt" count="0"/>
+        <metrics loc="19" ncloc="19" classes="1" methods="2" coveredmethods="0" conditionals="0" coveredconditionals="0" statements="6" coveredstatements="0" elements="8" coveredelements="0"/>
+      </file>
+    </package>
+    <metrics files="65" loc="2035" ncloc="1879" classes="35" methods="145" coveredmethods="23" conditionals="0" coveredconditionals="0" statements="614" coveredstatements="96" elements="759" coveredelements="119"/>
   </project>
 </coverage>
