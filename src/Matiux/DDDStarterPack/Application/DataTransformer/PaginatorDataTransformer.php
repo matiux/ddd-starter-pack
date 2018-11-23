@@ -49,5 +49,10 @@ abstract class PaginatorDataTransformer implements DataTransformer
         return $this->paginationData;
     }
 
+    public function write($item): DataTransformer
+    {
+        throw new \BadMethodCallException('If you need to transform a single element, use ArrayDataTransformer::write class', 500);
+    }
+
     protected abstract function getSingleTransformerNs(): string;
 }
