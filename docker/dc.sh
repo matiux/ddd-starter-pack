@@ -21,12 +21,6 @@ if [ "$1" = "composer" ]; then
 elif [ "$1" = "up" ]; then
 
     shift 1
-    if [ ! -d docker/php/ssh ]; then
-        mkdir -p docker/php/ssh
-        cp ~/.ssh/id_rsa docker/php/ssh/
-        cp ~/.ssh/id_rsa.pub docker/php/ssh/
-    fi
-
     docker-compose \
         --file docker/docker-compose.yml \
         -p ${PROJECT_NAME} \

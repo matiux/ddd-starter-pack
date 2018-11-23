@@ -8,10 +8,10 @@ use DDDStarterPack\Domain\Model\Repository\Paginator\Paginator;
 interface DataTransformer
 {
     /**
-     * @param IdentifiableDomainObject $domainModel
+     * @param IdentifiableDomainObject|array $item
      * @return DataTransformer
      */
-    public function write(IdentifiableDomainObject $domainModel): DataTransformer;
+    public function write($item): DataTransformer;
 
     /**
      * @param \Traversable|array|Paginator $collection
