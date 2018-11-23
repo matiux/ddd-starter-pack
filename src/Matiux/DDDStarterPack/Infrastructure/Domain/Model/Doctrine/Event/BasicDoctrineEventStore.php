@@ -1,6 +1,6 @@
 <?php
 
-namespace DDDStarterPack\Infrastructure\Domain\Model\Event\Doctrine;
+namespace DDDStarterPack\Infrastructure\Domain\Model\Doctrine\Event;
 
 use DDDStarterPack\Domain\Model\Event\DomainEvent;
 use DDDStarterPack\Domain\Model\Event\StoredDomainEventFactory;

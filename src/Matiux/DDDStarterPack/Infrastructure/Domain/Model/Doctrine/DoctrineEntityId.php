@@ -1,11 +1,11 @@
 <?php
 
-namespace DDDStarterPack\Infrastructure\Domain;
+namespace DDDStarterPack\Infrastructure\Domain\Model\Doctrine;
 
 use DDDStarterPack\Domain\Model\BasicEntityId;
+use DDDStarterPack\Domain\Model\EntityId;
 use Doctrine\DBAL\Platforms\AbstractPlatform;
 use Doctrine\DBAL\Types\GuidType;
-use DDDStarterPack\Domain\Model\EntityId;
 
 abstract class DoctrineEntityId extends GuidType
 {

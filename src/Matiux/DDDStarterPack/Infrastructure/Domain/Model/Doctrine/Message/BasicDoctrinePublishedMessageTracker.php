@@ -1,8 +1,7 @@
 <?php
 
-namespace DDDStarterPack\Infrastructure\Domain\Model\Message\Doctrine;
+namespace DDDStarterPack\Infrastructure\Domain\Model\Doctrine\Message;
 
-use DDDStarterPack\Domain\Model\Event\BasicStoredDomainEvent;
 use DDDStarterPack\Domain\Model\Event\StoredDomainEventInterface;
 use DDDStarterPack\Domain\Model\Message\BasicPublishedMessage;
 use DDDStarterPack\Domain\Model\Message\PublishedMessageFactory;

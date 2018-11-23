@@ -1,6 +1,6 @@
 <?php
 
-namespace DDDStarterPack\Infrastructure\Domain\Model\Repository\Doctrine;
+namespace DDDStarterPack\Infrastructure\Domain\Model\Doctrine\Repository;
 
 use DDDStarterPack\Domain\Model\Repository\Paginator\PaginatorWrapper;
 use Doctrine\ORM\Tools\Pagination\Paginator;

@@ -1,6 +1,6 @@
 <?php
 
-namespace DDDStarterPack\Infrastructure\Domain\Model\Repository\Doctrine\Filter;
+namespace DDDStarterPack\Infrastructure\Domain\Model\Doctrine\Repository\Filter;
 
 use DDDStarterPack\Domain\Model\Repository\Filter\FilterParamsApplier;
 
