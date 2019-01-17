@@ -4,5 +4,6 @@
     * https://github.com/buttercup-php/protects
 * Test per i modelli Criteria
 * Test per il salvataggio bulk degli eventi
+* Test per i data transformer
 
 

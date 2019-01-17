@@ -2,12 +2,20 @@
 
 namespace DDDStarterPack\Application\DataTransformer;
 
+use DDDStarterPack\Domain\Model\IdentifiableDomainObject;
+
 abstract class ItemDataTransformer implements DataTransformer
 {
-    protected $model;
+    protected $item;
 
-    public function writeCollection($collection, int $total = null): DataTransformer
+    /**
+     * @param IdentifiableDomainObject $item
+     * @return DataTransformer
+     */
+    public function write($item): DataTransformer
     {
-        throw new \BadMethodCallException('If you need to transform a collection, use ArrayCollectionDataTransformer class', 500);
+        $this->item = $item;
+
+        return $this;
     }
 }

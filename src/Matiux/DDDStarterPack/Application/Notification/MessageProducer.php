@@ -16,5 +16,5 @@ interface MessageProducer
 
     public function getBatchLimit(): int;
 
-    public function close($exchangeName);
+    public function close($exchangeName): void;
 }

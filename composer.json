@@ -13,7 +13,8 @@
   "require": {
     "php": ">=7.1",
     "ramsey/uuid": "^3.7",
-    "jms/serializer-bundle": "^2.2"
+    "jms/serializer-bundle": "^2.2",
+    "beberlei/assert": "^3.2"
   },
   "require-dev": {
     "phpunit/phpunit": "^6.4",

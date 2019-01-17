@@ -5,7 +5,6 @@ namespace DDDStarterPack\Infrastructure\Domain\Model\Doctrine\Event;
 use DDDStarterPack\Domain\Model\Event\DomainEvent;
 use DDDStarterPack\Domain\Model\Event\StoredDomainEventFactory;
 use DDDStarterPack\Domain\Service\Serializer;
-use Doctrine\Common\Persistence\Mapping\ClassMetadata;
 use Doctrine\ORM\EntityRepository;
 use JMS\Serializer\SerializerBuilder;
 

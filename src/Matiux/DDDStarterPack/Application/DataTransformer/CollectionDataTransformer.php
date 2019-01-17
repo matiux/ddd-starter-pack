@@ -2,12 +2,16 @@
 
 namespace DDDStarterPack\Application\DataTransformer;
 
-abstract class CollectionDataTransformer implements DataTransformer
-{
-    protected $models = [];
+use DDDStarterPack\Domain\Model\Repository\Paginator\Paginator;
 
-    public function write($item): DataTransformer
-    {
-        throw new \BadMethodCallException('If you need to transform a single element, use ArrayDataTransformer::write class', 500);
-    }
+interface CollectionDataTransformer
+{
+    /**
+     * @param \Traversable|array|Paginator $items
+     * @param int $total
+     * @return CollectionDataTransformer
+     */
+    public function writeCollection($items, int $total = null): CollectionDataTransformer;
+
+    public function read();
 }

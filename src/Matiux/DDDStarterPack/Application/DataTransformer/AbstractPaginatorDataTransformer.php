@@ -2,9 +2,10 @@
 
 namespace DDDStarterPack\Application\DataTransformer;
 
+use Assert\Assertion;
 use DDDStarterPack\Domain\Model\Repository\Paginator\Paginator;
 
-abstract class PaginatorDataTransformer implements DataTransformer
+abstract class AbstractPaginatorDataTransformer implements CollectionDataTransformer
 {
     protected $paginationData = [
         'meta' => [
@@ -20,20 +21,22 @@ abstract class PaginatorDataTransformer implements DataTransformer
     protected $paginator;
 
     /**
-     * @param Paginator $paginator
-     * @param int|null $total
-     * @return DataTransformer
+     * @param \Traversable|array|Paginator $items
+     * @param int $total
+     * @return CollectionDataTransformer
      */
-    public function writeCollection($paginator, int $total = null): DataTransformer
+    public function writeCollection($items, int $total = null): CollectionDataTransformer
     {
+        Assertion::isInstanceOf($items, Paginator::class);
+
         $this->paginationData['data'] = [];
 
-        $this->paginationData['meta']['total'] = $paginator->getTotalResult();
-        $this->paginationData['meta']['per_page'] = $paginator->getPerPageNumber();
-        $this->paginationData['meta']['page'] = $paginator->getCurrentPage();
-        $this->paginationData['meta']['total_pages'] = $paginator->getTotalPage();
+        $this->paginationData['meta']['total'] = $items->getTotalResult();
+        $this->paginationData['meta']['per_page'] = $items->getPerPageNumber();
+        $this->paginationData['meta']['page'] = $items->getCurrentPage();
+        $this->paginationData['meta']['total_pages'] = $items->getTotalPage();
 
-        $this->paginator = $paginator;
+        $this->paginator = $items;
 
         return $this;
     }
@@ -47,11 +50,6 @@ abstract class PaginatorDataTransformer implements DataTransformer
         }
 
         return $this->paginationData;
-    }
-
-    public function write($item): DataTransformer
-    {
-        throw new \BadMethodCallException('If you need to transform a single element, use ArrayDataTransformer::write class', 500);
     }
 
     protected abstract function getSingleTransformerNs(): string;

@@ -5,6 +5,7 @@ namespace DDDStarterPack\Domain\Event\Subscriber;
 use DDDStarterPack\Domain\Model\Event\DomainEvent;
 use DDDStarterPack\Domain\Model\Event\EventStore;
 use DDDStarterPack\Domain\Model\Event\StoredDomainEventFactory;
+use DDDStarterPack\Domain\Service\Serializer;
 
 class PersistAllEventSubscriber implements EventSubscriber
 {
@@ -23,7 +24,11 @@ class PersistAllEventSubscriber implements EventSubscriber
     {
         $serializedEvents = $this->serializer->serialize($anEvent, 'json');
 
-        $storedEvent = $this->storedEventFactory->build(get_class($anEvent), $anEvent->occurredOn(), $serializedEvents);
+        $storedEvent = $this->storedEventFactory->build(
+            get_class($anEvent),
+            $anEvent->occurredOn(),
+            $serializedEvents
+        );
 
         $this->eventStore->add($storedEvent);
     }
