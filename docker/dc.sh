@@ -5,7 +5,7 @@ WORKDIR=/var/www/app
 PROJECT_NAME=$(basename $(pwd) | tr  '[:upper:]' '[:lower:]')
 COMPOSE_OVERRIDE=
 
-if [ ! -f "./docker-compose.override.yml" ]; then
+if [ -f "./docker-compose.override.yml" ]; then
     COMPOSE_OVERRIDE="--file docker/docker-compose.override.yml"
 fi
 
