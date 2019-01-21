@@ -2,7 +2,6 @@
 
 namespace DDDStarterPack\Application\DataTransformer;
 
-use Assert\Assertion;
 use DDDStarterPack\Domain\Model\Repository\Paginator\Paginator;
 
 abstract class AbstractPaginatorDataTransformer implements CollectionDataTransformer
@@ -27,7 +26,9 @@ abstract class AbstractPaginatorDataTransformer implements CollectionDataTransfo
      */
     public function writeCollection($items, int $total = null): CollectionDataTransformer
     {
-        Assertion::isInstanceOf($items, Paginator::class);
+        if (!$items instanceof Paginator) {
+            throw new \LogicException('WriteCollection() accetta un oggetto di tipo Paginator');
+        }
 
         $this->paginationData['data'] = [];
 
