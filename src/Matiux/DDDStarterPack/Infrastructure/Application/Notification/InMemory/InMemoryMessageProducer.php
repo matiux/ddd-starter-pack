@@ -17,7 +17,7 @@ class InMemoryMessageProducer implements MessageProducer
         $this->messageQueue = $messageQueue;
     }
 
-    public function open(string $exchangeName)
+    public function open(string $exchangeName = '')
     {
 
     }
@@ -34,7 +34,7 @@ class InMemoryMessageProducer implements MessageProducer
         $this->messageQueue->appendMessage($serializedMessage);
     }
 
-    public function close($exchangeName)
+    public function close(string $exchangeName = ''): void
     {
 
     }

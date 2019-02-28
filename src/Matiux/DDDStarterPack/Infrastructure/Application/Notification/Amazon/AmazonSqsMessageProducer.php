@@ -2,6 +2,8 @@
 
 namespace DDDStarterPack\Infrastructure\Application\Notification\Amazon;
 
+use ArrayObject;
+use DDDStarterPack\Application\Notification\Message;
 use DDDStarterPack\Application\Notification\MessageProducer;
 use DDDStarterPack\Application\Notification\MessageProducerResponse;
 
@@ -14,7 +16,7 @@ class AmazonSqsMessageProducer implements MessageProducer
      */
     private $client;
 
-    public function open(string $exchangeName)
+    public function open(string $exchangeName = '')
     {
         $this->client = new SqsClient([
             'version' => 'latest',
@@ -26,28 +28,27 @@ class AmazonSqsMessageProducer implements MessageProducer
         ]);
     }
 
-    public function send(
-        string $exchangeName,
-        string $notificationMessage,
-        string $notificationType,
-        int $notificationId,
-        \DateTimeInterface $notificationOccurredOn
-    ): MessageProducerResponse
+    public function send(Message $message): MessageProducerResponse
     {
         $queueUrl = getenv('AMAZON_SQS_QUEUE_URL');
 
         $result = $this->client->sendMessage([
             'QueueUrl' => $queueUrl,
-            'MessageBody' => $notificationMessage,
+            'MessageBody' => $message->getNotificationBodyMessage(),
         ]);
     }
 
-    public function close($exchangeName)
+    public function close(string $exchangeName = ''): void
     {
 
     }
 
-    public function sendBatch(array $messages): MessageProducerResponse
+    public function sendBatch(ArrayObject $messages): MessageProducerResponse
+    {
+
+    }
+
+    public function getBatchLimit(): int
     {
 
     }
