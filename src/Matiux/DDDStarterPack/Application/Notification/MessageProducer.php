@@ -4,10 +4,8 @@ namespace DDDStarterPack\Application\Notification;
 
 use ArrayObject;
 
-interface MessageProducer
+interface MessageProducer extends MessageService
 {
-    public function open(string $exchangeName = '');
-
     public function send(Message $message): MessageProducerResponse;
 
     /**
@@ -17,6 +15,4 @@ interface MessageProducer
     public function sendBatch(ArrayObject $messages): MessageProducerResponse;
 
     public function getBatchLimit(): int;
-
-    public function close(string $exchangeName = ''): void;
 }

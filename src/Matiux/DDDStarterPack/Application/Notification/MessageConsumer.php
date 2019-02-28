@@ -2,15 +2,11 @@
 
 namespace DDDStarterPack\Application\Notification;
 
-interface MessageConsumer
+interface MessageConsumer extends MessageService
 {
-    public function open(string $exchangeName);
+    public function receiveMessage(int $maximumNumberOfMessages = 1): array;
 
-    public function receiveMessage(int $maximumNumberOfMessages = 1);
+    public function deleteMessage($messageId): void;
 
-    public function deleteMessage($messageId);
-
-    public function deleteMessageBatch(array $messagesId);
-
-    public function close($exchangeName);
+    public function deleteMessageBatch(array $messagesId): void;
 }
