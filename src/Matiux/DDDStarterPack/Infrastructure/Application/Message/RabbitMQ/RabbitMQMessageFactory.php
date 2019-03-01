@@ -7,7 +7,7 @@ use DateTimeInterface;
 use DDDStarterPack\Application\Message\Message;
 use DDDStarterPack\Application\Message\MessageFactory;
 
-class RabbitMQNotificationMessageFactory implements MessageFactory
+class RabbitMQMessageFactory implements MessageFactory
 {
     public function build(string $exchangeName, $messageId, string $body, string $type, DateTimeInterface $occurredAt): Message
     {
