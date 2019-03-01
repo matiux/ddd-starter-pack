@@ -2,7 +2,9 @@
 
 namespace DDDStarterPack\Application\DataTransformer;
 
-use DDDStarterPack\Domain\Model\Repository\Paginator\Paginator;
+use DDDStarterPack\Domain\Aggregate\Repository\Paginator\Paginator;
+use LogicException;
+use Traversable;
 
 abstract class AbstractPaginatorDataTransformer implements CollectionDataTransformer
 {
@@ -20,14 +22,14 @@ abstract class AbstractPaginatorDataTransformer implements CollectionDataTransfo
     protected $paginator;
 
     /**
-     * @param \Traversable|array|Paginator $items
+     * @param Traversable|array|Paginator $items
      * @param int $total
      * @return CollectionDataTransformer
      */
     public function writeCollection($items, int $total = null): CollectionDataTransformer
     {
         if (!$items instanceof Paginator) {
-            throw new \LogicException('WriteCollection() accetta un oggetto di tipo Paginator');
+            throw new LogicException('WriteCollection() accetta un oggetto di tipo Paginator');
         }
 
         $this->paginationData['data'] = [];

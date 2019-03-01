@@ -2,8 +2,6 @@ version: '3.7'
 
 services:
   php:
-    image: matiux/php:7.2.11-fpm-alpine3.8-dev
+    image: matiux/php:7.3.2-fpm-alpine3.9-dev
     volumes:
       - ../:/var/www/app
-    environment:
-      - APP_ENV=${APP_ENV}

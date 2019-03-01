@@ -2,7 +2,7 @@
 
 namespace DDDStarterPack\Application\Exception;
 
-use DDDStarterPack\Domain\Model\Exception\DomainException;
+use DDDStarterPack\Domain\Aggregate\Exception\DomainException;
 
 abstract class ApplicationException extends DomainException
 {

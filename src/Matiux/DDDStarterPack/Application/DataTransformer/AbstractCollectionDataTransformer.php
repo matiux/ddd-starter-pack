@@ -2,7 +2,8 @@
 
 namespace DDDStarterPack\Application\DataTransformer;
 
-use DDDStarterPack\Domain\Model\Repository\Paginator\Paginator;
+use DDDStarterPack\Domain\Aggregate\Repository\Paginator\Paginator;
+use Traversable;
 
 abstract class AbstractCollectionDataTransformer implements CollectionDataTransformer
 {
@@ -10,7 +11,7 @@ abstract class AbstractCollectionDataTransformer implements CollectionDataTransf
     protected $total;
 
     /**
-     * @param \Traversable|array|Paginator $items
+     * @param Traversable|array|Paginator $items
      * @param int $total
      * @return CollectionDataTransformer
      */

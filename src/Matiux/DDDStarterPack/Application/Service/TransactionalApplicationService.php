@@ -3,8 +3,9 @@
 namespace DDDStarterPack\Application\Service;
 
 use DDDStarterPack\Application\Exception\ApplicationException;
-use DDDStarterPack\Domain\Model\Exception\DomainException;
 use DDDStarterPack\Application\Exception\TransactionFailedException;
+use DDDStarterPack\Domain\Aggregate\Exception\DomainException;
+use Throwable;
 
 class TransactionalApplicationService implements ApplicationService
 {
@@ -37,7 +38,7 @@ class TransactionalApplicationService implements ApplicationService
 
             throw $exception;
 
-        } catch (\Throwable $exception) {
+        } catch (Throwable $exception) {
 
             throw new TransactionFailedException($exception->getMessage(), $exception->getCode(), $exception);
         }
