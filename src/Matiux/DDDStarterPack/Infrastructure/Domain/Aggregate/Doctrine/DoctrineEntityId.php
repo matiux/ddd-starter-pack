@@ -1,6 +1,6 @@
 <?php
 
-namespace DDDStarterPack\Infrastructure\Domain\Model\Doctrine;
+namespace DDDStarterPack\Infrastructure\Domain\Aggregate\Doctrine;
 
 use DDDStarterPack\Domain\Aggregate\BasicEntityId;
 use DDDStarterPack\Domain\Aggregate\EntityId;

@@ -2,29 +2,24 @@
 
 namespace DDDStarterPack\Infrastructure\Application\Message\RabbitMQ;
 
-use DateTimeInterface;
+use DateTimeImmutable;
 use DDDStarterPack\Application\Message\Message;
 
 class RabbitMQMessage implements Message
 {
-    private $exchangeName;
-    private $id;
     private $body;
-    private $type;
+    private $exchangeName;
     private $occurredAt;
+    private $type;
+    private $id;
 
-    public function __construct(string $exchangeName, int $id, string $body, string $type, DateTimeInterface $occurredAt)
+    public function __construct(string $body, string $exchangeName = '', DateTimeImmutable $occurredAt = null, string $type = '', $id = null)
     {
-        $this->exchangeName = $exchangeName;
-        $this->id = $id;
         $this->body = $body;
-        $this->type = $type;
+        $this->exchangeName = $exchangeName;
         $this->occurredAt = $occurredAt;
-    }
-
-    public function exchangeName(): string
-    {
-        return $this->exchangeName;
+        $this->type = $type;
+        $this->id = $id;
     }
 
     public function body(): string
@@ -32,7 +27,17 @@ class RabbitMQMessage implements Message
         return $this->body;
     }
 
-    public function type(): string
+    public function exchangeName(): string
+    {
+        return $this->exchangeName;
+    }
+
+    public function occurredAt(): ?DateTimeImmutable
+    {
+        return $this->occurredAt;
+    }
+
+    public function type(): ?string
     {
         return $this->type;
     }
@@ -40,10 +45,5 @@ class RabbitMQMessage implements Message
     public function id()
     {
         return $this->id;
-    }
-
-    public function occurredAt(): DateTimeInterface
-    {
-        return $this->occurredAt;
     }
 }

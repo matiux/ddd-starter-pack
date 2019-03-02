@@ -6,7 +6,7 @@ use ArrayObject;
 
 interface MessageConsumer extends MessageService
 {
-    public function receiveMessage(int $maximumNumberOfMessages = 1): ArrayObject;
+    public function receiveMessage(): ?Message;
 
     public function deleteMessage($messageId): void;
 

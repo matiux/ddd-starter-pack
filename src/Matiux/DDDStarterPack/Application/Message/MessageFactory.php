@@ -2,9 +2,9 @@
 
 namespace DDDStarterPack\Application\Message;
 
-use DateTimeInterface;
+use DateTimeImmutable;
 
 interface MessageFactory
 {
-    public function build(string $exchangeName, $messageId, string $body, string $type, DateTimeInterface $occurredAt): Message;
+    public function build(string $body, string $exchangeName = '', DateTimeImmutable $occurredAt = null, string $type = '', $id = null): Message;
 }

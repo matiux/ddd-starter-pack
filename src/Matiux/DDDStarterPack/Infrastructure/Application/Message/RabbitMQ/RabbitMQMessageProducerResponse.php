@@ -3,16 +3,17 @@
 namespace DDDStarterPack\Infrastructure\Application\Message\RabbitMQ;
 
 use DDDStarterPack\Application\Message\MessageProducerResponse;
+use PhpAmqpLib\Message\AMQPMessage;
 
 class RabbitMQMessageProducerResponse implements MessageProducerResponse
 {
     private $sentMessages;
-    private $originalResponse;
+    private $originalProducedMessage;
 
-    public function __construct(int $sentMessages, array $originalResponse)
+    public function __construct(int $sentMessages, AMQPMessage $originalProducedMessage = null)
     {
         $this->sentMessages = $sentMessages;
-        $this->originalResponse = $originalResponse;
+        $this->originalProducedMessage = $originalProducedMessage;
     }
 
     public function sentMessages(): int
@@ -22,16 +23,20 @@ class RabbitMQMessageProducerResponse implements MessageProducerResponse
 
     public function originalResponse()
     {
-        return $this->originalResponse;
+        return $this->originalProducedMessage;
     }
 
-    public function response()
+    public function body()
     {
-        return $this->originalResponse['Body'];
+        if ($this->originalProducedMessage) {
+            return $this->originalProducedMessage->body;
+        }
+
+        return null;
     }
 
     public function sentMessageId()
     {
-        return $this->originalResponse['ReceiptHandle'];
+        return null;
     }
 }

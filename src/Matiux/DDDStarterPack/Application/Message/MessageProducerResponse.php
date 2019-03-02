@@ -8,7 +8,7 @@ interface MessageProducerResponse
 
     public function originalResponse();
 
-    public function response();
+    public function body();
 
     public function sentMessageId();
 }

@@ -2,15 +2,14 @@
 
 namespace DDDStarterPack\Infrastructure\Application\Message\RabbitMQ;
 
-
-use DateTimeInterface;
+use DateTimeImmutable;
 use DDDStarterPack\Application\Message\Message;
 use DDDStarterPack\Application\Message\MessageFactory;
 
 class RabbitMQMessageFactory implements MessageFactory
 {
-    public function build(string $exchangeName, $messageId, string $body, string $type, DateTimeInterface $occurredAt): Message
+    public function build(string $body, string $exchangeName = '', DateTimeImmutable $occurredAt = null, string $type = '', $id = null): Message
     {
-        return new RabbitMQMessage($exchangeName, $messageId, $body, $type, $occurredAt);
+        return new RabbitMQMessage($body, $exchangeName, $occurredAt, $type, $id);
     }
 }

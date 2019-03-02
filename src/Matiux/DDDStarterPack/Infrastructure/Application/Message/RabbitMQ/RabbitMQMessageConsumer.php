@@ -3,19 +3,32 @@
 namespace DDDStarterPack\Infrastructure\Application\Message\RabbitMQ;
 
 use ArrayObject;
+use DDDStarterPack\Application\Message\Message;
 use DDDStarterPack\Application\Message\MessageConsumer;
+use PhpAmqpLib\Exception\AMQPTimeoutException;
+use PhpAmqpLib\Message\AMQPMessage;
 
 class RabbitMQMessageConsumer extends RabbitMQMessanger implements MessageConsumer
 {
-    public function receiveMessage(int $maximumNumberOfMessages = 1): ArrayObject
+    private $messageFactory;
+
+    public function __construct(RabbitMQConnection $connectionData, string $queueName, RabbitMQMessageFactory $messageFactory)
     {
+        parent::__construct($connectionData, $queueName);
+
+        $this->messageFactory = $messageFactory;
+    }
+
+    public function receiveMessage(): ?Message
+    {
+        $this->open();
+
         $body = null;
         $deliveryTag = null;
 
         $callback = function (AMQPMessage $msg) use (&$body, &$deliveryTag) {
 
             $body = $msg->getBody();
-
             $deliveryTag = $msg->delivery_info['delivery_tag'];
             /**
              * Avendo messo a `false` il 4° parametro del metodo `basic_consume`, indichiamo esplicitamente alla coda quando un task è terminato.
@@ -37,7 +50,9 @@ class RabbitMQMessageConsumer extends RabbitMQMessanger implements MessageConsum
 
             if ($body) {
 
-                return new ArrayObject(['Body' => $body, 'ReceiptHandle' => $deliveryTag]);
+                return $this->messageFactory->build($body, '', null, '', $deliveryTag);
+
+                //return new ArrayObject(['Body' => $body, 'ReceiptHandle' => $deliveryTag]);
             }
 
             try {
@@ -46,12 +61,14 @@ class RabbitMQMessageConsumer extends RabbitMQMessanger implements MessageConsum
 
             } catch (AMQPTimeoutException $e) {
 
-                $this->close('');
+                $this->close();
                 break;
             }
         }
 
         $this->close();
+
+        return null;
     }
 
     public function deleteMessage($messageId): void

@@ -2,7 +2,7 @@
 
 namespace DDDStarterPack\Application\Message;
 
-use DateTimeInterface;
+use DateTimeImmutable;
 
 interface Message
 {
@@ -10,9 +10,9 @@ interface Message
 
     public function body(): string;
 
-    public function type(): string;
+    public function type(): ?string;
 
     public function id();
 
-    public function occurredAt(): DateTimeInterface;
+    public function occurredAt(): ?DateTimeImmutable;
 }

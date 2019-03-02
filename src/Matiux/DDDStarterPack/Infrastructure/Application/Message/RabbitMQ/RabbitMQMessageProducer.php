@@ -10,16 +10,25 @@ use PhpAmqpLib\Message\AMQPMessage;
 
 class RabbitMQMessageProducer extends RabbitMQMessanger implements MessageProducer
 {
-
     public function send(Message $message): MessageProducerResponse
     {
-        $body = $message->getNotificationBodyMessage();
+        $body = $message->body();
 
         $msg = new AMQPMessage($body, ['delivery_mode' => AMQPMessage::DELIVERY_MODE_PERSISTENT]);
 
-        $this->channel->basic_publish($msg, '', $this->queueName);
+        try {
 
-        return new RabbitMQMessageProducerResponse(1);
+            $this->channel->basic_publish($msg, $message->exchangeName(), $this->queueName);
+
+            return new RabbitMQMessageProducerResponse(1, $msg);
+
+        } catch (\Exception $exception) {
+
+            /**
+             * TODO
+             */
+            throw $exception;
+        }
     }
 
     public function sendBatch(ArrayObject $messages): MessageProducerResponse
@@ -28,16 +37,6 @@ class RabbitMQMessageProducer extends RabbitMQMessanger implements MessageProduc
     }
 
     public function getBatchLimit(): int
-    {
-
-    }
-
-    public function open(string $exchangeName = ''): void
-    {
-
-    }
-
-    public function close(string $exchangeName = ''): void
     {
 
     }

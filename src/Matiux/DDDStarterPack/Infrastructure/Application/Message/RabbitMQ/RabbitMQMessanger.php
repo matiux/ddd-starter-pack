@@ -14,7 +14,7 @@ abstract class RabbitMQMessanger
     protected $connection = null;
 
     /** @var AMQPChannel */
-    protected $channel;
+    protected $channel = null;
 
     public function __construct(RabbitMQConnection $connectionData, string $queueName)
     {
@@ -24,7 +24,7 @@ abstract class RabbitMQMessanger
 
     public function open(string $exchangeName = ''): void
     {
-        if ($this->channel) {
+        if ($this->connection && $this->connection->isConnected()) {
             return;
         }
 
@@ -36,13 +36,12 @@ abstract class RabbitMQMessanger
         );
 
         $this->channel = $this->connection->channel();
-
         $this->channel->queue_declare($this->queueName, false, true, false, false);
     }
 
     public function close(string $exchangeName = ''): void
     {
-        if (!$this->connection) {
+        if (!$this->connection || !$this->connection->isConnected()) {
             return;
         }
 
