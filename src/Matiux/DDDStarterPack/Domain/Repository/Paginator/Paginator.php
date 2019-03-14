@@ -1,6 +1,6 @@
 <?php
 
-namespace DDDStarterPack\Domain\Aggregate\Repository\Paginator;
+namespace DDDStarterPack\Domain\Repository\Paginator;
 
 interface Paginator
 {

@@ -1,8 +1,10 @@
 <?php
 
-namespace DDDStarterPack\Domain\Aggregate\Repository\Paginator;
+namespace DDDStarterPack\Domain\Repository\Paginator;
 
-abstract class PaginatorWrapper implements Paginator, \Countable
+use Countable;
+
+abstract class PaginatorWrapper implements Paginator, Countable
 {
     protected $aggregate;
     protected $offset;
