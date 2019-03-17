@@ -1,10 +1,11 @@
 <?php
 
-namespace DDDStarterPack\Domain\Aggregate\Exception;
+namespace DDDStarterPack\Domain\Exception;
 
+use Exception;
 use Throwable;
 
-abstract class DomainException extends \Exception
+abstract class DomainException extends Exception
 {
     const MESSAGE = 'An error has occurred';
 

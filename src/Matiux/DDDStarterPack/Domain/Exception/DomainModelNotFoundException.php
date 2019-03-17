@@ -1,6 +1,6 @@
 <?php
 
-namespace DDDStarterPack\Domain\Aggregate\Exception;
+namespace DDDStarterPack\Domain\Exception;
 
 use Throwable;
 
