@@ -10,12 +10,14 @@ use UnexpectedValueException;
 abstract class AbstractPaginator implements Paginator
 {
     protected $iteratorAggregate;
+    protected $iterator;
     protected $offset;
     protected $limit;
 
     public function __construct(IteratorAggregate $iteratorAggregate, int $offset, int $limit)
     {
         $this->iteratorAggregate = $iteratorAggregate;
+        $this->iterator = $iteratorAggregate->getIterator();
         $this->offset = $offset;
         $this->limit = $limit;
     }
@@ -27,7 +29,7 @@ abstract class AbstractPaginator implements Paginator
 
     public function getIterator(): Traversable
     {
-        return $this->iteratorAggregate->getIterator();
+        return $this->iterator;
     }
 
     public function getCurrentPage(): int
