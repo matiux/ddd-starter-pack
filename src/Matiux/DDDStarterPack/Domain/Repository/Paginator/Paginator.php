@@ -2,7 +2,10 @@
 
 namespace DDDStarterPack\Domain\Repository\Paginator;
 
-interface Paginator
+use Countable;
+use IteratorAggregate;
+
+interface Paginator extends Countable, IteratorAggregate
 {
     public function getCurrentPageCollection();
 

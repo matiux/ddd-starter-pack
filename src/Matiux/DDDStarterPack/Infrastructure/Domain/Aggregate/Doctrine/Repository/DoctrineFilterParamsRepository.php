@@ -3,12 +3,25 @@
 namespace DDDStarterPack\Infrastructure\Domain\Aggregate\Doctrine\Repository;
 
 use DDDStarterPack\Domain\Aggregate\Repository\Filter\FilterParams;
-use DDDStarterPack\Domain\Aggregate\Repository\Paginator\PaginatorWrapper;
+use DDDStarterPack\Domain\Repository\Paginator\Paginator;
 use Doctrine\ORM\QueryBuilder;
-use Doctrine\ORM\Tools\Pagination\Paginator;
 
 abstract class DoctrineFilterParamsRepository extends DoctrineRepository
 {
+    protected function doByFilterParams(FilterParams $filterParams): Paginator
+    {
+        $qb = $this->em->createQueryBuilder();
+
+        $qb->select($this->getEntityAliasName())
+            ->from($this->getEntityClassName(), $this->getEntityAliasName());
+
+        $filterParams->applyTo($qb);
+
+        list($offset, $limit) = $this->calculatePagination($filterParams, $qb);
+
+        return $this->createPaginator($qb, $offset, $limit);
+    }
+
     protected function calculatePagination(FilterParams $filterParams, QueryBuilder $qb): array
     {
         $totalResult = count($qb->getQuery()->getResult());
@@ -26,19 +39,11 @@ abstract class DoctrineFilterParamsRepository extends DoctrineRepository
         return [$offset, $limit];
     }
 
-    public function byFilterParams(FilterParams $filterParams): PaginatorWrapper
-    {
-        $qb = $this->em->createQueryBuilder();
-
-        $qb->select($this->getEntityAliasName())
-            ->from($this->getEntityClassName(), $this->getEntityAliasName());
-
-        $filterParams->applyTo($qb);
-
-        list($offset, $limit) = $this->calculatePagination($filterParams, $qb);
-
-        $paginator = new DoctrinePaginatorWrapper(new Paginator($qb), $offset, $limit);
-
-        return $paginator;
-    }
+    /**
+     * @param QueryBuilder $qb
+     * @param int $offset
+     * @param int $limit
+     * @return Paginator
+     */
+    abstract protected function createPaginator(QueryBuilder $qb, int $offset, int $limit);
 }
