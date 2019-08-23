@@ -1,6 +1,6 @@
 <?php
 
-namespace DDDStarterPack\Domain\Aggregate\Repository\ModelCriteria;
+namespace DDDStarterPack\Domain\Repository\ModelCriteria;
 
 abstract class Criteria implements \Iterator, \Countable
 {
