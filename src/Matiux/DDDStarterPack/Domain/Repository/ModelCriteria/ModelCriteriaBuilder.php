@@ -15,26 +15,26 @@ class ModelCriteriaBuilder
     {
     }
 
-    public static function aModelCriteria(): ModelCriteriaBuilder
+    public static function create(): self
     {
         return new static();
     }
 
-    public function withPage(int $page): ModelCriteriaBuilder
+    public function withPage(int $page): self
     {
         $this->page = $page;
 
         return $this;
     }
 
-    public function withLimit(int $limit): ModelCriteriaBuilder
+    public function withLimit(int $limit): self
     {
         $this->limit = $limit;
 
         return $this;
     }
 
-    public function withOrCriterion(string $field, $value, $operator = '='): ModelCriteriaBuilder
+    public function withOrCriterion(string $field, $value, $operator = '='): self
     {
         $criterion = new Criterion($field, $value, $operator);
 
@@ -54,7 +54,7 @@ class ModelCriteriaBuilder
         return $this;
     }
 
-    public function withAndCriterion(string $field, $value, $operator = '='): ModelCriteriaBuilder
+    public function withAndCriterion(string $field, $value, $operator = '='): self
     {
         $criterion = new Criterion($field, $value, $operator);
 
@@ -63,7 +63,7 @@ class ModelCriteriaBuilder
         return $this;
     }
 
-    public function withOrder($sortField, $sortDirection): ModelCriteriaBuilder
+    public function withOrder($sortField, $sortDirection): self
     {
         $order = new Sorting($sortField, $sortDirection);
 
