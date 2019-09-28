@@ -4,7 +4,7 @@ namespace DDDStarterPack\Application\Service;
 
 use DDDStarterPack\Application\Exception\ApplicationException;
 use DDDStarterPack\Application\Exception\TransactionFailedException;
-use DDDStarterPack\Domain\Aggregate\Exception\DomainException;
+use DDDStarterPack\Domain\Exception\DomainException;
 use Throwable;
 
 class TransactionalApplicationService implements ApplicationService
