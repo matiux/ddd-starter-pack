@@ -2,9 +2,9 @@
 
 namespace DDDStarterPack\Domain\Service;
 
-interface DomainServiceResponse
+interface ServiceResponse
 {
     public function getSuccess(): bool;
 
-    public function getResponso();
+    public function getResponse();
 }

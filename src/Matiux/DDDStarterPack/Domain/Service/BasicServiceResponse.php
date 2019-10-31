@@ -2,7 +2,7 @@
 
 namespace DDDStarterPack\Domain\Service;
 
-class BasicDomainServiceResponse implements DomainServiceResponse
+class BasicServiceResponse implements ServiceResponse
 {
     private $succes;
     private $response;
@@ -18,7 +18,7 @@ class BasicDomainServiceResponse implements DomainServiceResponse
         return $this->succes;
     }
 
-    public function getResponso()
+    public function getResponse()
     {
         return $this->response;
     }
