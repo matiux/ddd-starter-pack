@@ -1,6 +1,6 @@
 <?php
 
-namespace DDDStarterPack\Domain\Repository\ModelCriteria;
+namespace DDDStarterPack\Domain\Aggregate\Repository\ModelCriteria;
 
 class ModelCriteriaBuilder
 {

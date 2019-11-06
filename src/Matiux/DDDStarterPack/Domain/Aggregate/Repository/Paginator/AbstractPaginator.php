@@ -1,6 +1,6 @@
 <?php
 
-namespace DDDStarterPack\Domain\Repository\Paginator;
+namespace DDDStarterPack\Domain\Aggregate\Repository\Paginator;
 
 use ArrayIterator;
 use IteratorAggregate;

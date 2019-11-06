@@ -1,6 +1,6 @@
 <?php
 
-namespace DDDStarterPack\Domain\Repository\ModelCriteria;
+namespace DDDStarterPack\Domain\Aggregate\Repository\ModelCriteria;
 
 abstract class Criteria implements \Iterator, \Countable
 {
@@ -18,32 +18,24 @@ abstract class Criteria implements \Iterator, \Countable
 
     public function current(): Criterion
     {
-        $criterion = current($this->criteria);
-
-        return $criterion;
+        return current($this->criteria);
     }
 
     public function next()
     {
-        $criterion = next($this->criteria);
-
-        return $criterion;
+        return next($this->criteria);
     }
 
     public function key(): string
     {
-        $key = key($this->criteria);
-
-        return $key;
+        return key($this->criteria);
     }
 
     public function valid()
     {
         $key = key($this->criteria);
 
-        $var = ($key !== NULL && $key !== FALSE);
-
-        return $var;
+        return ($key !== NULL && $key !== FALSE);
     }
 
     public function rewind()
