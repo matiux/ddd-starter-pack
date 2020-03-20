@@ -1,6 +1,6 @@
 <?php
 
-namespace DDDStarterPack\Domain\Aggregate\Event;
+namespace DDDStarterPack\Domain\Event;
 
 use DateTimeImmutable;
 

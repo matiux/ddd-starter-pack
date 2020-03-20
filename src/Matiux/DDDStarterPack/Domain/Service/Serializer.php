@@ -2,8 +2,6 @@
 
 namespace DDDStarterPack\Domain\Service;
 
-use phpDocumentor\Reflection\Types\Scalar;
-
 interface Serializer
 {
     /**
@@ -13,7 +11,7 @@ interface Serializer
      * @param $format
      * @return string
      */
-    public function serialize($data, $format): string;
+    public function serialize($data, string $format): string;
 
     /**
      * Deserializes the given data to the specified type.
@@ -21,7 +19,7 @@ interface Serializer
      * @param string $data
      * @param string $type
      * @param string $format
-     * @return object|array|scalar
+     * @return mixed
      */
     public function deserialize($data, $type, $format);
 }

@@ -2,7 +2,7 @@
 
 namespace DDDStarterPack\Application\DataTransformer;
 
-use DDDStarterPack\Domain\Repository\Paginator\Paginator;
+use DDDStarterPack\Domain\Aggregate\Repository\Paginator\Paginator;
 use Traversable;
 
 abstract class AbstractCollectionDataTransformer implements CollectionDataTransformer

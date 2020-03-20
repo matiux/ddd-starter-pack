@@ -18,15 +18,6 @@ abstract class DoctrineEntityId extends GuidType
         return $value instanceof EntityId ? $value->id() : $value;
     }
 
-    private function isValidUuid($value): bool
-    {
-        if (is_string($value) && BasicEntityId::isValidUuid($value)) {
-            return true;
-        }
-
-        return false;
-    }
-
     public function convertToPHPValue($value, AbstractPlatform $platform)
     {
         if (!$this->isValidUuid($value) && !$this->isCustomValid()) {
@@ -38,15 +29,24 @@ abstract class DoctrineEntityId extends GuidType
         return $className::create($value);
     }
 
-    abstract protected function getNamespace(): string;
-
-    protected function getFQCN(): string
+    private function isValidUuid($value): bool
     {
-        return $this->getNamespace() . '\\' . $this->getName();
+        if (is_string($value) && BasicEntityId::isValidUuid($value)) {
+            return true;
+        }
+
+        return false;
     }
 
     protected function isCustomValid(): bool
     {
         return false;
     }
+
+    protected function getFQCN(): string
+    {
+        return $this->getNamespace() . '\\' . $this->getName();
+    }
+
+    abstract protected function getNamespace(): string;
 }

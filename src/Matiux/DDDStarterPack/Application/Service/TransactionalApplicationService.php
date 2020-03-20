@@ -33,7 +33,6 @@ class TransactionalApplicationService implements ApplicationService
 
             throw $exception;
 
-
         } catch (DomainException $exception) {
 
             throw $exception;
