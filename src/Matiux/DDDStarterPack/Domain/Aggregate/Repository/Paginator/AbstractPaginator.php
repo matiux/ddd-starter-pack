@@ -1,6 +1,6 @@
 <?php
 
-namespace DDDStarterPack\Domain\Repository\Paginator;
+namespace DDDStarterPack\Domain\Aggregate\Repository\Paginator;
 
 use ArrayIterator;
 use IteratorAggregate;
@@ -27,16 +27,9 @@ abstract class AbstractPaginator implements Paginator
         return $this->limit;
     }
 
-    public function getIterator(): Traversable
-    {
-        return $this->iterator;
-    }
-
     public function getCurrentPage(): int
     {
-        $currentPage = 0 === $this->limit ? 1 : ($this->offset / $this->limit) + 1;
-
-        return $currentPage;
+        return 0 === $this->limit ? 1 : ($this->offset / $this->limit) + 1;
     }
 
     public function count(): int
@@ -44,25 +37,26 @@ abstract class AbstractPaginator implements Paginator
         return count($this->getIterator());
     }
 
-    public function getCurrentPageCollection()
+    public function getIterator(): Traversable
+    {
+        return $this->iterator;
+    }
+
+    public function getCurrentPageCollection(): array
     {
         if (!($this->getIterator() instanceof ArrayIterator)) {
 
             throw new UnexpectedValueException('Iterator must be an instance of \ArrayIterator');
         }
 
-        $collection = $this->getIterator()->getArrayCopy();
-
-        return $collection;
+        return $this->getIterator()->getArrayCopy();
     }
 
     public function getTotalPage(): int
     {
         $tot = $this->getTotalResult();
 
-        $totalPage = (int)ceil($tot / $this->limit);
-
-        return $totalPage;
+        return (int)ceil($tot / $this->limit);
     }
 
     public function getTotalResult(): int

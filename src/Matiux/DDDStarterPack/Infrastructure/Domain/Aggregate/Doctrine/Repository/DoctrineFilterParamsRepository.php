@@ -3,7 +3,7 @@
 namespace DDDStarterPack\Infrastructure\Domain\Aggregate\Doctrine\Repository;
 
 use DDDStarterPack\Domain\Aggregate\Repository\Filter\FilterParams;
-use DDDStarterPack\Domain\Repository\Paginator\Paginator;
+use DDDStarterPack\Domain\Aggregate\Repository\Paginator\Paginator;
 use Doctrine\ORM\QueryBuilder;
 
 abstract class DoctrineFilterParamsRepository extends DoctrineRepository

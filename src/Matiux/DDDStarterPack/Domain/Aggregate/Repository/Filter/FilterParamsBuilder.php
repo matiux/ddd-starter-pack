@@ -31,10 +31,8 @@ class FilterParamsBuilder
 
         //$options = array_merge($this->getDefaultOptions(), $options);
 
-        $filterParams = new FilterParams(array_values($this->appliers), $data);
-
         //$this->applyOptions($options, $filterParams);
 
-        return $filterParams;
+        return new FilterParams(array_values($this->appliers), $data);
     }
 }

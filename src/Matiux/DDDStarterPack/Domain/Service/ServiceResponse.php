@@ -4,7 +4,9 @@ namespace DDDStarterPack\Domain\Service;
 
 interface ServiceResponse
 {
-    public function getSuccess(): bool;
+    public function isSuccess(): bool;
 
-    public function getResponse(): array;
+    public function message(): string;
+
+    public function code(): int;
 }
