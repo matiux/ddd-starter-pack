@@ -45,5 +45,5 @@ abstract class DoctrineFilterParamsRepository extends DoctrineRepository
      * @param int $limit
      * @return Paginator
      */
-    abstract protected function createPaginator(QueryBuilder $qb, int $offset, int $limit);
+    abstract protected function createPaginator(QueryBuilder $qb, int $offset, int $limit): Paginator;
 }
