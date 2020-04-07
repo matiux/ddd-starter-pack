@@ -19,7 +19,7 @@ class RabbitMQMessageConsumer extends RabbitMQMessanger implements MessageConsum
         $this->messageFactory = $messageFactory;
     }
 
-    public function receiveMessage(): ?Message
+    public function consume(): ?Message
     {
         $this->open();
 
@@ -71,12 +71,12 @@ class RabbitMQMessageConsumer extends RabbitMQMessanger implements MessageConsum
         return null;
     }
 
-    public function deleteMessage($messageId): void
+    public function delete($messageId): void
     {
         $this->channel->basic_ack($messageId);
     }
 
-    public function deleteMessageBatch(ArrayObject $messagesId): void
+    public function deleteBatch(ArrayObject $messagesId): void
     {
 
     }

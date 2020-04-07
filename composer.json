@@ -12,7 +12,7 @@
   "description": "Basic Domain Driven Design utils",
   "require": {
     "ext-json": "*",
-    "php": ">=7.1",
+    "php": ">=7.2",
     "ramsey/uuid": "^3.7"
   },
   "require-dev": {

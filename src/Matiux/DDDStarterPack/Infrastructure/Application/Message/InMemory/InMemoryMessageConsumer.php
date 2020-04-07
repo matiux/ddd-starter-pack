@@ -14,7 +14,7 @@ class InMemoryMessageConsumer implements MessageConsumer
         $this->messageQueue = $messageQueue;
     }
 
-    public function receiveMessage(int $maximumNumberOfMessages = 1): ArrayObject
+    public function consume(int $maximumNumberOfMessages = 1): ArrayObject
     {
         $messageOrig = $this->messageQueue->popMessage();
 
@@ -28,12 +28,12 @@ class InMemoryMessageConsumer implements MessageConsumer
         return [$message];
     }
 
-    public function deleteMessage($messageId): void
+    public function delete($messageId): void
     {
 
     }
 
-    public function deleteMessageBatch(ArrayObject $messagesId): void
+    public function deleteBatch(ArrayObject $messagesId): void
     {
 
     }
