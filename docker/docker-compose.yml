@@ -2,6 +2,6 @@ version: '3.7'
 
 services:
   php:
-    image: matiux/php:7.3.6-fpm-alpine3.10-dev
+    image: matiux/php:7.2.25-fpm-alpine3.10-dev
     volumes:
       - ../:/var/www/app
