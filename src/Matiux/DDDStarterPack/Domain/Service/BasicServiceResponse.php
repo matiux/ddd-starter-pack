@@ -2,35 +2,51 @@
 
 namespace DDDStarterPack\Domain\Service;
 
-class BasicServiceResponse implements ServiceResponse
+abstract class BasicServiceResponse implements ServiceResponse
 {
+    public const ERROR_CODE = 1;
+    public const SUCCESS_CODE = 0;
+
     private $success;
-    private $message;
+    private $message = '';
     private $code;
 
     private function __construct()
     {
     }
 
-    public static function error(): self
+    public static function error(string $message = ''): self
     {
-        $response = new self;
+        $response = new static();
+        $response->code = $response->errorCode();
         $response->success = false;
+        $response->message = trim($message);
 
         return $response;
     }
 
-    public static function success(): self
+    abstract protected function errorCode(): int;
+
+    public static function success(string $message = ''): self
     {
-        $response = new self;
+        $response = new static();
+        $response->code = $response->successCode();
         $response->success = true;
+        $response->message = trim($message);
 
         return $response;
+    }
+
+    abstract protected function successCode(): int;
+
+    public static function create(): self
+    {
+        return new static();
     }
 
     public function withMessage(string $message): self
     {
-        $this->message = $message;
+        $this->message = trim($message);
 
         return $this;
     }

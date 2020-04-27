@@ -2,13 +2,15 @@
 
 namespace DDDStarterPack\Application\Message;
 
-use ArrayObject;
-
 interface MessageProducer extends MessageService
 {
     public function send(Message $message): MessageProducerResponse;
 
-    public function sendBatch(ArrayObject $messages): MessageProducerResponse;
+    /**
+     * @param Message[] $messages
+     * @return MessageProducerResponse
+     */
+    public function sendBatch(array $messages): MessageProducerResponse;
 
     public function getBatchLimit(): int;
 }

@@ -7,7 +7,7 @@ use DDDStarterPack\Application\Exception\TransactionFailedException;
 use DDDStarterPack\Domain\Exception\DomainException;
 use Throwable;
 
-class TransactionalApplicationService implements ApplicationService
+abstract class TransactionalApplicationService implements ApplicationService
 {
     protected $service;
     protected $session;
