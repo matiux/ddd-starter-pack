@@ -1,7 +1,7 @@
 version: '3.7'
 
 services:
-  php:
-    image: matiux/php:7.2.25-fpm-alpine3.10-dev
+  php_ddd_starter_pack:
+    build: php
     volumes:
       - ../:/var/www/app

@@ -5,6 +5,8 @@ namespace Tests\DDDStarterPack\Domain\Repository\Filter;
 use DDDStarterPack\Domain\Aggregate\Repository\Filter\FilterParams;
 use DDDStarterPack\Domain\Aggregate\Repository\Filter\FilterParamsApplier;
 use DDDStarterPack\Domain\Aggregate\Repository\Filter\FilterParamsBuilder;
+use InvalidArgumentException;
+use LogicException;
 use PHPUnit\Framework\TestCase;
 
 class FilterParamsBuilderTest extends TestCase
@@ -37,15 +39,16 @@ class FilterParamsBuilderTest extends TestCase
     /**
      * @test
      * @group filter
-     * @expectedException \LogicException
-     * @expectedExceptionMessage The builder is frozen
      */
     public function filter_params_builder_thow_an_exception()
     {
+        $this->expectException(LogicException::class);
+        $this->expectExceptionMessage('The builder is frozen');
+
         $filterParamsBuilder = new FilterParamsBuilder();
         $filterParamsBuilder->addApplier(new DummyFilterParamsApplier('a_key'));
 
-        $filterParams = $filterParamsBuilder->build([
+        $filterParamsBuilder->build([
             'a_key' => 'a_value',
             'another_key' => ['a_value', 'another_value'],
         ]);
@@ -77,15 +80,10 @@ class DummyFilterParamsApplier implements FilterParamsApplier
     public function __construct(string $key)
     {
         if (!$key) {
-            throw new \InvalidArgumentException('the given key is empty');
+            throw new InvalidArgumentException('the given key is empty');
         }
 
         $this->key = $key;
-    }
-
-    public function key(): string
-    {
-        return $this->key;
     }
 
     public function apply($target, FilterParams $filterParams): void
@@ -98,6 +96,11 @@ class DummyFilterParamsApplier implements FilterParamsApplier
         $target->add([
             $this->key() => $filterParams->get($this->key())
         ]);
+    }
+
+    public function key(): string
+    {
+        return $this->key;
     }
 
     public function supports(FilterParams $filterParams): bool

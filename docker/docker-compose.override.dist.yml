@@ -1,0 +1,14 @@
+version: '3.7'
+
+secrets:
+  id_rsa:
+    file:
+  id_rsa.pub:
+    file:
+
+services:
+  php_ddd_starter_pack:
+    environment:
+      - AWS_ACCESS_KEY_ID=
+      - AWS_SECRET_ACCESS_KEY=
+      - AWS_REGION=
