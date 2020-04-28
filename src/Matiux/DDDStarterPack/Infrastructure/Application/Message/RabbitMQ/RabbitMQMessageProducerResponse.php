@@ -39,4 +39,9 @@ class RabbitMQMessageProducerResponse implements MessageProducerResponse
     {
         return null;
     }
+
+    public function isSuccess(): bool
+    {
+        // TODO: Implement isSuccess() method.
+    }
 }
