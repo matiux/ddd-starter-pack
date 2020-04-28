@@ -13,7 +13,7 @@ class RabbitMQMessage implements Message
     private $type;
     private $id;
 
-    public function __construct(string $body, string $exchangeName = null, DateTimeImmutable $occurredAt = null, string $type = '', $id = null)
+    public function __construct(string $body, string $exchangeName = null, DateTimeImmutable $occurredAt = null, string $type = null, $id = null)
     {
         $this->body = $body;
         $this->exchangeName = $exchangeName;
