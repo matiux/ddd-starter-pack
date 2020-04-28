@@ -21,7 +21,7 @@ class SQSMessage implements Message
         $this->id = $id;
     }
 
-    public function exchangeName(): string
+    public function exchangeName(): ?string
     {
         throw new BadMethodCallException();
     }
