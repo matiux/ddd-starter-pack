@@ -80,4 +80,9 @@ class RabbitMQMessageConsumer extends RabbitMQMessanger implements MessageConsum
     {
 
     }
+
+    public function consumeBatch(): array
+    {
+
+    }
 }
