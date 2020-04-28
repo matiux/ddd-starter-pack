@@ -22,7 +22,7 @@ class InMemoryMessage implements Message
         $this->occurredOn = $occurredOn;
     }
 
-    public function exchangeName(): string
+    public function exchangeName(): ?string
     {
         return $this->exchangeName;
     }

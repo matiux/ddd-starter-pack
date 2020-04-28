@@ -6,7 +6,7 @@ use DateTimeImmutable;
 
 interface Message
 {
-    public function exchangeName(): string;
+    public function exchangeName(): ?string;
 
     public function body(): string;
 
