@@ -20,9 +20,9 @@ TODO
 
 #### Concetti sviluppati
 
-* [Domain](doc/domain.md)
-* [Application](doc/application.md)
-* [Infrastructure](doc/infrastructure.md)
+* [Domain](doc/domain/domain.md)
+* [Application](doc/application/application.md)
+* [Infrastructure](doc/infrastructure/infrastructure.md)
 
 
 #### TODO
