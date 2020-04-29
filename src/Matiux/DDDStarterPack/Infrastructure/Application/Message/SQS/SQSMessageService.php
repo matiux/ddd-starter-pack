@@ -14,13 +14,13 @@ use Symfony\Component\Config\Definition\Exception\InvalidConfigurationException;
 abstract class SQSMessageService extends BasicMessageService
 {
     const SQS_MAX_MESSAGES = 10;
-
     const NAME = 'SQS';
 
     /** @var SqsClient */
-    private static $client = null;
+    private $client = null;
 
-    private static $queue;
+    /** @var string */
+    private $queue = null;
 
     /** @var SQSConfiguration */
     private $SQSConfiguration;
@@ -37,7 +37,7 @@ abstract class SQSMessageService extends BasicMessageService
 
     protected function getClient(): SqsClient
     {
-        if (!self::$client) {
+        if (!$this->client) {
 
             $this->setQueueUrlOrFail();
 
@@ -47,17 +47,17 @@ abstract class SQSMessageService extends BasicMessageService
                 'debug' => false,
             ];
 
-            self::$client = new SqsClient($args + $this->createCredentials());
+            $this->client = new SqsClient($args + $this->createCredentials());
         }
 
-        return self::$client;
+        return $this->client;
     }
 
     private function setQueueUrlOrFail(): void
     {
-        self::$queue = $this->SQSConfiguration->queue();
+        $this->queue = $this->SQSConfiguration->queue();
 
-        if (empty(self::$queue)) {
+        if (!$this->queue || empty($this->queue)) {
             throw new InvalidConfigurationException('Queue url missing');
         }
     }
@@ -75,7 +75,11 @@ abstract class SQSMessageService extends BasicMessageService
 
     protected function getQueueUrl(): string
     {
-        return self::$queue;
+        if (!isset($this->queue)) {
+            $this->setQueueUrlOrFail();
+        }
+
+        return $this->queue;
     }
 
     protected function specificDriverName(): string
