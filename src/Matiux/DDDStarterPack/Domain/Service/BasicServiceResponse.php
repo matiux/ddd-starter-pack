@@ -63,7 +63,7 @@ abstract class BasicServiceResponse implements ServiceResponse
         return $this->success;
     }
 
-    public function message(): string
+    public function message()
     {
         return $this->message;
     }
