@@ -8,34 +8,34 @@ abstract class BasicServiceResponse implements ServiceResponse
     public const SUCCESS_CODE = 0;
 
     private $success;
-    private $message = '';
+    private $body = null;
     private $code;
 
     private function __construct()
     {
     }
 
-    public static function error(string $message = ''): self
+    public static function error($body = null): self
     {
         $response = new static();
         $response->code = $response->errorCode();
         $response->success = false;
-        $response->message = trim($message);
+        $response->body = $body;
+
+        return $response;
+    }
+
+    public static function success($body = null): self
+    {
+        $response = new static();
+        $response->code = $response->successCode();
+        $response->success = true;
+        $response->body = $body;
 
         return $response;
     }
 
     abstract protected function errorCode(): int;
-
-    public static function success(string $message = ''): self
-    {
-        $response = new static();
-        $response->code = $response->successCode();
-        $response->success = true;
-        $response->message = trim($message);
-
-        return $response;
-    }
 
     abstract protected function successCode(): int;
 
@@ -44,9 +44,9 @@ abstract class BasicServiceResponse implements ServiceResponse
         return new static();
     }
 
-    public function withMessage(string $message): self
+    public function withBody($body): self
     {
-        $this->message = trim($message);
+        $this->body = $body;
 
         return $this;
     }
@@ -63,9 +63,9 @@ abstract class BasicServiceResponse implements ServiceResponse
         return $this->success;
     }
 
-    public function message()
+    public function body()
     {
-        return $this->message;
+        return $this->body;
     }
 
     public function code(): int
