@@ -6,7 +6,7 @@ interface ServiceResponse
 {
     public function isSuccess(): bool;
 
-    public function message(): string;
+    public function message();
 
     public function code(): int;
 }
