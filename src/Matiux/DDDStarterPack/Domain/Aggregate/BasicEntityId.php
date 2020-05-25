@@ -1,61 +1,85 @@
 <?php
 
+declare(strict_types=1);
+
 namespace DDDStarterPack\Domain\Aggregate;
 
 use InvalidArgumentException;
 use Ramsey\Uuid\Uuid;
 
-abstract class BasicEntityId implements EntityId
+class BasicEntityId implements EntityId
 {
     const UUID_PATTERN = '/^[0-9a-f]{8}-[0-9a-f]{4}-4[0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$/';
+
+    /** @var null|int|string */
     private $id;
 
-    protected function __construct($anId = false)
+    /**
+     * @param null|int|string $id
+     */
+    protected function __construct($id)
     {
-        $this->verifyInputId($anId);
+        $this->verifyInputId($id);
 
-        if (false === $anId) {
-
-            $this->id = Uuid::uuid4()->toString();
-
-        } else if (null === $anId) {
-
-            $this->id = null;
-
-        } else {
-
-            $this->id = $anId;
-        }
+        $this->id = $id;
     }
 
-    private function verifyInputId($anId)
+    public function __toString(): string
+    {
+        return !$this->id ? '' : (string) $this->id;
+    }
+
+    /**
+     * @psalm-suppress DocblockTypeContradiction
+     *
+     * @param mixed $anId
+     */
+    private function verifyInputId($anId): void
     {
         if (is_object($anId)) {
-            throw new InvalidArgumentException("Entity id input must be scalar type");
+            throw new InvalidArgumentException('Entity id input must be scalar type');
         }
     }
 
-    public static function create($anId = false): EntityId
+    /**
+     * @throws \Exception
+     *
+     * @return static
+     */
+    public static function create(): EntityId
     {
-        return new static($anId);
+        return new static(Uuid::uuid4()->toString());
+    }
+
+    public static function createFrom($id): EntityId
+    {
+        if (!$id) {
+            throw new InvalidArgumentException(sprintf('Invalid ID: %s', $id));
+        }
+
+        return new static($id);
+    }
+
+    public static function createNUll(): EntityId
+    {
+        return new static(null);
     }
 
     public static function isValidUuid(string $uuid): bool
     {
-        if (preg_match(self::UUID_PATTERN, $uuid) === 1) {
-
+        if (1 === preg_match(self::UUID_PATTERN, $uuid)) {
             return true;
         }
 
         return false;
     }
 
-    public function equals(EntityId $entityId): bool
+    public function equals($entityId): bool
     {
         return $this->id() === $entityId->id();
     }
 
-    public function id(): ?string
+    public function id()
     {
         return $this->id;
     }
@@ -63,14 +87,5 @@ abstract class BasicEntityId implements EntityId
     public function isNull(): bool
     {
         return is_null($this->id);
-    }
-
-    public function __toString(): string
-    {
-        if (!$this->id()) {
-            return '';
-        }
-
-        return $this->id();
     }
 }

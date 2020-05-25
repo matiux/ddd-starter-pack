@@ -1,14 +1,34 @@
 <?php
 
+declare(strict_types=1);
+
 namespace DDDStarterPack\Domain\Aggregate;
 
 interface EntityId
 {
-    public static function create($anId = false): EntityId;
+    public function __toString(): string;
 
-    public function id(): ?string;
+    /** @return static */
+    public static function create(): EntityId;
 
-    public function equals(EntityId $entityId): bool;
+    /**
+     * @param int|string $id
+     *
+     * @return static
+     */
+    public static function createFrom($id): EntityId;
 
-    public function __toString();
+    public static function createNUll(): EntityId;
+
+    /**
+     * @return null|int|string
+     */
+    public function id();
+
+    /**
+     * @param EntityId $entityId
+     *
+     * @return bool
+     */
+    public function equals($entityId): bool;
 }

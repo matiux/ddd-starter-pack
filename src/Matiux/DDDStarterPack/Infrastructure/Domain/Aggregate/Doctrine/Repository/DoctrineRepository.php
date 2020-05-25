@@ -1,15 +1,20 @@
 <?php
 
+declare(strict_types=1);
+
 namespace DDDStarterPack\Infrastructure\Domain\Aggregate\Doctrine\Repository;
 
 use Doctrine\Common\Persistence\ManagerRegistry;
-use Doctrine\ORM\EntityManager;
+use Doctrine\ORM\EntityManagerInterface;
+use Doctrine\Persistence\ObjectManager;
+use LogicException;
 
 abstract class DoctrineRepository
 {
+    /** @var ManagerRegistry */
     protected $managerRegistry;
 
-    /** @var EntityManager */
+    /** @var EntityManagerInterface */
     protected $em;
 
     /** @var string */
@@ -18,7 +23,12 @@ abstract class DoctrineRepository
     public function __construct(ManagerRegistry $managerRegistry, string $model)
     {
         $this->managerRegistry = $managerRegistry;
-        $this->em = $managerRegistry->getManagerForClass($model);
+
+        if (!$em = $managerRegistry->getManagerForClass($model)) {
+            throw new LogicException('Entity manager cannot be null');
+        }
+        /** @psalm-suppress InvalidPropertyAssignmentValue */
+        $this->em = $em;
         $this->entityClassName = $model;
     }
 
@@ -27,5 +37,5 @@ abstract class DoctrineRepository
         return $this->entityClassName;
     }
 
-    protected abstract function getEntityAliasName(): string;
+    abstract protected function getEntityAliasName(): string;
 }

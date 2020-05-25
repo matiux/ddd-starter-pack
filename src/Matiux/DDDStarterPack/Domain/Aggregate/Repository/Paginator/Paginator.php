@@ -1,21 +1,29 @@
 <?php
 
+declare(strict_types=1);
+
 namespace DDDStarterPack\Domain\Aggregate\Repository\Paginator;
 
 use Countable;
-use IteratorAggregate;
+use Iterator;
 
-interface Paginator extends Countable, IteratorAggregate
+/**
+ * @template I
+ */
+interface Paginator extends Countable, Iterator
 {
+    /** @return array<int, I> */
     public function getCurrentPageCollection();
 
-    public function getCurrentPage();
+    public function getCurrentPage(): int;
 
-    public function getTotalPage(): int;
+    public function getNumberOfPages(): int;
 
     public function getTotalResult(): int;
 
     public function getPerPageNumber(): int;
 
-    public function getIterator();
+    public function getOffset(): int;
+
+    public function getLimit(): int;
 }

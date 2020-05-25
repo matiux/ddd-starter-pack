@@ -1,20 +1,25 @@
 <?php
 
+declare(strict_types=1);
+
 namespace DDDStarterPack\Application\Message\Configuration;
 
 abstract class ConfigurationValidator
 {
+    /** @var ConfigurationParamRegistry */
     protected $configurationParamRegistry;
+
+    /** @var array */
     private $errors = [];
 
     public function __construct()
     {
-        $this->configurationParamRegistry = new ConfigurationParamRegistry;
+        $this->configurationParamRegistry = new ConfigurationParamRegistry();
 
         $this->buildRegistry();
     }
 
-    abstract protected function buildRegistry();
+    abstract protected function buildRegistry(): void;
 
     public function errors(): array
     {
@@ -27,13 +32,14 @@ abstract class ConfigurationValidator
 
         if (empty($configs) || (1 === count($configs) && isset($configs['cache']))) {
             $this->errors[] = 'Empty configs';
+
             return false;
         }
 
         foreach ($configs as $name => $value) {
+            $configurationParamConstraintName = (string) $name;
 
-            if ($constraint = $this->configurationParamRegistry->resolve($name)) {
-
+            if ($constraint = $this->configurationParamRegistry->resolve($configurationParamConstraintName)) {
                 if (!$constraint->isSatisfiedBy($configuration)) {
                     $this->errors[] = $constraint->message();
                 }

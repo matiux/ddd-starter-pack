@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace DDDStarterPack\Application\Service;
 
 use DDDStarterPack\Application\Exception\ApplicationException;
@@ -7,6 +9,12 @@ use DDDStarterPack\Application\Exception\TransactionFailedException;
 use DDDStarterPack\Domain\Exception\DomainException;
 use Throwable;
 
+/**
+ * Class TransactionalApplicationService.
+ *
+ * @template T
+ * @implements ApplicationService<T>
+ */
 abstract class TransactionalApplicationService implements ApplicationService
 {
     protected $service;
@@ -18,28 +26,32 @@ abstract class TransactionalApplicationService implements ApplicationService
         $this->session = $session;
     }
 
+    /**
+     * @param null|T $request
+     *
+     * @throws ApplicationException
+     * @throws DomainException
+     * @throws TransactionFailedException
+     *
+     * @return mixed
+     */
     public function execute($request = null)
     {
+        /**
+         * @psalm-suppress MissingClosureReturnType
+         */
         $operation = function () use ($request) {
-
             return $this->service->execute($request);
         };
 
         try {
-
             return $this->session->executeAtomically($operation->bindTo($this));
-
         } catch (ApplicationException $exception) {
-
             throw $exception;
-
         } catch (DomainException $exception) {
-
             throw $exception;
-
         } catch (Throwable $exception) {
-
-            throw new TransactionFailedException($exception->getMessage(), $exception->getCode(), $exception);
+            throw new TransactionFailedException($exception->getMessage(), intval($exception->getCode()), $exception);
         }
     }
 }

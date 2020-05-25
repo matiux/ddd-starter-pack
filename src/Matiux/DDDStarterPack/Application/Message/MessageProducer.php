@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace DDDStarterPack\Application\Message;
 
 interface MessageProducer extends MessageService
@@ -8,6 +10,7 @@ interface MessageProducer extends MessageService
 
     /**
      * @param Message[] $messages
+     *
      * @return MessageProducerResponse
      */
     public function sendBatch(array $messages): MessageProducerResponse;

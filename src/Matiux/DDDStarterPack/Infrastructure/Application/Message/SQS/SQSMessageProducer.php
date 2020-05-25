@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace DDDStarterPack\Infrastructure\Application\Message\SQS;
 
 use Aws\Result;
@@ -7,7 +9,7 @@ use DDDStarterPack\Application\Message\Exception\MessageInvalidException;
 use DDDStarterPack\Application\Message\Message;
 use DDDStarterPack\Application\Message\MessageProducerConnector;
 use DDDStarterPack\Application\Message\MessageProducerResponse;
-
+use Webmozart\Assert\Assert;
 
 final class SQSMessageProducer extends SQSMessageService implements MessageProducerConnector
 {
@@ -15,6 +17,8 @@ final class SQSMessageProducer extends SQSMessageService implements MessageProdu
 
     public function send(Message $message): MessageProducerResponse
     {
+        Assert::isInstanceOf($message, SQSMessage::class);
+
         return $this->doSend($message);
     }
 
@@ -25,7 +29,7 @@ final class SQSMessageProducer extends SQSMessageService implements MessageProdu
         $result = $this->getClient()->sendMessage([
             'QueueUrl' => $this->getQueueUrl(),
             'MessageBody' => $message->body(),
-            'MessageAttributes' => $messageAttributes
+            'MessageAttributes' => $messageAttributes,
         ]);
 
         if (!$this->isValidSent($message, $result)) {
@@ -40,14 +44,14 @@ final class SQSMessageProducer extends SQSMessageService implements MessageProdu
         $messageAttributes = [
             'OccurredAt' => [
                 'DataType' => 'String',
-                'StringValue' => $message->occurredAt()->format('Y-m-d H:i:s')
-            ]
+                'StringValue' => $message->occurredAt()->format('Y-m-d H:i:s'),
+            ],
         ];
 
         if ($message->type()) {
             $messageAttributes['Type'] = [
                 'DataType' => 'String',
-                'StringValue' => $message->type()
+                'StringValue' => $message->type(),
             ];
         }
 
@@ -74,12 +78,13 @@ final class SQSMessageProducer extends SQSMessageService implements MessageProdu
     }
 
     /**
+     * @psalm-suppress InvalidReturnType
      * @param Message[] $messages
+     *
      * @return MessageProducerResponse
      */
     public function sendBatch(array $messages): MessageProducerResponse
     {
-
     }
 
     public function getBatchLimit(): int

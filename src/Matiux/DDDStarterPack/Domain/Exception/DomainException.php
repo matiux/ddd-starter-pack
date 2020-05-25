@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace DDDStarterPack\Domain\Exception;
 
 use Exception;
@@ -9,9 +11,9 @@ abstract class DomainException extends Exception
 {
     const MESSAGE = 'An error has occurred';
 
-    public function __construct(string $message = "", int $code = 0, Throwable $previous = null)
+    public function __construct(string $message = '', int $code = 0, Throwable $previous = null)
     {
-        $message = $message ?: static::MESSAGE;
+        $message = $message ?: (string) static::MESSAGE;
 
         parent::__construct($message, $code, $previous);
     }
@@ -21,11 +23,11 @@ abstract class DomainException extends Exception
         return json_encode($this->toArray());
     }
 
-    public function toArray()
+    public function toArray(): array
     {
-        $a['code'] = $this->getCode();
-        $a['message'] = $this->getMessage();
-
-        return $a;
+        return [
+            'code' => $this->getCode(),
+            'message' => $this->getMessage(),
+        ];
     }
 }

@@ -1,19 +1,26 @@
 <?php
 
+declare(strict_types=1);
+
 namespace DDDStarterPack\Domain\Aggregate\Repository\ModelCriteria;
 
+/**
+ * Class ModelCriteria.
+ *
+ * @psalm-suppress MissingConstructor
+ */
 class ModelCriteria
 {
-    /**
-     * @var Criteria[]
-     */
+    /** @var Criteria[] */
     private $criteria = [];
 
-    /**
-     * @var Sorting
-     */
+    /** @var Sorting */
     private $order;
+
+    /** @var int */
     private $page = 1;
+
+    /** @var int */
     private $limit = 0;
 
     public function setPage(int $page): void
@@ -42,7 +49,7 @@ class ModelCriteria
     }
 
     /**
-     * @return Criteria[]|array
+     * @return array|Criteria[]
      */
     public function criteria(): array
     {

@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace DDDStarterPack\Application\Message;
 
 use DDDStarterPack\Application\Message\Configuration\Configuration;
@@ -12,10 +14,16 @@ use Throwable;
 
 abstract class BasicMessageService
 {
+    /** @var bool */
     protected $isBootstrapped = false;
 
     /** @var ConfigurationValidator */
     protected $configurationValidator;
+
+    public function __construct()
+    {
+        $this->configurationValidator = $this->obtainConfigurationValidator();
+    }
 
     public function bootstrap(Configuration $configuration): void
     {
@@ -31,9 +39,10 @@ abstract class BasicMessageService
         $this->validateDriverName($configuration);
         $this->checkRequiredParams($configuration);
 
-        if (!$this->checkParamsIsValid($configuration)) {
+        if (!$this->configurationValidator->validate($configuration)) {
             $errors = $this->configurationValidator->errors();
-            throw new InvalidConfigurationException(sprintf('%s', implode("|", $errors)));
+
+            throw new InvalidConfigurationException(sprintf('%s', implode('|', $errors)));
         }
     }
 
@@ -56,20 +65,20 @@ abstract class BasicMessageService
         }
 
         try {
-
             $resolver->resolve($configuration->getParams());
-
         } catch (MissingOptionsException | Throwable $e) {
-
             throw new InvalidConfigurationException($e->getMessage());
         }
     }
 
-    protected abstract function requiredParams(): array;
+    /**
+     * @psalm-return list<string>
+     */
+    abstract protected function requiredParams(): array;
 
-    protected abstract function defaultsParams(): array;
+    abstract protected function defaultsParams(): array;
 
-    abstract protected function checkParamsIsValid(Configuration $configuration): bool;
+    abstract protected function obtainConfigurationValidator(): ConfigurationValidator;
 
     abstract protected function setSpecificConfiguration(Configuration $configuration): void;
 

@@ -1,18 +1,22 @@
 <?php
 
+declare(strict_types=1);
+
 namespace DDDStarterPack\Infrastructure\Application\Message\SQS\Configuration;
 
-use DDDStarterPack\Application\Message\Configuration\Configuration;
+use DDDStarterPack\Application\Message\Configuration\ConfigurationBuilder;
 use DDDStarterPack\Infrastructure\Application\Message\SQS\SQSMessageService;
 
-class SQSConfigurationBuilder
+class SQSConfigurationBuilder extends ConfigurationBuilder
 {
-    private $driverName;
-    private $configs = [];
-
-    public static function create(string $driverName = null): self
+    /**
+     * @param string $driverName
+     *
+     * @return static
+     */
+    public static function create(string $driverName = null)
     {
-        $builder = new self;
+        $builder = new static();
 
         $builder->driverName = $driverName ?? SQSMessageService::NAME;
 
@@ -40,15 +44,10 @@ class SQSConfigurationBuilder
         return $this;
     }
 
-    public function withQueue(string $bucketName): self
+    public function withQueue(string $queueName): self
     {
-        $this->configs['queue'] = $bucketName;
+        $this->configs['queue_name'] = $queueName;
 
         return $this;
-    }
-
-    public function build(): Configuration
-    {
-        return Configuration::withParams($this->driverName, $this->configs);
     }
 }

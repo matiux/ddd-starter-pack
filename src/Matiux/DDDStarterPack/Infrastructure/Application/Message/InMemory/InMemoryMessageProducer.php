@@ -1,8 +1,9 @@
 <?php
 
+declare(strict_types=1);
+
 namespace DDDStarterPack\Infrastructure\Application\Message\InMemory;
 
-use ArrayObject;
 use DDDStarterPack\Application\Message\Message;
 use DDDStarterPack\Application\Message\MessageProducer;
 use DDDStarterPack\Application\Message\MessageProducerResponse;
@@ -21,50 +22,44 @@ class InMemoryMessageProducer implements MessageProducer
 
     public function open(string $exchangeName = ''): void
     {
-
     }
 
     public function send(Message $message): MessageProducerResponse
     {
-        $message['body'] = $message->body();
-        $message['type'] = $message->type();
-        $message['occurred_on'] = $message->occurredAt();
-        $message['notification_id'] = $message->id();
+//        $payload['body'] = $message->body();
+//        $payload['type'] = $message->type();
+//        $payload['occurred_on'] = $message->occurredAt();
+//        $payload['notification_id'] = $message->id();
 
-        $serializedMessage = json_encode($message);
+        //$serializedMessage = json_encode($payload);
 
-        $this->messageQueue->appendMessage($serializedMessage);
+        $this->messageQueue->appendMessage($message);
+
+        return new InMemoryMessageProducerResponse(1, true, []);
     }
 
     public function close(string $exchangeName = ''): void
     {
-
     }
 
     /**
-     * @param ArrayObject|Message[] $messages
+     * @param Message[] $messages
+     *
      * @return MessageProducerResponse
      */
-    public function sendBatch(ArrayObject $messages): MessageProducerResponse
+    public function sendBatch(array $messages): MessageProducerResponse
     {
-        if ($messages->count() > self::BATCH_LIMIT) {
-
+        if (count($messages) > self::BATCH_LIMIT) {
             $max = self::BATCH_LIMIT;
-            throw new InvalidArgumentException("Too many messages in batch. {$messages->count()} on $max permitted");
+
+            throw new InvalidArgumentException(sprintf('Too many messages in batch. %s on {$max} permitted', count($messages)));
         }
 
-        $notifications = array_map(function (Message $notificationBodyMessage) {
-
-            return $notificationBodyMessage->body();
-
-        }, $messages->getArrayCopy());
-
-        foreach ($notifications as $notification) {
-
-            $this->messageQueue->appendMessage($notification);
+        foreach ($messages as $message) {
+            $this->messageQueue->appendMessage($message);
         }
 
-        return new InMemoryMessageProducerResponse($this->messageQueue->count(), null);
+        return new InMemoryMessageProducerResponse($this->messageQueue->count(), true, []);
     }
 
     public function getBatchLimit(): int

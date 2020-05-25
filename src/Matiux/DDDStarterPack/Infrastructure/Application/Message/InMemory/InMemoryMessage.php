@@ -1,8 +1,10 @@
 <?php
 
+declare(strict_types=1);
+
 namespace DDDStarterPack\Infrastructure\Application\Message\InMemory;
 
-use DateTimeInterface;
+use DateTimeImmutable;
 use DDDStarterPack\Application\Message\Message;
 
 class InMemoryMessage implements Message
@@ -13,7 +15,7 @@ class InMemoryMessage implements Message
     private $notificationType;
     private $occurredOn;
 
-    public function __construct(string $exchangeName, int $notificationId, string $notificationBodyMessage, string $notificationType, DateTimeInterface $occurredOn)
+    public function __construct(string $exchangeName, string $notificationId, string $notificationBodyMessage, string $notificationType, DateTimeImmutable $occurredOn)
     {
         $this->exchangeName = $exchangeName;
         $this->notificationId = $notificationId;
@@ -22,7 +24,7 @@ class InMemoryMessage implements Message
         $this->occurredOn = $occurredOn;
     }
 
-    public function exchangeName(): ?string
+    public function exchangeName(): string
     {
         return $this->exchangeName;
     }
@@ -42,7 +44,7 @@ class InMemoryMessage implements Message
         return $this->notificationId;
     }
 
-    public function occurredAt(): DateTimeInterface
+    public function occurredAt(): ?DateTimeImmutable
     {
         return $this->occurredOn;
     }

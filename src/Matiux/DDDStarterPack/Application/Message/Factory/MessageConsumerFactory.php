@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace DDDStarterPack\Application\Message\Factory;
 
 use DDDStarterPack\Application\Message\Configuration\Configuration;
@@ -30,10 +32,8 @@ class MessageConsumerFactory
         switch ($configuration->getDriverName()) {
             case SQSMessageService::NAME:
                 return new SQSMessageConsumer(new SQSMessageFactory());
-                break;
             default:
-                throw new RuntimeException(sprintf("Invalid driver name [%s]", $configuration->getDriverName()));
-                break;
+                throw new RuntimeException(sprintf('Invalid driver name [%s]', $configuration->getDriverName()));
         }
     }
 }

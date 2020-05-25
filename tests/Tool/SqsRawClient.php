@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Tests\Tool;
 
 use Aws\Credentials\Credentials;
@@ -7,9 +9,17 @@ use Aws\Result;
 use Aws\Sqs\SqsClient;
 use DDDStarterPack\Application\Util\EnvVarUtil;
 
+/**
+ * Trait SqsRawClient.
+ *
+ * @psalm-suppress MissingConstructor
+ */
 trait SqsRawClient
 {
-    private $client = null;
+    /** @var null|SqsClient */
+    private $client;
+
+    /** @var string */
     private $url = '';
 
     public function getQueueUrl(): string
@@ -22,7 +32,6 @@ trait SqsRawClient
     protected function getClient(): SqsClient
     {
         if (!$this->client) {
-
             $args = [
                 'version' => 'latest',
                 'region' => EnvVarUtil::get('AWS_REGION', 'us-east-1'),
@@ -39,9 +48,12 @@ trait SqsRawClient
 
     private function createCredentials(): array
     {
-        if (!empty(EnvVarUtil::get('AWS_ACCESS_KEY_ID')) && !empty(EnvVarUtil::get('AWS_SECRET_ACCESS_KEY'))) {
+        $accessKey = EnvVarUtil::get('AWS_ACCESS_KEY_ID');
+        $secretKey = EnvVarUtil::get('AWS_SECRET_ACCESS_KEY');
 
-            $credentials = new Credentials(EnvVarUtil::get('AWS_ACCESS_KEY_ID'), EnvVarUtil::get('AWS_SECRET_ACCESS_KEY'));
+        if (!empty($accessKey) && !empty($secretKey)) {
+            $credentials = new Credentials($accessKey, $secretKey);
+
             return ['credentials' => $credentials];
         }
 
@@ -50,19 +62,20 @@ trait SqsRawClient
 
     private function setUrl(): void
     {
+        /** @var array<string,string> $url */
         $url = $this->getClient()->getQueueUrl([
-            'QueueName' => 'connettore-pvp-test'
+            'QueueName' => EnvVarUtil::get('AWS_SQS_QUEUE_NAME'),
         ]);
 
         $this->url = $url['QueueUrl'];
     }
 
-    protected function purgeSqsQueue()
+    protected function purgeSqsQueue(): void
     {
         $fetched = 0;
 
         while (true) {
-
+            /** @var list<array{MessageId: string, ReceiptHandle: string, MD5OfBody: string, Body: string }> $messages */
             $messages = $this->pullFromQueue(10)->get('Messages');
 
             if (!$messages) {
@@ -72,16 +85,13 @@ trait SqsRawClient
             $fetched += count($messages);
 
             foreach ($messages as $message) {
-
                 if ($message) {
-
-                    $this->client->deleteMessage(array(
+                    $this->getClient()->deleteMessage([
                         'QueueUrl' => $this->url,
-                        'ReceiptHandle' => $message['ReceiptHandle']
-                    ));
+                        'ReceiptHandle' => $message['ReceiptHandle'],
+                    ]);
                 }
             }
-
         }
     }
 
@@ -90,7 +100,7 @@ trait SqsRawClient
         $options = [
             'QueueUrl' => $this->url,
             'MaxNumberOfMessages' => $amountOfMessagesToFetch,
-            'WaitTimeSeconds' => 2
+            'WaitTimeSeconds' => 2,
         ];
 
         return $this->getClient()->receiveMessage($options);
@@ -100,7 +110,7 @@ trait SqsRawClient
     {
         $this->getClient()->deleteMessage([
             'QueueUrl' => $this->url,
-            'ReceiptHandle' => $id
+            'ReceiptHandle' => $id,
         ]);
     }
 }

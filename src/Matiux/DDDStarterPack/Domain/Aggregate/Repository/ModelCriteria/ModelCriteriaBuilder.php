@@ -1,14 +1,29 @@
 <?php
 
+declare(strict_types=1);
+
 namespace DDDStarterPack\Domain\Aggregate\Repository\ModelCriteria;
 
+/**
+ * Class ModelCriteriaBuilder.
+ *
+ * @psalm-suppress PropertyNotSetInConstructor
+ */
 class ModelCriteriaBuilder
 {
+    /** @var Criterion[] */
     private $andCriteria = [];
+
+    /** @var Criterion[] */
     private $orCriteria = [];
 
+    /** @var Sorting */
     private $sorting;
+
+    /** @var int */
     private $page = 1;
+
+    /** @var int */
     private $limit = 0;
 
     private function __construct()
@@ -34,7 +49,7 @@ class ModelCriteriaBuilder
         return $this;
     }
 
-    public function withOrCriterion(string $field, $value, $operator = '='): self
+    public function withOrCriterion(string $field, string $value, string $operator = '='): self
     {
         $criterion = new Criterion($field, $value, $operator);
 
@@ -43,7 +58,7 @@ class ModelCriteriaBuilder
         return $this;
     }
 
-    public function withBetweenCriterion(string $field, $from, $to): self
+    public function withBetweenCriterion(string $field, string $from, string $to): self
     {
         $criterion = new Criterion($field, $from, '>=');
         array_push($this->andCriteria, $criterion);
@@ -54,7 +69,7 @@ class ModelCriteriaBuilder
         return $this;
     }
 
-    public function withAndCriterion(string $field, $value, $operator = '='): self
+    public function withAndCriterion(string $field, string $value, string $operator = '='): self
     {
         $criterion = new Criterion($field, $value, $operator);
 
@@ -63,7 +78,7 @@ class ModelCriteriaBuilder
         return $this;
     }
 
-    public function withOrder($sortField, $sortDirection): self
+    public function withOrder(string $sortField, string $sortDirection): self
     {
         $order = new Sorting($sortField, $sortDirection);
 
@@ -79,11 +94,9 @@ class ModelCriteriaBuilder
         $modelCriteria->setPage($this->page);
 
         if ($this->andCriteria) {
-
             $andCriteria = new AndCriteria();
 
             foreach ($this->andCriteria as $criterion) {
-
                 $andCriteria->add($criterion);
             }
 
@@ -91,18 +104,16 @@ class ModelCriteriaBuilder
         }
 
         if ($this->orCriteria) {
-
             $orCriteria = new OrCriteria();
 
             foreach ($this->orCriteria as $criterion) {
-
                 $orCriteria->add($criterion);
             }
 
             $modelCriteria->addCriteria($orCriteria);
         }
 
-        if ($this->sorting) {
+        if (isset($this->sorting)) {
             $modelCriteria->addSorting($this->sorting);
         }
 

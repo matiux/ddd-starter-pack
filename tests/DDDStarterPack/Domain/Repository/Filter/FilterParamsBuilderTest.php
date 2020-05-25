@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Tests\DDDStarterPack\Domain\Repository\Filter;
 
 use DDDStarterPack\Domain\Aggregate\Repository\Filter\FilterParams;
@@ -15,11 +17,14 @@ class FilterParamsBuilderTest extends TestCase
      * @test
      * @group filter
      */
-    public function filter_params_can_be_created()
+    public function filter_params_can_be_created(): void
     {
         $filterParamsBuilder = new FilterParamsBuilder();
         $filterParamsBuilder->addApplier(new DummyFilterParamsApplier('a_key'));
         $filterParamsBuilder->addApplier(new DummyFilterParamsApplier('another_key'));
+
+        // Psalm gets angry - as it should be
+        // $filterParamsBuilder->addApplier(new \stdClass());
 
         $filterParams = $filterParamsBuilder->build([
             'a_key' => 'a_value',
@@ -40,7 +45,7 @@ class FilterParamsBuilderTest extends TestCase
      * @test
      * @group filter
      */
-    public function filter_params_builder_thow_an_exception()
+    public function filter_params_builder_thow_an_exception(): void
     {
         $this->expectException(LogicException::class);
         $this->expectExceptionMessage('The builder is frozen');
@@ -53,16 +58,19 @@ class FilterParamsBuilderTest extends TestCase
             'another_key' => ['a_value', 'another_value'],
         ]);
 
-
         $filterParamsBuilder->addApplier(new DummyFilterParamsApplier('another_key'));
     }
 }
 
 class DummyArrayTarget
 {
+    /** @var array */
     private $data = [];
 
-    public function add($item)
+    /**
+     * @param array $item
+     */
+    public function add($item): void
     {
         $this->data[] = $item;
     }
@@ -73,8 +81,14 @@ class DummyArrayTarget
     }
 }
 
+/**
+ * Class DummyFilterParamsApplier.
+ *
+ * @implements FilterParamsApplier<DummyArrayTarget>
+ */
 class DummyFilterParamsApplier implements FilterParamsApplier
 {
+    /** @var string */
     private $key;
 
     public function __construct(string $key)
@@ -86,15 +100,14 @@ class DummyFilterParamsApplier implements FilterParamsApplier
         $this->key = $key;
     }
 
+    /**
+     * @param DummyArrayTarget $target
+     * @param FilterParams     $filterParams
+     */
     public function apply($target, FilterParams $filterParams): void
     {
-        $this->doApply($target, $filterParams);
-    }
-
-    protected function doApply(DummyArrayTarget $target, FilterParams $filterParams)
-    {
         $target->add([
-            $this->key() => $filterParams->get($this->key())
+            $this->key() => $filterParams->get($this->key()),
         ]);
     }
 
