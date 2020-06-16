@@ -4,3 +4,4 @@ vendor
 docker/docker-compose.override.yml
 .phpunit.result.cache
 /docker/data/shell_history/.x_history
+.php_cs.cache

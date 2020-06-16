@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace DDDStarterPack\Domain\Aggregate;
 
+use Exception;
 use InvalidArgumentException;
 use Ramsey\Uuid\Uuid;
 
@@ -42,7 +43,7 @@ class BasicEntityId implements EntityId
     }
 
     /**
-     * @throws \Exception
+     * @throws Exception
      *
      * @return static
      */
@@ -51,6 +52,11 @@ class BasicEntityId implements EntityId
         return new static(Uuid::uuid4()->toString());
     }
 
+    /**
+     * @param int|string $id
+     *
+     * @return static
+     */
     public static function createFrom($id): EntityId
     {
         if (!$id) {
@@ -60,6 +66,9 @@ class BasicEntityId implements EntityId
         return new static($id);
     }
 
+    /**
+     * @return static
+     */
     public static function createNUll(): EntityId
     {
         return new static(null);

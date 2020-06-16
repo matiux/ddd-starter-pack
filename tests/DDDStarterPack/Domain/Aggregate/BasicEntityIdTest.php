@@ -64,8 +64,6 @@ class BasicEntityIdTest extends TestCase
     {
         $myId = MyId::createNUll();
 
-        self::assertInstanceOf(MyId::class, $myId);
-
         self::assertTrue($myId->isNull());
         self::assertNull($myId->id());
     }
