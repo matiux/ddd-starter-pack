@@ -30,7 +30,7 @@ class DomainCollectionTest extends TestCase
      */
     public function create_empty(): void
     {
-        /** @var DomainCollection<Person> $people */
+        /** @psalm-var DomainCollection<Person> $people */
         $people = new DomainCollection();
 
         // Psalm gets angry - as it should be

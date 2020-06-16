@@ -6,7 +6,6 @@ namespace DDDStarterPack\Infrastructure\Domain\Aggregate\Doctrine\Repository;
 
 use Doctrine\Common\Persistence\ManagerRegistry;
 use Doctrine\ORM\EntityManagerInterface;
-use Doctrine\Persistence\ObjectManager;
 use LogicException;
 
 abstract class DoctrineRepository

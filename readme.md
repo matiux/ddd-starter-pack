@@ -5,6 +5,12 @@ Questa libreria contiene "concetti" per lo sviluppo di micro servizi basati su a
 
 ## Sviluppo
 
+```
+git clone git@github.com:matiux/ddd-starter-pack.git && cd ddd-starter-pack
+cp docker/docker-compose.override.dist.yml docker/docker-compose.override.yml
+rm -rf .git/hooks && ln -s ../scripts/git-hooks .git/hooks
+```
+
 #### Entrare nel container PHP per lo sviluppo
 ```
 ./dc up -d

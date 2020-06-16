@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Tests\DDDStarterPack\Domain\Repository\Filter;
+namespace Tests\DDDStarterPack\Domain\Aggregate\Repository\Filter;
 
 use DDDStarterPack\Domain\Aggregate\Repository\Filter\FilterParams;
 use DDDStarterPack\Domain\Aggregate\Repository\Filter\FilterParamsApplier;
