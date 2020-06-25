@@ -8,23 +8,33 @@ use DDDStarterPack\Application\DataTransformer\Type\CollectionDataTransformer;
 
 /**
  * @template I
- * @implements CollectionDataTransformer<I>
+ * @template R
+ * @implements CollectionDataTransformer<I, R>
  */
 abstract class BasicCollectionDataTransformer implements CollectionDataTransformer
 {
-    /** @var list<I> */
+    /**
+     * @psalm-suppress PropertyNotSetInConstructor
+     *
+     * @var list<I>
+     */
     protected $items;
 
     /** @var int */
     protected $total;
 
+    public function __construct()
+    {
+        $this->total = 0;
+    }
+
     /**
      * @param list<I> $items
      * @param int     $total
      *
-     * @return CollectionDataTransformer
+     * @return static
      */
-    public function write($items, int $total = 0): CollectionDataTransformer
+    public function write($items, int $total = 0)
     {
         $this->items = $items;
         $this->total = $total;

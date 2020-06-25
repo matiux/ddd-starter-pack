@@ -6,7 +6,8 @@ namespace DDDStarterPack\Application\DataTransformer\Type;
 
 /**
  * @template I
- * @extends DataTransformer
+ * @template R
+ * @extends DataTransformer<R>
  */
 interface CollectionDataTransformer extends DataTransformer
 {
@@ -14,7 +15,7 @@ interface CollectionDataTransformer extends DataTransformer
      * @param list<I> $items
      * @param int     $total
      *
-     * @return CollectionDataTransformer
+     * @return static
      */
-    public function write($items, int $total = 0): CollectionDataTransformer;
+    public function write($items, int $total = 0);
 }

@@ -6,14 +6,15 @@ namespace DDDStarterPack\Application\DataTransformer\Type;
 
 /**
  * @template I
- * @extends DataTransformer
+ * @template R
+ * @extends DataTransformer<R>
  */
 interface ItemDataTransformer extends DataTransformer
 {
     /**
      * @param I $item
      *
-     * @return ItemDataTransformer
+     * @return static
      */
-    public function write($item): ItemDataTransformer;
+    public function write($item);
 }

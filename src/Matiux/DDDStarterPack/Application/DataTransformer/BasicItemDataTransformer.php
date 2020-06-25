@@ -8,7 +8,8 @@ use DDDStarterPack\Application\DataTransformer\Type\ItemDataTransformer;
 
 /**
  * @template I
- * @implements ItemDataTransformer<I>
+ * @template R
+ * @implements ItemDataTransformer<I, R>
  */
 abstract class BasicItemDataTransformer implements ItemDataTransformer
 {
@@ -18,9 +19,9 @@ abstract class BasicItemDataTransformer implements ItemDataTransformer
     /**
      * @param I $item
      *
-     * @return ItemDataTransformer<I>
+     * @return static<I, R>
      */
-    public function write($item): ItemDataTransformer
+    public function write($item)
     {
         $this->item = $item;
 

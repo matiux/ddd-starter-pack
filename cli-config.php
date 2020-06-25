@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-require_once "vendor/autoload.php";
+require_once 'vendor/autoload.php';
 
 use Doctrine\ORM\Tools\Console\ConsoleRunner;
 use Tests\Tool\EntityManagerBuilder;

@@ -5,8 +5,7 @@ declare(strict_types=1);
 namespace DDDStarterPack\Application\Message;
 
 /**
- * Interface MessageProducerResponse
- * @package DDDStarterPack\Application\Message
+ * Interface MessageProducerResponse.
  */
 interface MessageProducerResponse
 {

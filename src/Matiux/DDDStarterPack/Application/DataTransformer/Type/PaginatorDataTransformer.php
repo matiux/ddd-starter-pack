@@ -8,14 +8,15 @@ use DDDStarterPack\Domain\Aggregate\Repository\Paginator\Paginator;
 
 /**
  * @template I
- * @extends DataTransformer
+ * @template R
+ * @extends DataTransformer<R>
  */
 interface PaginatorDataTransformer extends DataTransformer
 {
     /**
      * @param Paginator<I> $items
      *
-     * @return PaginatorDataTransformer
+     * @return static
      */
-    public function write(Paginator $items): PaginatorDataTransformer;
+    public function write(Paginator $items);
 }

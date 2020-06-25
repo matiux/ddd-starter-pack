@@ -7,11 +7,10 @@ namespace DDDStarterPack\Application\DataTransformer;
 use DDDStarterPack\Application\DataTransformer\Type\ItemDataTransformer;
 use DDDStarterPack\Application\DataTransformer\Type\PaginatorDataTransformer;
 use DDDStarterPack\Domain\Aggregate\Repository\Paginator\Paginator;
-use LogicException;
 
 /**
  * @template I
- * @implements PaginatorDataTransformer<I>
+ * @implements PaginatorDataTransformer<I, array>
  */
 abstract class BasicPaginatorDataTransformer implements PaginatorDataTransformer
 {
@@ -51,9 +50,9 @@ abstract class BasicPaginatorDataTransformer implements PaginatorDataTransformer
     /**
      * @param Paginator<I> $items
      *
-     * @return PaginatorDataTransformer
+     * @return static
      */
-    public function write(Paginator $items): PaginatorDataTransformer
+    public function write(Paginator $items)
     {
         $this->paginationData['data'] = [];
 

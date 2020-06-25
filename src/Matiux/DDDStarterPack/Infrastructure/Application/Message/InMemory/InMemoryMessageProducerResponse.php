@@ -19,9 +19,9 @@ class InMemoryMessageProducerResponse implements MessageProducerResponse
     /**
      * InMemoryMessageProducerResponse constructor.
      *
-     * @param int  $sentMessages
-     * @param bool $success
-     * @param mixed $originalResponse
+     * @param int    $sentMessages
+     * @param bool   $success
+     * @param mixed  $originalResponse
      * @param string $messageId
      */
     public function __construct(int $sentMessages, bool $success, $originalResponse, string $messageId = '')

@@ -79,6 +79,7 @@ final class SQSMessageProducer extends SQSMessageService implements MessageProdu
 
     /**
      * @psalm-suppress InvalidReturnType
+     *
      * @param Message[] $messages
      *
      * @return MessageProducerResponse

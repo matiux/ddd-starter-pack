@@ -11,8 +11,8 @@ namespace DDDStarterPack\Application\Service;
 abstract class CommandService implements ApplicationService
 {
     /**
-     * @param T $request
-     * @psalm-assert \DDDStarterPack\Domain\Command\DomainCommand $request
+     * @param T $command
+     * @psalm-assert \DDDStarterPack\Domain\Command\DomainCommand $command
      */
-    abstract public function execute($request): void;
+    abstract public function execute($command): void;
 }

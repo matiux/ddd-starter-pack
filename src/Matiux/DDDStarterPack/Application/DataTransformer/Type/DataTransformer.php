@@ -4,11 +4,12 @@ declare(strict_types=1);
 
 namespace DDDStarterPack\Application\DataTransformer\Type;
 
+/**
+ * @template R
+ */
 interface DataTransformer
 {
     /**
-     * @template R
-     *
      * @return R
      */
     public function read();

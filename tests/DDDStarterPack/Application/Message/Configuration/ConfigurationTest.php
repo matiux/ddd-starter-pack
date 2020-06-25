@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Tests\DDDStarterPack\Application\Message\Configuration;
 
 use DDDStarterPack\Application\Message\Configuration\Configuration;

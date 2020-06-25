@@ -9,7 +9,7 @@ use Tests\Support\Model\Person;
 
 /**
  * @psalm-suppress MissingConstructor
- * @extends BasicItemDataTransformer<Person>
+ * @extends BasicItemDataTransformer<Person, array>
  */
 class PersonDataTransformer extends BasicItemDataTransformer
 {
