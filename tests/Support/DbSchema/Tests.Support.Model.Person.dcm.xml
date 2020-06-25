@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doctrine-mapping xmlns="http://doctrine-project.org/schemas/orm/doctrine-mapping"
+                  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                  xsi:schemaLocation="http://doctrine-project.org/schemas/orm/doctrine-mapping https://www.doctrine-project.org/schemas/orm/doctrine-mapping.xsd">
+
+    <entity name="Tests\Support\Model\Person" table="`people`">
+
+        <id name="personId" type="PersonId" column="id"/>
+        <field name="name" type="string" column="name" nullable="false"/>
+
+
+        <!--        <field name="idImportazione" type="IdImportazione" column="id_importazione" nullable="false"/>-->
+        <!--        <embedded name="attributi" class="AFGeneratoreRichieste\Importazione\Domain\ValueObject\AttributiProcedura" use-column-prefix="false"/>-->
+        <!--        <field name="dataCreazione" type="DateTimeImmutableMicroseconds" column="data_creazione" nullable="false"/>-->
+
+    </entity>
+</doctrine-mapping>

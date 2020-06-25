@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace DDDStarterPack\Infrastructure\Application\Message\RabbitMQ;
 
 use ArrayObject;
@@ -27,14 +29,13 @@ class RabbitMQMessageConsumer extends RabbitMQMessanger implements MessageConsum
         $deliveryTag = null;
 
         $callback = function (AMQPMessage $msg) use (&$body, &$deliveryTag) {
-
             $body = $msg->getBody();
             $deliveryTag = $msg->delivery_info['delivery_tag'];
             /**
              * Avendo messo a `false` il 4° parametro del metodo `basic_consume`, indichiamo esplicitamente alla coda quando un task è terminato.
              * Se non viene inviata nessuna conferma il job viene rimesso automaticamente in coda e reinviato a un nuovo worker (quando ce n'è uno disponibile).
              * Inviando la conferma il messaggio verrà definitivamente cancellato dalla coda. No conferma = no cancellazione dalla coda e reinvio
-             * a un nuovo worker
+             * a un nuovo worker.
              */
             //$msg->delivery_info['channel']->basic_ack($msg->delivery_info['delivery_tag']);
         };
@@ -42,26 +43,21 @@ class RabbitMQMessageConsumer extends RabbitMQMessanger implements MessageConsum
         $this->channel->basic_qos(null, 1, null);
 
         /**
-         * Il 4° parametro è per il `message acknowledgments`
+         * Il 4° parametro è per il `message acknowledgments`.
          */
         $this->channel->basic_consume($this->queueName, '', false, false, false, false, $callback);
 
         while (count($this->channel->callbacks)) {
-
             if ($body) {
-
                 return $this->messageFactory->build($body, '', null, '', $deliveryTag);
-
                 //return new ArrayObject(['Body' => $body, 'ReceiptHandle' => $deliveryTag]);
             }
 
             try {
-
                 $this->channel->wait(null, true, 1);
-
             } catch (AMQPTimeoutException $e) {
-
                 $this->close();
+
                 break;
             }
         }
@@ -78,11 +74,9 @@ class RabbitMQMessageConsumer extends RabbitMQMessanger implements MessageConsum
 
     public function deleteBatch(ArrayObject $messagesId): void
     {
-
     }
 
     public function consumeBatch(): array
     {
-
     }
 }

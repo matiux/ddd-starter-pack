@@ -1,12 +1,16 @@
 <?php
 
+declare(strict_types=1);
+
 namespace DDDStarterPack\Infrastructure\Application\Message\InMemory;
 
 use ArrayObject;
+use DDDStarterPack\Application\Message\Message;
 use DDDStarterPack\Application\Message\MessageConsumer;
 
 class InMemoryMessageConsumer implements MessageConsumer
 {
+    /** @var InMemoryMessageQueue */
     private $messageQueue;
 
     public function __construct(InMemoryMessageQueue $messageQueue)
@@ -14,37 +18,32 @@ class InMemoryMessageConsumer implements MessageConsumer
         $this->messageQueue = $messageQueue;
     }
 
-    public function consume(int $maximumNumberOfMessages = 1): ArrayObject
+    public function consume(): ?Message
     {
-        $messageOrig = $this->messageQueue->popMessage();
-
-        $message['Body'] = $messageOrig;
-
-        $messageOrig = json_decode($messageOrig, true);
-        $message['MessageId'] = $messageOrig['event_id'];
-        $message['ReceiptHandle'] = $messageOrig['event_id'];
-        $message['MD5OfBody'] = '...';
-
-        return [$message];
+        return $this->messageQueue->popMessage();
     }
 
+    public function consumeBatch(): array
+    {
+        return [];
+    }
+
+    /**
+     * @param mixed $messageId
+     */
     public function delete($messageId): void
     {
-
     }
 
     public function deleteBatch(ArrayObject $messagesId): void
     {
-
     }
 
     public function open(string $exchangeName = ''): void
     {
-
     }
 
     public function close(string $exchangeName = ''): void
     {
-
     }
 }

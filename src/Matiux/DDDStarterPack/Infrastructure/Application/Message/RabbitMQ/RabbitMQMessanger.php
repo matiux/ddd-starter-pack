@@ -1,20 +1,27 @@
 <?php
 
+declare(strict_types=1);
+
 namespace DDDStarterPack\Infrastructure\Application\Message\RabbitMQ;
 
 use PhpAmqpLib\Channel\AMQPChannel;
 use PhpAmqpLib\Connection\AMQPStreamConnection;
 
+/**
+ * Class RabbitMQMessanger.
+ *
+ * @psalm-suppress all
+ */
 abstract class RabbitMQMessanger
 {
-    private $connectionData;
     protected $queueName;
 
     /** @var AMQPStreamConnection */
-    protected $connection = null;
+    protected $connection;
 
     /** @var AMQPChannel */
-    protected $channel = null;
+    protected $channel;
+    private $connectionData;
 
     public function __construct(RabbitMQConnection $connectionData, string $queueName)
     {

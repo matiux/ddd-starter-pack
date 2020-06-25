@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace DDDStarterPack\Application\Message;
 
 interface MessageService

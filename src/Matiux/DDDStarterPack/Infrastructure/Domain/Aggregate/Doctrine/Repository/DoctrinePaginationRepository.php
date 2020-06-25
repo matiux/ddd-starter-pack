@@ -1,17 +1,24 @@
 <?php
 
+declare(strict_types=1);
+
 namespace DDDStarterPack\Infrastructure\Domain\Aggregate\Doctrine\Repository;
 
 use Doctrine\ORM\QueryBuilder;
+use Webmozart\Assert\Assert;
 
 abstract class DoctrinePaginationRepository extends DoctrineRepository
 {
     protected function calculatePagination(QueryBuilder $qb): array
     {
-        $totalResult = count($qb->getQuery()->getResult());
+        $result = $qb->getQuery()->getResult();
+
+        Assert::true(is_countable($result));
+
+        $totalResult = count($result);
 
         $offset = 0;
-        $limit = $totalResult != 0 ? $totalResult : 1;
+        $limit = 0 != $totalResult ? $totalResult : 1;
 
         return [$offset, $limit];
     }

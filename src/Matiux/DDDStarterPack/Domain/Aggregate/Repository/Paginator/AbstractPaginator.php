@@ -1,25 +1,102 @@
 <?php
 
+declare(strict_types=1);
+
 namespace DDDStarterPack\Domain\Aggregate\Repository\Paginator;
 
 use ArrayIterator;
-use IteratorAggregate;
-use Traversable;
-use UnexpectedValueException;
+use ArrayObject;
 
+/**
+ * @template I
+ * @implements Paginator<I>
+ */
 abstract class AbstractPaginator implements Paginator
 {
-    protected $iteratorAggregate;
-    protected $iterator;
-    protected $offset;
-    protected $limit;
+    /** @var ArrayObject<int, I> */
+    private $page;
 
-    public function __construct(IteratorAggregate $iteratorAggregate, int $offset, int $limit)
+    /** @var ArrayIterator<int, I> */
+    private $iterator;
+
+    /** @var int */
+    private $offset;
+
+    /** @var int */
+    private $limit;
+
+    /** @var int */
+    private $totalResult;
+
+    /**
+     * AbstractPaginator constructor.
+     *
+     * @param ArrayObject<int, I> $page
+     * @param int                 $offset
+     * @param int                 $limit
+     * @param int                 $totalResult
+     */
+    public function __construct(ArrayObject $page, int $offset, int $limit, int $totalResult)
     {
-        $this->iteratorAggregate = $iteratorAggregate;
-        $this->iterator = $iteratorAggregate->getIterator();
+        $this->page = $page;
+        $this->iterator = $page->getIterator();
         $this->offset = $offset;
         $this->limit = $limit;
+        $this->totalResult = $totalResult;
+    }
+
+    /** @return I */
+    public function current()
+    {
+        return $this->iterator->current();
+    }
+
+    public function next(): void
+    {
+        $this->iterator->next();
+    }
+
+    public function key(): int
+    {
+        return $this->iterator->key();
+    }
+
+    public function valid(): bool
+    {
+        return $this->iterator->valid();
+    }
+
+    public function rewind(): void
+    {
+        $this->iterator->rewind();
+    }
+
+    public function count(): int
+    {
+        return $this->page->count();
+    }
+
+    /** @return array<int, I> */
+    public function getCurrentPageCollection()
+    {
+        return $this->page->getArrayCopy();
+    }
+
+    public function getCurrentPage(): int
+    {
+        return 0 === $this->limit ? 1 : intval($this->offset / $this->limit) + 1;
+    }
+
+    public function getNumberOfPages(): int
+    {
+        $tot = $this->getTotalResult();
+
+        return (int) ceil($tot / $this->limit);
+    }
+
+    public function getTotalResult(): int
+    {
+        return $this->totalResult;
     }
 
     public function getPerPageNumber(): int
@@ -27,40 +104,13 @@ abstract class AbstractPaginator implements Paginator
         return $this->limit;
     }
 
-    public function getCurrentPage(): int
+    public function getOffset(): int
     {
-        return 0 === $this->limit ? 1 : ($this->offset / $this->limit) + 1;
+        return $this->offset;
     }
 
-    public function count(): int
+    public function getLimit(): int
     {
-        return count($this->getIterator());
-    }
-
-    public function getIterator(): Traversable
-    {
-        return $this->iterator;
-    }
-
-    public function getCurrentPageCollection(): array
-    {
-        if (!($this->getIterator() instanceof ArrayIterator)) {
-
-            throw new UnexpectedValueException('Iterator must be an instance of \ArrayIterator');
-        }
-
-        return $this->getIterator()->getArrayCopy();
-    }
-
-    public function getTotalPage(): int
-    {
-        $tot = $this->getTotalResult();
-
-        return (int)ceil($tot / $this->limit);
-    }
-
-    public function getTotalResult(): int
-    {
-        return $this->iteratorAggregate->count();
+        return $this->limit;
     }
 }

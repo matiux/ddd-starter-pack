@@ -1,0 +1,56 @@
+#!/usr/bin/env bash
+
+PHP_STAGED_FILES=$(git diff --name-only --cached --diff-filter=ACMR -- '*.php' | sed 's| |\\ |g')
+
+if [[ -n "$PHP_STAGED_FILES" ]]; then
+
+    ./dc php-cs-fixer-fix $PHP_STAGED_FILES --show-progress=dots --dry-run
+    STATUS=$?
+
+    if [[ "$STATUS" -eq 0 ]]; then
+        echo ""
+        echo -e "\e[42mCode style is OK\e[m"
+    else
+        while true; do
+            echo -e "\e[41mInvalid code style\e[m"
+            read -p $'\e[31mDo you really want to commit ignoring code style warnings? y/n \e[0m: ' yn < /dev/tty
+            case $yn in
+                [Yy]* ) echo ""; echo "Please consider fixing code style"; break;;
+                [Nn]* ) echo "Run './dc php-cs-fixer-fix \$(git diff --name-only --cached --diff-filter=ACMR -- '*.php') --show-progress=dots' to fix"; exit 1;;
+                * ) echo "Please answer y or n.";;
+            esac
+        done
+    fi
+
+    ./dc psalm
+    STATUS=$?
+
+    if [[ "$STATUS" -eq 0 ]]; then
+        echo -e "\e[42mPHP Static Analysis is OK\e[m"
+    else
+        while true; do
+            read -p $'\e[31mDo you really want to commit ignoring psalm errors? y/n \e[0m: ' yn < /dev/tty
+            case $yn in
+                #[Yy]* ) exit 0; break;; # Si commit
+                [Yy]* ) echo ""; echo "Please consider fixing psalm errors"; break;;
+                [Nn]* ) exit 1;; # No commit
+                * ) echo "Please answer y or n.";;
+            esac
+        done
+    fi
+
+    ./dc phpunit
+    STATUS=$?
+
+    if [[ "$STATUS" -eq 0 ]]; then
+        echo -e "\e[42mPHP Unit Tests Suite is OK\e[m"
+    else
+        echo "Pay attention! Unit Tests are broken."
+        exit 1
+    fi
+
+else
+    echo -e "\e[42mNo PHP staged files.\e[m"
+    exit 0
+fi
+

@@ -1,12 +1,26 @@
 <?php
 
+declare(strict_types=1);
+
 namespace DDDStarterPack\Application\Message\Configuration;
 
 abstract class ConfigurationBuilder
 {
+    /** @var string */
     protected $driverName = '';
 
-    abstract public static function create(string $driverName = ''): ConfigurationBuilder;
+    /** @var array<string, int|string> */
+    protected $configs = [];
 
-    abstract public function build(): Configuration;
+    /**
+     * @param string $driverName
+     *
+     * @return static
+     */
+    abstract public static function create(string $driverName = '');
+
+    public function build(): Configuration
+    {
+        return Configuration::withParams($this->driverName, $this->configs);
+    }
 }

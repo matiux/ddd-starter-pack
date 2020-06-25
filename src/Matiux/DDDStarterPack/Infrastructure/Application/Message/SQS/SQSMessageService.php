@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace DDDStarterPack\Infrastructure\Application\Message\SQS;
 
 use Aws\Credentials\Credentials;
@@ -7,6 +9,7 @@ use Aws\Sqs\SqsClient;
 use BadMethodCallException;
 use DDDStarterPack\Application\Message\BasicMessageService;
 use DDDStarterPack\Application\Message\Configuration\Configuration;
+use DDDStarterPack\Application\Message\Configuration\ConfigurationValidator;
 use DDDStarterPack\Infrastructure\Application\Message\SQS\Configuration\SQSConfiguration;
 use DDDStarterPack\Infrastructure\Application\Message\SQS\Configuration\SQSConfigurationValidator;
 use Symfony\Component\Config\Definition\Exception\InvalidConfigurationException;
@@ -16,11 +19,11 @@ abstract class SQSMessageService extends BasicMessageService
     const SQS_MAX_MESSAGES = 10;
     const NAME = 'SQS';
 
-    /** @var SqsClient */
-    private $client = null;
+    /** @var null|SqsClient */
+    private $client;
 
-    /** @var string */
-    private $queue = null;
+    /** @var null|string */
+    private $queue;
 
     /** @var SQSConfiguration */
     private $SQSConfiguration;
@@ -38,7 +41,6 @@ abstract class SQSMessageService extends BasicMessageService
     protected function getClient(): SqsClient
     {
         if (!$this->client) {
-
             $this->setQueueUrlOrFail();
 
             $args = [
@@ -64,9 +66,9 @@ abstract class SQSMessageService extends BasicMessageService
 
     private function createCredentials(): array
     {
-        if (!empty($this->SQSConfiguration->accessKey() && !empty($this->SQSConfiguration->secretKey()))) {
-
+        if (!empty($this->SQSConfiguration->accessKey()) && !empty($this->SQSConfiguration->secretKey())) {
             $credentials = new Credentials($this->SQSConfiguration->accessKey(), $this->SQSConfiguration->secretKey());
+
             return ['credentials' => $credentials];
         }
 
@@ -89,7 +91,7 @@ abstract class SQSMessageService extends BasicMessageService
 
     protected function requiredParams(): array
     {
-        return ['region', 'queue'];
+        return ['region', 'queue_name'];
     }
 
     protected function defaultsParams(): array
@@ -98,31 +100,27 @@ abstract class SQSMessageService extends BasicMessageService
             'debug' => false,
             'version' => 'latest',
             'access_key' => '',
-            'secret_key' => ''
+            'secret_key' => '',
         ];
     }
 
-    protected function checkParamsIsValid(Configuration $configuration): bool
+    protected function obtainConfigurationValidator(): ConfigurationValidator
     {
-        $this->buildConfigurationValidator();
-
-        return $this->configurationValidator->validate($configuration);
-    }
-
-    protected function buildConfigurationValidator(): void
-    {
-        $this->configurationValidator = new SQSConfigurationValidator();
+        return new SQSConfigurationValidator();
     }
 
     protected function setSpecificConfiguration(Configuration $configuration): void
     {
         $params = $configuration->getParams();
 
+        $accessKey = $params['access_key'] ?? '';
+        $secretKey = $params['secret_key'] ?? '';
+
         $this->SQSConfiguration = new SQSConfiguration(
-            $params['queue'],
-            $params['region'],
-            $params['access_key'] ?? '',
-            $params['secret_key'] ?? ''
+            (string) $params['queue_name'],
+            (string) $params['region'],
+            (string) $accessKey,
+            (string) $secretKey
         );
     }
 }

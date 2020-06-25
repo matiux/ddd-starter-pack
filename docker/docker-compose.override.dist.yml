@@ -12,3 +12,8 @@ services:
       - AWS_ACCESS_KEY_ID=
       - AWS_SECRET_ACCESS_KEY=
       - AWS_REGION=
+      - AWS_SQS_QUEUE_NAME=
+
+  servicedb:
+    ports:
+      - 3307:3306

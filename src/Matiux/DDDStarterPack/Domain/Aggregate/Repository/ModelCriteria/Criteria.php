@@ -1,12 +1,15 @@
 <?php
 
+declare(strict_types=1);
+
 namespace DDDStarterPack\Domain\Aggregate\Repository\ModelCriteria;
 
-abstract class Criteria implements \Iterator, \Countable
+use Countable;
+use Iterator;
+
+abstract class Criteria implements Iterator, Countable
 {
-    /**
-     * @var Criterion[]
-     */
+    /** @var Criterion[] */
     protected $criteria = [];
 
     public function add(Criterion $criterion): Criteria
@@ -21,12 +24,13 @@ abstract class Criteria implements \Iterator, \Countable
         return current($this->criteria);
     }
 
-    public function next()
+    public function next(): void
     {
-        return next($this->criteria);
+        next($this->criteria);
     }
 
-    public function key(): string
+    /** @return null|int|string */
+    public function key()
     {
         return key($this->criteria);
     }
@@ -35,7 +39,7 @@ abstract class Criteria implements \Iterator, \Countable
     {
         $key = key($this->criteria);
 
-        return ($key !== NULL && $key !== FALSE);
+        return null !== $key;
     }
 
     public function rewind()

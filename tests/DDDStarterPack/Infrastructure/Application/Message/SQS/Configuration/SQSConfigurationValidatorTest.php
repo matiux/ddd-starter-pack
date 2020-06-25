@@ -1,15 +1,25 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Tests\DDDStarterPack\Infrastructure\Application\Message\SQS\Configuration;
 
 use DDDStarterPack\Infrastructure\Application\Message\SQS\Configuration\SQSConfigurationBuilder;
 use DDDStarterPack\Infrastructure\Application\Message\SQS\Configuration\SQSConfigurationValidator;
 use PHPUnit\Framework\TestCase;
 
+/**
+ * @psalm-suppress MissingConstructor
+ */
 class SQSConfigurationValidatorTest extends TestCase
 {
     /** @var SQSConfigurationValidator */
     private $validator;
+
+    protected function setUp(): void
+    {
+        $this->validator = new SQSConfigurationValidator();
+    }
 
     /**
      * @test
@@ -17,7 +27,7 @@ class SQSConfigurationValidatorTest extends TestCase
      * @group configuration
      * @group validation
      */
-    public function sqs_configuration_cannot_bet_empty()
+    public function sqs_configuration_cannot_bet_empty(): void
     {
         $configuration = SQSConfigurationBuilder::create()->build();
 
@@ -32,7 +42,7 @@ class SQSConfigurationValidatorTest extends TestCase
      * @group configuration
      * @group validation
      */
-    public function s3_configuration_params_cannot_bet_empty()
+    public function s3_configuration_params_cannot_bet_empty(): void
     {
         $configuration = SQSConfigurationBuilder::create()
             ->withRegion('')
@@ -52,7 +62,7 @@ class SQSConfigurationValidatorTest extends TestCase
      * @group configuration
      * @group validation
      */
-    public function valid_sqs_configuration()
+    public function valid_sqs_configuration(): void
     {
         $configuration = SQSConfigurationBuilder::create()
             ->withRegion('foo')
@@ -64,10 +74,5 @@ class SQSConfigurationValidatorTest extends TestCase
         $valid = $this->validator->validate($configuration);
 
         $this->assertTrue($valid);
-    }
-
-    protected function setUp(): void
-    {
-        $this->validator = new SQSConfigurationValidator();
     }
 }

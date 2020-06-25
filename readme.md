@@ -5,6 +5,12 @@ Questa libreria contiene "concetti" per lo sviluppo di micro servizi basati su a
 
 ## Sviluppo
 
+```
+git clone git@github.com:matiux/ddd-starter-pack.git && cd ddd-starter-pack
+cp docker/docker-compose.override.dist.yml docker/docker-compose.override.yml
+rm -rf .git/hooks && ln -s ../scripts/git-hooks .git/hooks
+```
+
 #### Entrare nel container PHP per lo sviluppo
 ```
 ./dc up -d
@@ -29,8 +35,4 @@ TODO
 * Prendere spunto da questi progetti per la gestione degli eventi nei modelli di dominio 
     * https://github.com/jkoudys/immutable.php
     * https://github.com/buttercup-php/protects
-* Test per i modelli Criteria
-* Test per il salvataggio bulk degli eventi
-* Test per i data transformer
-* Refactoring `MessageProducerFactory` con dettagli infrastrutturali
-* Refactoring `MessageConsumerFactory` con dettagli infrastrutturali
+* Separare le parti infrastrutturali in altre librerie

@@ -1,20 +1,14 @@
 <?php
 
+declare(strict_types=1);
+
 namespace DDDStarterPack\Infrastructure\Application\Message\SQS\Configuration;
 
-use DDDStarterPack\Application\Message\Configuration\Configuration;
 use DDDStarterPack\Application\Message\Configuration\ConfigurationParamConstraint;
 
 class RegionIsValidConfigurationParamConstraint extends ConfigurationParamConstraint
 {
     private const PARAM_NAME = 'region';
-
-    public function isSatisfiedBy(Configuration $configuration): bool
-    {
-        $configs = $configuration->getParams();
-
-        return array_key_exists(self::PARAM_NAME, $configs) && !empty(trim($configs[self::PARAM_NAME]));
-    }
 
     public function name(): string
     {

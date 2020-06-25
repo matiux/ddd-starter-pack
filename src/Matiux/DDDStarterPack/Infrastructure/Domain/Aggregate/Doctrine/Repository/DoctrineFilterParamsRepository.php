@@ -1,15 +1,19 @@
 <?php
 
+declare(strict_types=1);
+
 namespace DDDStarterPack\Infrastructure\Domain\Aggregate\Doctrine\Repository;
 
 use DDDStarterPack\Domain\Aggregate\Repository\Filter\FilterParams;
 use DDDStarterPack\Domain\Aggregate\Repository\Paginator\Paginator;
 use Doctrine\ORM\QueryBuilder;
+use Webmozart\Assert\Assert;
 
 abstract class DoctrineFilterParamsRepository extends DoctrineRepository
 {
     protected function doByFilterParams(FilterParams $filterParams): Paginator
     {
+        /** @var QueryBuilder $qb */
         $qb = $this->em->createQueryBuilder();
 
         $qb->select($this->getEntityAliasName())
@@ -22,27 +26,49 @@ abstract class DoctrineFilterParamsRepository extends DoctrineRepository
         return $this->createPaginator($qb, $offset, $limit);
     }
 
+    /**
+     * @param FilterParams $filterParams
+     * @param QueryBuilder $qb
+     *
+     * @return list<int>
+     */
     protected function calculatePagination(FilterParams $filterParams, QueryBuilder $qb): array
     {
-        $totalResult = count($qb->getQuery()->getResult());
+        $result = $qb->getQuery()->getResult();
+
+        Assert::true(is_countable($result));
+
+        $totalResult = count($result);
 
         $offset = 0;
-        $limit = $totalResult != 0 ? $totalResult : 1;
+        $limit = 0 != $totalResult ? $totalResult : 1;
 
         if (-1 != $filterParams->get('per_page')) {
+            $offset = $this->calculateOffset($filterParams);
 
-            $offset = ($filterParams->get('page') - 1) * $filterParams->get('per_page');
+            /** @var int $limit */
             $limit = $filterParams->get('per_page');
-
         }
 
-        return [$offset, $limit];
+        return [intval($offset), intval($limit)];
+    }
+
+    private function calculateOffset(FilterParams $filterParams): int
+    {
+        /** @var int $page */
+        $page = $filterParams->get('page');
+
+        /** @var int $perPage */
+        $perPage = $filterParams->get('per_page');
+
+        return ($page - 1) * $perPage;
     }
 
     /**
      * @param QueryBuilder $qb
-     * @param int $offset
-     * @param int $limit
+     * @param int          $offset
+     * @param int          $limit
+     *
      * @return Paginator
      */
     abstract protected function createPaginator(QueryBuilder $qb, int $offset, int $limit): Paginator;
