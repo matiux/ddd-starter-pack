@@ -9,6 +9,10 @@ use DDDStarterPack\Infrastructure\Application\Message\SQS\SQSMessageService;
 
 class SQSConfigurationBuilder extends ConfigurationBuilder
 {
+    final private function __construct()
+    {
+    }
+
     /**
      * @param string $driverName
      *

@@ -4,14 +4,14 @@ declare(strict_types=1);
 
 namespace DDDStarterPack\Infrastructure\Domain\Aggregate\Doctrine\Repository;
 
-use Doctrine\Common\Persistence\ManagerRegistry;
+use Doctrine\Bundle\DoctrineBundle\Registry;
 use Doctrine\ORM\EntityManagerInterface;
 use LogicException;
 
 abstract class DoctrineRepository
 {
-    /** @var ManagerRegistry */
-    protected $managerRegistry;
+    /** @var Registry */
+    protected $registry;
 
     /** @var EntityManagerInterface */
     protected $em;
@@ -19,11 +19,11 @@ abstract class DoctrineRepository
     /** @var string */
     private $entityClassName;
 
-    public function __construct(ManagerRegistry $managerRegistry, string $model)
+    public function __construct(Registry $registry, string $model)
     {
-        $this->managerRegistry = $managerRegistry;
+        $this->registry = $registry;
 
-        if (!$em = $managerRegistry->getManagerForClass($model)) {
+        if (!$em = $registry->getManagerForClass($model)) {
             throw new LogicException('Entity manager cannot be null');
         }
         /** @psalm-suppress InvalidPropertyAssignmentValue */
