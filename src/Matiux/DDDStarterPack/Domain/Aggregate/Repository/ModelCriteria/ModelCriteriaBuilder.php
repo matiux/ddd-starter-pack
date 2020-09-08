@@ -26,7 +26,7 @@ class ModelCriteriaBuilder
     /** @var int */
     private $limit = 0;
 
-    private function __construct()
+    final private function __construct()
     {
     }
 

@@ -18,7 +18,7 @@ class BasicEntityId implements EntityId
     /**
      * @param null|int|string $id
      */
-    protected function __construct($id)
+    final private function __construct($id)
     {
         $this->verifyInputId($id);
 

@@ -23,7 +23,7 @@ abstract class BasicServiceResponse implements ServiceResponse
     /** @var int */
     private $code;
 
-    private function __construct()
+    final private function __construct()
     {
     }
 

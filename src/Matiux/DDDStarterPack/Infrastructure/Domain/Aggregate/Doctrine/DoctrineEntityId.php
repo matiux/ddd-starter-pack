@@ -37,12 +37,16 @@ abstract class DoctrineEntityId extends GuidType
     /**
      * @param mixed $value
      *
-     * @return int|string
+     * @return null|int|string
      */
     private function prepareValue($value)
     {
         if (is_int($value)) {
             return intval($value);
+        }
+
+        if (is_null($value)) {
+            return null;
         }
 
         return (string) $value;
