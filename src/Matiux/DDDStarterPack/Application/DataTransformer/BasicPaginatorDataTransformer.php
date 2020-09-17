@@ -33,8 +33,12 @@ abstract class BasicPaginatorDataTransformer implements PaginatorDataTransformer
         foreach ($this->page as $item) {
             $ns = $this->getSingleTransformerNs();
 
+            $deps = $this->getDeps();
+
             /** @var ItemDataTransformer $itemDataTransformer */
-            $itemDataTransformer = new $ns();
+            $itemDataTransformer = empty($deps) ?
+                new $ns() :
+                new $ns(...$this->getDeps());
 
             $this->paginationData['data'][] = $itemDataTransformer->write($item)->read();
         }
@@ -46,6 +50,11 @@ abstract class BasicPaginatorDataTransformer implements PaginatorDataTransformer
      * @psalm-return class-string<ItemDataTransformer>
      */
     abstract protected function getSingleTransformerNs(): string;
+
+    protected function getDeps(): array
+    {
+        return [];
+    }
 
     /**
      * @param Paginator<I> $items
