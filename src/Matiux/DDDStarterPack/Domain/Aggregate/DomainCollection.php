@@ -21,7 +21,7 @@ class DomainCollection implements Iterator, Countable
     /**
      * @param array<int, T> $items
      */
-    public function __construct(array $items = [])
+    final public function __construct(array $items = [])
     {
         foreach ($items as $item) {
             $this->add($item);
@@ -83,5 +83,17 @@ class DomainCollection implements Iterator, Countable
     public function toArray(): array
     {
         return $this->items;
+    }
+
+    /**
+     * @param self $collection
+     *
+     * @return static
+     */
+    public function merge($collection)
+    {
+        $items = array_merge($this->items, $collection->items);
+
+        return new static($items);
     }
 }
