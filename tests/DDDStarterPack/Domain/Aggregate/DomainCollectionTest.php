@@ -62,4 +62,36 @@ class DomainCollectionTest extends TestCase
 
         self::assertEquals(2, $i);
     }
+
+    /**
+     * @test
+     */
+    public function should_merge_two_collections(): void
+    {
+        /**
+         * @psalm-var DomainCollection<Person> $people1
+         */
+        $people1 = new DomainCollection();
+        $people1->add(Person::crea(PersonId::create(), 'Mat', 34));
+
+        /**
+         * @psalm-var DomainCollection<Person> $people2
+         */
+        $people2 = new DomainCollection();
+        $people2->add(Person::crea(PersonId::create(), 'Teo', 85));
+
+        $people = $people1->merge($people2);
+
+        self::assertCount(2, $people);
+
+        /** @var Person $mat */
+        $mat = $people->current();
+        $people->next();
+
+        /** @var Person $teo */
+        $teo = $people->current();
+
+        self::assertSame('Mat', $mat->name());
+        self::assertSame('Teo', $teo->name());
+    }
 }
