@@ -59,7 +59,7 @@ abstract class SQSMessageService extends BasicMessageService
     {
         $this->queue = $this->SQSConfiguration->queue();
 
-        if (!$this->queue || empty($this->queue)) {
+        if (!$this->queue || 0 === strlen(trim($this->queue))) {
             throw new InvalidConfigurationException('Queue url missing');
         }
     }

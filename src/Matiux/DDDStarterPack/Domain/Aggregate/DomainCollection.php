@@ -9,6 +9,7 @@ use Iterator;
 
 /**
  * @template T
+ * @implements Iterator<int, T>
  */
 class DomainCollection implements Iterator, Countable
 {
@@ -80,6 +81,9 @@ class DomainCollection implements Iterator, Countable
         return count($this->items);
     }
 
+    /**
+     * @return T[]
+     */
     public function toArray(): array
     {
         return $this->items;
