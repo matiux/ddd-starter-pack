@@ -21,8 +21,10 @@ abstract class DoctrineGenericPaginationApplier extends DoctrineFilterParamsAppl
     }
 
     /**
-     * @param QueryBuilder $target
+     * @psalm-param QueryBuilder $target
+     *
      * @param FilterParams $filterParams
+     * @param mixed        $target
      */
     public function apply($target, FilterParams $filterParams): void
     {
