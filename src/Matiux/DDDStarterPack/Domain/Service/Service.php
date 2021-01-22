@@ -5,16 +5,15 @@ declare(strict_types=1);
 namespace DDDStarterPack\Domain\Service;
 
 /**
- * Interface Service.
- *
- * @template T
+ * @template I
+ * @template O
  */
 interface Service
 {
     /**
-     * @param T $request
+     * @param I $request
      *
-     * @return mixed
+     * @return O
      */
     public function execute($request);
 }

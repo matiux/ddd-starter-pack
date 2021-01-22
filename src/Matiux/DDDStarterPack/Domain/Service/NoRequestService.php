@@ -5,16 +5,16 @@ declare(strict_types=1);
 namespace DDDStarterPack\Domain\Service;
 
 /**
- * Interface Service.
+ * @template O
  *
- * @extends Service<null>
+ * @extends Service<null, O>
  */
-interface NoRequestApplicationService extends Service
+interface NoRequestService extends Service
 {
     /**
      * @param null $request
      *
-     * @return mixed
+     * @return O
      */
     public function execute($request = null);
 }

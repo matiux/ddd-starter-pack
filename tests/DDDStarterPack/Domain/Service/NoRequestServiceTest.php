@@ -4,17 +4,17 @@ declare(strict_types=1);
 
 namespace Tests\DDDStarterPack\Domain\Service;
 
-use DDDStarterPack\Domain\Service\NoRequestApplicationService;
+use DDDStarterPack\Domain\Service\NoRequestService;
 use PHPUnit\Framework\TestCase;
 
-class NoRequestApplicationServiceTest extends TestCase
+class NoRequestServiceTest extends TestCase
 {
     /**
      * @test
      */
     public function use_service(): void
     {
-        $service = new MyNoRequestApplicationService();
+        $service = new MyNoRequestService();
 
         // Psalm gets angry - as it should be
         //$service->execute(new \stdClass());
@@ -27,7 +27,10 @@ class NoRequestApplicationServiceTest extends TestCase
     }
 }
 
-class MyNoRequestApplicationService implements NoRequestApplicationService
+/**
+ * @implements NoRequestService<array>
+ */
+class MyNoRequestService implements NoRequestService
 {
     public function execute($request = null): array
     {

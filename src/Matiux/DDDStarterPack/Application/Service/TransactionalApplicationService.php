@@ -10,10 +10,9 @@ use DDDStarterPack\Domain\Exception\DomainException;
 use Throwable;
 
 /**
- * Class TransactionalApplicationService.
+ * @template I
  *
- * @template T
- * @implements ApplicationService<T>
+ * @implements ApplicationService<I, mixed>
  */
 abstract class TransactionalApplicationService implements ApplicationService
 {
@@ -27,7 +26,7 @@ abstract class TransactionalApplicationService implements ApplicationService
     }
 
     /**
-     * @param null|T $request
+     * @param null|I $request
      *
      * @throws ApplicationException
      * @throws DomainException
