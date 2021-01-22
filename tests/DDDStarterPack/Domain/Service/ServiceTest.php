@@ -12,7 +12,7 @@ class ServiceTest extends TestCase
     /**
      * @test
      */
-    public function user_service(): void
+    public function use_service(): void
     {
         $service = new MyService();
 
@@ -26,9 +26,7 @@ class ServiceTest extends TestCase
 }
 
 /**
- * Class MyService.
- *
- * @implements Service<MyRequest>
+ * @implements Service<MyRequest, array>
  */
 class MyService implements Service
 {
@@ -40,6 +38,28 @@ class MyService implements Service
     public function execute($request): array
     {
         return $request->getData();
+    }
+}
+
+/**
+ * @implements Service<MyRequest, void>
+ */
+class MyReturnVoidService implements Service
+{
+    /** @var int */
+    private $internalCounter = 0;
+
+    /**
+     * @param MyRequest $request
+     */
+    public function execute($request)
+    {
+        ++$this->internalCounter;
+    }
+
+    public function getCounter(): int
+    {
+        return $this->internalCounter;
     }
 }
 

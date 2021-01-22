@@ -7,10 +7,10 @@ namespace DDDStarterPack\Application\Service;
 use DDDStarterPack\Domain\Service\Service;
 
 /**
- * Interface Service.
+ * @template I
+ * @template O
  *
- * @template T
- * @extends Service<T>
+ * @extends Service<I, O>
  */
 interface ApplicationService extends Service
 {

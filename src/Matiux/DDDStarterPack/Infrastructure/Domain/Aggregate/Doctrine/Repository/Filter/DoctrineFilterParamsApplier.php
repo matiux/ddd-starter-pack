@@ -9,8 +9,6 @@ use DDDStarterPack\Domain\Aggregate\Repository\Filter\FilterParamsApplier;
 use Doctrine\ORM\QueryBuilder;
 
 /**
- * Class DoctrineFilterParamsApplier.
- *
  * @implements FilterParamsApplier<QueryBuilder>
  */
 abstract class DoctrineFilterParamsApplier implements FilterParamsApplier

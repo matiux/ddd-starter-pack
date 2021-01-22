@@ -5,8 +5,6 @@ declare(strict_types=1);
 namespace DDDStarterPack\Domain\Aggregate\Repository\Filter;
 
 /**
- * Interface FilterParamsApplier.
- *
  * @template T
  */
 interface FilterParamsApplier

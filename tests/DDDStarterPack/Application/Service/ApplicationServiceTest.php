@@ -27,9 +27,7 @@ class ApplicationServiceTest extends TestCase
 }
 
 /**
- * Class MyApplicationService.
- *
- * @implements ApplicationService<MyApplicationRequest>
+ * @implements ApplicationService<MyApplicationRequest, array>
  */
 class MyApplicationService implements ApplicationService
 {
