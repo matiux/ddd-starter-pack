@@ -5,8 +5,6 @@ declare(strict_types=1);
 namespace DDDStarterPack\Domain\Aggregate\Repository\ModelCriteria;
 
 /**
- * Class ModelCriteriaBuilder.
- *
  * @psalm-suppress PropertyNotSetInConstructor
  */
 class ModelCriteriaBuilder
@@ -17,7 +15,7 @@ class ModelCriteriaBuilder
     /** @var Criterion[] */
     private $orCriteria = [];
 
-    /** @var Sorting */
+    /** @var null|Sorting */
     private $sorting;
 
     /** @var int */
