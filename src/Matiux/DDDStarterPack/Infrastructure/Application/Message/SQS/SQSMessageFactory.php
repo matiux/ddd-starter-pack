@@ -9,8 +9,6 @@ use DDDStarterPack\Application\Message\MessageFactory;
 use Webmozart\Assert\Assert;
 
 /**
- * Class SQSMessageFactory.
- *
  * @implements MessageFactory<SQSMessage>
  */
 class SQSMessageFactory implements MessageFactory

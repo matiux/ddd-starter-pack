@@ -11,11 +11,11 @@ abstract class ConfigurationParamConstraint
         $configs = $configuration->getParams();
 
         if (array_key_exists($this->name(), $configs)) {
-            $param = $configs[$this->name()];
-            $param = is_string($param) ? trim($param) : $param;
+            $_param = $configs[$this->name()];
+            $_param = is_string($_param) ? trim($_param) : $_param;
         }
 
-        return !empty($param);
+        return !empty($_param);
     }
 
     public function message(): string

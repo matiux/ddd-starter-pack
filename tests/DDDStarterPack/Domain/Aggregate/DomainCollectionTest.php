@@ -6,6 +6,7 @@ namespace Tests\DDDStarterPack\Domain\Aggregate;
 
 use DDDStarterPack\Domain\Aggregate\DomainCollection;
 use PHPUnit\Framework\TestCase;
+use stdClass;
 use Tests\Support\Model\Person;
 use Tests\Support\Model\PersonId;
 
@@ -56,7 +57,7 @@ class DomainCollectionTest extends TestCase
 
         $i = 0;
 
-        foreach ($people as $person) {
+        foreach ($people as $_person) {
             ++$i;
         }
 
@@ -84,14 +85,31 @@ class DomainCollectionTest extends TestCase
 
         self::assertCount(2, $people);
 
-        /** @var Person $mat */
         $mat = $people->current();
         $people->next();
 
-        /** @var Person $teo */
         $teo = $people->current();
 
         self::assertSame('Mat', $mat->name());
         self::assertSame('Teo', $teo->name());
     }
+
+    /**
+     * @test
+     */
+    public function use_specific_collection(): void
+    {
+        $collection = new SpecificCollection();
+        //$collection->add('Foo'); // Psalm si arrabbia, giustamente
+        $collection->add(new stdClass());
+
+        self::assertCount(1, $collection);
+    }
+}
+
+/**
+ * @extends DomainCollection<stdClass>
+ */
+class SpecificCollection extends DomainCollection
+{
 }

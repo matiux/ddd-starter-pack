@@ -8,8 +8,6 @@ use DDDStarterPack\Domain\Service\Response\BasicServiceResponse;
 use DDDStarterPack\Domain\Service\Response\ServiceResponse;
 
 /**
- * Class BasicApplicationServiceResponse.
- *
  * @template T
  * @extends BasicServiceResponse<T>
  */

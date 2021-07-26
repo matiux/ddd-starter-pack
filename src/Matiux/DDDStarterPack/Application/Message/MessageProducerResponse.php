@@ -4,9 +4,6 @@ declare(strict_types=1);
 
 namespace DDDStarterPack\Application\Message;
 
-/**
- * Interface MessageProducerResponse.
- */
 interface MessageProducerResponse
 {
     public function isSuccess(): bool;

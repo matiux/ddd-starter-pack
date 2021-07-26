@@ -21,10 +21,10 @@ class BasicPaginatorDataTransformerTest extends TestCase
         $dt = new PeoplePaginatorDataTransformer();
 
         $people = [
-            $p1 = Person::crea(PersonId::create(), 'Mat', 34),
-            $p2 = Person::crea(PersonId::create(), 'Teo', 28),
-            $p3 = Person::crea(PersonId::create(), 'Iux', 85),
-            $p4 = Person::crea(PersonId::create(), 'Foo', 43),
+            Person::crea(PersonId::create(), 'Mat', 34),
+            Person::crea(PersonId::create(), 'Teo', 28),
+            Person::crea(PersonId::create(), 'Iux', 85),
+            Person::crea(PersonId::create(), 'Foo', 43),
         ];
 
         // Psalm gets angry - as it should be
@@ -60,7 +60,6 @@ class BasicPaginatorDataTransformerTest extends TestCase
 }
 
 /**
- * @psalm-suppress MissingConstructor
  * @extends BasicPaginatorDataTransformer<Person>
  */
 class PeoplePaginatorDataTransformer extends BasicPaginatorDataTransformer
@@ -75,7 +74,6 @@ class PeoplePaginatorDataTransformer extends BasicPaginatorDataTransformer
 }
 
 /**
- * @psalm-suppress MissingConstructor
  * @extends AbstractPaginator<Person>
  */
 class PeoplePaginator extends AbstractPaginator

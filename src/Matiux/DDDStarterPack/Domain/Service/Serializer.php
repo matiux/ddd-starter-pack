@@ -5,8 +5,6 @@ declare(strict_types=1);
 namespace DDDStarterPack\Domain\Service;
 
 /**
- * Interface Serializer.
- *
  * @template T
  */
 interface Serializer

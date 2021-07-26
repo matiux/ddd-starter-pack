@@ -19,8 +19,6 @@ abstract class ConfigurationValidator
         $this->buildRegistry();
     }
 
-    abstract protected function buildRegistry(): void;
-
     public function errors(): array
     {
         return $this->errors;
@@ -36,7 +34,7 @@ abstract class ConfigurationValidator
             return false;
         }
 
-        foreach ($configs as $name => $value) {
+        foreach ($configs as $name => $_value) {
             $configurationParamConstraintName = (string) $name;
 
             if ($constraint = $this->configurationParamRegistry->resolve($configurationParamConstraintName)) {
@@ -48,4 +46,6 @@ abstract class ConfigurationValidator
 
         return empty($this->errors);
     }
+
+    abstract protected function buildRegistry(): void;
 }

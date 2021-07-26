@@ -14,9 +14,10 @@ class BasicServiceResponseTest extends TestCase
      */
     public function create_error_response(): void
     {
-        $response = ServiceResponse::error('Error message');
+        //$response = ServiceResponse::error('Error message'); // Psalm si arrabbia, giustamente
+        $response = ServiceResponse::error(['status' => 'Error message']);
 
-        self::assertSame('Error message', $response->body());
+        self::assertSame(['status' => 'Error message'], $response->body());
         self::assertFalse($response->isSuccess());
         self::assertSame(1, $response->code());
     }
@@ -32,16 +33,36 @@ class BasicServiceResponseTest extends TestCase
         self::assertTrue($response->isSuccess());
         self::assertSame(0, $response->code());
     }
+
+    /**
+     * @test
+     */
+    public function create_specific_response(): void
+    {
+        $response = ServiceResponse::specificResponse();
+
+        self::assertSame(['msg' => 'Specific message'], $response->body());
+        self::assertTrue($response->isSuccess());
+        self::assertSame(2, $response->code());
+    }
 }
 
 /**
- * Class ServiceResponse.
- *
- * @template T of mixed
+ * @template T of array<string, string>
  * @extends BasicServiceResponse<T>
  */
 class ServiceResponse extends BasicServiceResponse
 {
+    public static function specificResponse(): self
+    {
+        $response = new static();
+        $response->withCode(2);
+        $response->withSuccessStatus(true);
+        $response->withBody(['msg' => 'Specific message']);
+
+        return $response;
+    }
+
     protected function errorCode(): int
     {
         return 1;

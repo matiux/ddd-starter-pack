@@ -34,7 +34,7 @@ trait SqsRawClient
         if (!$this->client) {
             $args = [
                 'version' => 'latest',
-                'region' => EnvVarUtil::get('AWS_REGION', 'us-east-1'),
+                'region' => EnvVarUtil::get('AWS_DEFAULT_REGION', 'us-east-1'),
                 'debug' => false,
             ];
 
@@ -44,6 +44,31 @@ trait SqsRawClient
         }
 
         return $this->client;
+    }
+
+    protected function purgeSqsQueue(): void
+    {
+        $_fetched = 0;
+
+        while (true) {
+            /** @var list<array{MessageId: string, ReceiptHandle: string, MD5OfBody: string, Body: string }> $messages */
+            $messages = $this->pullFromQueue(10)->get('Messages');
+
+            if (!$messages) {
+                break;
+            }
+
+            $_fetched += count($messages);
+
+            foreach ($messages as $message) {
+                if ($message) {
+                    $this->getClient()->deleteMessage([
+                        'QueueUrl' => $this->url,
+                        'ReceiptHandle' => $message['ReceiptHandle'],
+                    ]);
+                }
+            }
+        }
     }
 
     private function createCredentials(): array
@@ -68,31 +93,6 @@ trait SqsRawClient
         ]);
 
         $this->url = $url['QueueUrl'];
-    }
-
-    protected function purgeSqsQueue(): void
-    {
-        $fetched = 0;
-
-        while (true) {
-            /** @var list<array{MessageId: string, ReceiptHandle: string, MD5OfBody: string, Body: string }> $messages */
-            $messages = $this->pullFromQueue(10)->get('Messages');
-
-            if (!$messages) {
-                break;
-            }
-
-            $fetched += count($messages);
-
-            foreach ($messages as $message) {
-                if ($message) {
-                    $this->getClient()->deleteMessage([
-                        'QueueUrl' => $this->url,
-                        'ReceiptHandle' => $message['ReceiptHandle'],
-                    ]);
-                }
-            }
-        }
     }
 
     private function pullFromQueue(int $amountOfMessagesToFetch = 1): Result

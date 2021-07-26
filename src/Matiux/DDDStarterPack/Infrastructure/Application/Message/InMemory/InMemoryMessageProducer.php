@@ -4,14 +4,16 @@ declare(strict_types=1);
 
 namespace DDDStarterPack\Infrastructure\Application\Message\InMemory;
 
-use DDDStarterPack\Application\Message\Message;
 use DDDStarterPack\Application\Message\MessageProducer;
 use DDDStarterPack\Application\Message\MessageProducerResponse;
 use InvalidArgumentException;
 
+/**
+ * @implements MessageProducer<InMemoryMessage>
+ */
 class InMemoryMessageProducer implements MessageProducer
 {
-    const BATCH_LIMIT = 10;
+    public const BATCH_LIMIT = 10;
 
     private $messageQueue;
 
@@ -24,7 +26,7 @@ class InMemoryMessageProducer implements MessageProducer
     {
     }
 
-    public function send(Message $message): MessageProducerResponse
+    public function send($message): MessageProducerResponse
     {
 //        $payload['body'] = $message->body();
 //        $payload['type'] = $message->type();
@@ -43,15 +45,13 @@ class InMemoryMessageProducer implements MessageProducer
     }
 
     /**
-     * @param Message[] $messages
+     * @param InMemoryMessage[] $messages
      *
      * @return MessageProducerResponse
      */
     public function sendBatch(array $messages): MessageProducerResponse
     {
         if (count($messages) > self::BATCH_LIMIT) {
-            $max = self::BATCH_LIMIT;
-
             throw new InvalidArgumentException(sprintf('Too many messages in batch. %s on {$max} permitted', count($messages)));
         }
 

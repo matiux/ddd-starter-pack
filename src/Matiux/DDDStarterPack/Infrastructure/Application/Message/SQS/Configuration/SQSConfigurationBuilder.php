@@ -7,7 +7,10 @@ namespace DDDStarterPack\Infrastructure\Application\Message\SQS\Configuration;
 use DDDStarterPack\Application\Message\Configuration\ConfigurationBuilder;
 use DDDStarterPack\Infrastructure\Application\Message\SQS\SQSMessageService;
 
-class SQSConfigurationBuilder extends ConfigurationBuilder
+/**
+ * @psalm-consistent-constructor
+ */
+final class SQSConfigurationBuilder extends ConfigurationBuilder
 {
     final private function __construct()
     {

@@ -39,7 +39,6 @@ class BasicCollectionDataTransformerTest extends TestCase
 }
 
 /**
- * @psalm-suppress MissingConstructor
  * @extends BasicCollectionDataTransformer<Person, array>
  */
 class PeopleDataTransformer extends BasicCollectionDataTransformer

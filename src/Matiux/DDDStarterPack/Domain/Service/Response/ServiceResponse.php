@@ -5,8 +5,6 @@ declare(strict_types=1);
 namespace DDDStarterPack\Domain\Service\Response;
 
 /**
- * Interface ServiceResponse.
- *
  * @template B of mixed
  */
 interface ServiceResponse

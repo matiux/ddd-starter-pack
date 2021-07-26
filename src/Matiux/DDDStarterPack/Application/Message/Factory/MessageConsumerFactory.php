@@ -16,7 +16,7 @@ class MessageConsumerFactory
 {
     public static function create(): self
     {
-        return new  self();
+        return new self();
     }
 
     public function obtainConsumer(Configuration $configuration): MessageConsumer

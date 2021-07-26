@@ -9,16 +9,12 @@ use DDDStarterPack\Application\Message\Factory\MessageConsumerFactory;
 use DDDStarterPack\Application\Message\Factory\MessageProducerFactory;
 use DDDStarterPack\Application\Message\MessageConsumer;
 use DDDStarterPack\Application\Message\MessageProducer;
+use DDDStarterPack\Application\Util\EnvVarUtil;
 use DDDStarterPack\Infrastructure\Application\Message\SQS\Configuration\SQSConfigurationBuilder;
 use DDDStarterPack\Infrastructure\Application\Message\SQS\SQSMessage;
 use PHPUnit\Framework\TestCase;
 use Tests\Tool\SqsRawClient;
 
-/**
- * Class SQSMessageConsumerTest.
- *
- * @psalm-suppress MissingConstructor
- */
 class SQSMessageConsumerTest extends TestCase
 {
     use SqsRawClient;
@@ -40,7 +36,7 @@ class SQSMessageConsumerTest extends TestCase
         parent::setUp();
 
         $configuration = SQSConfigurationBuilder::create()
-            ->withRegion('eu-west-1')
+            ->withRegion(EnvVarUtil::get('AWS_DEFAULT_REGION'))
             ->withQueue($this->getQueueUrl())
             ->build();
 

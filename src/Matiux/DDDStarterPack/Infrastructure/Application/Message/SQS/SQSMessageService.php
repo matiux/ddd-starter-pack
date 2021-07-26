@@ -13,11 +13,12 @@ use DDDStarterPack\Application\Message\Configuration\ConfigurationValidator;
 use DDDStarterPack\Infrastructure\Application\Message\SQS\Configuration\SQSConfiguration;
 use DDDStarterPack\Infrastructure\Application\Message\SQS\Configuration\SQSConfigurationValidator;
 use Symfony\Component\Config\Definition\Exception\InvalidConfigurationException;
+use Webmozart\Assert\Assert;
 
 abstract class SQSMessageService extends BasicMessageService
 {
-    const SQS_MAX_MESSAGES = 10;
-    const NAME = 'SQS';
+    public const SQS_MAX_MESSAGES = 10;
+    public const NAME = 'SQS';
 
     /** @var null|SqsClient */
     private $client;
@@ -55,31 +56,13 @@ abstract class SQSMessageService extends BasicMessageService
         return $this->client;
     }
 
-    private function setQueueUrlOrFail(): void
-    {
-        $this->queue = $this->SQSConfiguration->queue();
-
-        if (!$this->queue || 0 === strlen(trim($this->queue))) {
-            throw new InvalidConfigurationException('Queue url missing');
-        }
-    }
-
-    private function createCredentials(): array
-    {
-        if (!empty($this->SQSConfiguration->accessKey()) && !empty($this->SQSConfiguration->secretKey())) {
-            $credentials = new Credentials($this->SQSConfiguration->accessKey(), $this->SQSConfiguration->secretKey());
-
-            return ['credentials' => $credentials];
-        }
-
-        return [];
-    }
-
     protected function getQueueUrl(): string
     {
         if (!isset($this->queue)) {
             $this->setQueueUrlOrFail();
         }
+
+        Assert::notNull($this->queue);
 
         return $this->queue;
     }
@@ -122,5 +105,25 @@ abstract class SQSMessageService extends BasicMessageService
             (string) $accessKey,
             (string) $secretKey
         );
+    }
+
+    private function setQueueUrlOrFail(): void
+    {
+        $this->queue = $this->SQSConfiguration->queue();
+
+        if (!$this->queue || 0 === strlen(trim($this->queue))) {
+            throw new InvalidConfigurationException('Queue url missing');
+        }
+    }
+
+    private function createCredentials(): array
+    {
+        if (!empty($this->SQSConfiguration->accessKey()) && !empty($this->SQSConfiguration->secretKey())) {
+            $credentials = new Credentials($this->SQSConfiguration->accessKey(), $this->SQSConfiguration->secretKey());
+
+            return ['credentials' => $credentials];
+        }
+
+        return [];
     }
 }

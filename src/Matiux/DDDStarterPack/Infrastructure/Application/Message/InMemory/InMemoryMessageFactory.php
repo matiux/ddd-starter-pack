@@ -9,8 +9,6 @@ use DDDStarterPack\Application\Message\MessageFactory;
 use Webmozart\Assert\Assert;
 
 /**
- * Class InMemoryMessageFactory.
- *
  * @implements MessageFactory<InMemoryMessage>
  */
 class InMemoryMessageFactory implements MessageFactory

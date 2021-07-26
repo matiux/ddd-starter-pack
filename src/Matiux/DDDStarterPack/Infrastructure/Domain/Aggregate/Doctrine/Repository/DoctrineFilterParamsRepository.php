@@ -13,7 +13,6 @@ abstract class DoctrineFilterParamsRepository extends DoctrineRepository
 {
     protected function doByFilterParams(FilterParams $filterParams): Paginator
     {
-        /** @var QueryBuilder $qb */
         $qb = $this->em->createQueryBuilder();
 
         $qb->select($this->getEntityAliasName())
@@ -21,7 +20,7 @@ abstract class DoctrineFilterParamsRepository extends DoctrineRepository
 
         $filterParams->applyTo($qb);
 
-        list($offset, $limit) = $this->calculatePagination($filterParams, $qb);
+        [$offset, $limit] = $this->calculatePagination($filterParams, $qb);
 
         return $this->createPaginator($qb, $offset, $limit);
     }
@@ -53,6 +52,15 @@ abstract class DoctrineFilterParamsRepository extends DoctrineRepository
         return [intval($offset), intval($limit)];
     }
 
+    /**
+     * @param QueryBuilder $qb
+     * @param int          $offset
+     * @param int          $limit
+     *
+     * @return Paginator
+     */
+    abstract protected function createPaginator(QueryBuilder $qb, int $offset, int $limit): Paginator;
+
     private function calculateOffset(FilterParams $filterParams): int
     {
         /** @var int $page */
@@ -63,13 +71,4 @@ abstract class DoctrineFilterParamsRepository extends DoctrineRepository
 
         return ($page - 1) * $perPage;
     }
-
-    /**
-     * @param QueryBuilder $qb
-     * @param int          $offset
-     * @param int          $limit
-     *
-     * @return Paginator
-     */
-    abstract protected function createPaginator(QueryBuilder $qb, int $offset, int $limit): Paginator;
 }

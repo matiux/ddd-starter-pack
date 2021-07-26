@@ -7,8 +7,6 @@ namespace DDDStarterPack\Application\Message;
 use DateTimeImmutable;
 
 /**
- * Interface MessageFactory.
- *
  * @template T of Message
  */
 interface MessageFactory

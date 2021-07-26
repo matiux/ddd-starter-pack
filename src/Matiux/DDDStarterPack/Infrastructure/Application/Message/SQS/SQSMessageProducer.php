@@ -11,26 +11,110 @@ use DDDStarterPack\Application\Message\MessageProducerConnector;
 use DDDStarterPack\Application\Message\MessageProducerResponse;
 use Webmozart\Assert\Assert;
 
+/**
+ * @implements MessageProducerConnector<SQSMessage>
+ */
 final class SQSMessageProducer extends SQSMessageService implements MessageProducerConnector
 {
-    const BATCH_LIMIT = 10;
+    public const BATCH_LIMIT = 10;
 
-    public function send(Message $message): MessageProducerResponse
+    /**
+     * @param SQSMessage $message
+     *
+     * @throws MessageInvalidException
+     *
+     * @return MessageProducerResponse
+     */
+    public function send($message): MessageProducerResponse
     {
-        Assert::isInstanceOf($message, SQSMessage::class);
-
         return $this->doSend($message);
+    }
+
+    /**
+     * @param SQSMessage[] $messages
+     *
+     * @return MessageProducerResponse
+     */
+    public function sendBatch(array $messages): MessageProducerResponse
+    {
+        $entries = [];
+
+        foreach ($messages as $message) {
+            $entries[] = [
+                'Id' => $message->id() ?? md5($message->body()),
+                'MessageAttributes' => $this->createMessageAttributes($message),
+                'MessageBody' => $message->body(),
+            ];
+        }
+
+        $result = $this->getClient()->sendMessageBatch([
+            'QueueUrl' => $this->getQueueUrl(),
+            'Entries' => $entries,
+        ]);
+
+        Assert::isArray($result['Successful']);
+
+        $sentMessages = count($result['Successful']);
+
+        return new SQSMessageProducerResponse($sentMessages, $result);
+    }
+
+    public function getBatchLimit(): int
+    {
+        return self::BATCH_LIMIT;
+    }
+
+    /**
+     * @psalm-suppress MixedAssignment
+     *
+     * @param array<array-key, mixed> $extra
+     *
+     * @return array<array-key, mixed>
+     */
+    protected function parseExtra(array $extra): array
+    {
+        if (empty($extra)) {
+            return [];
+        }
+
+        /** @psalm-var array<array-key, mixed> $e */
+        $e = [];
+
+        foreach ($extra as $key => $value) {
+            switch ($key) {
+                case 'MessageDeduplicationId':
+                case 'ContentBasedDeduplication':
+                case 'MessageGroupId':
+                    /**
+                     * MessageDeduplicationId - obbligatorio per le code FIFO
+                     * ContentBasedDeduplication - obbligatorio per le code FIFO
+                     * MessageGroupId - obbligatorio per le code FIFO
+                     * https://docs.aws.amazon.com/aws-sdk-php/v3/api/api-sqs-2012-11-05.html#sendmessage
+                     * https://docs.aws.amazon.com/AWSSimpleQueueService/latest/SQSDeveloperGuide/FIFO-queues.html#FIFO-queues-exactly-once-processing
+                     * https://docs.aws.amazon.com/AWSSimpleQueueService/latest/SQSDeveloperGuide/using-messagegroupid-property.html.
+                     */
+                    $e[$key] = $value;
+
+                    break;
+            }
+        }
+
+        return $e;
     }
 
     private function doSend(SQSMessage $message): SQSMessageProducerResponse
     {
         $messageAttributes = $this->createMessageAttributes($message);
 
-        $result = $this->getClient()->sendMessage([
+        $extra = $this->parseExtra($message->extra());
+
+        $args = $extra + [
             'QueueUrl' => $this->getQueueUrl(),
             'MessageBody' => $message->body(),
             'MessageAttributes' => $messageAttributes,
-        ]);
+        ];
+
+        $result = $this->getClient()->sendMessage($args);
 
         if (!$this->isValidSent($message, $result)) {
             throw new MessageInvalidException('Message sent but corrupt');
@@ -58,38 +142,8 @@ final class SQSMessageProducer extends SQSMessageService implements MessageProdu
         return $messageAttributes;
     }
 
-//    private function getQueueUrl(string $exchangeName)
-//    {
-//        if (!array_key_exists($exchangeName, $this->urls)) {
-//
-//            $url = $this->getClient()->getQueueUrl([
-//                'QueueName' => $exchangeName
-//            ]);
-//
-//            $this->urls[$exchangeName] = $url['QueueUrl'];
-//        }
-//
-//        return $this->urls[$exchangeName];
-//    }
-
     private function isValidSent(Message $message, Result $result): bool
     {
         return md5($message->body()) === $result['MD5OfMessageBody'];
-    }
-
-    /**
-     * @psalm-suppress InvalidReturnType
-     *
-     * @param Message[] $messages
-     *
-     * @return MessageProducerResponse
-     */
-    public function sendBatch(array $messages): MessageProducerResponse
-    {
-    }
-
-    public function getBatchLimit(): int
-    {
-        return self::BATCH_LIMIT;
     }
 }

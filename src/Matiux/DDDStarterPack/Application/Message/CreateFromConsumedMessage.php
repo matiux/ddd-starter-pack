@@ -9,8 +9,6 @@ use DDDStarterPack\Domain\Command\DomainCommand;
 use DDDStarterPack\Domain\Event\DomainEvent;
 
 /**
- * Class CreateFromConsumedMessage.
- *
  * @template T
  */
 abstract class CreateFromConsumedMessage

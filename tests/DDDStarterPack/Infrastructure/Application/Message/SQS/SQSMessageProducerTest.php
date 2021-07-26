@@ -12,11 +12,6 @@ use DDDStarterPack\Infrastructure\Application\Message\SQS\SQSMessage;
 use PHPUnit\Framework\TestCase;
 use Tests\Tool\SqsRawClient;
 
-/**
- * Class SQSMessageProducerTest.
- *
- * @psalm-suppress MissingConstructor
- */
 class SQSMessageProducerTest extends TestCase
 {
     use SqsRawClient;
