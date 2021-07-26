@@ -32,7 +32,7 @@ class BasicEntityIdTest extends TestCase
         };
 
         self::assertInstanceOf(MyId::class, $entity->id());
-        self::assertRegExp(BasicEntityId::UUID_PATTERN, (string) $entity->id());
+        self::assertMatchesRegularExpression(BasicEntityId::UUID_PATTERN, (string) $entity->id());
     }
 
     /**

@@ -25,6 +25,8 @@ class Configuration
     /**
      * @param string                    $driverName
      * @param array<string, int|string> $params
+     *
+     * @return Configuration
      */
     public static function withParams(string $driverName, array $params): self
     {

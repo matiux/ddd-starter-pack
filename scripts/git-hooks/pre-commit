@@ -39,7 +39,7 @@ if [[ -n "$PHP_STAGED_FILES" ]]; then
         done
     fi
 
-    ./dc phpunit
+    ./dc phpunit --testdox -vvv
     STATUS=$?
 
     if [[ "$STATUS" -eq 0 ]]; then

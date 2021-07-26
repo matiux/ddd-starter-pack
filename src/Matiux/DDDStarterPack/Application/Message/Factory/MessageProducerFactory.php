@@ -15,7 +15,7 @@ class MessageProducerFactory
 {
     public static function create(): self
     {
-        return new  self();
+        return new self();
     }
 
     public function obtainProducer(Configuration $configuration): MessageProducer
@@ -31,12 +31,8 @@ class MessageProducerFactory
         switch ($configuration->getDriverName()) {
             case SQSMessageService::NAME:
                 return new SQSMessageProducer();
-
-                break;
             default:
                 throw new RuntimeException(sprintf('Invalid driver name [%s]', $configuration->getDriverName()));
-
-                break;
         }
     }
 }

@@ -44,33 +44,6 @@ class SQSMessageConsumer extends SQSMessageService implements MessageConsumerCon
         return $this->extractSqsMessageFromResponse($response);
     }
 
-    private function extractSqsMessageFromResponse(Result $response): ?SQSMessage
-    {
-        if (empty($response['Messages'])) {
-            return null;
-        }
-
-        Assert::isArray($response['Messages']);
-        Assert::count($response['Messages'], 1);
-
-        $message = $response['Messages'][0];
-
-        Assert::isArray($message);
-        Assert::string($message['Body']);
-        Assert::string($message['ReceiptHandle']);
-
-        /** @var array{OccurredAt: array{StringValue: string}, Type: array{StringValue: string}} $messageAttributes */
-        $messageAttributes = $message['MessageAttributes'];
-
-        return $this->SQSMessageFactory->build(
-            $message['Body'],
-            '',
-            new DateTimeImmutable($messageAttributes['OccurredAt']['StringValue']),
-            $messageAttributes['Type']['StringValue'],
-            $message['ReceiptHandle']
-        );
-    }
-
     /**
      * @psalm-suppress InvalidReturnType
      *
@@ -130,5 +103,32 @@ class SQSMessageConsumer extends SQSMessageService implements MessageConsumerCon
     public function getBatchLimit(): int
     {
         // TODO: Implement getBatchLimit() method.
+    }
+
+    private function extractSqsMessageFromResponse(Result $response): ?SQSMessage
+    {
+        if (empty($response['Messages'])) {
+            return null;
+        }
+
+        Assert::isArray($response['Messages']);
+        Assert::count($response['Messages'], 1);
+
+        $message = $response['Messages'][0];
+
+        Assert::isArray($message);
+        Assert::string($message['Body']);
+        Assert::string($message['ReceiptHandle']);
+
+        /** @var array{OccurredAt: array{StringValue: string}, Type: array{StringValue: string}} $messageAttributes */
+        $messageAttributes = $message['MessageAttributes'];
+
+        return $this->SQSMessageFactory->build(
+            $message['Body'],
+            '',
+            new DateTimeImmutable($messageAttributes['OccurredAt']['StringValue']),
+            $messageAttributes['Type']['StringValue'] ?? null,
+            $message['ReceiptHandle']
+        );
     }
 }

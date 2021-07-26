@@ -41,28 +41,6 @@ class MyService implements Service
     }
 }
 
-/**
- * @implements Service<MyRequest, void>
- */
-class MyReturnVoidService implements Service
-{
-    /** @var int */
-    private $internalCounter = 0;
-
-    /**
-     * @param MyRequest $request
-     */
-    public function execute($request)
-    {
-        ++$this->internalCounter;
-    }
-
-    public function getCounter(): int
-    {
-        return $this->internalCounter;
-    }
-}
-
 class MyRequest
 {
     public function getData(): array

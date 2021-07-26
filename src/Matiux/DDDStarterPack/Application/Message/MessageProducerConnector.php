@@ -6,6 +6,10 @@ namespace DDDStarterPack\Application\Message;
 
 use DDDStarterPack\Application\Message\Configuration\Configuration;
 
+/**
+ * @template T
+ * @extends MessageProducer<T>
+ */
 interface MessageProducerConnector extends MessageProducer
 {
     public function name(): string;

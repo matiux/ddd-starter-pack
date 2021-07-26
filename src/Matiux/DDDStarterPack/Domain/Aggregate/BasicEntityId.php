@@ -10,7 +10,7 @@ use Ramsey\Uuid\Uuid;
 
 class BasicEntityId implements EntityId
 {
-    const UUID_PATTERN = '/^[0-9a-f]{8}-[0-9a-f]{4}-4[0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$/';
+    public const UUID_PATTERN = '/^[0-9a-f]{8}-[0-9a-f]{4}-4[0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$/';
 
     /** @var null|int|string */
     private $id;
@@ -28,18 +28,6 @@ class BasicEntityId implements EntityId
     public function __toString(): string
     {
         return !$this->id ? '' : (string) $this->id;
-    }
-
-    /**
-     * @psalm-suppress DocblockTypeContradiction
-     *
-     * @param mixed $anId
-     */
-    private function verifyInputId($anId): void
-    {
-        if (is_object($anId)) {
-            throw new InvalidArgumentException('Entity id input must be scalar type');
-        }
     }
 
     /**
@@ -96,5 +84,17 @@ class BasicEntityId implements EntityId
     public function isNull(): bool
     {
         return is_null($this->id);
+    }
+
+    /**
+     * @psalm-suppress DocblockTypeContradiction
+     *
+     * @param mixed $anId
+     */
+    private function verifyInputId($anId): void
+    {
+        if (is_object($anId)) {
+            throw new InvalidArgumentException('Entity id input must be scalar type');
+        }
     }
 }

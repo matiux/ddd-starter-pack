@@ -8,7 +8,6 @@ use DDDStarterPack\Application\DataTransformer\BasicItemDataTransformer;
 use Tests\Support\Model\Person;
 
 /**
- * @psalm-suppress MissingConstructor
  * @extends BasicItemDataTransformer<Person, array>
  */
 class PersonDataTransformer extends BasicItemDataTransformer
@@ -18,7 +17,6 @@ class PersonDataTransformer extends BasicItemDataTransformer
      */
     public function read(): array
     {
-        /** @var Person $i */
         $i = $this->item;
 
         return $i->toArray();

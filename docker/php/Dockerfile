@@ -13,5 +13,8 @@ RUN composer self-update
 
 USER utente
 
-RUN echo 'alias test="vendor/bin/phpunit"' >> /home/utente/.bashrc \
-    echo 'alias test="vendor/bin/phpunit"' >> /home/utente/.zshrc
+###> Bashrc con alias
+COPY conf/shell-alias.rc /tmp/shell-alias.rc
+RUN cat /tmp/shell-alias.rc >> /home/utente/.zshrc \
+    && cat /tmp/shell-alias.rc >> /home/utente/.bashrc
+###> Fine bashrc con alias

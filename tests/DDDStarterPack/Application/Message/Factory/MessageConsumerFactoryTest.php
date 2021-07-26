@@ -22,16 +22,16 @@ class MessageConsumerFactoryTest extends TestCase
      */
     public function obtain_sqs_message_consumer(): void
     {
-        $accessKey = EnvVarUtil::get('AWS_ACCESS_KEY_ID');
-        $secretKey = EnvVarUtil::get('AWS_SECRET_ACCESS_KEY');
-
-        self::assertNotEmpty($accessKey);
-        self::assertNotEmpty($secretKey);
+//        $accessKey = EnvVarUtil::get('AWS_ACCESS_KEY_ID');
+//        $secretKey = EnvVarUtil::get('AWS_SECRET_ACCESS_KEY');
+//
+//        self::assertNotEmpty($accessKey);
+//        self::assertNotEmpty($secretKey);
 
         $configuration = SQSConfigurationBuilder::create()
             ->withRegion('eu-west-1')
-            ->withAccessKey($accessKey)
-            ->withSecretKey($secretKey)
+//            ->withAccessKey($accessKey)
+//            ->withSecretKey($secretKey)
             ->withQueue($this->getQueueUrl())
             ->build();
 

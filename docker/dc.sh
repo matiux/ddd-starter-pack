@@ -32,7 +32,7 @@ elif [[ "$1" == "php-cs-fixer-fix" ]]; then
 
   shift 1
   ${DC_RUN} \
-    vendor/bin/php-cs-fixer fix --config=.php_cs.dist "$@"
+    vendor/bin/php-cs-fixer fix --config=.php-cs-fixer.dist.php "$@"
 
 elif [[ "$1" == "php-cs-fixer" ]]; then
 

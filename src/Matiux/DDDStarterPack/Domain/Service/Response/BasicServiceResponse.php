@@ -7,7 +7,7 @@ namespace DDDStarterPack\Domain\Service\Response;
 /**
  * @template B of mixed
  * @implements ServiceResponse<B>
- * @psalm-suppress PropertyNotSetInConstructor
+ * @psalm-suppress PropertyNotSetInConstructor, UnsafeGenericInstantiation
  */
 abstract class BasicServiceResponse implements ServiceResponse
 {
@@ -23,18 +23,18 @@ abstract class BasicServiceResponse implements ServiceResponse
     /** @var int */
     private $code;
 
-    final private function __construct()
+    final protected function __construct()
     {
     }
 
     /**
-     * @template T of mixed
+     * @template T of B | null
      *
      * @param T $body
      *
      * @return static<T>
      */
-    public static function error($body = null)
+    public static function error($body = null): self
     {
         /** @var static<T> */
         $response = new static();
@@ -46,7 +46,7 @@ abstract class BasicServiceResponse implements ServiceResponse
     }
 
     /**
-     * @template T of mixed
+     * @template T of B | null
      *
      * @param T $body
      *
@@ -63,12 +63,14 @@ abstract class BasicServiceResponse implements ServiceResponse
         return $response;
     }
 
-    abstract protected function errorCode(): int;
-
-    abstract protected function successCode(): int;
-
+    /**
+     * @template T of B | null
+     *
+     * @return static<T>
+     */
     public static function create(): self
     {
+        /** @var static<T> */
         return new static();
     }
 
@@ -96,6 +98,18 @@ abstract class BasicServiceResponse implements ServiceResponse
         return $this;
     }
 
+    /**
+     * @param bool $status
+     *
+     * @return $this
+     */
+    public function withSuccessStatus(bool $status): self
+    {
+        $this->success = $status;
+
+        return $this;
+    }
+
     public function isSuccess(): bool
     {
         return $this->success;
@@ -113,4 +127,8 @@ abstract class BasicServiceResponse implements ServiceResponse
     {
         return $this->code;
     }
+
+    abstract protected function errorCode(): int;
+
+    abstract protected function successCode(): int;
 }

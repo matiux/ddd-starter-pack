@@ -8,8 +8,9 @@ use Countable;
 use Iterator;
 
 /**
+ * @psalm-suppress UnsafeGenericInstantiation
  * @template T
- * @implements Iterator<int, T>
+ * @implements Iterator<array-key, T>
  */
 class DomainCollection implements Iterator, Countable
 {
@@ -20,7 +21,7 @@ class DomainCollection implements Iterator, Countable
     private $items = [];
 
     /**
-     * @param array<int, T> $items
+     * @param array<array-key, T> $items
      */
     final public function __construct(array $items = [])
     {
@@ -39,13 +40,6 @@ class DomainCollection implements Iterator, Countable
         $this->validateItem($item);
 
         $this->items[] = $item;
-    }
-
-    /**
-     * @param T $item
-     */
-    protected function validateItem($item): void
-    {
     }
 
     /**
@@ -90,14 +84,23 @@ class DomainCollection implements Iterator, Countable
     }
 
     /**
-     * @param self $collection
+     * @template B of DomainCollection<T>
+     *
+     * @param B $collection
      *
      * @return static
      */
-    public function merge($collection)
+    final public function merge($collection)
     {
         $items = array_merge($this->items, $collection->items);
 
         return new static($items);
+    }
+
+    /**
+     * @param T $item
+     */
+    protected function validateItem($item): void
+    {
     }
 }

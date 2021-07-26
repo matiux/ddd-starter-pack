@@ -7,8 +7,6 @@ namespace DDDStarterPack\Application\Message;
 use DDDStarterPack\Domain\Command\DomainCommand;
 
 /**
- * Class CreateDomainCommandFromConsumedMessage.
- *
  * @template T
  * @extends CreateFromConsumedMessage<T>
  */

@@ -35,7 +35,6 @@ abstract class BasicPaginatorDataTransformer implements PaginatorDataTransformer
 
             $deps = $this->getDeps();
 
-            /** @var ItemDataTransformer $itemDataTransformer */
             $itemDataTransformer = empty($deps) ?
                 new $ns() :
                 new $ns(...$this->getDeps());
@@ -44,16 +43,6 @@ abstract class BasicPaginatorDataTransformer implements PaginatorDataTransformer
         }
 
         return $this->paginationData;
-    }
-
-    /**
-     * @psalm-return class-string<ItemDataTransformer>
-     */
-    abstract protected function getSingleTransformerNs(): string;
-
-    protected function getDeps(): array
-    {
-        return [];
     }
 
     /**
@@ -73,5 +62,15 @@ abstract class BasicPaginatorDataTransformer implements PaginatorDataTransformer
         $this->page = $items->getCurrentPageCollection();
 
         return $this;
+    }
+
+    /**
+     * @psalm-return class-string<ItemDataTransformer>
+     */
+    abstract protected function getSingleTransformerNs(): string;
+
+    protected function getDeps(): array
+    {
+        return [];
     }
 }

@@ -4,13 +4,16 @@ declare(strict_types=1);
 
 namespace DDDStarterPack\Application\Message;
 
+/**
+ * @template T
+ */
 interface MessageProducerResponseFactory
 {
     /**
-     * @param int        $sentMessages
-     * @param null|mixed $originalResponse
+     * @param int $sentMessages
+     * @param T   $originalResponse
      *
      * @return MessageProducerResponse
      */
-    public function build(int $sentMessages, $originalResponse = null): MessageProducerResponse;
+    public function build(int $sentMessages, $originalResponse): MessageProducerResponse;
 }

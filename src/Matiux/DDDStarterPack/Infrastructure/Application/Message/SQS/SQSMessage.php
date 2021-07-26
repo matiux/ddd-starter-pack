@@ -14,13 +14,15 @@ class SQSMessage implements Message
     private $body;
     private $id;
     private $occurredAt;
+    private $extra;
 
-    public function __construct(string $body, DateTimeImmutable $occurredAt, string $type = null, string $id = null)
+    public function __construct(string $body, DateTimeImmutable $occurredAt, string $type = null, string $id = null, array $extra = [])
     {
         $this->body = $body;
         $this->occurredAt = $occurredAt;
         $this->type = $type;
         $this->id = $id;
+        $this->extra = $extra;
     }
 
     public function exchangeName(): ?string
@@ -46,5 +48,10 @@ class SQSMessage implements Message
     public function occurredAt(): DateTimeImmutable
     {
         return $this->occurredAt;
+    }
+
+    public function extra(): array
+    {
+        return $this->extra;
     }
 }
