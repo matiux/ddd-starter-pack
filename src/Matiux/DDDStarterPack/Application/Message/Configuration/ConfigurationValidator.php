@@ -6,11 +6,10 @@ namespace DDDStarterPack\Application\Message\Configuration;
 
 abstract class ConfigurationValidator
 {
-    /** @var ConfigurationParamRegistry */
-    protected $configurationParamRegistry;
+    protected ConfigurationParamRegistry $configurationParamRegistry;
 
-    /** @var array */
-    private $errors = [];
+    /** @var string[] */
+    private array $errors = [];
 
     public function __construct()
     {
@@ -19,6 +18,9 @@ abstract class ConfigurationValidator
         $this->buildRegistry();
     }
 
+    /**
+     * @return string[]
+     */
     public function errors(): array
     {
         return $this->errors;

@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace DDDStarterPack\Application\DataTransformer;
 
+use DDDStarterPack\Application\DataTransformer\Type\DataTransformer;
 use DDDStarterPack\Application\DataTransformer\Type\ItemDataTransformer;
 use DDDStarterPack\Application\DataTransformer\Type\PaginatorDataTransformer;
 use DDDStarterPack\Domain\Aggregate\Repository\Paginator\Paginator;
@@ -14,8 +15,8 @@ use DDDStarterPack\Domain\Aggregate\Repository\Paginator\Paginator;
  */
 abstract class BasicPaginatorDataTransformer implements PaginatorDataTransformer
 {
-    /** @var array{data: list<array<array-key,mixed>|mixed>, meta: array<array-key,mixed>} */
-    protected $paginationData = [
+    /** @var array{data: list<array|mixed>, meta: array} */
+    protected array $paginationData = [
         'data' => [],
         'meta' => [
             'total' => 0,
@@ -26,7 +27,7 @@ abstract class BasicPaginatorDataTransformer implements PaginatorDataTransformer
     ];
 
     /** @var array<int, I> */
-    protected $page = [];
+    protected array $page = [];
 
     public function read(): array
     {
@@ -50,7 +51,7 @@ abstract class BasicPaginatorDataTransformer implements PaginatorDataTransformer
      *
      * @return static
      */
-    public function write(Paginator $items)
+    public function write(Paginator $items): DataTransformer
     {
         $this->paginationData['data'] = [];
 

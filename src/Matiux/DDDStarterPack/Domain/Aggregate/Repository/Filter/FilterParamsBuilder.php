@@ -4,15 +4,15 @@ declare(strict_types=1);
 
 namespace DDDStarterPack\Domain\Aggregate\Repository\Filter;
 
+use InvalidArgumentException;
 use LogicException;
 
 class FilterParamsBuilder
 {
-    /** @var array<array-key, FilterParamsApplier> */
-    protected $appliers = [];
+    /** @var FilterParamsApplier[] */
+    protected array $appliers = [];
 
-    /** @var bool */
-    protected $frozen = false;
+    protected bool $frozen = false;
 
     public function addApplier(FilterParamsApplier $applier): void
     {
@@ -23,7 +23,7 @@ class FilterParamsBuilder
         $key = $applier->key();
 
         if (isset($this->appliers[$key])) {
-            throw new \InvalidArgumentException('Applier "'.$key.'" is already set');
+            throw new InvalidArgumentException('Applier "'.$key.'" is already set');
         }
 
         $this->appliers[$key] = $applier;

@@ -5,7 +5,7 @@ declare(strict_types=1);
 namespace Tests\DDDStarterPack\Application\Message\Configuration;
 
 use DDDStarterPack\Application\Message\Configuration\ConfigurationParamRegistry;
-use DDDStarterPack\Infrastructure\Application\Message\SQS\Configuration\AccessKeyIsValidConfigurationParamConstraint;
+use DDDStarterPack\Infrastructure\Application\Message\AWS\Configuration\AccessKeyIsValidConfigurationParamConstraint;
 use PHPUnit\Framework\TestCase;
 
 class ConfigurationParamRegistryTest extends TestCase

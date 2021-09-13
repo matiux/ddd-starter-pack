@@ -6,15 +6,12 @@ namespace Tests\DDDStarterPack\Application\Message\Factory;
 
 use DDDStarterPack\Application\Message\Factory\MessageProducerFactory;
 use DDDStarterPack\Application\Util\EnvVarUtil;
-use DDDStarterPack\Infrastructure\Application\Message\SQS\Configuration\SQSConfigurationBuilder;
-use DDDStarterPack\Infrastructure\Application\Message\SQS\SQSMessageProducer;
+use DDDStarterPack\Infrastructure\Application\Message\AWS\SQS\Configuration\SQSConfigurationBuilder;
+use DDDStarterPack\Infrastructure\Application\Message\AWS\SQS\SQSMessageProducer;
 use PHPUnit\Framework\TestCase;
-use Tests\Tool\SqsRawClient;
 
 class MessageProducerFactoryTest extends TestCase
 {
-    use SqsRawClient;
-
     /**
      * @test
      * @group factory
@@ -32,7 +29,7 @@ class MessageProducerFactoryTest extends TestCase
             ->withRegion('eu-west-1')
             ->withAccessKey($accessKey)
             ->withSecretKey($secretKey)
-            ->withQueue($this->getQueueUrl())
+            ->withQueueUrl(EnvVarUtil::get('AWS_SQS_QUEUE_NAME'))
             ->build();
 
         $factory = MessageProducerFactory::create();

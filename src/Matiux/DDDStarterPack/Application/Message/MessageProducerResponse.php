@@ -10,12 +10,9 @@ interface MessageProducerResponse
 
     public function sentMessages(): int;
 
-    /** @return mixed */
-    public function originalResponse();
+    public function originalResponse(): mixed;
 
-    /** @return mixed */
-    public function body();
+    public function body(): mixed;
 
-    /** @return mixed */
-    public function sentMessageId();
+    public function sentMessageId(): mixed;
 }

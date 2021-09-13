@@ -16,5 +16,5 @@ interface ItemDataTransformer extends DataTransformer
      *
      * @return static
      */
-    public function write($item);
+    public function write($item): DataTransformer;
 }

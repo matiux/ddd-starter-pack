@@ -12,8 +12,8 @@ interface Serializer
     /**
      * Serializes the given data to the specified output format.
      *
-     * @param T $data
-     * @param $format
+     * @param T      $data
+     * @param string $format
      *
      * @return string
      */
@@ -28,5 +28,5 @@ interface Serializer
      *
      * @return T
      */
-    public function deserialize($data, $type, $format);
+    public function deserialize(string $data, string $type, string $format);
 }

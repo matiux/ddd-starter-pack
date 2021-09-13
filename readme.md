@@ -22,7 +22,7 @@ composer install
 ```
 
 ## test
-Eseguire l'alias `test` 
+Eseguire l'alias `test`
 
 #### Concetti sviluppati
 

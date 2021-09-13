@@ -39,12 +39,12 @@ class InMemoryMessage implements Message
         return $this->notificationType;
     }
 
-    public function id()
+    public function id(): mixed
     {
         return $this->notificationId;
     }
 
-    public function occurredAt(): ?DateTimeImmutable
+    public function occurredAt(): DateTimeImmutable|null
     {
         return $this->occurredOn;
     }

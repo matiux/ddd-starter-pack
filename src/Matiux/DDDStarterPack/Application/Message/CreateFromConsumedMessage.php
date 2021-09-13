@@ -36,5 +36,5 @@ abstract class CreateFromConsumedMessage
      *
      * @return DomainCommand|DomainEvent
      */
-    abstract protected function create($consumedMessage);
+    abstract protected function create($consumedMessage): DomainCommand|DomainEvent;
 }

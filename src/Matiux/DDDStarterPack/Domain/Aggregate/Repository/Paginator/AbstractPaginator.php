@@ -13,36 +13,22 @@ use ArrayObject;
  */
 abstract class AbstractPaginator implements Paginator
 {
-    /** @var ArrayObject<int, I> */
-    private $page;
-
     /** @var ArrayIterator<int, I> */
-    private $iterator;
-
-    /** @var int */
-    private $offset;
-
-    /** @var int */
-    private $limit;
-
-    /** @var int */
-    private $totalResult;
+    private ArrayIterator $iterator;
 
     /**
-     * AbstractPaginator constructor.
-     *
      * @param ArrayObject<int, I> $page
      * @param int                 $offset
      * @param int                 $limit
      * @param int                 $totalResult
      */
-    public function __construct(ArrayObject $page, int $offset, int $limit, int $totalResult)
-    {
-        $this->page = $page;
+    public function __construct(
+        private ArrayObject $page,
+        private int $offset,
+        private int $limit,
+        private int $totalResult,
+    ) {
         $this->iterator = $page->getIterator();
-        $this->offset = $offset;
-        $this->limit = $limit;
-        $this->totalResult = $totalResult;
     }
 
     /** @return I */
@@ -77,7 +63,7 @@ abstract class AbstractPaginator implements Paginator
     }
 
     /** @return array<int, I> */
-    public function getCurrentPageCollection()
+    public function getCurrentPageCollection(): array
     {
         return $this->page->getArrayCopy();
     }

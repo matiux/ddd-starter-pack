@@ -14,11 +14,10 @@ use Iterator;
  */
 class DomainCollection implements Iterator, Countable
 {
-    /** @var int */
-    private $position = 0;
+    private int $position = 0;
 
     /** @var array<int, T> */
-    private $items = [];
+    private array $items = [];
 
     /**
      * @param array<array-key, T> $items
@@ -31,9 +30,7 @@ class DomainCollection implements Iterator, Countable
     }
 
     /**
-     * @psalm-param T $item
-     *
-     * @param mixed $item
+     * @param T $item
      */
     public function add($item): void
     {
@@ -90,7 +87,7 @@ class DomainCollection implements Iterator, Countable
      *
      * @return static
      */
-    final public function merge($collection)
+    final public function merge($collection): static
     {
         $items = array_merge($this->items, $collection->items);
 

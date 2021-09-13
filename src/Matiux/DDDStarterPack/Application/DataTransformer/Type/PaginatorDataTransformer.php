@@ -18,5 +18,5 @@ interface PaginatorDataTransformer extends DataTransformer
      *
      * @return static
      */
-    public function write(Paginator $items);
+    public function write(Paginator $items): DataTransformer;
 }

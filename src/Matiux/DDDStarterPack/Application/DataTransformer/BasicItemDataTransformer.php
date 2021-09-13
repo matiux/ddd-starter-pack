@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace DDDStarterPack\Application\DataTransformer;
 
+use DDDStarterPack\Application\DataTransformer\Type\DataTransformer;
 use DDDStarterPack\Application\DataTransformer\Type\ItemDataTransformer;
 
 /**
@@ -21,7 +22,7 @@ abstract class BasicItemDataTransformer implements ItemDataTransformer
      *
      * @return static<I, R>
      */
-    public function write($item)
+    public function write($item): DataTransformer
     {
         $this->item = $item;
 

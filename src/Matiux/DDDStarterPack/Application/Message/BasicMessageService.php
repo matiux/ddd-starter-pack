@@ -14,11 +14,9 @@ use Throwable;
 
 abstract class BasicMessageService
 {
-    /** @var bool */
-    protected $isBootstrapped = false;
+    protected bool $isBootstrapped = false;
 
-    /** @var ConfigurationValidator */
-    protected $configurationValidator;
+    protected ConfigurationValidator $configurationValidator;
 
     public function __construct()
     {
@@ -34,16 +32,9 @@ abstract class BasicMessageService
         $this->isBootstrapped = true;
     }
 
-    private function validateConfiguration(Configuration $configuration): void
+    public function name(): string
     {
-        $this->validateDriverName($configuration);
-        $this->checkRequiredParams($configuration);
-
-        if (!$this->configurationValidator->validate($configuration)) {
-            $errors = $this->configurationValidator->errors();
-
-            throw new InvalidConfigurationException(sprintf('%s', implode('|', $errors)));
-        }
+        return $this->specificDriverName();
     }
 
     protected function validateDriverName(Configuration $configuration): void
@@ -66,7 +57,7 @@ abstract class BasicMessageService
 
         try {
             $resolver->resolve($configuration->getParams());
-        } catch (MissingOptionsException | Throwable $e) {
+        } catch (MissingOptionsException|Throwable $e) {
             throw new InvalidConfigurationException($e->getMessage());
         }
     }
@@ -82,8 +73,15 @@ abstract class BasicMessageService
 
     abstract protected function setSpecificConfiguration(Configuration $configuration): void;
 
-    public function name(): string
+    private function validateConfiguration(Configuration $configuration): void
     {
-        return $this->specificDriverName();
+        $this->validateDriverName($configuration);
+        $this->checkRequiredParams($configuration);
+
+        if (!$this->configurationValidator->validate($configuration)) {
+            $errors = $this->configurationValidator->errors();
+
+            throw new InvalidConfigurationException(sprintf('%s', implode('|', $errors)));
+        }
     }
 }

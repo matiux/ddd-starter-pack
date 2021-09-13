@@ -12,13 +12,9 @@ class BasicEntityId implements EntityId
 {
     public const UUID_PATTERN = '/^[0-9a-f]{8}-[0-9a-f]{4}-4[0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$/';
 
-    /** @var null|int|string */
-    private $id;
+    private null|int|string $id;
 
-    /**
-     * @param null|int|string $id
-     */
-    final private function __construct($id)
+    final protected function __construct(null|int|string $id)
     {
         $this->verifyInputId($id);
 
@@ -35,17 +31,12 @@ class BasicEntityId implements EntityId
      *
      * @return static
      */
-    public static function create(): EntityId
+    public static function create(): static
     {
         return new static(Uuid::uuid4()->toString());
     }
 
-    /**
-     * @param int|string $id
-     *
-     * @return static
-     */
-    public static function createFrom($id): EntityId
+    public static function createFrom(int|string $id): static
     {
         if (!$id) {
             throw new InvalidArgumentException(sprintf('Invalid ID: %s', $id));
@@ -54,10 +45,7 @@ class BasicEntityId implements EntityId
         return new static($id);
     }
 
-    /**
-     * @return static
-     */
-    public static function createNUll(): EntityId
+    public static function createNUll(): static
     {
         return new static(null);
     }
@@ -71,12 +59,12 @@ class BasicEntityId implements EntityId
         return false;
     }
 
-    public function equals($entityId): bool
+    public function equals(EntityId $entityId): bool
     {
         return $this->id() === $entityId->id();
     }
 
-    public function id()
+    public function id(): null|int|string
     {
         return $this->id;
     }
@@ -87,8 +75,6 @@ class BasicEntityId implements EntityId
     }
 
     /**
-     * @psalm-suppress DocblockTypeContradiction
-     *
      * @param mixed $anId
      */
     private function verifyInputId($anId): void

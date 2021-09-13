@@ -4,51 +4,39 @@ declare(strict_types=1);
 
 namespace DDDStarterPack\Application\Service;
 
-use DDDStarterPack\Application\Exception\ApplicationException;
 use DDDStarterPack\Application\Exception\TransactionFailedException;
-use DDDStarterPack\Domain\Exception\DomainException;
+use DDDStarterPack\Domain\Service\Service;
 use Throwable;
 
 /**
  * @template I
- *
- * @implements ApplicationService<I, mixed>
+ * @template O
  */
-abstract class TransactionalApplicationService implements ApplicationService
+abstract class TransactionalApplicationService
 {
-    protected $service;
-    protected $session;
-
-    public function __construct(ApplicationService $service, TransactionalSession $session)
-    {
-        $this->service = $service;
-        $this->session = $session;
+    /**
+     * @param Service<I, O>           $service
+     * @param TransactionalSession<O> $session
+     */
+    public function __construct(
+        protected Service $service,
+        protected TransactionalSession $session,
+    ) {
     }
 
     /**
-     * @param null|I $request
+     * @param I $request
      *
-     * @throws ApplicationException
-     * @throws DomainException
      * @throws TransactionFailedException
      *
-     * @return mixed
+     * @return O
      */
-    public function execute($request = null)
+    public function executeInTransaction($request = null)
     {
-        /**
-         * @psalm-suppress MissingClosureReturnType
-         */
-        $operation = function () use ($request) {
-            return $this->service->execute($request);
-        };
-
         try {
-            return $this->session->executeAtomically($operation->bindTo($this));
-        } catch (ApplicationException $exception) {
-            throw $exception;
-        } catch (DomainException $exception) {
-            throw $exception;
+            return $this->session->executeAtomically(function () use ($request) {
+                return $this->service->execute($request);
+            });
         } catch (Throwable $exception) {
             throw new TransactionFailedException($exception->getMessage(), intval($exception->getCode()), $exception);
         }
