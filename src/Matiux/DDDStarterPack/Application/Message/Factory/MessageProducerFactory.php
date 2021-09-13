@@ -7,8 +7,8 @@ namespace DDDStarterPack\Application\Message\Factory;
 use DDDStarterPack\Application\Message\Configuration\Configuration;
 use DDDStarterPack\Application\Message\MessageProducer;
 use DDDStarterPack\Application\Message\MessageProducerConnector;
-use DDDStarterPack\Infrastructure\Application\Message\SQS\SQSMessageProducer;
-use DDDStarterPack\Infrastructure\Application\Message\SQS\SQSMessageService;
+use DDDStarterPack\Infrastructure\Application\Message\AWS\SNS\SNSMessagePubblisher;
+use DDDStarterPack\Infrastructure\Application\Message\AWS\SQS\SQSMessageProducer;
 use RuntimeException;
 
 class MessageProducerFactory
@@ -28,11 +28,11 @@ class MessageProducerFactory
 
     private function getMessageProducerOrFail(Configuration $configuration): MessageProducerConnector
     {
-        switch ($configuration->getDriverName()) {
-            case SQSMessageService::NAME:
-                return new SQSMessageProducer();
-            default:
-                throw new RuntimeException(sprintf('Invalid driver name [%s]', $configuration->getDriverName()));
-        }
+        // TODO -> No buono parlare di infrastruttura qui
+        return match ($configuration->getDriverName()) {
+            SQSMessageProducer::NAME => new SQSMessageProducer(),
+            SNSMessagePubblisher::NAME => new SNSMessagePubblisher(),
+            default => throw new RuntimeException(sprintf('Invalid driver name [%s]', $configuration->getDriverName())),
+        };
     }
 }

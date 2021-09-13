@@ -8,27 +8,13 @@ interface EntityId
 {
     public function __toString(): string;
 
-    /** @return static */
-    public static function create(): EntityId;
+    public static function create(): static;
 
-    /**
-     * @param int|string $id
-     *
-     * @return static
-     */
-    public static function createFrom($id): EntityId;
+    public static function createFrom(int|string $id): static;
 
-    public static function createNUll(): EntityId;
+    public static function createNull(): static;
 
-    /**
-     * @return null|int|string
-     */
-    public function id();
+    public function id(): null|int|string;
 
-    /**
-     * @param EntityId $entityId
-     *
-     * @return bool
-     */
-    public function equals($entityId): bool;
+    public function equals(EntityId $entityId): bool;
 }

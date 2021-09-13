@@ -39,7 +39,7 @@ class IdentifiableRepositoryTest extends TestCase
 class InMemoryRepository implements IdentifiableRepository
 {
     /** @var Person[] */
-    private $people = [];
+    private array $people = [];
 
     public function __construct(PersonId $personId)
     {

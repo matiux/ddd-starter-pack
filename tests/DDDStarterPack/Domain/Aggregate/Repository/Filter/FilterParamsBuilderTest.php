@@ -64,8 +64,7 @@ class FilterParamsBuilderTest extends TestCase
 
 class DummyArrayTarget
 {
-    /** @var array */
-    private $data = [];
+    private array $data = [];
 
     /**
      * @param array $item
@@ -82,14 +81,11 @@ class DummyArrayTarget
 }
 
 /**
- * Class DummyFilterParamsApplier.
- *
  * @implements FilterParamsApplier<DummyArrayTarget>
  */
 class DummyFilterParamsApplier implements FilterParamsApplier
 {
-    /** @var string */
-    private $key;
+    private string $key;
 
     public function __construct(string $key)
     {

@@ -11,6 +11,7 @@ volumes:
 services:
   php_ddd_starter_pack:
     build: php
+    hostname: dddsp_host
     volumes:
       - ../:/var/www/app
       - ./data/shell_history:/home/utente/shell_history

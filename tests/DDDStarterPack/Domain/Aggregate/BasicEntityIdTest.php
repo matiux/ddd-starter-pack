@@ -62,7 +62,7 @@ class BasicEntityIdTest extends TestCase
      */
     public function create_null_id(): void
     {
-        $myId = MyId::createNUll();
+        $myId = MyId::createNull();
 
         self::assertTrue($myId->isNull());
         self::assertNull($myId->id());

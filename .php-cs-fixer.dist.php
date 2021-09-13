@@ -9,7 +9,7 @@ $finder = PhpCsFixer\Finder::create()
 
 $config = new PhpCsFixer\Config();
 $rules = [
-    '@PHP71Migration' => true,
+    '@PHP80Migration' => true,
     'declare_strict_types' => true,
     '@PhpCsFixer' => true,
     'php_unit_test_class_requires_covers' => false,
@@ -34,7 +34,7 @@ $rules = [
             'if',
         ],
     ],
-    'ordered_class_elements' => true,
+    'ordered_class_elements' => false,
     'multiline_whitespace_before_semicolons' => true,
     'phpdoc_annotation_without_dot' => true,
     'no_unused_imports' => true,

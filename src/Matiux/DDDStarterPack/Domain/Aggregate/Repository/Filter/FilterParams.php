@@ -8,29 +8,25 @@ use InvalidArgumentException;
 
 class FilterParams
 {
-    /** @var array<array-key, mixed> */
-    protected $data;
-
     /** @var FilterParamsApplier[] */
-    protected $appliers = [];
+    protected array $appliers = [];
 
     /**
      * @param array<array-key, FilterParamsApplier> $appliers
      * @param array                                 $data
      */
-    public function __construct(array $appliers, array $data)
+    public function __construct(array $appliers, protected array $data)
     {
         $this->setAppliers($appliers);
-        $this->data = $data;
     }
 
     /**
      * @param string $key
-     * @param null   $default
+     * @param mixed  $default
      *
      * @return mixed
      */
-    public function get(string $key, $default = null)
+    public function get(string $key, mixed $default = null): mixed
     {
         if (array_key_exists($key, $this->data)) {
             return $this->data[$key];
@@ -39,10 +35,7 @@ class FilterParams
         return $default;
     }
 
-    /**
-     * @param mixed $target
-     */
-    public function applyTo($target): void
+    public function applyTo(mixed $target): void
     {
         foreach ($this->appliers as $applier) {
             if ($applier->supports($this)) {

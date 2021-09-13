@@ -1,18 +1,13 @@
 version: '3.7'
 
-secrets:
-  id_rsa:
-    file:
-  id_rsa.pub:
-    file:
-
 services:
   php_ddd_starter_pack:
     environment:
       - AWS_ACCESS_KEY_ID=
       - AWS_SECRET_ACCESS_KEY=
-      - AWS_DEFAULT_REGION=
-      - AWS_SQS_QUEUE_NAME=
+      - AWS_DEFAULT_REGION=eu-west-1
+      - AWS_SQS_QUEUE_NAME=https://sqs.eu-west-1.amazonaws.com/685681845681/ddd-starter-pack-test-queue.fifo
+      - AWS_SNS_TOPIC_ARN=arn:aws:sns:eu-west-1:685681845681:ddd-starter-pack-test-topic.fifo
 
   servicedb:
     ports:

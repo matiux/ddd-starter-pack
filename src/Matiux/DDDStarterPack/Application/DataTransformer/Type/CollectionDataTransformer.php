@@ -17,5 +17,5 @@ interface CollectionDataTransformer extends DataTransformer
      *
      * @return static
      */
-    public function write($items, int $total = 0);
+    public function write($items, int $total = 0): DataTransformer;
 }

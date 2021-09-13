@@ -8,9 +8,9 @@ use DDDStarterPack\Domain\Aggregate\Repository\Filter\SortingFilterParamsApplier
 
 trait SortingFilterRequest
 {
-    private $sortingFilters = [];
+    private array $sortingFilters = [];
 
-    public function withSorting(?string $sortingField, ?string $sortingDirection): self
+    public function withSorting(null|string $sortingField, null|string $sortingDirection): self
     {
         if ($sortingField && $sortingDirection) {
             $this->sortingFilters[SortingFilterParamsApplierKeys::SORT] = $sortingField;

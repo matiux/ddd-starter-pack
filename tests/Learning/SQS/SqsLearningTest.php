@@ -4,12 +4,31 @@ declare(strict_types=1);
 
 namespace Tests\Learning\SQS;
 
+use DateTimeImmutable;
+use DateTimeInterface;
+use DDDStarterPack\Application\Util\EnvVarUtil;
+use DDDStarterPack\Infrastructure\Application\Message\AWS\RawClient\SqsRawClient;
 use PHPUnit\Framework\TestCase;
-use Tests\Tool\SqsRawClient;
+use Ramsey\Uuid\Uuid;
 
 class SqsLearningTest extends TestCase
 {
     use SqsRawClient;
+
+    private DateTimeImmutable $occurredAt;
+
+    protected function setUp(): void
+    {
+        $this->setQueueUrl(EnvVarUtil::get('AWS_SQS_QUEUE_NAME'));
+        $this->purgeSqsQueue();
+
+        $this->occurredAt = new DateTimeImmutable();
+    }
+
+    protected function tearDown(): void
+    {
+        $this->purgeSqsQueue();
+    }
 
     /**
      * @test
@@ -18,11 +37,16 @@ class SqsLearningTest extends TestCase
      */
     public function send_message_in_queue(): void
     {
-        $msg = 'An awesome message!';
+        $msg = json_encode([
+            'Foo' => 'Bar',
+            'occurredAt' => $this->occurredAt->format(DateTimeInterface::RFC3339_EXTENDED),
+        ]);
 
-        $result = $this->getClient()->sendMessage([
+        $result = $this->getSqsClient()->sendMessage([
             'QueueUrl' => $this->getQueueUrl(),
-            'MessageBody' => 'An awesome message!',
+            'MessageBody' => $msg,
+            'MessageGroupId' => Uuid::uuid4()->toString(),
+            'MessageDeduplicationId' => Uuid::uuid4()->toString(),
         ]);
 
         $this->assertEquals(md5($msg), $result['MD5OfMessageBody']);
@@ -32,8 +56,6 @@ class SqsLearningTest extends TestCase
         self::assertIsArray($result['@metadata']);
         self::assertArrayHasKey('statusCode', $result['@metadata']);
         self::assertSame(200, $result['@metadata']['statusCode']);
-
-        $this->purgeSqsQueue();
     }
 
     /**
@@ -48,18 +70,23 @@ class SqsLearningTest extends TestCase
             'StringValue' => 'MyType',
         ];
 
-        $this->getClient()->sendMessage([
+        $this->getSqsClient()->sendMessage([
             'QueueUrl' => $this->getQueueUrl(),
-            'MessageBody' => 'An awesome message!',
+            'MessageBody' => json_encode([
+                'Foo' => 'Bar',
+                'occurredAt' => $this->occurredAt->format(DateTimeInterface::RFC3339_EXTENDED),
+            ]),
+            'MessageGroupId' => Uuid::uuid4()->toString(),
+            'MessageDeduplicationId' => Uuid::uuid4()->toString(),
             'MessageAttributes' => [
                 'Type' => $myType,
             ],
         ]);
 
-        $result = $this->getClient()->receiveMessage([
+        $result = $this->getSqsClient()->receiveMessage([
             'QueueUrl' => $this->getQueueUrl(),
-            'AttributeNames' => ['ApproximateReceiveCount'],
-            'MessageAttributeNames' => ['Type'],
+            'AttributeNames' => ['All'],
+            'MessageAttributeNames' => ['All'],
         ]);
 
         self::assertNotEmpty($result['Messages']);
@@ -87,14 +114,19 @@ class SqsLearningTest extends TestCase
      */
     public function ricevi_messaggio_dalla_coda(): void
     {
-        $msg = 'An awesome message!';
-
-        $this->getClient()->sendMessage([
-            'QueueUrl' => $this->getQueueUrl(),
-            'MessageBody' => $msg,
+        $msg = json_encode([
+            'Foo' => 'Bar',
+            'occurredAt' => $this->occurredAt->format(DateTimeInterface::RFC3339_EXTENDED),
         ]);
 
-        $result = $this->getClient()->receiveMessage([
+        $this->getSqsClient()->sendMessage([
+            'QueueUrl' => $this->getQueueUrl(),
+            'MessageBody' => $msg,
+            'MessageGroupId' => Uuid::uuid4()->toString(),
+            'MessageDeduplicationId' => Uuid::uuid4()->toString(),
+        ]);
+
+        $result = $this->getSqsClient()->receiveMessage([
             'QueueUrl' => $this->getQueueUrl(),
             'AttributeNames' => ['ApproximateReceiveCount'],
         ]);

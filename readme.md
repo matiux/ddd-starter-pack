@@ -3,6 +3,9 @@ DDD Starter Pack
 
 Questa libreria contiene "concetti" per lo sviluppo di micro servizi basati su architettura esagonale e DDD.
 
+* Ramo v2: PHP < 8.0
+* Ramo v3: PHP >= 8.0
+
 ## Sviluppo
 
 ```
@@ -19,10 +22,7 @@ composer install
 ```
 
 ## test
-Eseguire l'alias `test` per lanciare `vendor/bin/phpunit`
-
-#### Gruppi di test
-TODO
+Eseguire l'alias `test`
 
 #### Concetti sviluppati
 

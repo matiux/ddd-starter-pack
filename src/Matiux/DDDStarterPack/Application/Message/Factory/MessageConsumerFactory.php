@@ -7,9 +7,8 @@ namespace DDDStarterPack\Application\Message\Factory;
 use DDDStarterPack\Application\Message\Configuration\Configuration;
 use DDDStarterPack\Application\Message\MessageConsumer;
 use DDDStarterPack\Application\Message\MessageConsumerConnector;
-use DDDStarterPack\Infrastructure\Application\Message\SQS\SQSMessageConsumer;
-use DDDStarterPack\Infrastructure\Application\Message\SQS\SQSMessageFactory;
-use DDDStarterPack\Infrastructure\Application\Message\SQS\SQSMessageService;
+use DDDStarterPack\Infrastructure\Application\Message\AWS\AWSMessageFactory;
+use DDDStarterPack\Infrastructure\Application\Message\AWS\SQS\SQSMessageConsumer;
 use RuntimeException;
 
 class MessageConsumerFactory
@@ -29,11 +28,9 @@ class MessageConsumerFactory
 
     private function getMessageConsumerOrFail(Configuration $configuration): MessageConsumerConnector
     {
-        switch ($configuration->getDriverName()) {
-            case SQSMessageService::NAME:
-                return new SQSMessageConsumer(new SQSMessageFactory());
-            default:
-                throw new RuntimeException(sprintf('Invalid driver name [%s]', $configuration->getDriverName()));
-        }
+        return match ($configuration->getDriverName()) {
+            SQSMessageConsumer::NAME => new SQSMessageConsumer(new AWSMessageFactory()),
+            default => throw new RuntimeException(sprintf('Invalid driver name [%s]', $configuration->getDriverName())),
+        };
     }
 }

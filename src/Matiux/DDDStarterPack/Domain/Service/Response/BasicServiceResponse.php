@@ -14,14 +14,12 @@ abstract class BasicServiceResponse implements ServiceResponse
     public const ERROR_CODE = 1;
     public const SUCCESS_CODE = 0;
 
-    /** @var bool */
-    private $success;
+    private bool $success;
 
     /** @var B */
     private $body;
 
-    /** @var int */
-    private $code;
+    private int $code;
 
     final protected function __construct()
     {

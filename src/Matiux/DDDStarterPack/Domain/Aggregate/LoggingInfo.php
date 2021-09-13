@@ -8,9 +8,9 @@ use DateTime;
 
 trait LoggingInfo
 {
-    protected $created;
-    protected $updated;
-    protected $editedBy;
+    protected null|DateTime $created = null;
+    protected null|DateTime $updated = null;
+    protected null|string $editedBy = null;
 
     public function getUpdatingDate(): ?DateTime
     {
@@ -22,7 +22,7 @@ trait LoggingInfo
         return $this->editedBy;
     }
 
-    public function setEditor(string $editor)
+    public function setEditor(string $editor): void
     {
         $this->editedBy = $editor;
     }

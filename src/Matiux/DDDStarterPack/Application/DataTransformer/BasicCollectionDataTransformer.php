@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace DDDStarterPack\Application\DataTransformer;
 
 use DDDStarterPack\Application\DataTransformer\Type\CollectionDataTransformer;
+use DDDStarterPack\Application\DataTransformer\Type\DataTransformer;
 
 /**
  * @template I
@@ -14,14 +15,10 @@ use DDDStarterPack\Application\DataTransformer\Type\CollectionDataTransformer;
 abstract class BasicCollectionDataTransformer implements CollectionDataTransformer
 {
     /**
-     * @psalm-suppress PropertyNotSetInConstructor
-     *
      * @var list<I>
      */
-    protected $items;
-
-    /** @var int */
-    protected $total;
+    protected array $items = [];
+    protected int $total;
 
     public function __construct()
     {
@@ -34,7 +31,7 @@ abstract class BasicCollectionDataTransformer implements CollectionDataTransform
      *
      * @return static
      */
-    public function write($items, int $total = 0)
+    public function write($items, int $total = 0): DataTransformer
     {
         $this->items = $items;
         $this->total = $total;

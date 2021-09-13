@@ -6,20 +6,14 @@ namespace DDDStarterPack\Application\Message\Configuration;
 
 class Configuration
 {
-    /** @var string string */
-    private $driverName;
-
-    /** @var array<string, int|string> */
-    private $params;
-
     /**
      * @param string                    $driverName
      * @param array<string, int|string> $params
      */
-    private function __construct(string $driverName, array $params)
-    {
-        $this->driverName = $driverName;
-        $this->params = $params;
+    private function __construct(
+        private string $driverName,
+        private array $params,
+    ) {
     }
 
     /**
@@ -38,9 +32,6 @@ class Configuration
         return $this->driverName;
     }
 
-    /**
-     * @return array<array-key, int|string|null|bool>
-     */
     public function getParams(): array
     {
         return $this->params;

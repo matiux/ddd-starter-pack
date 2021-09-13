@@ -9,7 +9,7 @@ use RuntimeException;
 class ConfigurationParamRegistry
 {
     /** @var ConfigurationParamConstraint[] */
-    private $configConstraints = [];
+    private array $configConstraints = [];
 
     public function addConstraint(ConfigurationParamConstraint $configurationParamConstraint): void
     {

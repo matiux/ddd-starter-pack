@@ -8,16 +8,13 @@ use DateTimeImmutable;
 
 interface Message
 {
-    public function exchangeName(): ?string;
+    public function exchangeName(): null|string;
 
     public function body(): string;
 
-    public function type(): ?string;
+    public function type(): null|string;
 
-    /**
-     * @return mixed
-     */
-    public function id();
+    public function id(): mixed;
 
-    public function occurredAt(): ?DateTimeImmutable;
+    public function occurredAt(): DateTimeImmutable|null;
 }

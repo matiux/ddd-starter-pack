@@ -8,12 +8,12 @@ use DDDStarterPack\Domain\Aggregate\Repository\Filter\PaginationFilterParamsAppl
 
 trait PaginationFilterRequest
 {
-    private $paginationFilters = [
+    private array $paginationFilters = [
         'page' => 1,
         'per_page' => -1,
     ];
 
-    public function withPagination(?int $page, ?int $perPage): self
+    public function withPagination(null|int $page, null|int $perPage): self
     {
         if ($page && $perPage) {
             $this->paginationFilters[PaginationFilterParamsApplierKeys::PAGE] = $page;
