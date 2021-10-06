@@ -14,7 +14,7 @@ use DDDStarterPack\Application\Message\MessageConsumerConnector;
 use DDDStarterPack\Infrastructure\Application\Message\AWS\AWSBasicService;
 use DDDStarterPack\Infrastructure\Application\Message\AWS\AWSMessage;
 use DDDStarterPack\Infrastructure\Application\Message\AWS\AWSMessageFactory;
-use Throwable;
+use Exception;
 use Webmozart\Assert\Assert;
 
 /**
@@ -166,23 +166,14 @@ class SQSMessageConsumer extends BasicMessageService implements MessageConsumerC
     {
         $queue ??= $this->getQueueUrlFromConfig();
 
-        $time = microtime(true);
+        $result = $this->getClient()->deleteMessage([
+            'QueueUrl' => $queue,
+            'ReceiptHandle' => $messageId,
+        ]);
 
-        while (microtime(true) - $time < 300) {
-            try {
-                //$result =
-                $this->getClient()->deleteMessage([
-                    'QueueUrl' => $queue,
-                    'ReceiptHandle' => $messageId,
-                ]);
-
-                break;
-            } catch (Throwable $e) {
-                sleep(10);
-            }
+        if (!self::isAwsResultValid($result)) {
+            throw new Exception(sprintf('Unable to delete message with id %s from %s', $messageId, $this->getQueueUrlFromConfig()));
         }
-
-        //return $result;
     }
 
     public function deleteBatch(ArrayObject $messagesId): void
