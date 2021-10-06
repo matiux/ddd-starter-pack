@@ -4,7 +4,6 @@ declare(strict_types=1);
 
 namespace DDDStarterPack\Infrastructure\Application\Message\AWS\SNS;
 
-use Aws\Result;
 use Aws\Sns\SnsClient;
 use BadMethodCallException;
 use DateTimeInterface;
@@ -35,21 +34,6 @@ class SNSMessagePubblisher extends BasicMessageService implements MessageProduce
     private null|string $topicArn = null;
     private null|SnsClient $client = null;
 
-    public function send($message): MessageProducerResponse
-    {
-        return $this->doSend($message);
-    }
-
-    public function sendBatch(array $messages): MessageProducerResponse
-    {
-        throw new BadMethodCallException();
-    }
-
-    public function getBatchLimit(): int
-    {
-        throw new BadMethodCallException();
-    }
-
     protected function defaultsParams(): array
     {
         return $this->customDefaultsParams() + ['sns_topic_arn' => null];
@@ -71,6 +55,58 @@ class SNSMessagePubblisher extends BasicMessageService implements MessageProduce
             $params['secret_key'] ?? null,
             $params['sns_topic_arn'] ?? null,
         );
+    }
+
+    public function send($message): MessageProducerResponse
+    {
+        return $this->doSend($message);
+    }
+
+    private function doSend(AWSMessage $message): MessageProducerResponse
+    {
+        $messageAttributes = $this->createMessageAttributes($message);
+
+        $extra = $this->parseExtra($message->extra());
+
+        $args = $extra + [
+            'Message' => $message->body(),
+            'MessageAttributes' => $messageAttributes,
+        ];
+
+        if (!array_key_exists('TopicArn', $args)) {
+            $args['TopicArn'] = $this->getTopicArnFromConfig();
+        }
+
+        $result = $this->getClient()->publish($args);
+
+        if (!self::isAwsResultValid($result)) {
+            throw new MessageInvalidException('Message sent but corrupt');
+        }
+
+        return new AWSMessageProducerResponse(1, $result);
+    }
+
+    private function createMessageAttributes(AWSMessage $message): array
+    {
+        $messageAttributes = [
+            'OccurredAt' => [
+                'DataType' => 'String',
+                'StringValue' => $message->occurredAt()->format(DateTimeInterface::RFC3339_EXTENDED),
+            ],
+        ];
+
+        if ($message->type()) {
+            $messageAttributes['Type'] = [
+                'DataType' => 'String',
+                'StringValue' => (string) $message->type(),
+            ];
+        }
+
+        if (array_key_exists('MessageAttributes', $message->extra())) {
+            $messageAttributes += (array) $message->extra()['MessageAttributes'];
+        }
+
+        return $messageAttributes;
     }
 
     /**
@@ -112,68 +148,6 @@ class SNSMessagePubblisher extends BasicMessageService implements MessageProduce
         return $e;
     }
 
-    protected function getClient(): SnsClient
-    {
-        if (!isset($this->client)) {
-            $args = [
-                'version' => 'latest',
-                'region' => $this->configuration->region(),
-                'debug' => false,
-            ];
-
-            $this->client = new SnsClient($args + $this->createCredentials());
-        }
-
-        return $this->client;
-    }
-
-    private function doSend(AWSMessage $message): MessageProducerResponse
-    {
-        $messageAttributes = $this->createMessageAttributes($message);
-
-        $extra = $this->parseExtra($message->extra());
-
-        $args = $extra + [
-            'Message' => $message->body(),
-            'MessageAttributes' => $messageAttributes,
-        ];
-
-        if (!array_key_exists('TopicArn', $args)) {
-            $args['TopicArn'] = $this->getTopicArnFromConfig();
-        }
-
-        $result = $this->getClient()->publish($args);
-
-        if (!$this->isValidSent($result)) {
-            throw new MessageInvalidException('Message sent but corrupt');
-        }
-
-        return new AWSMessageProducerResponse(1, $result);
-    }
-
-    private function createMessageAttributes(AWSMessage $message): array
-    {
-        $messageAttributes = [
-            'OccurredAt' => [
-                'DataType' => 'String',
-                'StringValue' => $message->occurredAt()->format(DateTimeInterface::RFC3339_EXTENDED),
-            ],
-        ];
-
-        if ($message->type()) {
-            $messageAttributes['Type'] = [
-                'DataType' => 'String',
-                'StringValue' => (string) $message->type(),
-            ];
-        }
-
-        if (array_key_exists('MessageAttributes', $message->extra())) {
-            $messageAttributes += (array) $message->extra()['MessageAttributes'];
-        }
-
-        return $messageAttributes;
-    }
-
     private function getTopicArnFromConfig(): string
     {
         if (!isset($this->topicArn)) {
@@ -194,10 +168,28 @@ class SNSMessagePubblisher extends BasicMessageService implements MessageProduce
         }
     }
 
-    private function isValidSent(Result $result): bool
+    protected function getClient(): SnsClient
     {
-        Assert::isArray($result['@metadata']);
+        if (!isset($this->client)) {
+            $args = [
+                'version' => 'latest',
+                'region' => $this->configuration->region(),
+                'debug' => false,
+            ];
 
-        return 200 === $result['@metadata']['statusCode'];
+            $this->client = new SnsClient($args + $this->createCredentials());
+        }
+
+        return $this->client;
+    }
+
+    public function sendBatch(array $messages): MessageProducerResponse
+    {
+        throw new BadMethodCallException();
+    }
+
+    public function getBatchLimit(): int
+    {
+        throw new BadMethodCallException();
     }
 }

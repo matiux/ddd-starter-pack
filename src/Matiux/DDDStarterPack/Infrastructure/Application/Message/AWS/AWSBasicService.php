@@ -5,7 +5,9 @@ declare(strict_types=1);
 namespace DDDStarterPack\Infrastructure\Application\Message\AWS;
 
 use Aws\Credentials\Credentials;
+use Aws\Result;
 use BadMethodCallException;
+use Webmozart\Assert\Assert;
 
 trait AWSBasicService
 {
@@ -54,5 +56,17 @@ trait AWSBasicService
     public function close(string $exchangeName = ''): void
     {
         throw new BadMethodCallException();
+    }
+
+    public static function obtainStatusCode(Result $result): int
+    {
+        Assert::isArray($result['@metadata']);
+
+        return (int) $result['@metadata']['statusCode'];
+    }
+
+    public static function isAwsResultValid(Result $result): bool
+    {
+        return 200 === self::obtainStatusCode($result);
     }
 }
