@@ -6,8 +6,8 @@ namespace Tests\Learning\SQS;
 
 use DateTimeImmutable;
 use DateTimeInterface;
-use DDDStarterPack\Application\Util\EnvVarUtil;
-use DDDStarterPack\Infrastructure\Application\Message\AWS\RawClient\SqsRawClient;
+use DDDStarterPack\Message\Infrastructure\AWS\RawClient\SqsRawClient;
+use DDDStarterPack\Util\EnvVarUtil;
 use PHPUnit\Framework\TestCase;
 use Ramsey\Uuid\Uuid;
 

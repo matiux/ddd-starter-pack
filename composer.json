@@ -46,6 +46,8 @@
   },
   "autoload-dev": {
     "psr-4": {
+      "Tests\\Unit\\DDDStarterPack\\": "tests/Unit/DDDStarterPack/",
+      "Tests\\Integration\\DDDStarterPack\\": "tests/Integration/DDDStarterPack/",
       "Tests\\DDDStarterPack\\": "tests/DDDStarterPack/",
       "Tests\\Learning\\": "tests/Learning/",
       "Tests\\Support\\": "tests/Support/",

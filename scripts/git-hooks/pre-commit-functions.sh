@@ -32,7 +32,6 @@ check_psalm() {
 
   if [[ "$STATUS" -eq 0 ]]; then
       echo -e "\e[42mPHP Static Analysis is OK\e[m"
-      ./dc badge "static analysis" passed psalm
       return 0 # true
   fi
 
@@ -50,12 +49,11 @@ check_psalm() {
 check_phpunit() {
 
   # Esecuzione dei tests con phpunit
-  ./dc phpunit --testdox --exclude-group learning -vvv
+  ./dc phpunit --testdox --colors=always --exclude-group learning -vvv
   STATUS=$?
 
   if [[ "$STATUS" -eq 0 ]]; then
       echo -e "\e[42mPHP Unit Tests Suite is OK\e[m"
-      ./dc badge test passed phpunit
       return 0 # true
   fi
 

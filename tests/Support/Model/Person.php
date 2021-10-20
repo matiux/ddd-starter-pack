@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Tests\Support\Model;
 
-use DDDStarterPack\Domain\Aggregate\IdentifiableDomainObject;
+use DDDStarterPack\Aggregate\Domain\IdentifiableDomainObject;
 
 class Person implements IdentifiableDomainObject
 {
