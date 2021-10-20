@@ -84,6 +84,8 @@ class SNSMessagePubblisherTest extends TestCase
         self::assertTrue($response->isSuccess());
         self::assertEquals(1, $response->sentMessages());
 
+        sleep(3);
+
         $message = $this->messageConsumer->consume();
 
         self::assertInstanceOf(AWSMessage::class, $message);

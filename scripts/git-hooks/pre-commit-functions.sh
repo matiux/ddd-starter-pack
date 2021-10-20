@@ -3,7 +3,7 @@
 check_code_style() {
 
     # Formattazione del codice con PHP CS Fixer
-    ./dc php-cs-fixer-fix $PHP_STAGED_FILES --show-progress=dots --dry-run
+    ./dc php-cs-fixer-check "$PHP_STAGED_FILES"
     STATUS=$?
 
     if [[ "$STATUS" -eq 0 ]]; then
@@ -17,8 +17,8 @@ check_code_style() {
         read -p $'\e[31mDo you really want to commit ignoring code style warnings? y/n/f[Fix] \e[0m: ' yn < /dev/tty
         case $yn in
             [Yy]* ) echo ""; echo "Please consider fixing code style"; return 0;;
-            [Nn]* ) echo "Run './dc php-cs-fixer-fix \$(git diff --name-only --cached --diff-filter=ACMR -- '*.php') --show-progress=dots' to fix"; return 1;;
-            [Ff]* ) ./dc php-cs-fixer-fix "$(git diff --name-only --cached --diff-filter=ACMR -- '*.php')" --show-progress=dots; return 1;;
+            [Nn]* ) echo "Run './dc php-cs-fixer-fix' to fix"; return 1;;
+            [Ff]* ) ./dc php-cs-fixer-fix; return 1;;
             * ) echo "Please answer y, n or f.";;
         esac
     done
@@ -27,7 +27,7 @@ check_code_style() {
 check_psalm() {
 
   # Analisi statica del codice con Psalm
-  ./dc psalm --no-cache
+  ./dc psalm
   STATUS=$?
 
   if [[ "$STATUS" -eq 0 ]]; then
@@ -49,7 +49,7 @@ check_psalm() {
 check_phpunit() {
 
   # Esecuzione dei tests con phpunit
-  ./dc phpunit --testdox --colors=always --exclude-group learning -vvv
+  ./dc phpunit
   STATUS=$?
 
   if [[ "$STATUS" -eq 0 ]]; then

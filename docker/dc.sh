@@ -32,25 +32,32 @@ elif [[ "$1" == "php-cs-fixer-fix" ]]; then
 
   shift 1
   ${DC_RUN} \
-    vendor/bin/php-cs-fixer fix --config=.php-cs-fixer.dist.php "$@"
+    make coding-standard-fix
 
-elif [[ "$1" == "php-cs-fixer" ]]; then
-
-  shift 1
-  ${DC_RUN} \
-    vendor/bin/php-cs-fixer "$@"
-
-elif [[ "$1" == "psalm" ]]; then
+elif [[ "$1" == "php-cs-fixer-fix-single" ]]; then
 
   shift 1
   ${DC_RUN} \
-    vendor/bin/psalm "$@"
+    make coding-standard-single "$@"
+
+elif [[ "$1" == "php-cs-fixer-check" ]]; then
+
+  shift 1
+
+  ${DC_RUN} \
+    make coding-standard-check "$@"
 
 elif [[ "$1" == "phpunit" ]]; then
 
   shift 1
   ${DC_RUN} \
-    vendor/bin/phpunit "$@"
+    make phpunit-no-coverage
+
+elif [[ "$1" == "psalm" ]]; then
+
+  shift 1
+  ${DC_RUN} \
+    make psalm "$@"
 
 elif [[ "$1" == "up" ]]; then
 

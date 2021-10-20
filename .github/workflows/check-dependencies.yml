@@ -1,6 +1,9 @@
 name: "Check dependencies"
 
-on: ["pull_request", "push"]
+on:
+  pull_request: ~
+  push: ~
+  workflow_dispatch: ~
 
 jobs:
   check-dependencies:
@@ -24,4 +27,4 @@ jobs:
             ${{ runner.os }}-php-
 
       - name: Install dependencies
-        run: composer install --prefer-dist --no-progress
+        run: make install-dependencies

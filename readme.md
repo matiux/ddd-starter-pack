@@ -2,10 +2,12 @@ DDD Starter Pack
 =====
 
 ![check dependencies](https://github.com/matiux/ddd-starter-pack/actions/workflows/check-dependencies.yml/badge.svg)
-![test](https://github.com/matiux/ddd-starter-pack/actions/workflows/test.yml/badge.svg)
-[![codecov](https://codecov.io/gh/matiux/ddd-starter-pack/branch/develop/graph/badge.svg)](https://codecov.io/gh/matiux/ddd-starter-pack)
+![test](https://github.com/matiux/ddd-starter-pack/actions/workflows/tests.yml/badge.svg)
+[![codecov](https://codecov.io/gh/matiux/ddd-starter-pack/branch/v3/graph/badge.svg)](https://codecov.io/gh/matiux/ddd-starter-pack)
 [![type coverage](https://shepherd.dev/github/matiux/ddd-starter-pack/coverage.svg)](https://shepherd.dev/github/matiux/ddd-starter-pack)
 [![psalm level](https://shepherd.dev/github/matiux/ddd-starter-pack/level.svg)](https://shepherd.dev/github/matiux/ddd-starter-pack)
+![Security analysis status](https://github.com/matiux/ddd-starter-pack/actions/workflows/security-analysis.yml/badge.svg)
+![Coding standards status](https://github.com/matiux/ddd-starter-pack/actions/workflows/coding-standards.yml/badge.svg)
 
 Questa libreria contiene "concetti" per lo sviluppo di micro servizi basati su architettura esagonale e DDD.
 

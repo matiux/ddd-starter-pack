@@ -1,15 +1,13 @@
-name: "Static analysis"
+name: "Security analysis"
 
 on:
   pull_request: ~
-  workflow_dispatch: ~
   push: ~
-  schedule:
-    - cron: '0 */3 * * *'
+  workflow_dispatch: ~
 
 jobs:
-  static-analysis:
-    name: "static analysis"
+  security-analysis:
+    name: "security analysis"
     runs-on: "ubuntu-latest"
     steps:
       - name: "checkout"
@@ -26,8 +24,5 @@ jobs:
       - name: Install dependencies
         run: make install-dependencies
 
-      - name: "running static analysis"
-        run: make static-analysis
-
-      - name: "calculating type coverage"
-        run: make type-coverage
+      - name: "running security analysis ( psalm )"
+        run: make security-analysis
