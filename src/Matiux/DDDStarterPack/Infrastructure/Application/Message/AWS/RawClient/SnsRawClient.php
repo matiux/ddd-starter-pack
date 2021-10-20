@@ -17,7 +17,7 @@ trait SnsRawClient
 
     protected function getSnsTopicArn(): string
     {
-        Assert::notNull($this->snsTopicArn);
+        Assert::notNull($this->snsTopicArn, 'Topic ARN non può essere null');
 
         return $this->snsTopicArn;
     }

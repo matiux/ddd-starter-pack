@@ -74,23 +74,25 @@ class SQSMessageConsumerTest extends TestCase
 
         $message = $this->messageConsumer->consume();
 
-        $this->assertInstanceOf(AWSMessage::class, $message);
+        self::assertInstanceOf(AWSMessage::class, $message);
 
-        $this->assertEquals(
+        self::assertEquals(
             json_encode([
                 'Foo' => 'Bar',
                 'occurredAt' => $this->occurredAt->format(DateTimeInterface::RFC3339_EXTENDED),
             ]),
             $message->body()
         );
-        $this->assertEquals('MyType', $message->type());
-        $this->assertEquals(
+        self::assertEquals('MyType', $message->type());
+        $occurredAt = $message->occurredAt();
+        self::assertNotNull($occurredAt);
+        self::assertEquals(
             $this->occurredAt->format(DateTimeInterface::RFC3339_EXTENDED),
-            $message->occurredAt()->format(DateTimeInterface::RFC3339_EXTENDED)
+            $occurredAt->format(DateTimeInterface::RFC3339_EXTENDED)
         );
 
         $id = $message->id();
-        assert:self::assertNotNull($id);
+        self::assertNotNull($id);
 
         $this->deleteMessage($id);
     }
@@ -106,7 +108,7 @@ class SQSMessageConsumerTest extends TestCase
 
         $message = $this->messageConsumer->consume();
 
-        $this->assertInstanceOf(AWSMessage::class, $message);
+        self::assertInstanceOf(AWSMessage::class, $message);
 
         $messageId = $message->id();
 
@@ -116,6 +118,6 @@ class SQSMessageConsumerTest extends TestCase
 
         $message = $this->messageConsumer->consume();
 
-        $this->assertNull($message);
+        self::assertNull($message);
     }
 }

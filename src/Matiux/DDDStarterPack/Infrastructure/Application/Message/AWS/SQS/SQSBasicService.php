@@ -62,7 +62,7 @@ trait SQSBasicService
             $this->setQueueUrlOrFail();
         }
 
-        Assert::notNull($this->queueUrl);
+        Assert::notNull($this->queueUrl, 'Coda SQS non può essere null');
 
         return $this->queueUrl;
     }

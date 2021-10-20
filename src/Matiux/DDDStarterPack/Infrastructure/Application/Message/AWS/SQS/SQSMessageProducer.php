@@ -109,10 +109,12 @@ class SQSMessageProducer extends BasicMessageService implements MessageProducerC
     {
         $messageAttributes = [];
 
-        $messageAttributes['OccurredAt'] = [
-            'DataType' => 'String',
-            'StringValue' => $message->occurredAt()->format(DateTimeInterface::RFC3339_EXTENDED),
-        ];
+        if ($occurredAt = $message->occurredAt()) {
+            $messageAttributes['OccurredAt'] = [
+                'DataType' => 'String',
+                'StringValue' => $occurredAt->format(DateTimeInterface::RFC3339_EXTENDED),
+            ];
+        }
 
         if ($message->type()) {
             $messageAttributes['Type'] = [

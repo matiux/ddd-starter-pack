@@ -6,7 +6,6 @@ namespace DDDStarterPack\Infrastructure\Application\Message\AWS;
 
 use DateTimeImmutable;
 use DDDStarterPack\Application\Message\MessageFactory;
-use Webmozart\Assert\Assert;
 
 /**
  * @implements MessageFactory<AWSMessage>
@@ -21,8 +20,6 @@ class AWSMessageFactory implements MessageFactory
         null|string $id = null,
         array $extra = [],
     ) {
-        Assert::notNull($occurredAt);
-
         return new AWSMessage(
             body: $body,
             occurredAt: $occurredAt,

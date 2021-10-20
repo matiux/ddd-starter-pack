@@ -88,12 +88,16 @@ class SNSMessagePubblisher extends BasicMessageService implements MessageProduce
 
     private function createMessageAttributes(AWSMessage $message): array
     {
-        $messageAttributes = [
-            'OccurredAt' => [
-                'DataType' => 'String',
-                'StringValue' => $message->occurredAt()->format(DateTimeInterface::RFC3339_EXTENDED),
-            ],
-        ];
+        $messageAttributes = [];
+
+        if ($occurredAt = $message->occurredAt()) {
+            $messageAttributes = [
+                'OccurredAt' => [
+                    'DataType' => 'String',
+                    'StringValue' => $occurredAt->format(DateTimeInterface::RFC3339_EXTENDED),
+                ],
+            ];
+        }
 
         if ($message->type()) {
             $messageAttributes['Type'] = [
@@ -154,7 +158,7 @@ class SNSMessagePubblisher extends BasicMessageService implements MessageProduce
             $this->setTopicArnOrFail();
         }
 
-        Assert::notNull($this->topicArn);
+        Assert::notNull($this->topicArn, 'Topic ARN non può essere null');
 
         return $this->topicArn;
     }

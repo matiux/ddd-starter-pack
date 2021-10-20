@@ -12,7 +12,7 @@ class AWSMessage implements Message
 {
     public function __construct(
         private string $body,
-        private DateTimeImmutable $occurredAt,
+        private null | DateTimeImmutable $occurredAt,
         private null | string $type = null,
         private null | string $id = null,
         private array $extra = []
@@ -39,7 +39,7 @@ class AWSMessage implements Message
         return $this->id;
     }
 
-    public function occurredAt(): DateTimeImmutable
+    public function occurredAt(): null|DateTimeImmutable
     {
         return $this->occurredAt;
     }
