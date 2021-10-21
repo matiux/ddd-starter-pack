@@ -14,11 +14,11 @@ class AWSMessageFactory implements MessageFactory
 {
     public function build(
         string $body,
-        null|string $exchangeName = null,
         null|DateTimeImmutable $occurredAt = null,
         null|string $type = null,
         null|string $id = null,
         array $extra = [],
+        null|string $exchangeName = null
     ) {
         return new AWSMessage(
             body: $body,

@@ -2,13 +2,11 @@
 
 declare(strict_types=1);
 
-namespace Tests\Unit\DDDStarterPack\Aggregate\Infrastructure\Domain\Aggregate\Doctrine\Repository\Filter;
+namespace Tests\Integration\DDDStarterPack\Aggregate\Infrastructure\Doctrine\Repository\Filter;
 
-use DDDStarterPack\Aggregate\Domain\Repository\Filter\FilterParams;
-use DDDStarterPack\Aggregate\Domain\Repository\Filter\FilterParamsApplier;
 use DDDStarterPack\Aggregate\Domain\Repository\Filter\FilterParamsBuilder;
-use DDDStarterPack\Aggregate\Infrastructure\Doctrine\Repository\Filter\DoctrineGenericPaginationApplier;
 use PHPUnit\Framework\TestCase;
+use Tests\Support\Model\Doctrine\DoctrinePaginationApplier;
 use Tests\Support\Model\Person;
 use Tests\Tool\DoctrineUtil;
 use Tests\Tool\EntityManagerBuilder;
@@ -42,7 +40,7 @@ class DoctrineGenericPaginationApplierTest extends TestCase
         $filterParamsBuilder = new FilterParamsBuilder();
         $filterParamsBuilder->addApplier(new DoctrinePaginationApplier());
         $filterParams = $filterParamsBuilder->build(['page' => $page, 'per_page' => $perPage]);
-        $filterParams->applyTo($qb);
+        $filterParams->applyToTarget($qb);
 
         $expected = sprintf(
             'SELECT %s FROM %s %s',
@@ -57,23 +55,5 @@ class DoctrineGenericPaginationApplierTest extends TestCase
 
         self::assertEquals($offset, $qb->getFirstResult());
         self::assertEquals($perPage, $qb->getMaxResults());
-    }
-}
-
-class DoctrinePaginationApplier extends DoctrineGenericPaginationApplier implements FilterParamsApplier
-{
-    protected function pageKey(): string
-    {
-        return 'page';
-    }
-
-    protected function perPageKey(): string
-    {
-        return 'per_page';
-    }
-
-    public function supports(FilterParams $filterParams): bool
-    {
-        return true;
     }
 }

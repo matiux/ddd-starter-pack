@@ -4,8 +4,6 @@ declare(strict_types=1);
 
 namespace Tests\Unit\DDDStarterPack\Aggregate\Domain\Repository\Filter;
 
-use DDDStarterPack\Aggregate\Domain\Repository\Filter\FilterParams;
-use DDDStarterPack\Aggregate\Domain\Repository\Filter\FilterParamsApplier;
 use DDDStarterPack\Aggregate\Domain\Repository\Filter\FilterParamsBuilder;
 use InvalidArgumentException;
 use LogicException;
@@ -17,28 +15,54 @@ class FilterParamsBuilderTest extends TestCase
      * @test
      * @group filter
      */
-    public function filter_params_can_be_created(): void
+    public function it_should_create_a_filterparams_by_builder(): void
     {
-        $filterParamsBuilder = new FilterParamsBuilder();
-        $filterParamsBuilder->addApplier(new DummyFilterParamsApplier('a_key'));
-        $filterParamsBuilder->addApplier(new DummyFilterParamsApplier('another_key'));
+        $filterParamsBuilder = new FilterParamsBuilder(
+            [
+                new DummyFilterParamsApplier('name'),
+                new DummyFilterParamsApplier('skills'),
+            ]
+        );
 
         // Psalm gets angry - as it should be
         // $filterParamsBuilder->addApplier(new \stdClass());
 
         $filterParams = $filterParamsBuilder->build([
-            'a_key' => 'a_value',
-            'another_key' => ['a_value', 'another_value'],
+            'name' => 'Matteo',
+            'skills' => ['architecture', 'programming'],
         ]);
 
         $target = new DummyArrayTarget();
 
-        $filterParams->applyTo($target);
+        $filterParams->applyToTarget($target);
 
         $this->assertEquals([
-            ['a_key' => 'a_value'],
-            ['another_key' => ['a_value', 'another_value']],
+            ['name' => 'Matteo'],
+            [
+                'skills' => ['architecture', 'programming'],
+            ],
         ], $target->get());
+    }
+
+    /**
+     * @test
+     */
+    public function it_should_throw_exception_if_two_filter_params_applier_have_same_key(): void
+    {
+        self::expectException(InvalidArgumentException::class);
+        self::expectExceptionMessage('Applier for key \'name\' is already set');
+
+        (new FilterParamsBuilder(
+            [
+                new DummyFilterParamsApplier('name'),
+                new DummyFilterParamsApplier('name'),
+            ]
+        ))->build(
+            [
+                'name' => 'Matteo',
+                'skills' => ['architecture', 'programming'],
+            ]
+        );
     }
 
     /**
@@ -51,14 +75,14 @@ class FilterParamsBuilderTest extends TestCase
         $this->expectExceptionMessage('The builder is frozen');
 
         $filterParamsBuilder = new FilterParamsBuilder();
-        $filterParamsBuilder->addApplier(new DummyFilterParamsApplier('a_key'));
+        $filterParamsBuilder->addApplier(new DummyFilterParamsApplier('name'));
 
         $filterParamsBuilder->build([
-            'a_key' => 'a_value',
-            'another_key' => ['a_value', 'another_value'],
+            'name' => 'Matteo',
+            'skills' => ['architecture', 'programming'],
         ]);
 
-        $filterParamsBuilder->addApplier(new DummyFilterParamsApplier('another_key'));
+        $filterParamsBuilder->addApplier(new DummyFilterParamsApplier('skills'));
     }
 }
 
@@ -77,43 +101,5 @@ class DummyArrayTarget
     public function get(): array
     {
         return $this->data;
-    }
-}
-
-/**
- * @implements FilterParamsApplier<DummyArrayTarget>
- */
-class DummyFilterParamsApplier implements FilterParamsApplier
-{
-    private string $key;
-
-    public function __construct(string $key)
-    {
-        if (!$key) {
-            throw new InvalidArgumentException('the given key is empty');
-        }
-
-        $this->key = $key;
-    }
-
-    /**
-     * @param DummyArrayTarget $target
-     * @param FilterParams     $filterParams
-     */
-    public function apply($target, FilterParams $filterParams): void
-    {
-        $target->add([
-            $this->key() => $filterParams->get($this->key()),
-        ]);
-    }
-
-    public function key(): string
-    {
-        return $this->key;
-    }
-
-    public function supports(FilterParams $filterParams): bool
-    {
-        return true;
     }
 }

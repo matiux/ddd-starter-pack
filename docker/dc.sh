@@ -1,5 +1,4 @@
 #!/usr/bin/env bash
-
 WORKDIR=/var/www/app
 PROJECT_NAME=$(basename "$(pwd)" | tr '[:upper:]' '[:lower:]')
 COMPOSE_OVERRIDE=
@@ -22,48 +21,13 @@ DC_RUN="${DC_BASE_COMMAND}
     -w ${WORKDIR}
     ${PHP_CONTAINER}"
 
-if [ "$1" = "composer" ]; then
-
-  shift 1
-  ${DC_RUN} \
-    composer "$@"
-
-elif [[ "$1" == "php-cs-fixer-fix" ]]; then
-
-  shift 1
-  ${DC_RUN} \
-    make coding-standard-fix
-
-elif [[ "$1" == "php-cs-fixer-fix-single" ]]; then
-
-  shift 1
-  ${DC_RUN} \
-    make coding-standard-single "$@"
-
-elif [[ "$1" == "php-cs-fixer-check" ]]; then
-
-  shift 1
-
-  ${DC_RUN} \
-    make coding-standard-check "$@"
-
-elif [[ "$1" == "phpunit" ]]; then
-
-  shift 1
-  ${DC_RUN} \
-    make phpunit-no-coverage
-
-elif [[ "$1" == "psalm" ]]; then
-
-  shift 1
-  ${DC_RUN} \
-    make psalm "$@"
-
-elif [[ "$1" == "up" ]]; then
-
-  shift 1
-  ${DC_BASE_COMMAND} \
-    up "$@"
+if [ "$1" = "composer" ]; then shift 1; ${DC_RUN} composer "$@"
+elif [[ "$1" == "php-cs-fixer-fix" ]]; then shift 1; ${DC_RUN} make coding-standard-fix "$@"
+elif [[ "$1" == "php-cs-fixer-fix-staged" ]]; then shift 1; ${DC_RUN} make coding-standard-fix-staged
+elif [[ "$1" == "php-cs-fixer-check-staged" ]]; then shift 1; ${DC_RUN} make coding-standard-check-staged
+elif [[ "$1" == "phpunit" ]]; then shift 1; ${DC_RUN} make coverage
+elif [[ "$1" == "psalm" ]]; then shift 1; ${DC_RUN} make psalm "$@"
+elif [[ "$1" == "up" ]]; then shift 1; ${DC_BASE_COMMAND} up "$@"
 
 elif [[ "$1" == "enter-root" ]]; then
 
@@ -101,8 +65,10 @@ elif [[ "$1" == "log" ]]; then
 
 elif [[ "$1" == "build" ]] && [[ "$2" == "php" ]]; then
 
+  shift 2
+
   ${DC_BASE_COMMAND} \
-    build ${PHP_CONTAINER}
+    build "$@" ${PHP_CONTAINER}
 
 elif [[ $# -gt 0 ]]; then
 

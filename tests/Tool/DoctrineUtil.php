@@ -15,7 +15,7 @@ class DoctrineUtil
                 "\n" => '',
             ]);
 
-            return preg_replace('/[\s][\s]*/', ' ', $dql);
+            return preg_replace('/[\s]+/', ' ', $dql);
         };
         $expected = $clear($expected);
         $actual = $clear($actual);

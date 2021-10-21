@@ -6,6 +6,9 @@ namespace DDDStarterPack\Exception\Domain;
 
 use Throwable;
 
+/**
+ * @codeCoverageIgnore
+ */
 abstract class DomainModelNotFoundException extends DomainException
 {
     public const MESSAGE = 'Aggregate not found';

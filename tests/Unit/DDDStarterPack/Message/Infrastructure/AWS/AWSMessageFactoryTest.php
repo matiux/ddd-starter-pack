@@ -20,8 +20,8 @@ class AWSMessageFactoryTest extends TestCase
 
         $message = $SQSmessageFactory->build(
             body: '',
-            type: 'MyType',
             occurredAt: new DateTimeImmutable(),
+            type: 'MyType',
         );
 
         self::assertSame('MyType', $message->type());

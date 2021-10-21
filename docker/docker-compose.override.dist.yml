@@ -8,6 +8,7 @@ services:
       - AWS_DEFAULT_REGION=eu-west-1
       - AWS_SQS_QUEUE_NAME=https://sqs.eu-west-1.amazonaws.com/685681845681/ddd-starter-pack-test-queue.fifo
       - AWS_SNS_TOPIC_ARN=arn:aws:sns:eu-west-1:685681845681:ddd-starter-pack-test-topic.fifo
+      - DATABASE_URL=mysql://root:root@servicedb:3306/ddd_sp_test?serverVersion=5.7
 
   servicedb:
     ports:

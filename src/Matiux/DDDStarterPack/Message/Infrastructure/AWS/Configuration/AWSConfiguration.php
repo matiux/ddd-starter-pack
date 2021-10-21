@@ -8,8 +8,8 @@ abstract class AWSConfiguration
 {
     public function __construct(
         private string $region,
-        private null | string $accessKey = null,
-        private null | string $secretKey = null,
+        private null|string $accessKey = null,
+        private null|string $secretKey = null,
     ) {
     }
 

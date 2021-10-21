@@ -1,4 +1,4 @@
-alias test="vendor/bin/phpunit --colors=always --exclude-group slow,learning --testdox -vvv"
-alias test-all="vendor/bin/phpunit --colors=always --testdox -vvv"
-alias psalm="vendor/bin/psalm --no-cache"
-alias cs-fix="vendor/bin/php-cs-fixer fix --config=.php-cs-fixer.dist.php $(git diff --name-only --cached --diff-filter=ACMR -- '*.php') --show-progress=dots"
+alias test-filter="make phpunit"
+alias test-all="make phpunit"
+alias psalm="make psalm"
+alias cs-fix="make coding-standard-fix ./src ./tests"

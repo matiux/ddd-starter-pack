@@ -7,6 +7,9 @@ namespace DDDStarterPack\Exception\Domain;
 use Exception;
 use Throwable;
 
+/**
+ * @codeCoverageIgnore
+ */
 abstract class DomainException extends Exception
 {
     public const MESSAGE = 'An error has occurred';

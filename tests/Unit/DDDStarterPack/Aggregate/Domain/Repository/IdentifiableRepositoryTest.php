@@ -21,7 +21,7 @@ class IdentifiableRepositoryTest extends TestCase
         $repo = new InMemoryRepository($personId);
 
         // Psalm gets angry - as it should be
-        //$repo->ofId(34);
+        //$repo->ofId(35);
         //$repo->ofId(null);
 
         $person = $repo->ofId($personId);
@@ -43,7 +43,7 @@ class InMemoryRepository implements IdentifiableRepository
 
     public function __construct(PersonId $personId)
     {
-        $this->people[] = Person::crea($personId, 'Mat', 34);
+        $this->people[] = Person::crea($personId, 'Mat', 35);
     }
 
     public function ofId($id)

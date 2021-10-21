@@ -9,19 +9,13 @@ use DDDStarterPack\Message\Application\Message;
 
 class RabbitMQMessage implements Message
 {
-    private $body;
-    private $exchangeName;
-    private $occurredAt;
-    private $type;
-    private $id;
-
-    public function __construct(string $body, string $exchangeName = null, DateTimeImmutable $occurredAt = null, string $type = null, $id = null)
-    {
-        $this->body = $body;
-        $this->exchangeName = $exchangeName;
-        $this->occurredAt = $occurredAt;
-        $this->type = $type;
-        $this->id = $id;
+    public function __construct(
+        private string $body,
+        private null|string $exchangeName = null,
+        private null|DateTimeImmutable $occurredAt = null,
+        private null|string $type = null,
+        private $id = null
+    ) {
     }
 
     public function body(): string

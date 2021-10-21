@@ -29,10 +29,10 @@ abstract class DoctrineGenericPaginationApplier extends DoctrineFilterParamsAppl
     public function apply($target, FilterParams $filterParams): void
     {
         /** @var int $page */
-        $page = $filterParams->get($this->pageKey());
+        $page = $filterParams->getFilterValueForKey($this->pageKey(), '1');
 
         /** @var int $perPage */
-        $perPage = $filterParams->get($this->perPageKey());
+        $perPage = $filterParams->getFilterValueForKey($this->perPageKey());
 
         if (-1 !== $perPage) {
             $offset = ($page - 1) * $perPage;

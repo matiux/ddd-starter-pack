@@ -48,11 +48,19 @@ trait AWSBasicService
         return [];
     }
 
+    /**
+     * @param string $exchangeName
+     * @codeCoverageIgnore
+     */
     public function open(string $exchangeName = ''): void
     {
         throw new BadMethodCallException();
     }
 
+    /**
+     * @param string $exchangeName
+     * @codeCoverageIgnore
+     */
     public function close(string $exchangeName = ''): void
     {
         throw new BadMethodCallException();

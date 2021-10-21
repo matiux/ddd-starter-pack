@@ -12,7 +12,9 @@ use Iterator;
  */
 interface Paginator extends Countable, Iterator
 {
-    /** @return array<int, I> */
+    /**
+     * @return array<int, I>
+     */
     public function getCurrentPageCollection();
 
     public function getCurrentPage(): int;

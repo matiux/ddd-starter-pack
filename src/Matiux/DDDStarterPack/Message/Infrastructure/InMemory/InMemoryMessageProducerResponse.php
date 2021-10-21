@@ -9,27 +9,12 @@ use Ramsey\Uuid\Uuid;
 
 class InMemoryMessageProducerResponse implements MessageProducerResponse
 {
-    private $sentMessages;
-    private $success;
-
-    /** @var mixed */
-    private $originalResponse;
-    private $messageId;
-
-    /**
-     * InMemoryMessageProducerResponse constructor.
-     *
-     * @param int    $sentMessages
-     * @param bool   $success
-     * @param mixed  $originalResponse
-     * @param string $messageId
-     */
-    public function __construct(int $sentMessages, bool $success, $originalResponse, string $messageId = '')
-    {
-        $this->sentMessages = $sentMessages;
-        $this->success = $success;
-        $this->originalResponse = $originalResponse;
-        $this->messageId = $messageId;
+    public function __construct(
+        private int $sentMessages,
+        private bool $success,
+        private mixed $originalResponse,
+        private null|string $messageId = null
+    ) {
     }
 
     public function isSuccess(): bool
@@ -56,8 +41,8 @@ class InMemoryMessageProducerResponse implements MessageProducerResponse
         return ['success' => false];
     }
 
-    public function sentMessageId(): mixed
+    public function sentMessageId(): string
     {
-        return $this->messageId ?: Uuid::uuid4();
+        return $this->messageId ?: (string) Uuid::uuid4();
     }
 }

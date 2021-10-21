@@ -9,17 +9,24 @@
          convertWarningsToExceptions="true"
          processIsolation="false"
          stopOnFailure="true">
-    <coverage>
+
+    <coverage processUncoveredFiles="true">
         <include>
-            <directory>src</directory>
+            <directory suffix=".php">src</directory>
         </include>
+        <exclude>
+            <directory>src/Matiux/DDDStarterPack/Message/Infrastructure/RabbitMQ</directory>
+        </exclude>
     </coverage>
+
     <php>
         <ini name="error_reporting" value="-1"/>
     </php>
+
     <testsuites>
         <testsuite name="Project Test Suite">
             <directory>tests</directory>
         </testsuite>
     </testsuites>
+
 </phpunit>

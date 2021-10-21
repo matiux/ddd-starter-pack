@@ -6,14 +6,14 @@ namespace DDDStarterPack\Aggregate\Infrastructure\Doctrine\Repository\Filter;
 
 use DDDStarterPack\Aggregate\Domain\Repository\Filter\FilterParams;
 use Doctrine\ORM\QueryBuilder;
-use LogicException;
+use InvalidArgumentException;
 
 abstract class DoctrineGenericSortApplier extends DoctrineFilterParamsApplier
 {
     protected const KEY = 'sorting';
 
     /** @var array<string, string> */
-    protected $fieldsMap;
+    protected array $fieldsMap;
 
     abstract protected function sortDirectionKey(): string;
 
@@ -29,24 +29,14 @@ abstract class DoctrineGenericSortApplier extends DoctrineFilterParamsApplier
      */
     public function apply($target, FilterParams $filterParams): void
     {
-        /** @var null|string $sortField */
-        $sortField = $filterParams->get($this->sortKey());
+        try {
+            $sortField = (string) $filterParams->getFilterValueForKey($this->sortKey());
 
-        /** @var null|string $sortDirection */
-        $sortDirection = $filterParams->get($this->sortDirectionKey());
+            $sortDirection = (string) $filterParams->getFilterValueForKey($this->sortDirectionKey(), 'ASC');
 
-        if (!$sortField) {
+            $target->orderBy($this->fieldsMap[$sortField], $sortDirection);
+        } catch (InvalidArgumentException $e) {
             return;
         }
-
-        if (!$sortDirection) {
-            $sortDirection = 'ASC';
-        }
-
-        if (!array_key_exists($sortField, $this->fieldsMap)) {
-            throw new LogicException("\"{$sortField}\" is not a valid sorting field");
-        }
-
-        $target->orderBy($this->fieldsMap[$sortField], $sortDirection);
     }
 }

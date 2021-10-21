@@ -6,26 +6,22 @@ namespace DDDStarterPack\Aggregate\Infrastructure\Doctrine\Repository;
 
 use Doctrine\Bundle\DoctrineBundle\Registry;
 use Doctrine\ORM\EntityManagerInterface;
-use LogicException;
+use Webmozart\Assert\Assert;
 
 abstract class DoctrineRepository
 {
-    /** @var Registry */
-    protected $registry;
-
-    /** @var EntityManagerInterface */
-    protected $em;
-
-    /** @var string */
-    private $entityClassName;
+    protected Registry $registry;
+    protected EntityManagerInterface $em;
+    private string $entityClassName;
 
     public function __construct(Registry $registry, string $model)
     {
         $this->registry = $registry;
 
-        if (!$em = $registry->getManagerForClass($model)) {
-            throw new LogicException('Entity manager cannot be null');
-        }
+        $em = $registry->getManagerForClass($model);
+
+        Assert::notNull($em, 'Entity manager cannot be null');
+
         /** @psalm-suppress InvalidPropertyAssignmentValue */
         $this->em = $em;
         $this->entityClassName = $model;

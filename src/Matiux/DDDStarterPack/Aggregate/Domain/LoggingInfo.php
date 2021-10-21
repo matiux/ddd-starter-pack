@@ -6,6 +6,9 @@ namespace DDDStarterPack\Aggregate\Domain;
 
 use DateTime;
 
+/**
+ * @codeCoverageIgnore
+ */
 trait LoggingInfo
 {
     protected null|DateTime $created = null;

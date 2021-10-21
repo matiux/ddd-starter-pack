@@ -12,13 +12,17 @@ class AWSMessage implements Message
 {
     public function __construct(
         private string $body,
-        private null | DateTimeImmutable $occurredAt,
-        private null | string $type = null,
-        private null | string $id = null,
+        private null|DateTimeImmutable $occurredAt,
+        private null|string $type = null,
+        private null|string $id = null,
         private array $extra = []
     ) {
     }
 
+    /**
+     * @return null|string
+     * @codeCoverageIgnore
+     */
     public function exchangeName(): null|string
     {
         throw new BadMethodCallException();

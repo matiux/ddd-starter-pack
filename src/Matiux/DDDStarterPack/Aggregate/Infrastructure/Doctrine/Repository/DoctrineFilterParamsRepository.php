@@ -18,7 +18,7 @@ abstract class DoctrineFilterParamsRepository extends DoctrineRepository
         $qb->select($this->getEntityAliasName())
             ->from($this->getEntityClassName(), $this->getEntityAliasName());
 
-        $filterParams->applyTo($qb);
+        $filterParams->applyToTarget($qb);
 
         [$offset, $limit] = $this->calculatePagination($filterParams, $qb);
 
@@ -42,11 +42,11 @@ abstract class DoctrineFilterParamsRepository extends DoctrineRepository
         $offset = 0;
         $limit = 0 != $totalResult ? $totalResult : 1;
 
-        if (-1 != $filterParams->get('per_page')) {
+        if (-1 != $filterParams->getFilterValueForKey('per_page')) {
             $offset = $this->calculateOffset($filterParams);
 
             /** @var int $limit */
-            $limit = $filterParams->get('per_page');
+            $limit = $filterParams->getFilterValueForKey('per_page');
         }
 
         return [intval($offset), intval($limit)];
@@ -64,10 +64,10 @@ abstract class DoctrineFilterParamsRepository extends DoctrineRepository
     private function calculateOffset(FilterParams $filterParams): int
     {
         /** @var int $page */
-        $page = $filterParams->get('page');
+        $page = $filterParams->getFilterValueForKey('page');
 
         /** @var int $perPage */
-        $perPage = $filterParams->get('per_page');
+        $perPage = $filterParams->getFilterValueForKey('per_page');
 
         return ($page - 1) * $perPage;
     }

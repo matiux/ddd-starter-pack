@@ -4,8 +4,8 @@ on:
   pull_request: ~
   workflow_dispatch: ~
   push: ~
-  schedule:
-    - cron: '0 */3 * * *'
+#  schedule:
+#    - cron: '0 */3 * * *'
 
 jobs:
   static-analysis:

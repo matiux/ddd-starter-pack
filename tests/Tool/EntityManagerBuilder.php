@@ -4,28 +4,31 @@ declare(strict_types=1);
 
 namespace Tests\Tool;
 
+use DDDStarterPack\Util\EnvVarUtil;
 use Doctrine\DBAL\Types\Type;
 use Doctrine\ORM\Configuration;
 use Doctrine\ORM\EntityManager;
+use Doctrine\ORM\EntityRepository;
 use Doctrine\ORM\Tools\Setup;
+use Doctrine\Persistence\ObjectRepository;
+use InvalidArgumentException;
+use Nyholm\Dsn\DsnParser;
 use Tests\Support\Model\Doctrine\DoctrinePersonId;
 
 class EntityManagerBuilder
 {
     /** @var list<string> */
-    private $paths;
+    private array $paths;
 
-    /** @var bool */
-    private $isDevMode;
+    private bool $isDevMode;
 
-    /** @var Configuration */
-    private $config;
+    private Configuration $config;
 
     /** @var array{dbname: string, driver: string, host: string, password: string, port: int, user: string} */
-    private $connectionParams;
+    private array $connectionParams;
 
     /** @var EntityManager[] */
-    private $ems = [];
+    private array $ems = [];
 
     private function __construct(bool $isDevMode)
     {
@@ -46,13 +49,15 @@ class EntityManagerBuilder
 
     private function prepareConnectionParams(): void
     {
+        $dsn = DsnParser::parse(EnvVarUtil::get('DATABASE_URL'));
+
         $dbParamsAuth = [
             'driver' => 'pdo_mysql',
-            'user' => 'root',
-            'password' => 'root',
-            'dbname' => 'ddd_sp_test',
-            'host' => 'servicedb',
-            'port' => 3306,
+            'user' => (string) $dsn->getUser(),
+            'password' => (string) $dsn->getPassword(),
+            'dbname' => ltrim((string) $dsn->getPath(), '/'),
+            'host' => (string) $dsn->getHost(),
+            'port' => (int) $dsn->getPort(),
         ];
 
         $this->connectionParams = $dbParamsAuth;
@@ -74,7 +79,7 @@ class EntityManagerBuilder
     public function getEntityManager(string $em = 'default'): EntityManager
     {
         if (!array_key_exists($em, $this->ems)) {
-            throw new \InvalidArgumentException('Invalid key for entity manager');
+            throw new InvalidArgumentException('Invalid key for entity manager');
         }
 
         return $this->ems[$em];
@@ -84,9 +89,9 @@ class EntityManagerBuilder
      * @param class-string $entity
      * @param string       $entityManager
      *
-     * @return \Doctrine\ORM\EntityRepository|\Doctrine\Persistence\ObjectRepository
+     * @return EntityRepository|ObjectRepository
      */
-    public function getRepository(string $entity, string $entityManager = 'default')
+    public function getRepository(string $entity, string $entityManager = 'default'): EntityRepository|ObjectRepository
     {
         return $this->ems[$entityManager]->getRepository($entity);
     }

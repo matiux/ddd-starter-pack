@@ -10,9 +10,9 @@ class SNSConfiguration extends AWSConfiguration
 {
     public function __construct(
         private string $region,
-        private null | string $accessKey = null,
-        private null | string $secretKey = null,
-        private null | string $topicArn = null,
+        private null|string $accessKey = null,
+        private null|string $secretKey = null,
+        private null|string $topicArn = null,
     ) {
         parent::__construct($this->region, $this->accessKey, $this->secretKey);
     }

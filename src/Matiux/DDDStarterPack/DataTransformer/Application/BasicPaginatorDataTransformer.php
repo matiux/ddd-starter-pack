@@ -38,7 +38,7 @@ abstract class BasicPaginatorDataTransformer implements PaginatorDataTransformer
 
             $itemDataTransformer = empty($deps) ?
                 new $ns() :
-                new $ns(...$this->getDeps());
+                new $ns(...$deps);
 
             $this->paginationData['data'][] = $itemDataTransformer->write($item)->read();
         }

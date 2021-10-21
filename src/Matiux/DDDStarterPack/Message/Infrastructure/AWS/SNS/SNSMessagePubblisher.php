@@ -187,11 +187,21 @@ class SNSMessagePubblisher extends BasicMessageService implements MessageProduce
         return $this->client;
     }
 
+    /**
+     * @param array $messages
+     *
+     * @return MessageProducerResponse
+     * @codeCoverageIgnore
+     */
     public function sendBatch(array $messages): MessageProducerResponse
     {
         throw new BadMethodCallException();
     }
 
+    /**
+     * @return int
+     * @codeCoverageIgnore
+     */
     public function getBatchLimit(): int
     {
         throw new BadMethodCallException();

@@ -32,7 +32,7 @@ trait SqsRawClient
         if (!$this->sqsClient) {
             $args = [
                 'version' => 'latest',
-                'region' => EnvVarUtil::get('AWS_DEFAULT_REGION'),
+                'region' => EnvVarUtil::get('AWS_DEFAULT_REGION', 'eu-west-1'),
                 'debug' => false,
             ];
 
@@ -52,17 +52,15 @@ trait SqsRawClient
             /** @var list<array{MessageId: string, ReceiptHandle: string, MD5OfBody: string, Body: string }> $messages */
             $messages = $this->pullFromSqsQueue(10)->get('Messages');
 
-            if (!$messages) {
+            if (empty($message)) {
                 break;
             }
 
             foreach ($messages as $message) {
-                if ($message) {
-                    $this->getSqsClient()->deleteMessage([
-                        'QueueUrl' => $this->getQueueUrl(),
-                        'ReceiptHandle' => $message['ReceiptHandle'],
-                    ]);
-                }
+                $this->getSqsClient()->deleteMessage([
+                    'QueueUrl' => $this->getQueueUrl(),
+                    'ReceiptHandle' => $message['ReceiptHandle'],
+                ]);
             }
         }
     }

@@ -114,6 +114,7 @@ class SNSMessagePubblisherTest extends TestCase
                 'occurredAt' => $this->occurredAt->format(DateTimeInterface::RFC3339_EXTENDED),
             ]),
             occurredAt: $this->occurredAt,
+            type: 'EventoAvvenuto',
             extra: [
                 'TopicArn' => $this->getSnsTopicArn(),
                 'MessageGroupId' => Uuid::uuid4()->toString(),

@@ -6,3 +6,6 @@ docker/docker-compose.override.yml
 /docker/data/shell_history/.x_history
 .php_cs.cache
 .php-cs-fixer.cache
+.coverage-clover.xml
+coverage.xml
+.coverage/

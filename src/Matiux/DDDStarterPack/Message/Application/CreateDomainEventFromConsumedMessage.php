@@ -7,6 +7,7 @@ namespace DDDStarterPack\Message\Application;
 use DDDStarterPack\Event\DomainEvent;
 
 /**
+ * @codeCoverageIgnore
  * @template T
  * @extends CreateFromConsumedMessage<T>
  */

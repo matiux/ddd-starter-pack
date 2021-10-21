@@ -13,19 +13,17 @@ abstract class DoctrineEntityId extends GuidType
 {
     public function convertToDatabaseValue($value, AbstractPlatform $platform)
     {
-        if (!$value) {
-            return null;
-        }
-
-        return $value instanceof EntityId ? $value->id() : $value;
+        return $value instanceof EntityId ? $value->id() : $value ?? null;
     }
 
     public function convertToPHPValue($value, AbstractPlatform $platform)
     {
         $value = $this->prepareValue($value);
 
-        /** @var int|string $value */
-        if (!$this->isValidUuid($value) && !$this->isCustomValid()) {
+        if (
+            is_null($value)
+            || (!$this->isValidUuid($value) && !$this->isCustomValid())
+        ) {
             return $value;
         }
 
@@ -39,17 +37,13 @@ abstract class DoctrineEntityId extends GuidType
      *
      * @return null|int|string
      */
-    private function prepareValue($value)
+    private function prepareValue(mixed $value): null|int|string
     {
-        if (is_int($value)) {
-            return intval($value);
-        }
-
-        if (is_null($value)) {
-            return null;
-        }
-
-        return (string) $value;
+        return match (true) {
+            is_object($value), is_null($value) => null,
+            is_int($value) => $value,
+            default => (string) $value
+        };
     }
 
     /**
@@ -57,13 +51,9 @@ abstract class DoctrineEntityId extends GuidType
      *
      * @return bool
      */
-    private function isValidUuid($value): bool
+    private function isValidUuid(int|string $value): bool
     {
-        if (is_string($value) && BasicEntityId::isValidUuid($value)) {
-            return true;
-        }
-
-        return false;
+        return is_string($value) && BasicEntityId::isValidUuid($value);
     }
 
     protected function isCustomValid(): bool

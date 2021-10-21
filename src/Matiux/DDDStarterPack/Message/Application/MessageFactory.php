@@ -13,12 +13,20 @@ interface MessageFactory
 {
     /**
      * @param string                 $body
-     * @param null|string            $exchangeName
      * @param null|DateTimeImmutable $occurredAt
      * @param null|string            $type
      * @param null|string            $id
+     * @param array                  $extra
+     * @param null|string            $exchangeName
      *
      * @return T
      */
-    public function build(string $body, string $exchangeName = null, DateTimeImmutable $occurredAt = null, string $type = null, string $id = null);
+    public function build(
+        string $body,
+        null|DateTimeImmutable $occurredAt = null,
+        null|string $type = null,
+        null|string $id = null,
+        array $extra = [],
+        null|string $exchangeName = null
+    );
 }

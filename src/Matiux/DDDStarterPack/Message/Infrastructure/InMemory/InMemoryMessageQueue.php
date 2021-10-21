@@ -10,7 +10,7 @@ use InvalidArgumentException;
 class InMemoryMessageQueue
 {
     /** @var array<array-key, Message[]> */
-    private $messages = [];
+    private array $messages = [];
 
     public function __construct()
     {

@@ -10,12 +10,9 @@ use DDDStarterPack\Message\Application\MessageConsumer;
 
 class InMemoryMessageConsumer implements MessageConsumer
 {
-    /** @var InMemoryMessageQueue */
-    private $messageQueue;
-
-    public function __construct(InMemoryMessageQueue $messageQueue)
-    {
-        $this->messageQueue = $messageQueue;
+    public function __construct(
+        private InMemoryMessageQueue $messageQueue
+    ) {
     }
 
     public function consume(null|string $queue = null): null|Message
@@ -23,6 +20,10 @@ class InMemoryMessageConsumer implements MessageConsumer
         return $this->messageQueue->popMessage();
     }
 
+    /**
+     * @return Message[]
+     * @codeCoverageIgnore
+     */
     public function consumeBatch(): array
     {
         return [];
@@ -30,19 +31,32 @@ class InMemoryMessageConsumer implements MessageConsumer
 
     /**
      * @param mixed $messageId
+     * @codeCoverageIgnore
      */
     public function delete(string $messageId, null|string $queue = null): void
     {
     }
 
+    /**
+     * @param ArrayObject $messagesId
+     * @codeCoverageIgnore
+     */
     public function deleteBatch(ArrayObject $messagesId): void
     {
     }
 
+    /**
+     * @param string $exchangeName
+     * @codeCoverageIgnore
+     */
     public function open(string $exchangeName = ''): void
     {
     }
 
+    /**
+     * @param string $exchangeName
+     * @codeCoverageIgnore
+     */
     public function close(string $exchangeName = ''): void
     {
     }

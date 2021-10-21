@@ -4,48 +4,46 @@ declare(strict_types=1);
 
 namespace DDDStarterPack\Message\Infrastructure\InMemory;
 
+use BadMethodCallException;
 use DateTimeImmutable;
 use DDDStarterPack\Message\Application\Message;
 
 class InMemoryMessage implements Message
 {
-    private $exchangeName;
-    private $notificationId;
-    private $notificationBodyMessage;
-    private $notificationType;
-    private $occurredOn;
-
-    public function __construct(string $exchangeName, string $notificationId, string $notificationBodyMessage, string $notificationType, DateTimeImmutable $occurredOn)
-    {
-        $this->exchangeName = $exchangeName;
-        $this->notificationId = $notificationId;
-        $this->notificationBodyMessage = $notificationBodyMessage;
-        $this->notificationType = $notificationType;
-        $this->occurredOn = $occurredOn;
+    public function __construct(
+        private string $body,
+        private null|DateTimeImmutable $occurredAt,
+        private null|string $type = null,
+        private null|string $id = null,
+    ) {
     }
 
+    /**
+     * @return string
+     * @codeCoverageIgnore
+     */
     public function exchangeName(): string
     {
-        return $this->exchangeName;
+        throw new BadMethodCallException();
     }
 
     public function body(): string
     {
-        return $this->notificationBodyMessage;
+        return $this->body;
     }
 
-    public function type(): string
+    public function type(): null|string
     {
-        return $this->notificationType;
+        return $this->type;
     }
 
     public function id(): mixed
     {
-        return $this->notificationId;
+        return $this->id;
     }
 
     public function occurredAt(): DateTimeImmutable|null
     {
-        return $this->occurredOn;
+        return $this->occurredAt;
     }
 }

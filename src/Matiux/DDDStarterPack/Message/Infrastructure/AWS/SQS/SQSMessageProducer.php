@@ -32,11 +32,21 @@ class SQSMessageProducer extends BasicMessageService implements MessageProducerC
         return $this->doSend($message);
     }
 
+    /**
+     * @param array $messages
+     *
+     * @return MessageProducerResponse
+     * @codeCoverageIgnore
+     */
     public function sendBatch(array $messages): MessageProducerResponse
     {
         throw new BadMethodCallException();
     }
 
+    /**
+     * @return int
+     * @codeCoverageIgnore
+     */
     public function getBatchLimit(): int
     {
         throw new BadMethodCallException();

@@ -49,7 +49,7 @@ class RabbitMQMessageConsumer extends RabbitMQMessanger implements MessageConsum
 
         while (count($this->channel->callbacks)) {
             if ($body) {
-                return $this->messageFactory->build($body, '', null, '', $deliveryTag);
+                return $this->messageFactory->build($body, '', $deliveryTag, '', null, null);
                 //return new ArrayObject(['Body' => $body, 'ReceiptHandle' => $deliveryTag]);
             }
 

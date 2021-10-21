@@ -29,6 +29,11 @@ class SQSConfigurationValidatorTest extends TestCase
 
         $valid = $this->validator->validate($configuration);
 
+        $errors = $this->validator->errors();
+
+        self::assertCount(1, $errors);
+        self::assertSame('Empty configs', current($errors));
+
         $this->assertFalse($valid);
     }
 

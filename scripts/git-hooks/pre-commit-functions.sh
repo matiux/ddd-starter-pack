@@ -3,7 +3,9 @@
 check_code_style() {
 
     # Formattazione del codice con PHP CS Fixer
-    ./dc php-cs-fixer-check "$PHP_STAGED_FILES"
+    #./dc php-cs-fixer-check-staged "$PHP_STAGED_FILES"
+    ./dc php-cs-fixer-check-staged
+
     STATUS=$?
 
     if [[ "$STATUS" -eq 0 ]]; then
@@ -17,8 +19,8 @@ check_code_style() {
         read -p $'\e[31mDo you really want to commit ignoring code style warnings? y/n/f[Fix] \e[0m: ' yn < /dev/tty
         case $yn in
             [Yy]* ) echo ""; echo "Please consider fixing code style"; return 0;;
-            [Nn]* ) echo "Run './dc php-cs-fixer-fix' to fix"; return 1;;
-            [Ff]* ) ./dc php-cs-fixer-fix; return 1;;
+            [Nn]* ) echo "Run './dc php-cs-fixer-fix-staged' to fix"; return 1;;
+            [Ff]* ) ./dc php-cs-fixer-fix-staged; return 1;;
             * ) echo "Please answer y, n or f.";;
         esac
     done

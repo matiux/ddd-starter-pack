@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace DDDStarterPack\Message\Infrastructure\InMemory;
 
+use DDDStarterPack\Message\Application\Message;
 use DDDStarterPack\Message\Application\MessageProducer;
 use DDDStarterPack\Message\Application\MessageProducerResponse;
 use InvalidArgumentException;
@@ -15,31 +16,36 @@ class InMemoryMessageProducer implements MessageProducer
 {
     public const BATCH_LIMIT = 10;
 
-    private $messageQueue;
-
-    public function __construct(InMemoryMessageQueue $messageQueue)
-    {
-        $this->messageQueue = $messageQueue;
+    public function __construct(
+        private InMemoryMessageQueue $messageQueue
+    ) {
     }
 
+    /**
+     * @param string $exchangeName
+     * @codeCoverageIgnore
+     */
     public function open(string $exchangeName = ''): void
     {
     }
 
     public function send($message): MessageProducerResponse
     {
-//        $payload['body'] = $message->body();
-//        $payload['type'] = $message->type();
-//        $payload['occurred_on'] = $message->occurredAt();
-//        $payload['notification_id'] = $message->id();
-
-        //$serializedMessage = json_encode($payload);
-
         $this->messageQueue->appendMessage($message);
 
-        return new InMemoryMessageProducerResponse(1, true, []);
+        $id = null;
+
+        if ($message instanceof Message) {
+            $id = (string) $message->id();
+        }
+
+        return new InMemoryMessageProducerResponse(sentMessages: 1, success: true, originalResponse: [], messageId: $id);
     }
 
+    /**
+     * @param string $exchangeName
+     * @codeCoverageIgnore
+     */
     public function close(string $exchangeName = ''): void
     {
     }
