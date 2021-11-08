@@ -30,8 +30,6 @@ class SQSMessageConsumerTest extends TestCase
 
     public function setUp(): void
     {
-        parent::setUp();
-
         $this->setQueueUrl(EnvVarUtil::get('AWS_SQS_QUEUE_NAME'));
         $this->purgeSqsQueue();
 

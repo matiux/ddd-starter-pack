@@ -23,6 +23,7 @@ $rules = [
     'phpdoc_to_comment' => false, // Needed to support @Desc annotation
     'single_line_throw' => false,
     'php_unit_method_casing' => ['case' => 'snake_case'],
+    'return_assignment' => false,
     'blank_line_before_statement' => [
         'statements' => [
             'break',

@@ -6,6 +6,6 @@ namespace DDDStarterPack\Exception\Application;
 
 use DDDStarterPack\Exception\Domain\DomainException;
 
-abstract class ApplicationException extends DomainException
+class ApplicationException extends DomainException
 {
 }

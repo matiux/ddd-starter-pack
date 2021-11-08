@@ -53,11 +53,13 @@ psalm() {
 }
 
 coding_standard_fix() {
+
+  #--stop-on-violation \
+
   ./vendor/bin/php-cs-fixer \
     fix \
     --verbose \
     --show-progress=dots \
-    --stop-on-violation \
     --cache-file="$TOOLS_PATH"/php-cs-fixer/.php-cs-fixer.cache \
     --config="$TOOLS_PATH"/php-cs-fixer/.php-cs-fixer.dist.php "$@"
 

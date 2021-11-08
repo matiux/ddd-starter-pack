@@ -52,7 +52,7 @@ trait SqsRawClient
             /** @var list<array{MessageId: string, ReceiptHandle: string, MD5OfBody: string, Body: string }> $messages */
             $messages = $this->pullFromSqsQueue(10)->get('Messages');
 
-            if (empty($message)) {
+            if (empty($messages)) {
                 break;
             }
 

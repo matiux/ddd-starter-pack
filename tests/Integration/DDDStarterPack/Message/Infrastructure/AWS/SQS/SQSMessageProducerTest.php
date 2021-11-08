@@ -28,6 +28,7 @@ class SQSMessageProducerTest extends TestCase
     use SnsRawClient;
 
     private DateTimeImmutable $occurredAt;
+    private Configuration $SQSConfiguration;
     private MessageConsumer $messageConsumer;
 
     protected function setUp(): void
@@ -37,14 +38,12 @@ class SQSMessageProducerTest extends TestCase
 
         $this->occurredAt = new DateTimeImmutable();
 
-        $SQSconfiguration = SQSConfigurationBuilder::create()
-            ->withRegion('eu-west-1')
+        $this->SQSConfiguration = SQSConfigurationBuilder::create()
+            ->withRegion(EnvVarUtil::get('AWS_DEFAULT_REGION'))
             ->withQueueUrl($this->getQueueUrl())
-            ->withAccessKey(EnvVarUtil::get('AWS_ACCESS_KEY_ID'))
-            ->withSecretKey(EnvVarUtil::get('AWS_SECRET_ACCESS_KEY'))
             ->build();
 
-        $this->messageConsumer = MessageConsumerFactory::create()->obtainConsumer($SQSconfiguration);
+        $this->messageConsumer = MessageConsumerFactory::create()->obtainConsumer($this->SQSConfiguration);
     }
 
     protected function tearDown(): void
@@ -97,15 +96,10 @@ class SQSMessageProducerTest extends TestCase
      * @group sqs
      * @group producer
      */
-    public function message_provider_can_send_message_in_queue(): void
+    public function message_producer_can_send_message_in_queue(): void
     {
-        $configuration = SQSConfigurationBuilder::create()
-            ->withRegion('eu-west-1')
-            ->withQueueUrl($this->getQueueUrl())
-            ->build();
-
         $factory = MessageProducerFactory::create();
-        $messageProducer = $factory->obtainProducer($configuration);
+        $messageProducer = $factory->obtainProducer($this->SQSConfiguration);
 
         $message = new AWSMessage(
             body: json_encode([
@@ -151,12 +145,8 @@ class SQSMessageProducerTest extends TestCase
      */
     public function it_should_send_message_on_topic_without_implied_queue_url(): void
     {
-        $configuration = SQSConfigurationBuilder::create()
-            ->withRegion('eu-west-1')
-            ->build();
-
         $factory = MessageProducerFactory::create();
-        $messageProducer = $factory->obtainProducer($configuration);
+        $messageProducer = $factory->obtainProducer($this->SQSConfiguration);
 
         $message = new AWSMessage(
             body: json_encode([
@@ -165,7 +155,6 @@ class SQSMessageProducerTest extends TestCase
             ]),
             occurredAt: $this->occurredAt,
             extra: [
-                'QueueUrl' => $this->getQueueUrl(),
                 'MessageGroupId' => Uuid::uuid4()->toString(),
                 'MessageDeduplicationId' => Uuid::uuid4()->toString(),
             ]

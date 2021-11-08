@@ -3,7 +3,7 @@
 check_code_style() {
 
   # Formattazione del codice con PHP CS Fixer
-  ./dc php-cs-fixer-check-staged
+  ./dc coding-standard-check-staged
 
   STATUS=$?
 
@@ -23,11 +23,11 @@ check_code_style() {
       return 0
       ;;
     [Nn]*)
-      echo "Run './dc php-cs-fixer-fix-staged' to fix"
+      echo "Run './dc coding-standard-fix-staged' to fix"
       return 1
       ;;
     [Ff]*)
-      ./dc php-cs-fixer-fix-staged
+      ./dc coding-standard-fix-staged
       return 1
       ;;
     *) echo "Please answer y, n or f." ;;

@@ -6,16 +6,31 @@ namespace DDDStarterPack\Aggregate\Infrastructure\Doctrine\Repository;
 
 use Doctrine\Bundle\DoctrineBundle\Registry;
 use Doctrine\ORM\EntityManagerInterface;
+use InvalidArgumentException;
 use Webmozart\Assert\Assert;
 
 abstract class DoctrineRepository
 {
     protected Registry $registry;
     protected EntityManagerInterface $em;
+
+    /**
+     * @var class-string
+     */
     private string $entityClassName;
 
+    /**
+     * @psalm-assert class-string $model
+     *
+     * @param Registry     $registry
+     * @param class-string $model
+     */
     public function __construct(Registry $registry, string $model)
     {
+        if (!class_exists($model)) {
+            throw new InvalidArgumentException(sprintf('`%s` is not a valid class-string', (string) $model));
+        }
+
         $this->registry = $registry;
 
         $em = $registry->getManagerForClass($model);
@@ -27,6 +42,9 @@ abstract class DoctrineRepository
         $this->entityClassName = $model;
     }
 
+    /**
+     * @return class-string
+     */
     public function getEntityClassName(): string
     {
         return $this->entityClassName;
