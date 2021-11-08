@@ -12,4 +12,4 @@ services:
 
   servicedb:
     ports:
-      - 3307:3306
+      - "3307:3306"

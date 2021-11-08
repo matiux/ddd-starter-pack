@@ -33,10 +33,10 @@ jobs:
         uses: "actions/checkout@v2"
 
       - name: Install dependencies
-        run: make install-dependencies
+        run: ./scripts/project/bin/project install_dependencies
 
       - name: Create Schema
-        run: make schema-create
+        run: ./scripts/project/bin/project schema-create
 
       - name: "Run unit tests (PHPUnit)"
         env:
@@ -46,10 +46,10 @@ jobs:
           AWS_DEFAULT_REGION: ${{ secrets.AWS_DEFAULT_REGION }}
           AWS_SQS_QUEUE_NAME: ${{ secrets.AWS_SQS_QUEUE_NAME }}
           AWS_SNS_TOPIC_ARN: ${{ secrets.AWS_SNS_TOPIC_ARN }}
-        run: make coverage
+        run: ./scripts/project/bin/project coverage
 
       - name: Upload coverage to Codecov
         uses: codecov/codecov-action@v1
         with:
           token: ${{ secrets.CODECOV_TOKEN }}
-          file: ./coverage.xml
+          file: ./.coverage/coverage-clover.xml

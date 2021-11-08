@@ -1,11 +1,28 @@
 .idea
 vendor
 .env
+
+###> Docker ###
 docker/docker-compose.override.yml
-.phpunit.result.cache
-/docker/data/shell_history/.x_history
+###< Docker ###
+
+###> phpunit ###
+.phpunit
+tools/phpunit/.phpunit.result.cache
+/phpunit.xml
+###< phpunit ###
+
+###> friendsofphp/php-cs-fixer ###
+.php_cs
 .php_cs.cache
 .php-cs-fixer.cache
-.coverage-clover.xml
-coverage.xml
-.coverage/
+lsp
+###< friendsofphp/php-cs-fixer ###
+
+###> code coverage ###
+/public/coverage/
+.coverage
+#/public/coverage-clover.xml
+/public/coverage-badge.svg
+/public/*.svg
+###< code coverage ###

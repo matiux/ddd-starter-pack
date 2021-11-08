@@ -24,10 +24,10 @@ jobs:
           extensions: bcmath, mbstring, intl, sodium, json
 
       - name: Install dependencies
-        run: make install-dependencies
+        run: ./scripts/project/bin/project install_dependencies
 
       - name: "running static analysis"
-        run: make static-analysis
+        run: ./scripts/project/bin/project psalm
 
       - name: "calculating type coverage"
-        run: make type-coverage
+        run: ./scripts/project/bin/project type-coverage

@@ -22,7 +22,7 @@ jobs:
           extensions: bcmath, mbstring, intl, sodium, json
 
       - name: Install dependencies
-        run: make install-dependencies
+        run: ./scripts/project/bin/project install_dependencies
 
       - name: "running security analysis ( psalm )"
-        run: make security-analysis
+        run: ./scripts/project/bin/project security-analysis

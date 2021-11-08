@@ -27,4 +27,4 @@ jobs:
             ${{ runner.os }}-php-
 
       - name: Install dependencies
-        run: make install-dependencies
+        run: ./scripts/project/bin/project install_dependencies

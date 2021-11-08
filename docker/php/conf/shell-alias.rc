@@ -1,4 +1,0 @@
-alias test-filter="make phpunit"
-alias test-all="make phpunit"
-alias psalm="make psalm"
-alias cs-fix="make coding-standard-fix ./src ./tests"

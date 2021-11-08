@@ -33,4 +33,21 @@ abstract class DomainException extends Exception
             'message' => $this->getMessage(),
         ];
     }
+
+    protected static function obtainMessage(null|Throwable $previous = null): string
+    {
+        $msg = '';
+
+        if (!$previous) {
+            return $msg;
+        }
+
+        $msg = $previous->getMessage();
+
+        if (empty($msg)) {
+            $msg = $previous->getPrevious()?->getMessage() ?? '';
+        }
+
+        return $msg;
+    }
 }

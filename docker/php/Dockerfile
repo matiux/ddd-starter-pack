@@ -1,4 +1,4 @@
-FROM matiux/php:8.0-fpm-debian-buster-dev
+FROM matiux/php:8.0-fpm-bullseye-dev
 
 USER root
 
@@ -19,9 +19,9 @@ RUN composer self-update
 USER utente
 
 ###> Bashrc con alias
-COPY conf/shell-alias.rc /tmp/shell-alias.rc
-RUN cat /tmp/shell-alias.rc >> /home/utente/.zshrc \
-    && cat /tmp/shell-alias.rc >> /home/utente/.bashrc
+COPY conf/shell-custom.rc /tmp/shell-custom.rc
+RUN cat /tmp/shell-custom.rc >> /home/utente/.zshrc \
+    && cat /tmp/shell-custom.rc >> /home/utente/.bashrc
 ###> Fine bashrc con alias
 
 USER www-data

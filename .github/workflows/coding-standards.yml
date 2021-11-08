@@ -21,7 +21,7 @@ jobs:
           extensions: bcmath, mbstring, intl, sodium, json
 
       - name: Install dependencies
-        run: make install-dependencies
+        run: ./scripts/project/bin/project install_dependencies
 
       - name: "coding-standard-check"
-        run: make coding-standard-check ./src ./tests
+        run: ./scripts/project/bin/project coding-standard-fix-all
