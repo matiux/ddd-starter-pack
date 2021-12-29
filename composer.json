@@ -12,11 +12,10 @@
   ],
   "description": "Basic Domain Driven Design utils",
   "require": {
-    "php": "^8.0",
+    "php": ">=8.0",
     "ext-json": "*",
-    "ext-sockets": "*",
     "ramsey/uuid": "^3.7|^4.0",
-    "symfony/options-resolver": "^5.0 | ^4.0",
+    "symfony/options-resolver": "^5.0 | ^4.0 | ^6.0",
     "webmozart/assert": "^1.9"
   },
   "require-dev": {
@@ -56,6 +55,9 @@
   },
   "config": {
     "optimize-autoloader": true,
-    "sort-packages": true
+    "sort-packages": true,
+    "allow-plugins": {
+      "composer/package-versions-deprecated": true
+    }
   }
 }
