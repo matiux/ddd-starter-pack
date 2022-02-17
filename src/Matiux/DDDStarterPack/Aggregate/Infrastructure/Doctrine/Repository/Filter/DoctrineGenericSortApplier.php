@@ -7,6 +7,7 @@ namespace DDDStarterPack\Aggregate\Infrastructure\Doctrine\Repository\Filter;
 use DDDStarterPack\Aggregate\Domain\Repository\Filter\FilterParams;
 use Doctrine\ORM\QueryBuilder;
 use InvalidArgumentException;
+use LogicException;
 
 abstract class DoctrineGenericSortApplier extends DoctrineFilterParamsApplier
 {
@@ -31,8 +32,11 @@ abstract class DoctrineGenericSortApplier extends DoctrineFilterParamsApplier
     {
         try {
             $sortField = (string) $filterParams->getFilterValueForKey($this->sortKey());
-
             $sortDirection = (string) $filterParams->getFilterValueForKey($this->sortDirectionKey(), 'ASC');
+
+            if (!array_key_exists($sortField, $this->fieldsMap)) {
+                throw new LogicException(sprintf('Invalid sort key: %s', $sortField));
+            }
 
             $target->orderBy($this->fieldsMap[$sortField], $sortDirection);
         } catch (InvalidArgumentException $e) {

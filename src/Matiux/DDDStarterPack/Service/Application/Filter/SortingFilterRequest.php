@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace DDDStarterPack\Service\Application\Filter;
 
-use DDDStarterPack\Domain\Aggregate\Repository\Filter\SortingFilterParamsApplierKeys;
+use DDDStarterPack\Aggregate\Domain\Repository\Filter\SortingFilterParamsApplierKeys;
 
 trait SortingFilterRequest
 {
