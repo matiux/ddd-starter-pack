@@ -4,7 +4,7 @@ USER root
 
 ENV TZ=Europe/Rome
 
-RUN docker-php-ext-install sockets
+#RUN docker-php-ext-install sockets
 RUN rm /usr/local/etc/php/conf.d/docker-php-memlimit.ini
 ADD conf/php.ini /usr/local/etc/php
 
