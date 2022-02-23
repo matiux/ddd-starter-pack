@@ -12,7 +12,7 @@
         <directory name="../../tests"/>
         <ignoreFiles>
             <directory name="../../vendor"/>
-            <directory name="../../src/Matiux/DDDStarterPack/Message/Infrastructure/RabbitMQ"/>
+            <directory name="../../src/Matiux/DDDStarterPack/Message/Infrastructure/Driver/RabbitMQ"/>
         </ignoreFiles>
     </projectFiles>
     <plugins>
