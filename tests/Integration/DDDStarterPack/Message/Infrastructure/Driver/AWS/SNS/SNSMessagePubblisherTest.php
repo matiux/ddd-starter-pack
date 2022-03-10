@@ -101,13 +101,6 @@ class SNSMessagePubblisherTest extends TestCase
      */
     public function it_should_publish_message_on_topic_without_implied_arn(): void
     {
-        $configuration = SNSConfigurationBuilder::create()
-            ->withRegion('eu-west-1')
-            ->build();
-
-        $factory = MessageProducerFactory::create();
-        $messageProducer = $factory->obtainProducer($configuration);
-
         $message = new AWSMessage(
             body: json_encode([
                 'Foo' => 'Bar',
@@ -128,7 +121,13 @@ class SNSMessagePubblisherTest extends TestCase
             ]
         );
 
-        $response = $messageProducer->send($message);
+        $response = MessageProducerFactory::create()
+            ->obtainProducer(
+                SNSConfigurationBuilder::create()
+                    ->withRegion('eu-west-1')
+                    ->build()
+            )
+            ->send($message);
 
         self::assertTrue($response->isSuccess());
         self::assertEquals(1, $response->sentMessages());

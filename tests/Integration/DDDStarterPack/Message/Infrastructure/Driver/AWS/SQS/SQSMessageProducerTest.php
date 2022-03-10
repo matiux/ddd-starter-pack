@@ -96,71 +96,44 @@ class SQSMessageProducerTest extends TestCase
      * @group sqs
      * @group producer
      */
-    public function message_producer_can_send_message_in_queue(): void
+    public function it_should_send_message_in_queue(): void
     {
-        $factory = MessageProducerFactory::create();
-        $messageProducer = $factory->obtainProducer($this->SQSConfiguration);
-
-        $message = new AWSMessage(
-            body: json_encode([
-                'Foo' => 'Bar',
-                'occurredAt' => $this->occurredAt->format(DateTimeInterface::RFC3339_EXTENDED),
-            ]),
-            occurredAt: $this->occurredAt,
-            id: Uuid::uuid4()->toString(),
-            extra: [
-                'MessageGroupId' => Uuid::uuid4()->toString(),
-                'MessageDeduplicationId' => Uuid::uuid4()->toString(),
-                'MessageAttributes' => [
-                    'Evento' => [
-                        'DataType' => 'String',
-                        'StringValue' => 'EventoAvvenuto',
-                    ],
-                ],
-            ]
-        );
-
-        $response = $messageProducer->send($message);
+        $response = MessageProducerFactory::create()
+            ->obtainProducer($this->SQSConfiguration)
+            ->send($this->createMessage());
 
         self::assertTrue($response->isSuccess());
         self::assertEquals(1, $response->sentMessages());
         self::assertInstanceOf(Result::class, $response->originalResponse());
-        $body = $response->body();
-        self::assertIsArray($body);
-        self::assertCount(5, $body);
+
+        self::assertIsArray($response->body());
+        self::assertCount(5, (array) $response->body());
         self::assertTrue(Uuid::isValid((string) $response->sentMessageId()));
 
         $message = $this->messageConsumer->consume();
 
         self::assertInstanceOf(AWSMessage::class, $message);
+        self::assertNotNull($message->id());
 
-        $receiptHandle = $message->id();
-        self::assertNotNull($receiptHandle);
-
-        $this->deleteMessage($receiptHandle);
+        $this->deleteMessage((string) $message->id());
     }
 
     /**
      * @test
      */
-    public function it_should_send_message_on_topic_without_implied_queue_url(): void
+    public function it_should_send_message_in_queue_without_implied_queue_url(): void
     {
-        $factory = MessageProducerFactory::create();
-        $messageProducer = $factory->obtainProducer($this->SQSConfiguration);
+        $SQSConfiguration = SQSConfigurationBuilder::create()
+            ->withRegion(EnvVarUtil::get('AWS_DEFAULT_REGION'))
+            ->build();
 
-        $message = new AWSMessage(
-            body: json_encode([
-                'Foo' => 'Bar',
-                'occurredAt' => $this->occurredAt->format(DateTimeInterface::RFC3339_EXTENDED),
-            ]),
-            occurredAt: $this->occurredAt,
-            extra: [
-                'MessageGroupId' => Uuid::uuid4()->toString(),
-                'MessageDeduplicationId' => Uuid::uuid4()->toString(),
-            ]
-        );
-
-        $response = $messageProducer->send($message);
+        $response = MessageProducerFactory::create()
+            ->obtainProducer($SQSConfiguration)
+            ->send(
+                $this->createMessage(
+                    extra: ['QueueUrl' => $this->getQueueUrl()]
+                )
+            );
 
         self::assertTrue($response->isSuccess());
         self::assertEquals(1, $response->sentMessages());
@@ -168,10 +141,61 @@ class SQSMessageProducerTest extends TestCase
         $message = $this->messageConsumer->consume();
 
         self::assertInstanceOf(AWSMessage::class, $message);
+        self::assertNotNull($message->id());
 
-        $receiptHandle = $message->id();
-        self::assertNotNull($receiptHandle);
+        $this->deleteMessage((string) $message->id());
+    }
 
-        $this->deleteMessage($receiptHandle);
+    /**
+     * @test
+     * @group sqs
+     * @group producer
+     */
+    public function it_should_send_message_batch_in_queue(): void
+    {
+        $response = MessageProducerFactory::create()
+            ->obtainProducer($this->SQSConfiguration)
+            ->sendBatch(
+                (array) $this->createMessage(2)
+            );
+
+        self::assertTrue($response->isSuccess());
+        self::assertEquals(2, $response->sentMessages());
+
+        $body = $this->messageConsumer->consume()?->body();
+        self::assertIsString($body);
+        self::assertMatchesRegularExpression('/"Foo":"Bar 0"/', $body);
+
+        $body = $this->messageConsumer->consume()?->body();
+        self::assertIsString($body);
+        self::assertMatchesRegularExpression('/"Foo":"Bar 1"/', $body);
+    }
+
+    private function createMessage(int $amount = 1, array $extra = []): array|AWSMessage
+    {
+        $result = [];
+
+        for ($i = 0; $i < $amount; ++$i) {
+            $result[] = new AWSMessage(
+                body: json_encode([
+                    'Foo' => sprintf('Bar %s', $i),
+                    'occurredAt' => $this->occurredAt->format(DateTimeInterface::RFC3339_EXTENDED),
+                ]),
+                occurredAt: $this->occurredAt,
+                id: Uuid::uuid4()->toString(),
+                extra: $extra + [
+                    'MessageGroupId' => sprintf('%s-%s', Uuid::uuid4()->toString(), $i),
+                    'MessageDeduplicationId' => sprintf('%s-%s', Uuid::uuid4()->toString(), $i),
+                    'MessageAttributes' => [
+                        'Evento' => [
+                            'DataType' => 'String',
+                            'StringValue' => 'EventoAvvenuto',
+                        ],
+                    ],
+                ]
+            );
+        }
+
+        return 1 === count($result) ? $result[0] : $result;
     }
 }

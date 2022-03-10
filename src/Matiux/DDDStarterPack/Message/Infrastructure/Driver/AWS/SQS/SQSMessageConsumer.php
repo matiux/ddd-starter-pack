@@ -157,6 +157,9 @@ class SQSMessageConsumer extends BasicMessageService implements MessageConsumerC
         };
     }
 
+    /**
+     * {@inheritDoc}
+     */
     public function consumeBatch(): array
     {
         throw new BadMethodCallException();

@@ -1,4 +1,5 @@
 #!/usr/bin/env bash
+
 WORKDIR=/var/www/app
 PROJECT_NAME=$(basename "$(pwd)" | tr '[:upper:]' '[:lower:]')
 PROJECT_TOOL=$WORKDIR/tools/bin/project
@@ -11,8 +12,10 @@ if [[ -f "./docker/docker-compose.override.yml" ]]; then
 fi
 
 DC_BASE_COMMAND="docker-compose --file docker/docker-compose.yml ${COMPOSE_OVERRIDE} -p ${PROJECT_NAME}"
+
 DC_RUN_BASE="${DC_BASE_COMMAND} run --rm"
 DC_RUN_NODEJS_NO_PSEUDO_TTY="${DC_RUN_BASE} -T nodejs"
+
 DC_EXEC_PHP="${DC_BASE_COMMAND} exec -u ${PHP_USER} -w ${WORKDIR} ${PHP_CONTAINER}"
 DC_EXEC_PHP_NO_PSEUDO_TTY="${DC_BASE_COMMAND} exec -T -u ${PHP_USER} -w ${WORKDIR} ${PHP_CONTAINER}"
 
@@ -40,3 +43,5 @@ elif [[ "$1" == "exec" ]]; then shift 1;                                ${DC_EXE
 elif [[ $# -gt 0 ]]; then                                               ${DC_BASE_COMMAND} "$@"
 else                                                                    ${DC_BASE_COMMAND} ps
 fi
+
+exit $?

@@ -15,6 +15,7 @@ use DDDStarterPack\Message\Infrastructure\Exception\MessageInvalidException;
 use DDDStarterPack\Message\Infrastructure\Message;
 use DDDStarterPack\Message\Infrastructure\MessageProducerConnector;
 use DDDStarterPack\Message\Infrastructure\MessageProducerResponse;
+use Webmozart\Assert\Assert;
 
 /**
  * @psalm-suppress PropertyNotSetInConstructor
@@ -27,46 +28,61 @@ class SQSMessageProducer extends BasicMessageService implements MessageProducerC
 
     public const NAME = 'SQS';
 
+    /**
+     * {@inheritDoc}
+     */
     public function send($message): MessageProducerResponse
     {
         return $this->doSend($message);
     }
 
-    /**
-     * @param array $messages
-     *
-     * @return MessageProducerResponse
-     * @codeCoverageIgnore
-     */
-    public function sendBatch(array $messages): MessageProducerResponse
+    private function doSend(AWSMessage $AWSMessage): MessageProducerResponse
     {
-        throw new BadMethodCallException();
+        $result = $this->getClient()->sendMessage(
+            $this->prepareMessage($AWSMessage)
+        );
+
+        if (!$this->isValidSent($AWSMessage, $result)) {
+            throw new MessageInvalidException('Message sent but corrupt');
+        }
+
+        return new AWSMessageProducerResponse(1, $result);
     }
 
-    /**
-     * @return int
-     * @codeCoverageIgnore
-     */
-    public function getBatchLimit(): int
+    private function prepareMessage(AWSMessage $AWSMessage): array
     {
-        throw new BadMethodCallException();
+        $extraAttributes = $this->extractExtraAttributesFromMessage($AWSMessage);
+        $attributes = $this->extractAttributesFromMessage($AWSMessage);
+
+        $result = $extraAttributes + [
+            'MessageBody' => $AWSMessage->body(),
+            'MessageAttributes' => $attributes,
+        ];
+
+        if (!array_key_exists('QueueUrl', $result)) {
+            $result['QueueUrl'] = $this->getQueueUrlFromConfig();
+        }
+
+        return $result;
     }
 
     /**
      * @psalm-suppress MixedAssignment
      *
-     * @param array $extra
+     * @param AWSMessage $AWSMessage
      *
      * @return array
      */
-    protected function parseExtra(array $extra): array
+    protected function extractExtraAttributesFromMessage(AWSMessage $AWSMessage): array
     {
-        if (empty($extra)) {
+        if (empty($AWSMessage->extra())) {
             return [];
         }
 
-        /** @psalm-var array<array-key, mixed> $e */
-        $e = [];
+        $extra = $AWSMessage->extra();
+
+        /** @psalm-var array<array-key, mixed> $result */
+        $result = [];
 
         foreach ($extra as $key => $value) {
             switch ($key) {
@@ -82,40 +98,16 @@ class SQSMessageProducer extends BasicMessageService implements MessageProducerC
                      * https://docs.aws.amazon.com/AWSSimpleQueueService/latest/SQSDeveloperGuide/FIFO-queues.html#FIFO-queues-exactly-once-processing
                      * https://docs.aws.amazon.com/AWSSimpleQueueService/latest/SQSDeveloperGuide/using-messagegroupid-property.html.
                      */
-                    $e[$key] = $value;
+                    $result[$key] = $value;
 
                     break;
             }
         }
 
-        return $e;
+        return $result;
     }
 
-    private function doSend(AWSMessage $message): MessageProducerResponse
-    {
-        $messageAttributes = $this->createMessageAttributes($message);
-
-        $extra = $this->parseExtra($message->extra());
-
-        $args = $extra + [
-            'MessageBody' => $message->body(),
-            'MessageAttributes' => $messageAttributes,
-        ];
-
-        if (!array_key_exists('QueueUrl', $args)) {
-            $args['QueueUrl'] = $this->getQueueUrlFromConfig();
-        }
-
-        $result = $this->getClient()->sendMessage($args);
-
-        if (!$this->isValidSent($message, $result)) {
-            throw new MessageInvalidException('Message sent but corrupt');
-        }
-
-        return new AWSMessageProducerResponse(1, $result);
-    }
-
-    private function createMessageAttributes(AWSMessage $message): array
+    private function extractAttributesFromMessage(AWSMessage $message): array
     {
         $messageAttributes = [];
 
@@ -138,6 +130,46 @@ class SQSMessageProducer extends BasicMessageService implements MessageProducerC
         }
 
         return $messageAttributes;
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    public function sendBatch(array $messages): MessageProducerResponse
+    {
+        $toSendMessages = [];
+
+        foreach ($messages as $message) {
+            $toSendMessages[] = $this->prepareBatchMessage($message);
+        }
+
+        $result = $this->getClient()->sendMessageBatch([
+            'QueueUrl' => $this->getQueueUrlFromConfig(),
+            'Entries' => $toSendMessages,
+        ]);
+
+        Assert::isArray($result['Successful']);
+
+        return new AWSMessageProducerResponse(count($result['Successful']), $result);
+    }
+
+    private function prepareBatchMessage(AWSMessage $message): array
+    {
+        $result = $this->prepareMessage($message);
+
+        $result['Id'] = $message->id() ?? md5($message->body());
+        unset($result['QueueUrl']);
+
+        return $result;
+    }
+
+    /**
+     * @return int
+     * @codeCoverageIgnore
+     */
+    public function getBatchLimit(): int
+    {
+        throw new BadMethodCallException();
     }
 
     private function isValidSent(Message $message, Result $result): bool

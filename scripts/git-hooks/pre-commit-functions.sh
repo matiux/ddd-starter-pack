@@ -4,7 +4,6 @@ check_code_style() {
 
   # Formattazione del codice con PHP CS Fixer
   ./dc coding-standard-check-staged
-
   STATUS=$?
 
   if [[ "$STATUS" -eq 0 ]]; then
