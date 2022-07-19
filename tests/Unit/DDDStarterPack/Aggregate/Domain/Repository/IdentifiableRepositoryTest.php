@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Tests\Unit\DDDStarterPack\Aggregate\Domain\Repository;
 
 use DDDStarterPack\Aggregate\Domain\Repository\IdentifiableRepository;
+use DDDStarterPack\Aggregate\Domain\UuidEntityId;
 use PHPUnit\Framework\TestCase;
 use Tests\Support\Model\Person;
 use Tests\Support\Model\PersonId;
@@ -21,15 +22,15 @@ class IdentifiableRepositoryTest extends TestCase
         $repo = new InMemoryRepository($personId);
 
         // Psalm gets angry - as it should be
-        //$repo->ofId(35);
-        //$repo->ofId(null);
+        // $repo->ofId(35);
+        // $repo->ofId(null);
 
         $person = $repo->ofId($personId);
 
         self::assertNotNull($person);
 
         $personId = $repo->nextIdentity();
-        self::assertFalse($personId->isNull());
+        self::assertTrue(UuidEntityId::isValidUuid($personId->id()));
     }
 }
 

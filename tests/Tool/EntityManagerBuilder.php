@@ -13,7 +13,7 @@ use Doctrine\ORM\ORMSetup;
 use Doctrine\Persistence\ObjectRepository;
 use InvalidArgumentException;
 use Nyholm\Dsn\DsnParser;
-use Tests\Support\Model\Doctrine\DoctrinePersonId;
+use Tests\Support\Model\Doctrine\DoctrineUuidPersonId;
 
 class EntityManagerBuilder
 {
@@ -68,7 +68,7 @@ class EntityManagerBuilder
         $builder = new self($isDevMode);
 
         if (!Type::hasType('PersonId')) {
-            Type::addType('PersonId', DoctrinePersonId::class);
+            Type::addType('PersonId', DoctrineUuidPersonId::class);
         }
 
         $builder->ems['default'] = EntityManager::create($builder->connectionParams, $builder->config);

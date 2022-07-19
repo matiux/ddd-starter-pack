@@ -21,9 +21,9 @@ class CommandServiceTest extends TestCase
         $service = new MyCommandService($store);
 
         // Psalm gets angry - as it should be
-        //$service->execute();
-        //$service->execute(2);
-        //$service->execute([]);
+        // $service->execute();
+        // $service->execute(2);
+        // $service->execute([]);
 
         $service->execute(new MyCommand());
 

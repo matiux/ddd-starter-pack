@@ -37,7 +37,7 @@ class RabbitMQMessageConsumer extends RabbitMQMessanger implements MessageConsum
              * Inviando la conferma il messaggio verrà definitivamente cancellato dalla coda. No conferma = no cancellazione dalla coda e reinvio
              * a un nuovo worker.
              */
-            //$msg->delivery_info['channel']->basic_ack($msg->delivery_info['delivery_tag']);
+            // $msg->delivery_info['channel']->basic_ack($msg->delivery_info['delivery_tag']);
         };
 
         $this->channel->basic_qos(null, 1, null);
@@ -50,7 +50,7 @@ class RabbitMQMessageConsumer extends RabbitMQMessanger implements MessageConsum
         while (count($this->channel->callbacks)) {
             if ($body) {
                 return $this->messageFactory->build($body, '', $deliveryTag, '', null, null);
-                //return new ArrayObject(['Body' => $body, 'ReceiptHandle' => $deliveryTag]);
+                // return new ArrayObject(['Body' => $body, 'ReceiptHandle' => $deliveryTag]);
             }
 
             try {

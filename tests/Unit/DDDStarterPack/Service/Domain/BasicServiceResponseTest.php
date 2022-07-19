@@ -14,7 +14,7 @@ class BasicServiceResponseTest extends TestCase
      */
     public function create_error_response(): void
     {
-        //$response = ServiceResponse::error('Error message'); // Psalm si arrabbia, giustamente
+        // $response = ServiceResponse::error('Error message'); // Psalm si arrabbia, giustamente
         $response = ServiceResponse::error(['status' => 'Error message']);
 
         self::assertSame(['status' => 'Error message'], $response->body());

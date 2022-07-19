@@ -28,10 +28,10 @@ class SQSMessageConsumer extends BasicMessageService implements MessageConsumerC
     public const NAME = 'SQS';
 
     /** @var string[] */
-    private array $attributeNames = ['All']; //'ApproximateReceiveCount'
+    private array $attributeNames = ['All']; // 'ApproximateReceiveCount'
 
     /** @var string[] */
-    private array $messageAttributeNames = ['All']; //'Type', 'OccurredAt'
+    private array $messageAttributeNames = ['All']; // 'Type', 'OccurredAt'
 
     public function __construct(
         private AWSMessageFactory $AWSMessageFactory

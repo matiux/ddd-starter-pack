@@ -4,16 +4,16 @@ declare(strict_types=1);
 
 namespace DDDStarterPack\Aggregate\Infrastructure\Doctrine;
 
-use DDDStarterPack\Aggregate\Domain\BasicEntityId;
 use DDDStarterPack\Aggregate\Domain\EntityId;
+use DDDStarterPack\Aggregate\Domain\UuidEntityId;
 use Doctrine\DBAL\Platforms\AbstractPlatform;
 use Doctrine\DBAL\Types\GuidType;
 
-abstract class DoctrineEntityId extends GuidType
+abstract class DoctrineUuidEntityId extends GuidType
 {
     public function convertToDatabaseValue($value, AbstractPlatform $platform)
     {
-        return $value instanceof EntityId ? $value->id() : $value ?? null;
+        return $value instanceof UuidEntityId ? $value->id() : $value ?? null;
     }
 
     public function convertToPHPValue($value, AbstractPlatform $platform)
@@ -35,25 +35,24 @@ abstract class DoctrineEntityId extends GuidType
     /**
      * @param mixed $value
      *
-     * @return null|int|string
+     * @return null|string
      */
-    private function prepareValue(mixed $value): null|int|string
+    private function prepareValue(mixed $value): null|string
     {
         return match (true) {
             is_object($value), is_null($value) => null,
-            is_int($value) => $value,
             default => (string) $value
         };
     }
 
     /**
-     * @param int|string $value
+     * @param string $value
      *
      * @return bool
      */
-    private function isValidUuid(int|string $value): bool
+    private function isValidUuid(string $value): bool
     {
-        return is_string($value) && BasicEntityId::isValidUuid($value);
+        return UuidEntityId::isValidUuid($value);
     }
 
     protected function isCustomValid(): bool

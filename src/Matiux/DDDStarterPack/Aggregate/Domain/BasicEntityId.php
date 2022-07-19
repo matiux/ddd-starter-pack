@@ -4,55 +4,18 @@ declare(strict_types=1);
 
 namespace DDDStarterPack\Aggregate\Domain;
 
-use Exception;
-use InvalidArgumentException;
-use Ramsey\Uuid\Uuid;
-
-class BasicEntityId implements EntityId
+/**
+ * @template T
+ * @implements EntityId<T>
+ */
+abstract class BasicEntityId implements EntityId
 {
-    public const UUID_PATTERN = '/^[0-9a-f]{8}-[0-9a-f]{4}-4[0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$/';
-
-    final protected function __construct(
-        private null|int|string $id
-    ) {
-    }
-
-    public function __toString(): string
-    {
-        return !$this->id ? '' : (string) $this->id;
-    }
-
     /**
-     * @throws Exception
-     *
-     * @return static
+     * @param T $id
      */
-    public static function create(): static
-    {
-        return new static(Uuid::uuid4()->toString());
-    }
-
-    public static function createFrom(int|string $id): static
-    {
-        if (!$id) {
-            throw new InvalidArgumentException(sprintf('Invalid ID: %s', $id));
-        }
-
-        return new static($id);
-    }
-
-    public static function createNUll(): static
-    {
-        return new static(null);
-    }
-
-    public static function isValidUuid(string $uuid): bool
-    {
-        if (1 === preg_match(self::UUID_PATTERN, $uuid)) {
-            return true;
-        }
-
-        return false;
+    final protected function __construct(
+        protected $id
+    ) {
     }
 
     public function equals(EntityId $entityId): bool
@@ -60,13 +23,11 @@ class BasicEntityId implements EntityId
         return $this->id() === $entityId->id();
     }
 
-    public function id(): null|int|string
+    /**
+     * @return T
+     */
+    public function id()
     {
         return $this->id;
-    }
-
-    public function isNull(): bool
-    {
-        return is_null($this->id);
     }
 }

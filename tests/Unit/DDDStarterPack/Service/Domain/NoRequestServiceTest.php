@@ -17,8 +17,8 @@ class NoRequestServiceTest extends TestCase
         $service = new MyNoRequestService();
 
         // Psalm gets angry - as it should be
-        //$service->execute(new \stdClass());
-        //$service->execute('Foo');
+        // $service->execute(new \stdClass());
+        // $service->execute('Foo');
 
         $result = $service->execute();
 

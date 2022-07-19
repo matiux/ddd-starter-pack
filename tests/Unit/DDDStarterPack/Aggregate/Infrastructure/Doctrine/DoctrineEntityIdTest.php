@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Tests\Unit\DDDStarterPack\Aggregate\Infrastructure\Doctrine;
 
-use DDDStarterPack\Aggregate\Infrastructure\Doctrine\DoctrineEntityId;
+use DDDStarterPack\Aggregate\Infrastructure\Doctrine\DoctrineUuidEntityId;
 use Doctrine\DBAL\Platforms\AbstractPlatform;
 use Mockery;
 use PHPUnit\Framework\TestCase;
@@ -17,8 +17,8 @@ class DoctrineEntityIdTest extends TestCase
      */
     public function php_value_should_be_same_of_input_if_database_value_is_not_valid_uuid_or_custom_valid(): void
     {
-        MyId::addType('MyId', MyId::class);
-        $id = MyId::getType('MyId');
+        MyIdUuid::addType('MyId', MyIdUuid::class);
+        $id = MyIdUuid::getType('MyId');
 
         $phpValue = $id->convertToPHPValue('foo_id', Mockery::mock(AbstractPlatform::class));
 
@@ -26,7 +26,7 @@ class DoctrineEntityIdTest extends TestCase
     }
 }
 
-class MyId extends DoctrineEntityId
+class MyIdUuid extends DoctrineUuidEntityId
 {
     protected function getFQCN(): string
     {

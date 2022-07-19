@@ -4,17 +4,26 @@ declare(strict_types=1);
 
 namespace DDDStarterPack\Aggregate\Domain;
 
+/**
+ * @template I of mixed
+ */
 interface EntityId
 {
-    public function __toString(): string;
-
     public static function create(): static;
 
-    public static function createFrom(int|string $id): static;
+    /**
+     * @template T of I
+     *
+     * @param T $id
+     *
+     * @return static
+     */
+    public static function createFrom($id): static;
 
-    public static function createNull(): static;
-
-    public function id(): null|int|string;
+    /**
+     * @return I
+     */
+    public function id();
 
     public function equals(EntityId $entityId): bool;
 }

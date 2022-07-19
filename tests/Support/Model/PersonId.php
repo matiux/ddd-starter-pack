@@ -4,8 +4,8 @@ declare(strict_types=1);
 
 namespace Tests\Support\Model;
 
-use DDDStarterPack\Aggregate\Domain\BasicEntityId;
+use DDDStarterPack\Aggregate\Domain\UuidEntityId;
 
-class PersonId extends BasicEntityId
+class PersonId extends UuidEntityId
 {
 }
