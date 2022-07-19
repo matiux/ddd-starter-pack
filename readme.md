@@ -2,6 +2,7 @@ DDD Starter Pack
 =====
 
 ![check dependencies](https://github.com/matiux/ddd-starter-pack/actions/workflows/check-dependencies.yml/badge.svg)
+![check deps vulnerability](https://github.com/matiux/ddd-starter-pack/actions/workflows/dependencies-vulnerability.yml/badge.svg)
 ![test](https://github.com/matiux/ddd-starter-pack/actions/workflows/tests.yml/badge.svg)
 [![codecov](https://codecov.io/gh/matiux/ddd-starter-pack/branch/v3/graph/badge.svg)](https://codecov.io/gh/matiux/ddd-starter-pack)
 [![type coverage](https://shepherd.dev/github/matiux/ddd-starter-pack/coverage.svg)](https://shepherd.dev/github/matiux/ddd-starter-pack)
