@@ -9,7 +9,7 @@ use Doctrine\DBAL\Types\Type;
 use Doctrine\ORM\Configuration;
 use Doctrine\ORM\EntityManager;
 use Doctrine\ORM\EntityRepository;
-use Doctrine\ORM\Tools\Setup;
+use Doctrine\ORM\ORMSetup;
 use Doctrine\Persistence\ObjectRepository;
 use InvalidArgumentException;
 use Nyholm\Dsn\DsnParser;
@@ -37,7 +37,7 @@ class EntityManagerBuilder
         $this->createPaths();
         $this->prepareConnectionParams();
 
-        $this->config = Setup::createXMLMetadataConfiguration($this->paths, $this->isDevMode);
+        $this->config = ORMSetup::createXMLMetadataConfiguration($this->paths, $this->isDevMode);
     }
 
     private function createPaths(): void
