@@ -42,7 +42,7 @@ class DomainCollection implements Iterator, Countable
     /**
      * @return T
      */
-    public function current()
+    public function current(): mixed
     {
         return $this->items[$this->position];
     }

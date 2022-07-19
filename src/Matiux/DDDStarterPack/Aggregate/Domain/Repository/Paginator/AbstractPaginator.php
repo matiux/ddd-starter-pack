@@ -32,7 +32,7 @@ abstract class AbstractPaginator implements Paginator
     }
 
     /** @return I */
-    public function current()
+    public function current(): mixed
     {
         return $this->iterator->current();
     }
