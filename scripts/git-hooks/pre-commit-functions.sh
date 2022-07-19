@@ -27,7 +27,7 @@ check_code_style() {
       ;;
     [Ff]*)
       ./dc coding-standard-fix-staged
-      return 1
+      return $?
       ;;
     *) echo "Please answer y, n or f." ;;
     esac
@@ -57,7 +57,6 @@ check_psalm() {
     *) echo "Please answer y or n." ;;
     esac
   done
-
 }
 
 check_phpunit() {

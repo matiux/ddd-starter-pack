@@ -76,12 +76,8 @@ while :; do
     php_staged_files
     break
     ;;
-  setup-test)
-    APP_RUNTIME_ENV='test' setup
-    break
-    ;;
-  setup-dev)
-    APP_RUNTIME_ENV='dev' setup
+  setup)
+    setup
     break
     ;;
   schema-create)
@@ -136,8 +132,7 @@ while :; do
     echo \
       install_dependencies \
       php_staged_files \
-      setup-test \
-      setup-dev \
+      setup \
       schema-create \
       phpunit \
       coverage \
