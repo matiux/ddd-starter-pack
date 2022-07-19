@@ -2,7 +2,9 @@ name: "Security analysis"
 
 on:
   pull_request: ~
-  push: ~
+  push:
+    branches:
+      - v3
   workflow_dispatch: ~
 
 jobs:

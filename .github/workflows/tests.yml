@@ -2,20 +2,20 @@ name: "Test"
 
 on:
   pull_request: ~
-  push: ~
+  push:
+    branches:
+      - v3
   workflow_dispatch: ~
 
 jobs:
-
   run-tests:
     name: Run tests
     env:
       DATABASE_URL: mysql://root:root@127.0.0.1:32574/ddd_sp_test?serverVersion=5
     runs-on: "ubuntu-latest"
-#    container: ubuntu
+    #container: ubuntu
 
     services:
-
       servicedb:
         image: mariadb:10.3.22
         env:
@@ -28,6 +28,11 @@ jobs:
     steps:
       - name: Verify MySQL connection from container
         run: mysql --host 127.0.0.1 --port 32574 -uroot -proot -e "SHOW DATABASES"
+
+      - name: Setup PHP
+        uses: shivammathur/setup-php@v2
+        with:
+          php-version: '8.0'
 
       - name: Checkout code
         uses: "actions/checkout@v2"

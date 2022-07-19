@@ -2,7 +2,10 @@ name: "Coding standards"
 
 on:
   pull_request: ~
-  push: ~
+  push:
+    branches:
+      - v3
+  workflow_dispatch: ~
 
 jobs:
   coding-standards:

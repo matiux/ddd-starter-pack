@@ -2,10 +2,10 @@ name: "Static analysis"
 
 on:
   pull_request: ~
+  push:
+    branches:
+      - v3
   workflow_dispatch: ~
-  push: ~
-#  schedule:
-#    - cron: '0 */3 * * *'
 
 jobs:
   static-analysis:

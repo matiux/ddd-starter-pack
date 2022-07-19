@@ -32,6 +32,12 @@ composer install
 ## test
 Eseguire l'alias `test`
 
+This repository uses GitHub actions to perform some checks. If you want to test the actions locally you can use [act](https://github.com/nektos/act).
+For example if you want to check the action for static analysis
+```
+act -P ubuntu-latest=shivammathur/node:latest --job static-analysis
+```
+
 #### Moduli
 
 * [Aggregate](doc/aggregate.md)
