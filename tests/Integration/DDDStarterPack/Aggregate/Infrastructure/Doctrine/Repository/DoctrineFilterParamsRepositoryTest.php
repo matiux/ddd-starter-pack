@@ -61,16 +61,22 @@ class DoctrineFilterParamsRepositoryTest extends TestCase
 
         $filterParams = $filterParamsBuilder->build(['sort_field' => 'name', 'sort_direction' => 'DESC', 'page' => 2, 'per_page' => 2]);
 
+        $items = $this->repository->byFilterParamsWithPagination($filterParams);
+
+        self::assertInstanceOf(Paginator::class, $items);
+        self::assertCount(1, $items);
+        self::assertSame($p1, $items->current());
+
         $items = $this->repository->byFilterParams($filterParams);
 
         self::assertCount(1, $items);
-
-        $person = $items->current();
-
-        self::assertSame($p1, $person);
+        self::assertSame($p1, $items[0]);
     }
 }
 
+/**
+ * @extends DoctrineFilterParamsRepository<Person>
+ */
 class MyFilterParamsRepository extends DoctrineFilterParamsRepository
 {
     public function aggiungi(Person $person): void
@@ -79,7 +85,12 @@ class MyFilterParamsRepository extends DoctrineFilterParamsRepository
         $this->em->flush();
     }
 
-    public function byFilterParams(FilterParams $filterParams): Paginator
+    public function byFilterParamsWithPagination(FilterParams $filterParams): Paginator
+    {
+        return $this->doByFilterParamsWithPagination($filterParams);
+    }
+
+    public function byFilterParams(FilterParams $filterParams): array
     {
         return $this->doByFilterParams($filterParams);
     }

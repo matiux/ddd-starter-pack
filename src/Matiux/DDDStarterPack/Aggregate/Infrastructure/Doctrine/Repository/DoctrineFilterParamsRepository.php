@@ -9,9 +9,42 @@ use DDDStarterPack\Aggregate\Domain\Repository\Paginator\Paginator;
 use Doctrine\ORM\QueryBuilder;
 use Webmozart\Assert\Assert;
 
+/**
+ * @template T
+ */
 abstract class DoctrineFilterParamsRepository extends DoctrineRepository
 {
-    protected function doByFilterParams(FilterParams $filterParams): Paginator
+    /**
+     * @param FilterParams $filterParams
+     *
+     * @return Paginator<T>
+     */
+    protected function doByFilterParamsWithPagination(FilterParams $filterParams): Paginator
+    {
+        $qb = $this->createQuery($filterParams);
+
+        [$offset, $limit] = $this->calculatePagination($filterParams, $qb);
+
+        return $this->createPaginator($qb, $offset, $limit);
+    }
+
+    /**
+     * @param FilterParams $filterParams
+     *
+     * @return T[]
+     */
+    protected function doByFilterParams(FilterParams $filterParams): array
+    {
+        $qb = $this->createQuery($filterParams);
+
+        $results = $qb->getQuery()->getResult();
+
+        Assert::isArray($results);
+
+        return $results;
+    }
+
+    private function createQuery(FilterParams $filterParams): QueryBuilder
     {
         $qb = $this->em->createQueryBuilder();
 
@@ -20,9 +53,7 @@ abstract class DoctrineFilterParamsRepository extends DoctrineRepository
 
         $filterParams->applyToTarget($qb);
 
-        [$offset, $limit] = $this->calculatePagination($filterParams, $qb);
-
-        return $this->createPaginator($qb, $offset, $limit);
+        return $qb;
     }
 
     /**
@@ -57,7 +88,7 @@ abstract class DoctrineFilterParamsRepository extends DoctrineRepository
      * @param int          $offset
      * @param int          $limit
      *
-     * @return Paginator
+     * @return Paginator<T>
      */
     abstract protected function createPaginator(QueryBuilder $qb, int $offset, int $limit): Paginator;
 
