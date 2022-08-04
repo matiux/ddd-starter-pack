@@ -16,7 +16,7 @@ class DomainCollection implements Iterator, Countable
 {
     private int $position = 0;
 
-    /** @var array<int, T> */
+    /** @var list<T> */
     private array $items = [];
 
     /**
@@ -73,7 +73,7 @@ class DomainCollection implements Iterator, Countable
     }
 
     /**
-     * @return T[]
+     * @return list<T>
      */
     public function toArray(): array
     {
