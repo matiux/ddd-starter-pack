@@ -9,6 +9,4 @@ use DateTimeImmutable;
 interface DomainEvent
 {
     public function occurredAt(): DateTimeImmutable;
-
-    public function id(): string;
 }
