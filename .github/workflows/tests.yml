@@ -16,7 +16,7 @@ jobs:
     #container: ubuntu
 
     services:
-      servicedb:
+      ddd-starter-pack-db:
         image: mariadb:10.3.22
         env:
           MYSQL_ROOT_PASSWORD: root

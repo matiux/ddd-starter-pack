@@ -6,10 +6,10 @@ ENV TZ=Europe/Rome
 
 #RUN docker-php-ext-install sockets
 RUN rm /usr/local/etc/php/conf.d/docker-php-memlimit.ini
-ADD conf/php.ini /usr/local/etc/php
+ADD ./docker/php/conf/php.ini /usr/local/etc/php
 
 ###> Configurazione Xdebug
-COPY conf/xdebug-starter.sh /usr/local/bin/xdebug-starter
+COPY ./docker/php/conf/xdebug-starter.sh /usr/local/bin/xdebug-starter
 RUN chmod +x /usr/local/bin/xdebug-starter
 RUN /usr/local/bin/xdebug-starter
 ###> Fine configurazione Xdebug
@@ -19,7 +19,7 @@ RUN composer self-update
 USER utente
 
 ###> Bashrc con alias
-COPY conf/shell-custom.rc /tmp/shell-custom.rc
+COPY ./docker/php/conf/shell-custom.rc /tmp/shell-custom.rc
 RUN cat /tmp/shell-custom.rc >> /home/utente/.zshrc \
     && cat /tmp/shell-custom.rc >> /home/utente/.bashrc
 ###> Fine bashrc con alias

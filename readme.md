@@ -25,9 +25,9 @@ rm -rf .git/hooks && ln -s ../scripts/git-hooks .git/hooks
 
 #### Entrare nel container PHP per lo sviluppo
 ```
-./dc up -d
-./dc enter
-composer install
+make build-php ARG=--no-cache
+make upd
+make project ARG=setup
 ```
 
 ## test

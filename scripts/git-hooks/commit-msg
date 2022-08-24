@@ -1,2 +1,3 @@
-#!/usr/bin/env bash
-./dc conventional
+#!/bin/bash
+
+make conventional

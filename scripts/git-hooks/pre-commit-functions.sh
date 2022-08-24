@@ -3,7 +3,7 @@
 check_code_style() {
 
   # Formattazione del codice con PHP CS Fixer
-  ./dc coding-standard-check-staged
+  make coding-standard-check-staged
   STATUS=$?
 
   if [[ "$STATUS" -eq 0 ]]; then
@@ -22,11 +22,11 @@ check_code_style() {
       return 0
       ;;
     [Nn]*)
-      echo "Run './dc coding-standard-fix-staged' to fix"
+      echo "Run 'make coding-standard-fix-staged' to fix"
       return 1
       ;;
     [Ff]*)
-      ./dc coding-standard-fix-staged
+      make coding-standard-fix-staged
       return $?
       ;;
     *) echo "Please answer y, n or f." ;;
@@ -37,7 +37,7 @@ check_code_style() {
 check_psalm() {
 
   # Analisi statica del codice con Psalm
-  ./dc psalm
+  make psalm
   STATUS=$?
 
   if [[ "$STATUS" -eq 0 ]]; then
@@ -59,10 +59,34 @@ check_psalm() {
   done
 }
 
+check_psalm_taint_analysis() {
+  # Analisi statica del codice con Psalm
+  make psalm-taint
+  STATUS=$?
+
+  if [[ "$STATUS" -eq 0 ]]; then
+    echo -e "\e[42mPHP Taint analysis Analysis is OK\e[m"
+    return 0 # true
+  fi
+
+  while true; do
+    read -p $'\e[31mDo you really want to commit ignoring taint analysis errors? y/n \e[0m: ' yn </dev/tty
+    case $yn in
+    [Yy]*)
+      echo ""
+      echo "Please consider fixing taint analysis errors"
+      return 0
+      ;;
+    [Nn]*) return 1 ;; # No commit
+    *) echo "Please answer y or n." ;;
+    esac
+  done
+}
+
 check_phpunit() {
 
   # Esecuzione dei test con phpunit
-  ./dc phpunit
+  make phpunit
   STATUS=$?
 
   if [[ "$STATUS" -eq 0 ]]; then
@@ -74,21 +98,16 @@ check_phpunit() {
   return 1
 }
 
-#check_deptrac() {
-#
-#  FILES="config/deptrac/*"
-#  for f in $FILES; do
-#    ./dc deptrac "$f"
-#    STATUS=$?
-#
-#    if [[ "$STATUS" -eq 0 ]]; then
-#      echo ""
-#      echo -e "\e[42mDeptrac $f is OK\e[m"
-#    else
-#      echo -e "\e[31m Deptrac $f if failed\e[m"
-#      return 1
-#    fi
-#  done
-#
-#  return 0 # true
-#}
+check_dependencies_vulnerabilities() {
+
+  make check-deps-vulnerabilities
+
+  STATUS=$?
+
+  if [[ "$STATUS" -gt 0 ]]; then
+    echo "Dependency vulnerability problem"
+    return 1 # true
+  fi
+
+  return 0
+}

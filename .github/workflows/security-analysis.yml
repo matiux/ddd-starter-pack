@@ -27,4 +27,4 @@ jobs:
         run: ./tools/bin/project install_dependencies
 
       - name: "running security analysis ( psalm )"
-        run: ./tools/bin/project security-analysis
+        run: ./tools/bin/project psalm-taint

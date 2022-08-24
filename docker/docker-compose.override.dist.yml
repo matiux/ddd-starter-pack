@@ -1,15 +1,15 @@
 version: '3.7'
 
 services:
-  php_ddd_starter_pack:
+  ddd-starter-pack-php:
     environment:
       - AWS_ACCESS_KEY_ID=
       - AWS_SECRET_ACCESS_KEY=
       - AWS_DEFAULT_REGION=eu-west-1
       - AWS_SQS_QUEUE_NAME=https://sqs.eu-west-1.amazonaws.com/685681845681/ddd-starter-pack-test-queue.fifo
       - AWS_SNS_TOPIC_ARN=arn:aws:sns:eu-west-1:685681845681:ddd-starter-pack-test-topic.fifo
-      - DATABASE_URL=mysql://root:root@servicedb:3306/ddd_sp_test?serverVersion=5.7
+      - DATABASE_URL=mysql://root:root@ddd-starter-pack-db:3306/ddd_sp_test?serverVersion=5.7
 
-  servicedb:
+  ddd-starter-pack-db:
     ports:
       - "3307:3306"

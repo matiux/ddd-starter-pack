@@ -1,42 +1,44 @@
 version: '3.7'
 
 networks:
-  ddd_starter_pack_network:
-    name: ddd_starter_pack_network
+  ddd-starter-pack-network:
+    name: ddd-starter-pack-network
     driver: bridge
 
 volumes:
-  app_database: {}
+  ddd-starter-pack-database-volume: {}
 
 services:
-  php_ddd_starter_pack:
+  ddd-starter-pack-php:
+    image: ddd-starter-pack-php
     build: php
-    hostname: dddsp_host
+    hostname: dddsp
     volumes:
       - ../:/var/www/app
       - ./data/shell_history:/home/utente/shell_history
     networks:
-      - ddd_starter_pack_network
+      - ddd-starter-pack-network
     environment:
       - HISTFILE=/home/utente/shell_history/.x_history
 
-  servicedb:
+  ddd-starter-pack-db:
     image: mariadb:10.3.22
     volumes:
-      - app_database:/var/lib/mysql
+      - ddd-starter-pack-database-volume:/var/lib/mysql
       - ./mysql/custom.cnf:/etc/mysql/conf.d/custom.cnf
     environment:
       - MYSQL_ROOT_PASSWORD=root
       - MYSQL_DATABASE=ddd_sp_test
     command: mysqld --sql_mode="" #Per mysql, non serve per mariadb
     networks:
-      - ddd_starter_pack_network
+      - ddd-starter-pack-network
 
-  nodejs:
+  ddd-starter-pack-nodejs:
+    image: ddd-starter-pack-nodejs
     build: nodejs
     working_dir: /var/www/app
     #command: "commitlint -e --from=HEAD"
     volumes:
       - ../:/var/www/app
     networks:
-      - ddd_starter_pack_network
+      - ddd-starter-pack-network

@@ -9,6 +9,17 @@ php_staged_files() {
   echo "$PHP_STAGED_FILES"
 }
 
+check_deps_vulnerabilities() {
+  composer update --dry-run roave/security-advisories
+
+  local STATUS=$?
+
+  if [[ "$STATUS" -eq 0 ]]; then
+    echo -e "\e[42mDependency vulnerability check is OK\e[m"
+    return 0 # true
+  fi
+}
+
 install_dependencies() {
   composer install --prefer-dist --no-progress
 }
@@ -80,6 +91,10 @@ while :; do
     setup
     break
     ;;
+  check-deps-vulnerabilities)
+    check_deps_vulnerabilities
+    break
+    ;;
   schema-create)
     schema_create
     break;
@@ -96,7 +111,7 @@ while :; do
     psalm "$@"
     exit $?
     ;;
-  security-analysis)
+  psalm-taint)
     psalm --taint-analysis
     exit $?
     ;;
@@ -133,11 +148,12 @@ while :; do
       install_dependencies \
       php_staged_files \
       setup \
+      check-deps-vulnerabilities \
       schema-create \
       phpunit \
       coverage \
       psalm \
-      security-analysis \
+      psalm-taint \
       type-coverage \
       coding-standard-fix \
       coding-standard-fix-all \
