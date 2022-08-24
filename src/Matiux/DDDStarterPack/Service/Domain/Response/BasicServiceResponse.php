@@ -126,7 +126,13 @@ abstract class BasicServiceResponse implements ServiceResponse
         return $this->code;
     }
 
-    abstract protected function errorCode(): int;
+    protected function errorCode(): int
+    {
+        return (int) static::ERROR_CODE;
+    }
 
-    abstract protected function successCode(): int;
+    protected function successCode(): int
+    {
+        return (int) static::SUCCESS_CODE;
+    }
 }
