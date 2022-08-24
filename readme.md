@@ -31,7 +31,9 @@ make project ARG=setup
 ```
 
 ## test
-Eseguire l'alias `test`
+make build-php ARG=--no-cache
+make upd
+make test
 
 This repository uses GitHub actions to perform some checks. If you want to test the actions locally you can use [act](https://github.com/nektos/act).
 For example if you want to check the action for static analysis
