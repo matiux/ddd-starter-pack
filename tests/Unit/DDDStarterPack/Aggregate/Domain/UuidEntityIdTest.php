@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Tests\Unit\DDDStarterPack\Aggregate\Domain;
 
-use DDDStarterPack\Aggregate\Domain\UuidEntityId;
+use DDDStarterPack\Aggregate\Domain\UuidV4EntityId;
 use InvalidArgumentException;
 use PHPUnit\Framework\TestCase;
 
@@ -15,7 +15,7 @@ class UuidEntityIdTest extends TestCase
      */
     public function create_randomic_uuid(): void
     {
-        self::assertMatchesRegularExpression(UuidEntityId::UUID_PATTERN, (string) UuidEntityId::create());
+        self::assertMatchesRegularExpression(UuidV4EntityId::UUID_PATTERN, (string) UuidV4EntityId::create());
     }
 
     /**
@@ -23,7 +23,7 @@ class UuidEntityIdTest extends TestCase
      */
     public function create_specific_uuid(): void
     {
-        $myId = UuidEntityId::createFrom('79fe4c6b-87f6-4093-98f9-ce6a193ab2a5');
+        $myId = UuidV4EntityId::createFrom('79fe4c6b-87f6-4093-98f9-ce6a193ab2a5');
 
         self::assertEquals('79fe4c6b-87f6-4093-98f9-ce6a193ab2a5', $myId->id());
         self::assertIsString($myId->id());
@@ -47,7 +47,7 @@ class UuidEntityIdTest extends TestCase
     {
         self::expectException(InvalidArgumentException::class);
 
-        UuidEntityId::createFrom('');
+        UuidV4EntityId::createFrom('');
     }
 
     /**
@@ -55,7 +55,7 @@ class UuidEntityIdTest extends TestCase
      */
     public function is_should_verify_if_id_is_in_uuid_v4_format(): void
     {
-        self::assertTrue(UuidEntityId::isValidUuid('79fe4c6b-87f6-4093-98f9-ce6a193ab2a5'));
-        self::assertFalse(UuidEntityId::isValidUuid('12345'));
+        self::assertTrue(UuidV4EntityId::isValidUuid('79fe4c6b-87f6-4093-98f9-ce6a193ab2a5'));
+        self::assertFalse(UuidV4EntityId::isValidUuid('12345'));
     }
 }

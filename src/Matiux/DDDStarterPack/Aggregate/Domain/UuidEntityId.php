@@ -11,9 +11,11 @@ use Ramsey\Uuid\Uuid;
 /**
  * @extends  BasicEntityId<string>
  */
-class UuidEntityId extends BasicEntityId
+abstract class UuidEntityId extends BasicEntityId
 {
-    public const UUID_PATTERN = '/^[0-9a-f]{8}-[0-9a-f]{4}-4[0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$/';
+    // public const UUID_PATTERN = '/^[0-9a-f]{8}-[0-9a-f]{4}-4[0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$/';
+    // See https://github.com/ramsey/uuid/blob/4.x/src/Validator/GenericValidator.php#L32
+    public const UUID_PATTERN = '/\A[0-9A-Fa-f]{8}-[0-9A-Fa-f]{4}-[0-9A-Fa-f]{4}-[0-9A-Fa-f]{4}-[0-9A-Fa-f]{12}\z/';
 
     public function __toString(): string
     {
@@ -25,10 +27,7 @@ class UuidEntityId extends BasicEntityId
      *
      * @return static
      */
-    public static function create(): static
-    {
-        return new static(Uuid::uuid4()->toString());
-    }
+    abstract public static function create(): static;
 
     /**
      * @param string $id
