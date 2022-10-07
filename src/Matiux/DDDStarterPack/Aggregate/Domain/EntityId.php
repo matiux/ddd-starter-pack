@@ -23,7 +23,7 @@ interface EntityId
     /**
      * @return I
      */
-    public function id();
+    public function value();
 
     public function equals(EntityId $entityId): bool;
 }

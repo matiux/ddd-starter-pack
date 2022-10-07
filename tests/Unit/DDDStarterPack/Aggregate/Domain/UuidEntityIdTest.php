@@ -25,8 +25,8 @@ class UuidEntityIdTest extends TestCase
     {
         $myId = UuidV4EntityId::createFrom('79fe4c6b-87f6-4093-98f9-ce6a193ab2a5');
 
-        self::assertEquals('79fe4c6b-87f6-4093-98f9-ce6a193ab2a5', $myId->id());
-        self::assertIsString($myId->id());
+        self::assertEquals('79fe4c6b-87f6-4093-98f9-ce6a193ab2a5', $myId->value());
+        self::assertIsString($myId->value());
     }
 
 //    /**

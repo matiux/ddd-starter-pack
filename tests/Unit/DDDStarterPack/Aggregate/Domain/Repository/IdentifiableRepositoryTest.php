@@ -30,7 +30,7 @@ class IdentifiableRepositoryTest extends TestCase
         self::assertNotNull($person);
 
         $personId = $repo->nextIdentity();
-        self::assertTrue(UuidEntityId::isValidUuid($personId->id()));
+        self::assertTrue(UuidEntityId::isValidUuid($personId->value()));
     }
 }
 

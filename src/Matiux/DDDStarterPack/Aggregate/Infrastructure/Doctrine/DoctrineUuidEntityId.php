@@ -13,7 +13,7 @@ abstract class DoctrineUuidEntityId extends GuidType
 {
     public function convertToDatabaseValue($value, AbstractPlatform $platform)
     {
-        return $value instanceof UuidEntityId ? $value->id() : $value ?? null;
+        return $value instanceof UuidEntityId ? $value->value() : $value ?? null;
     }
 
     public function convertToPHPValue($value, AbstractPlatform $platform)

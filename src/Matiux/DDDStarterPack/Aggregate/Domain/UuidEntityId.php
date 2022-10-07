@@ -19,7 +19,7 @@ abstract class UuidEntityId extends BasicEntityId
 
     public function __toString(): string
     {
-        return !$this->id ? '' : $this->id;
+        return empty($this->value()) ? '' : $this->value();
     }
 
     /**
