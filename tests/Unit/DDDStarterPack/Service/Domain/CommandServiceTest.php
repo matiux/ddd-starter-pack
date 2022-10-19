@@ -55,11 +55,19 @@ class MyCommandService implements CommandService
     }
 
     /**
-     * @param MyCommand $request
+     * @param MyCommand $command
      */
-    public function execute($request): void
+    public function execute($command): void
     {
-        $this->store->log($request->operation());
+        $this->store->log($command->operation());
+    }
+
+    /**
+     * @param MyCommand $command
+     */
+    public function __invoke($command): void
+    {
+        $this->execute($command);
     }
 }
 

@@ -39,6 +39,16 @@ class MyService implements Service
     {
         return $request->getData();
     }
+
+    /**
+     * @param MyRequest $request
+     *
+     * @return array
+     */
+    public function __invoke($request): array
+    {
+        return $this->execute($request);
+    }
 }
 
 class MyRequest

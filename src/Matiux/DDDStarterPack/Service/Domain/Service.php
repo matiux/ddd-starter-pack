@@ -16,4 +16,11 @@ interface Service
      * @return O
      */
     public function execute($request);
+
+    /**
+     * @param I $request
+     *
+     * @return O
+     */
+    public function __invoke($request);
 }
