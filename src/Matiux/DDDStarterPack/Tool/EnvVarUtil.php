@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace DDDStarterPack\Util;
+namespace DDDStarterPack\Tool;
 
 class EnvVarUtil
 {

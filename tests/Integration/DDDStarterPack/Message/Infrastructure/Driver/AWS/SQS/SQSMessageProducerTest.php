@@ -17,7 +17,7 @@ use DDDStarterPack\Message\Infrastructure\Exception\InvalidConfigurationExceptio
 use DDDStarterPack\Message\Infrastructure\Factory\MessageConsumerFactory;
 use DDDStarterPack\Message\Infrastructure\Factory\MessageProducerFactory;
 use DDDStarterPack\Message\Infrastructure\MessageConsumer;
-use DDDStarterPack\Util\EnvVarUtil;
+use DDDStarterPack\Tool\EnvVarUtil;
 use InvalidArgumentException;
 use PHPUnit\Framework\TestCase;
 use Ramsey\Uuid\Uuid;

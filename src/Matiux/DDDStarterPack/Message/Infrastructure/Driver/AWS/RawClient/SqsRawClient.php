@@ -6,7 +6,7 @@ namespace DDDStarterPack\Message\Infrastructure\Driver\AWS\RawClient;
 
 use Aws\Result;
 use Aws\Sqs\SqsClient;
-use DDDStarterPack\Util\EnvVarUtil;
+use DDDStarterPack\Tool\EnvVarUtil;
 use Webmozart\Assert\Assert;
 
 trait SqsRawClient

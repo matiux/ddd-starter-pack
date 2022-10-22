@@ -5,7 +5,7 @@ declare(strict_types=1);
 namespace DDDStarterPack\Message\Infrastructure\Driver\AWS\RawClient;
 
 use Aws\Credentials\Credentials;
-use DDDStarterPack\Util\EnvVarUtil;
+use DDDStarterPack\Tool\EnvVarUtil;
 
 trait AWSCredentials
 {
