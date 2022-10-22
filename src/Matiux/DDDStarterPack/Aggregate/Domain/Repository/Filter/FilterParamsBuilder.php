@@ -6,6 +6,7 @@ namespace DDDStarterPack\Aggregate\Domain\Repository\Filter;
 
 use InvalidArgumentException;
 use LogicException;
+use Traversable;
 
 class FilterParamsBuilder
 {
@@ -15,10 +16,14 @@ class FilterParamsBuilder
     protected bool $frozen = false;
 
     /**
-     * @param FilterParamsApplier[] $appliers
+     * @param FilterParamsApplier[]|Traversable<FilterParamsApplier> $appliers
      */
-    public function __construct(array $appliers = [])
+    public function __construct($appliers = [])
     {
+        if ($appliers instanceof Traversable) {
+            $appliers = iterator_to_array($appliers);
+        }
+
         foreach ($appliers as $applier) {
             $this->addApplier($applier);
         }
