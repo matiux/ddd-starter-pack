@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace DDDStarterPack\Aggregate\Domain;
+namespace DDDStarterPack\Aggregate\Domain\Identifier;
 
 /**
  * @template I of mixed

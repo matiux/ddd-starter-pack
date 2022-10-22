@@ -2,10 +2,10 @@
 
 declare(strict_types=1);
 
-namespace DDDStarterPack\Aggregate\Infrastructure\Doctrine;
+namespace DDDStarterPack\Aggregate\Infrastructure\Doctrine\Identifier;
 
-use DDDStarterPack\Aggregate\Domain\EntityId;
-use DDDStarterPack\Aggregate\Domain\UuidEntityId;
+use DDDStarterPack\Aggregate\Domain\Identifier\EntityId;
+use DDDStarterPack\Aggregate\Domain\Identifier\UuidEntityId;
 use Doctrine\DBAL\Platforms\AbstractPlatform;
 use Doctrine\DBAL\Types\GuidType;
 

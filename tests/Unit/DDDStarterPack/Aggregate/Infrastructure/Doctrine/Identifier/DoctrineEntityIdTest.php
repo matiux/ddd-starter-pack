@@ -2,9 +2,9 @@
 
 declare(strict_types=1);
 
-namespace Tests\Unit\DDDStarterPack\Aggregate\Infrastructure\Doctrine;
+namespace Tests\Unit\DDDStarterPack\Aggregate\Infrastructure\Doctrine\Identifier;
 
-use DDDStarterPack\Aggregate\Infrastructure\Doctrine\DoctrineUuidEntityId;
+use DDDStarterPack\Aggregate\Infrastructure\Doctrine\Identifier\DoctrineUuidEntityId;
 use Doctrine\DBAL\Platforms\AbstractPlatform;
 use Mockery;
 use PHPUnit\Framework\TestCase;
