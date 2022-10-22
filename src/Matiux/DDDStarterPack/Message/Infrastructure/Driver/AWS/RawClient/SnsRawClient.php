@@ -5,7 +5,7 @@ declare(strict_types=1);
 namespace DDDStarterPack\Message\Infrastructure\Driver\AWS\RawClient;
 
 use Aws\Sns\SnsClient;
-use DDDStarterPack\Util\EnvVarUtil;
+use DDDStarterPack\Tool\EnvVarUtil;
 use Webmozart\Assert\Assert;
 
 trait SnsRawClient

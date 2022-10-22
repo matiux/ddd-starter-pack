@@ -7,7 +7,7 @@ namespace Tests\Unit\DDDStarterPack\Message\Infrastructure\Factory;
 use DDDStarterPack\Message\Infrastructure\Driver\AWS\SQS\Configuration\SQSConfigurationBuilder;
 use DDDStarterPack\Message\Infrastructure\Driver\AWS\SQS\SQSMessageConsumer;
 use DDDStarterPack\Message\Infrastructure\Factory\MessageConsumerFactory;
-use DDDStarterPack\Util\EnvVarUtil;
+use DDDStarterPack\Tool\EnvVarUtil;
 use PHPUnit\Framework\TestCase;
 
 class MessageConsumerFactoryTest extends TestCase

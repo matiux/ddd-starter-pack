@@ -14,7 +14,7 @@ use DDDStarterPack\Message\Infrastructure\Driver\AWS\SQS\Configuration\SQSConfig
 use DDDStarterPack\Message\Infrastructure\Factory\MessageConsumerFactory;
 use DDDStarterPack\Message\Infrastructure\Factory\MessageProducerFactory;
 use DDDStarterPack\Message\Infrastructure\MessageConsumer;
-use DDDStarterPack\Util\EnvVarUtil;
+use DDDStarterPack\Tool\EnvVarUtil;
 use PHPUnit\Framework\TestCase;
 use Ramsey\Uuid\Uuid;
 
