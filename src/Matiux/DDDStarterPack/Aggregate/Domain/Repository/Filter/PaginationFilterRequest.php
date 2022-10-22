@@ -2,9 +2,7 @@
 
 declare(strict_types=1);
 
-namespace DDDStarterPack\Service\Application\Filter;
-
-use DDDStarterPack\Aggregate\Domain\Repository\Filter\PaginationFilterParamsApplierKeys;
+namespace DDDStarterPack\Aggregate\Domain\Repository\Filter;
 
 trait PaginationFilterRequest
 {
