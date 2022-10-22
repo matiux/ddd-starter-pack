@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Tests\Unit\DDDStarterPack\Aggregate\Domain;
 
-use DDDStarterPack\Aggregate\Domain\UuidV4EntityId;
+use DDDStarterPack\Aggregate\Domain\Identifier\UuidV4EntityId;
 use InvalidArgumentException;
 use PHPUnit\Framework\TestCase;
 

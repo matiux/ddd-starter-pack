@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace DDDStarterPack\Event;
 
-use DDDStarterPack\Aggregate\Domain\BasicEntityId;
+use DDDStarterPack\Aggregate\Domain\Identifier\BasicEntityId;
 use DDDStarterPack\Type\DateTimeRFC;
 
 /**

@@ -2,11 +2,10 @@
 
 declare(strict_types=1);
 
-namespace DDDStarterPack\Aggregate\Domain;
+namespace DDDStarterPack\Aggregate\Domain\Identifier;
 
 use Exception;
 use InvalidArgumentException;
-use Ramsey\Uuid\Uuid;
 
 /**
  * @extends  BasicEntityId<string>
