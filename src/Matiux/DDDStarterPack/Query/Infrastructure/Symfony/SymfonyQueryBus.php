@@ -11,7 +11,7 @@ use Symfony\Component\Messenger\HandleTrait;
 use Symfony\Component\Messenger\MessageBusInterface;
 use Webmozart\Assert\Assert;
 
-class SymfonyQueryBus implements QueryBus
+class SymfonyQueryBus extends QueryBus
 {
     use HandleTrait;
 

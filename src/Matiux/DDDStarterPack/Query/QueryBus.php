@@ -4,7 +4,12 @@ declare(strict_types=1);
 
 namespace DDDStarterPack\Query;
 
-interface QueryBus
+abstract class QueryBus
 {
-    public function query(Query $query): mixed;
+    abstract public function query(Query $query): mixed;
+
+    public function __invoke(Query $query): mixed
+    {
+        return $this->query($query);
+    }
 }
