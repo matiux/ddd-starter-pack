@@ -13,7 +13,7 @@ abstract class DoctrineGenericSortApplier extends DoctrineFilterApplier
 {
     protected const KEY = 'sorting';
 
-    /** @var array<string, string> */
+    /** @var array<array-key, string> */
     protected array $fieldsMap;
 
     abstract protected function sortDirectionKey(): string;
