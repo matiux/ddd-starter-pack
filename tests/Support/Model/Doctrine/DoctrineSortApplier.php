@@ -4,11 +4,11 @@ declare(strict_types=1);
 
 namespace Tests\Support\Model\Doctrine;
 
-use DDDStarterPack\Aggregate\Domain\Repository\Filter\FilterParams;
-use DDDStarterPack\Aggregate\Domain\Repository\Filter\FilterParamsApplier;
+use DDDStarterPack\Aggregate\Domain\Repository\Filter\FilterApplier;
+use DDDStarterPack\Aggregate\Domain\Repository\Filter\FilterApplierRegistry;
 use DDDStarterPack\Aggregate\Infrastructure\Doctrine\Repository\Filter\DoctrineGenericSortApplier;
 
-class DoctrineSortApplier extends DoctrineGenericSortApplier implements FilterParamsApplier
+class DoctrineSortApplier extends DoctrineGenericSortApplier implements FilterApplier
 {
     public function __construct()
     {
@@ -25,7 +25,7 @@ class DoctrineSortApplier extends DoctrineGenericSortApplier implements FilterPa
         return 'sort_field';
     }
 
-    public function supports(FilterParams $filterParams): bool
+    public function supports(FilterApplierRegistry $filterApplierRegistry): bool
     {
         return true;
     }

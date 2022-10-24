@@ -4,10 +4,10 @@ declare(strict_types=1);
 
 namespace DDDStarterPack\Aggregate\Infrastructure\Doctrine\Repository\Filter;
 
-use DDDStarterPack\Aggregate\Domain\Repository\Filter\FilterParams;
+use DDDStarterPack\Aggregate\Domain\Repository\Filter\FilterApplierRegistry;
 use Doctrine\ORM\QueryBuilder;
 
-abstract class DoctrineGenericPaginationApplier extends DoctrineFilterParamsApplier
+abstract class DoctrineGenericPaginationApplier extends DoctrineFilterApplier
 {
     protected const KEY = 'pagination';
 
@@ -23,16 +23,16 @@ abstract class DoctrineGenericPaginationApplier extends DoctrineFilterParamsAppl
     /**
      * @psalm-param QueryBuilder $target
      *
-     * @param FilterParams $filterParams
-     * @param mixed        $target
+     * @param FilterApplierRegistry $filterApplierRegistry
+     * @param mixed                 $target
      */
-    public function apply($target, FilterParams $filterParams): void
+    public function apply($target, FilterApplierRegistry $filterApplierRegistry): void
     {
         /** @var int $page */
-        $page = $filterParams->getFilterValueForKey($this->pageKey(), '1');
+        $page = $filterApplierRegistry->getFilterValueForKey($this->pageKey(), '1');
 
         /** @var int $perPage */
-        $perPage = $filterParams->getFilterValueForKey($this->perPageKey());
+        $perPage = $filterApplierRegistry->getFilterValueForKey($this->perPageKey());
 
         if (-1 !== $perPage) {
             $offset = ($page - 1) * $perPage;

@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Tests\Integration\DDDStarterPack\Aggregate\Infrastructure\Doctrine\Repository\Filter;
 
-use DDDStarterPack\Aggregate\Domain\Repository\Filter\FilterParamsBuilder;
+use DDDStarterPack\Aggregate\Domain\Repository\Filter\FilterBuilder;
 use Doctrine\ORM\QueryBuilder;
 use PHPUnit\Framework\TestCase;
 use Tests\Support\Model\Doctrine\DoctrineSortApplier;
@@ -36,7 +36,7 @@ class DoctrineGenericSortApplierTest extends TestCase
             (string) $this->qb->getQuery()->getDQL()
         );
 
-        $filterParamsBuilder = new FilterParamsBuilder();
+        $filterParamsBuilder = new FilterBuilder();
         $filterParamsBuilder->addApplier(new DoctrineSortApplier());
 
         $filterParams = $filterParamsBuilder->build(['sort_field' => 'name', 'sort_direction' => 'ASC']);
@@ -70,7 +70,7 @@ class DoctrineGenericSortApplierTest extends TestCase
             (string) $this->qb->getQuery()->getDQL()
         );
 
-        $filterParamsBuilder = new FilterParamsBuilder();
+        $filterParamsBuilder = new FilterBuilder();
         $filterParamsBuilder->addApplier(new DoctrineSortApplier());
 
         $filterParams = $filterParamsBuilder->build(['sort_field' => null, 'sort_direction' => 'ASC']);
@@ -96,7 +96,7 @@ class DoctrineGenericSortApplierTest extends TestCase
             (string) $this->qb->getQuery()->getDQL()
         );
 
-        $filterParamsBuilder = new FilterParamsBuilder();
+        $filterParamsBuilder = new FilterBuilder();
         $filterParamsBuilder->addApplier(new DoctrineSortApplier());
 
         $filterParams = $filterParamsBuilder->build(['sort_field' => 'name']);

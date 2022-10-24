@@ -5,8 +5,8 @@ declare(strict_types=1);
 namespace Tests\Integration\DDDStarterPack\Aggregate\Infrastructure\Doctrine\Repository;
 
 use ArrayObject;
-use DDDStarterPack\Aggregate\Domain\Repository\Filter\FilterParams;
-use DDDStarterPack\Aggregate\Domain\Repository\Filter\FilterParamsBuilder;
+use DDDStarterPack\Aggregate\Domain\Repository\Filter\FilterApplierRegistry;
+use DDDStarterPack\Aggregate\Domain\Repository\Filter\FilterBuilder;
 use DDDStarterPack\Aggregate\Domain\Repository\Paginator\Paginator;
 use DDDStarterPack\Aggregate\Infrastructure\Doctrine\Repository\DoctrineFilterParamsRepository;
 use Doctrine\Bundle\DoctrineBundle\Registry;
@@ -55,7 +55,7 @@ class DoctrineFilterParamsRepositoryTest extends TestCase
         $this->repository->aggiungi(Person::crea(PersonId::create(), 'B_Met', 35));
         $this->repository->aggiungi(Person::crea(PersonId::create(), 'Z_Teo', 35));
 
-        $filterParamsBuilder = new FilterParamsBuilder();
+        $filterParamsBuilder = new FilterBuilder();
         $filterParamsBuilder->addApplier(new DoctrineSortApplier());
         $filterParamsBuilder->addApplier(new DoctrinePaginationApplier());
 
@@ -85,12 +85,12 @@ class MyFilterParamsRepository extends DoctrineFilterParamsRepository
         $this->em->flush();
     }
 
-    public function byFilterParamsWithPagination(FilterParams $filterParams): Paginator
+    public function byFilterParamsWithPagination(FilterApplierRegistry $filterParams): Paginator
     {
         return $this->doByFilterParamsWithPagination($filterParams);
     }
 
-    public function byFilterParams(FilterParams $filterParams): array
+    public function byFilterParams(FilterApplierRegistry $filterParams): array
     {
         return $this->doByFilterParams($filterParams);
     }

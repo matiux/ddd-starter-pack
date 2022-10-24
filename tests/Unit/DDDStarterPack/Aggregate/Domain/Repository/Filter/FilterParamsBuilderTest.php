@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Tests\Unit\DDDStarterPack\Aggregate\Domain\Repository\Filter;
 
-use DDDStarterPack\Aggregate\Domain\Repository\Filter\FilterParamsBuilder;
+use DDDStarterPack\Aggregate\Domain\Repository\Filter\FilterBuilder;
 use InvalidArgumentException;
 use LogicException;
 use PHPUnit\Framework\TestCase;
@@ -17,10 +17,10 @@ class FilterParamsBuilderTest extends TestCase
      */
     public function it_should_create_a_filterparams_by_builder(): void
     {
-        $filterParamsBuilder = new FilterParamsBuilder(
+        $filterParamsBuilder = new FilterBuilder(
             [
-                new DummyFilterParamsApplier('name'),
-                new DummyFilterParamsApplier('skills'),
+                new DummyFilterApplier('name'),
+                new DummyFilterApplier('skills'),
             ]
         );
 
@@ -52,10 +52,10 @@ class FilterParamsBuilderTest extends TestCase
         self::expectException(InvalidArgumentException::class);
         self::expectExceptionMessage('Applier for key \'name\' is already set');
 
-        (new FilterParamsBuilder(
+        (new FilterBuilder(
             [
-                new DummyFilterParamsApplier('name'),
-                new DummyFilterParamsApplier('name'),
+                new DummyFilterApplier('name'),
+                new DummyFilterApplier('name'),
             ]
         ))->build(
             [
@@ -74,15 +74,15 @@ class FilterParamsBuilderTest extends TestCase
         $this->expectException(LogicException::class);
         $this->expectExceptionMessage('The builder is frozen');
 
-        $filterParamsBuilder = new FilterParamsBuilder();
-        $filterParamsBuilder->addApplier(new DummyFilterParamsApplier('name'));
+        $filterParamsBuilder = new FilterBuilder();
+        $filterParamsBuilder->addApplier(new DummyFilterApplier('name'));
 
         $filterParamsBuilder->build([
             'name' => 'Matteo',
             'skills' => ['architecture', 'programming'],
         ]);
 
-        $filterParamsBuilder->addApplier(new DummyFilterParamsApplier('skills'));
+        $filterParamsBuilder->addApplier(new DummyFilterApplier('skills'));
     }
 }
 

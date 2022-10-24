@@ -6,39 +6,39 @@ namespace DDDStarterPack\Aggregate\Domain\Repository\Filter;
 
 use InvalidArgumentException;
 
-class FilterParams
+class FilterApplierRegistry
 {
-    /** @var FilterParamsApplier[] */
-    protected array $appliers = [];
+    /** @var FilterApplier[] */
+    protected array $filterAppliers = [];
 
     /**
-     * @param array<array-key, FilterParamsApplier> $appliers
-     * @param array                                 $neededFilters
+     * @param array<array-key, FilterApplier> $filterAppliers
+     * @param array                           $neededFilters
      */
-    public function __construct(array $appliers, protected array $neededFilters)
+    public function __construct(array $filterAppliers, protected array $neededFilters)
     {
-        $this->setAppliers($appliers);
+        $this->setAppliers($filterAppliers);
     }
 
     /**
-     * @param FilterParamsApplier[] $appliers
+     * @param FilterApplier[] $filterAppliers
      */
-    private function setAppliers(array $appliers): void
+    private function setAppliers(array $filterAppliers): void
     {
-        foreach ($appliers as $applier) {
+        foreach ($filterAppliers as $applier) {
             $this->addApplier($applier);
         }
     }
 
-    public function addApplier(FilterParamsApplier $applier): void
+    public function addApplier(FilterApplier $filterApplier): void
     {
-        $key = $applier->key();
+        $key = $filterApplier->key();
 
-        if (isset($this->appliers[$key])) {
+        if (isset($this->filterAppliers[$key])) {
             throw new InvalidArgumentException("Applier for key '{$key}' is already set");
         }
 
-        $this->appliers[$key] = $applier;
+        $this->filterAppliers[$key] = $filterApplier;
     }
 
     /**
@@ -63,7 +63,7 @@ class FilterParams
 
     public function applyToTarget(mixed $target): void
     {
-        foreach ($this->appliers as $applier) {
+        foreach ($this->filterAppliers as $applier) {
             if ($applier->supports($this)) {
                 $applier->apply($target, $this);
             }

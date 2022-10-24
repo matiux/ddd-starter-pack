@@ -11,8 +11,8 @@ trait SortingFilterRequest
     public function withSorting(null|string $sortingField, null|string $sortingDirection): self
     {
         if ($sortingField && $sortingDirection) {
-            $this->sortingFilters[SortingFilterParamsApplierKeys::SORT] = $sortingField;
-            $this->sortingFilters[SortingFilterParamsApplierKeys::SORT_DIRECTION] = $sortingDirection;
+            $this->sortingFilters[SortingKeyFilterApplier::SORT] = $sortingField;
+            $this->sortingFilters[SortingKeyFilterApplier::SORT_DIRECTION] = $sortingDirection;
         }
 
         return $this;

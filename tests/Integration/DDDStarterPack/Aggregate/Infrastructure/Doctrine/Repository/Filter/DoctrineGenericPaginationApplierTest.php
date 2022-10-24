@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Tests\Integration\DDDStarterPack\Aggregate\Infrastructure\Doctrine\Repository\Filter;
 
-use DDDStarterPack\Aggregate\Domain\Repository\Filter\FilterParamsBuilder;
+use DDDStarterPack\Aggregate\Domain\Repository\Filter\FilterBuilder;
 use PHPUnit\Framework\TestCase;
 use Tests\Support\Model\Doctrine\DoctrinePaginationApplier;
 use Tests\Support\Model\Person;
@@ -37,7 +37,7 @@ class DoctrineGenericPaginationApplierTest extends TestCase
 
         $qb->select('p')->from(Person::class, 'p');
 
-        $filterParamsBuilder = new FilterParamsBuilder();
+        $filterParamsBuilder = new FilterBuilder();
         $filterParamsBuilder->addApplier(new DoctrinePaginationApplier());
         $filterParams = $filterParamsBuilder->build(['page' => $page, 'per_page' => $perPage]);
         $filterParams->applyToTarget($qb);

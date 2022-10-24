@@ -4,12 +4,12 @@ declare(strict_types=1);
 
 namespace DDDStarterPack\Aggregate\Infrastructure\Doctrine\Repository\Filter;
 
-use DDDStarterPack\Aggregate\Domain\Repository\Filter\FilterParams;
+use DDDStarterPack\Aggregate\Domain\Repository\Filter\FilterApplierRegistry;
 use Doctrine\ORM\QueryBuilder;
 use InvalidArgumentException;
 use LogicException;
 
-abstract class DoctrineGenericSortApplier extends DoctrineFilterParamsApplier
+abstract class DoctrineGenericSortApplier extends DoctrineFilterApplier
 {
     protected const KEY = 'sorting';
 
@@ -28,11 +28,11 @@ abstract class DoctrineGenericSortApplier extends DoctrineFilterParamsApplier
     /**
      * @param QueryBuilder $target
      */
-    public function apply($target, FilterParams $filterParams): void
+    public function apply($target, FilterApplierRegistry $filterApplierRegistry): void
     {
         try {
-            $sortField = (string) $filterParams->getFilterValueForKey($this->sortKey());
-            $sortDirection = (string) $filterParams->getFilterValueForKey($this->sortDirectionKey(), 'ASC');
+            $sortField = (string) $filterApplierRegistry->getFilterValueForKey($this->sortKey());
+            $sortDirection = (string) $filterApplierRegistry->getFilterValueForKey($this->sortDirectionKey(), 'ASC');
 
             if (!array_key_exists($sortField, $this->fieldsMap)) {
                 throw new LogicException(sprintf('Invalid sort key: %s', $sortField));

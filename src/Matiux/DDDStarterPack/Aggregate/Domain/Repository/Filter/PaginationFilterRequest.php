@@ -14,8 +14,8 @@ trait PaginationFilterRequest
     public function withPagination(null|int $page, null|int $perPage): self
     {
         if ($page && $perPage) {
-            $this->paginationFilters[PaginationFilterParamsApplierKeys::PAGE] = $page;
-            $this->paginationFilters[PaginationFilterParamsApplierKeys::PER_PAGE] = $perPage;
+            $this->paginationFilters[PaginationKeyFilterApplier::PAGE] = $page;
+            $this->paginationFilters[PaginationKeyFilterApplier::PER_PAGE] = $perPage;
         }
 
         return $this;
