@@ -12,10 +12,10 @@ interface FilterApplier
     public function key(): string;
 
     /**
-     * @param T                     $target
-     * @param FilterApplierRegistry $filterApplierRegistry
+     * @param T              $target
+     * @param FilterAppliers $filterAppliers
      */
-    public function apply($target, FilterApplierRegistry $filterApplierRegistry): void;
+    public function apply($target, FilterAppliers $filterAppliers): void;
 
-    public function supports(FilterApplierRegistry $filterApplierRegistry): bool;
+    public function supports(FilterAppliers $filterAppliers): bool;
 }

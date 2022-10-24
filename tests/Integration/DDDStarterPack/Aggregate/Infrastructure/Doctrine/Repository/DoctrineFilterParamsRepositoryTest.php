@@ -5,7 +5,7 @@ declare(strict_types=1);
 namespace Tests\Integration\DDDStarterPack\Aggregate\Infrastructure\Doctrine\Repository;
 
 use ArrayObject;
-use DDDStarterPack\Aggregate\Domain\Repository\Filter\FilterApplierRegistry;
+use DDDStarterPack\Aggregate\Domain\Repository\Filter\FilterAppliers;
 use DDDStarterPack\Aggregate\Domain\Repository\Filter\FilterBuilder;
 use DDDStarterPack\Aggregate\Domain\Repository\Paginator\Paginator;
 use DDDStarterPack\Aggregate\Infrastructure\Doctrine\Repository\DoctrineFilterParamsRepository;
@@ -85,12 +85,12 @@ class MyFilterParamsRepository extends DoctrineFilterParamsRepository
         $this->em->flush();
     }
 
-    public function byFilterParamsWithPagination(FilterApplierRegistry $filterParams): Paginator
+    public function byFilterParamsWithPagination(FilterAppliers $filterParams): Paginator
     {
         return $this->doByFilterParamsWithPagination($filterParams);
     }
 
-    public function byFilterParams(FilterApplierRegistry $filterParams): array
+    public function byFilterParams(FilterAppliers $filterParams): array
     {
         return $this->doByFilterParams($filterParams);
     }

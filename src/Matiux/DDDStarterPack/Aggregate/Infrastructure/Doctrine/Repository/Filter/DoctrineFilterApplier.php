@@ -5,7 +5,7 @@ declare(strict_types=1);
 namespace DDDStarterPack\Aggregate\Infrastructure\Doctrine\Repository\Filter;
 
 use DDDStarterPack\Aggregate\Domain\Repository\Filter\FilterApplier;
-use DDDStarterPack\Aggregate\Domain\Repository\Filter\FilterApplierRegistry;
+use DDDStarterPack\Aggregate\Domain\Repository\Filter\FilterAppliers;
 use Doctrine\ORM\QueryBuilder;
 
 /**
@@ -14,8 +14,8 @@ use Doctrine\ORM\QueryBuilder;
 abstract class DoctrineFilterApplier implements FilterApplier
 {
     /**
-     * @param QueryBuilder          $target
-     * @param FilterApplierRegistry $filterApplierRegistry
+     * @param QueryBuilder   $target
+     * @param FilterAppliers $filterAppliers
      */
-    abstract public function apply($target, FilterApplierRegistry $filterApplierRegistry): void;
+    abstract public function apply($target, FilterAppliers $filterAppliers): void;
 }

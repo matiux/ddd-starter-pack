@@ -6,7 +6,7 @@ namespace DDDStarterPack\Aggregate\Domain\Repository\Filter;
 
 use InvalidArgumentException;
 
-class FilterApplierRegistry
+class FilterAppliers
 {
     /** @var FilterApplier[] */
     protected array $filterAppliers = [];

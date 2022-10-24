@@ -5,7 +5,7 @@ declare(strict_types=1);
 namespace Tests\Support\Model\Doctrine;
 
 use DDDStarterPack\Aggregate\Domain\Repository\Filter\FilterApplier;
-use DDDStarterPack\Aggregate\Domain\Repository\Filter\FilterApplierRegistry;
+use DDDStarterPack\Aggregate\Domain\Repository\Filter\FilterAppliers;
 use DDDStarterPack\Aggregate\Infrastructure\Doctrine\Repository\Filter\DoctrineGenericSortApplier;
 
 class DoctrineSortApplier extends DoctrineGenericSortApplier implements FilterApplier
@@ -25,7 +25,7 @@ class DoctrineSortApplier extends DoctrineGenericSortApplier implements FilterAp
         return 'sort_field';
     }
 
-    public function supports(FilterApplierRegistry $filterApplierRegistry): bool
+    public function supports(FilterAppliers $filterAppliers): bool
     {
         return true;
     }

@@ -5,7 +5,7 @@ declare(strict_types=1);
 namespace Tests\Unit\DDDStarterPack\Aggregate\Domain\Repository\Filter;
 
 use DDDStarterPack\Aggregate\Domain\Repository\Filter\FilterApplier;
-use DDDStarterPack\Aggregate\Domain\Repository\Filter\FilterApplierRegistry;
+use DDDStarterPack\Aggregate\Domain\Repository\Filter\FilterAppliers;
 use InvalidArgumentException;
 
 /**
@@ -25,13 +25,13 @@ class DummyFilterApplier implements FilterApplier
     }
 
     /**
-     * @param DummyArrayTarget      $target
-     * @param FilterApplierRegistry $filterApplierRegistry
+     * @param DummyArrayTarget $target
+     * @param FilterAppliers   $filterAppliers
      */
-    public function apply($target, FilterApplierRegistry $filterApplierRegistry): void
+    public function apply($target, FilterAppliers $filterAppliers): void
     {
         $target->add([
-            $this->key() => $filterApplierRegistry->getFilterValueForKey($this->key()),
+            $this->key() => $filterAppliers->getFilterValueForKey($this->key()),
         ]);
     }
 
@@ -40,7 +40,7 @@ class DummyFilterApplier implements FilterApplier
         return $this->key;
     }
 
-    public function supports(FilterApplierRegistry $filterApplierRegistry): bool
+    public function supports(FilterAppliers $filterAppliers): bool
     {
         return true;
     }

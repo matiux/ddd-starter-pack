@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace DDDStarterPack\Aggregate\Infrastructure\Doctrine\Repository;
 
-use DDDStarterPack\Aggregate\Domain\Repository\Filter\FilterApplierRegistry;
+use DDDStarterPack\Aggregate\Domain\Repository\Filter\FilterAppliers;
 use DDDStarterPack\Aggregate\Domain\Repository\Paginator\Paginator;
 use Doctrine\ORM\QueryBuilder;
 use Webmozart\Assert\Assert;
@@ -15,27 +15,27 @@ use Webmozart\Assert\Assert;
 abstract class DoctrineFilterParamsRepository extends DoctrineRepository
 {
     /**
-     * @param FilterApplierRegistry $filterApplierRegistry
+     * @param FilterAppliers $filterAppliers
      *
      * @return Paginator<T>
      */
-    protected function doByFilterParamsWithPagination(FilterApplierRegistry $filterApplierRegistry): Paginator
+    protected function doByFilterParamsWithPagination(FilterAppliers $filterAppliers): Paginator
     {
-        $qb = $this->createQuery($filterApplierRegistry);
+        $qb = $this->createQuery($filterAppliers);
 
-        [$offset, $limit] = $this->calculatePagination($filterApplierRegistry, $qb);
+        [$offset, $limit] = $this->calculatePagination($filterAppliers, $qb);
 
         return $this->createPaginator($qb, $offset, $limit);
     }
 
     /**
-     * @param FilterApplierRegistry $filterApplierRegistry
+     * @param FilterAppliers $filterAppliers
      *
      * @return T[]
      */
-    protected function doByFilterParams(FilterApplierRegistry $filterApplierRegistry): array
+    protected function doByFilterParams(FilterAppliers $filterAppliers): array
     {
-        $qb = $this->createQuery($filterApplierRegistry);
+        $qb = $this->createQuery($filterAppliers);
 
         $results = $qb->getQuery()->getResult();
 
@@ -44,25 +44,25 @@ abstract class DoctrineFilterParamsRepository extends DoctrineRepository
         return $results;
     }
 
-    private function createQuery(FilterApplierRegistry $filterApplierRegistry): QueryBuilder
+    private function createQuery(FilterAppliers $filterAppliers): QueryBuilder
     {
         $qb = $this->em->createQueryBuilder();
 
         $qb->select($this->getEntityAliasName())
             ->from($this->getEntityClassName(), $this->getEntityAliasName());
 
-        $filterApplierRegistry->applyToTarget($qb);
+        $filterAppliers->applyToTarget($qb);
 
         return $qb;
     }
 
     /**
-     * @param FilterApplierRegistry $filterApplierRegistry
-     * @param QueryBuilder          $qb
+     * @param FilterAppliers $filterAppliers
+     * @param QueryBuilder   $qb
      *
      * @return list<int>
      */
-    protected function calculatePagination(FilterApplierRegistry $filterApplierRegistry, QueryBuilder $qb): array
+    protected function calculatePagination(FilterAppliers $filterAppliers, QueryBuilder $qb): array
     {
         $result = $qb->getQuery()->getResult();
 
@@ -73,11 +73,11 @@ abstract class DoctrineFilterParamsRepository extends DoctrineRepository
         $offset = 0;
         $limit = 0 != $totalResult ? $totalResult : 1;
 
-        if (-1 != $filterApplierRegistry->getFilterValueForKey('per_page')) {
-            $offset = $this->calculateOffset($filterApplierRegistry);
+        if (-1 != $filterAppliers->getFilterValueForKey('per_page')) {
+            $offset = $this->calculateOffset($filterAppliers);
 
             /** @var int $limit */
-            $limit = $filterApplierRegistry->getFilterValueForKey('per_page');
+            $limit = $filterAppliers->getFilterValueForKey('per_page');
         }
 
         return [intval($offset), intval($limit)];
@@ -92,13 +92,13 @@ abstract class DoctrineFilterParamsRepository extends DoctrineRepository
      */
     abstract protected function createPaginator(QueryBuilder $qb, int $offset, int $limit): Paginator;
 
-    private function calculateOffset(FilterApplierRegistry $filterApplierRegistry): int
+    private function calculateOffset(FilterAppliers $filterAppliers): int
     {
         /** @var int $page */
-        $page = $filterApplierRegistry->getFilterValueForKey('page');
+        $page = $filterAppliers->getFilterValueForKey('page');
 
         /** @var int $perPage */
-        $perPage = $filterApplierRegistry->getFilterValueForKey('per_page');
+        $perPage = $filterAppliers->getFilterValueForKey('per_page');
 
         return ($page - 1) * $perPage;
     }
