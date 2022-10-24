@@ -12,7 +12,7 @@ use Webmozart\Assert\Assert;
 /**
  * @template T
  */
-abstract class DoctrineFilterParamsRepository extends DoctrineRepository
+abstract class DoctrineFilterApplierRepository extends DoctrineRepository
 {
     /**
      * @param FilterAppliers $filterAppliers

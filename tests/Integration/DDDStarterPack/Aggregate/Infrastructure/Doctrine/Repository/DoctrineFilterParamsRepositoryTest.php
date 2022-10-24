@@ -8,7 +8,7 @@ use ArrayObject;
 use DDDStarterPack\Aggregate\Domain\Repository\Filter\FilterAppliers;
 use DDDStarterPack\Aggregate\Domain\Repository\Filter\FilterBuilder;
 use DDDStarterPack\Aggregate\Domain\Repository\Paginator\Paginator;
-use DDDStarterPack\Aggregate\Infrastructure\Doctrine\Repository\DoctrineFilterParamsRepository;
+use DDDStarterPack\Aggregate\Infrastructure\Doctrine\Repository\DoctrineFilterApplierRepository;
 use Doctrine\Bundle\DoctrineBundle\Registry;
 use Doctrine\ORM\EntityManager;
 use Doctrine\ORM\QueryBuilder;
@@ -24,7 +24,7 @@ use Tests\Tool\EntityManagerBuilder;
 
 class DoctrineFilterParamsRepositoryTest extends TestCase
 {
-    private MyFilterParamsRepository $repository;
+    private MyFilterApplierRepository $repository;
     private EntityManager $em;
 
     protected function setUp(): void
@@ -37,7 +37,7 @@ class DoctrineFilterParamsRepositoryTest extends TestCase
             ->shouldReceive('getManagerForClass')->andReturn($this->em)
             ->getMock();
 
-        $this->repository = new MyFilterParamsRepository($registry, Person::class);
+        $this->repository = new MyFilterApplierRepository($registry, Person::class);
     }
 
     protected function tearDown(): void
@@ -75,9 +75,9 @@ class DoctrineFilterParamsRepositoryTest extends TestCase
 }
 
 /**
- * @extends DoctrineFilterParamsRepository<Person>
+ * @extends DoctrineFilterApplierRepository<Person>
  */
-class MyFilterParamsRepository extends DoctrineFilterParamsRepository
+class MyFilterApplierRepository extends DoctrineFilterApplierRepository
 {
     public function aggiungi(Person $person): void
     {
