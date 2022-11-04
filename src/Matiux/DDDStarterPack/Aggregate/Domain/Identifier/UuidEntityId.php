@@ -42,6 +42,24 @@ abstract class UuidEntityId extends BasicEntityId
         return new static($id);
     }
 
+    /**
+     * @param null|string $id
+     *
+     * @return null|static
+     */
+    public static function tryCreateFrom($id): null|static
+    {
+        if (is_null($id)) {
+            return null;
+        }
+
+        try {
+            return self::createFrom($id);
+        } catch (\Exception $e) {
+            return null;
+        }
+    }
+
     public static function isValidUuid(string $uuid): bool
     {
         if (1 === preg_match(self::UUID_PATTERN, $uuid)) {

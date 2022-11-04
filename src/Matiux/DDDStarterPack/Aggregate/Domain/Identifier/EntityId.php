@@ -21,6 +21,15 @@ interface EntityId
     public static function createFrom($id): static;
 
     /**
+     * @template T of I
+     *
+     * @param null|T $id
+     *
+     * @return null|static
+     */
+    public static function tryCreateFrom($id): null|static;
+
+    /**
      * @return I
      */
     public function value();
