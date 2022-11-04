@@ -19,6 +19,7 @@ class SNSConfigurationValidatorTest extends TestCase
 
     /**
      * @test
+     *
      * @group sns
      * @group configuration
      * @group validation
@@ -34,6 +35,7 @@ class SNSConfigurationValidatorTest extends TestCase
 
     /**
      * @test
+     *
      * @group sqs
      * @group configuration
      * @group validation
@@ -54,6 +56,7 @@ class SNSConfigurationValidatorTest extends TestCase
 
     /**
      * @test
+     *
      * @group sqs
      * @group configuration
      * @group validation

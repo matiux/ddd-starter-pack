@@ -4,8 +4,6 @@ declare(strict_types=1);
 
 namespace DDDStarterPack\Message\Infrastructure\Configuration;
 
-use RuntimeException;
-
 class ConfigurationParamRegistry
 {
     /** @var ConfigurationParamConstraint[] */
@@ -16,7 +14,7 @@ class ConfigurationParamRegistry
         $configConstraintName = $configurationParamConstraint->name();
 
         if (isset($this->configConstraints[$configConstraintName])) {
-            throw new RuntimeException(sprintf('Constraint %s is already set', $configConstraintName));
+            throw new \RuntimeException(sprintf('Constraint %s is already set', $configConstraintName));
         }
 
         $this->configConstraints[$configConstraintName] = $configurationParamConstraint;

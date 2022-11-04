@@ -4,7 +4,6 @@ declare(strict_types=1);
 
 namespace Tests\Unit\DDDStarterPack\DataTransformer\Application;
 
-use ArrayObject;
 use DDDStarterPack\Aggregate\Domain\Repository\Paginator\AbstractPaginator;
 use DDDStarterPack\DataTransformer\Application\BasicPaginatorDataTransformer;
 use PHPUnit\Framework\TestCase;
@@ -33,7 +32,7 @@ class BasicPaginatorDataTransformerTest extends TestCase
         //     new \stdClass(),
         // ];
 
-        $transformed = $dt->write(new PeoplePaginator(new ArrayObject($people), 0, 3, 4))->read();
+        $transformed = $dt->write(new PeoplePaginator(new \ArrayObject($people), 0, 3, 4))->read();
 
         self::assertNotEmpty($transformed);
         self::assertCount(2, $transformed);

@@ -9,6 +9,7 @@ use DDDStarterPack\Aggregate\Domain\Repository\Paginator\Paginator;
 /**
  * @template I
  * @template R
+ *
  * @extends DataTransformer<R>
  */
 interface PaginatorDataTransformer extends DataTransformer

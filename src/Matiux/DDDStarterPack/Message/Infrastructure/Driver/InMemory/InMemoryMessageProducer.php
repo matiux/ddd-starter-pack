@@ -7,7 +7,6 @@ namespace DDDStarterPack\Message\Infrastructure\Driver\InMemory;
 use DDDStarterPack\Message\Infrastructure\Message;
 use DDDStarterPack\Message\Infrastructure\MessageProducer;
 use DDDStarterPack\Message\Infrastructure\MessageProducerResponse;
-use InvalidArgumentException;
 
 /**
  * @implements MessageProducer<InMemoryMessage>
@@ -23,6 +22,7 @@ class InMemoryMessageProducer implements MessageProducer
 
     /**
      * @param string $exchangeName
+     *
      * @codeCoverageIgnore
      */
     public function open(string $exchangeName = ''): void
@@ -44,6 +44,7 @@ class InMemoryMessageProducer implements MessageProducer
 
     /**
      * @param string $exchangeName
+     *
      * @codeCoverageIgnore
      */
     public function close(string $exchangeName = ''): void
@@ -58,7 +59,7 @@ class InMemoryMessageProducer implements MessageProducer
     public function sendBatch(array $messages): MessageProducerResponse
     {
         if (count($messages) > self::BATCH_LIMIT) {
-            throw new InvalidArgumentException(sprintf('Too many messages in batch. %s on {$max} permitted', count($messages)));
+            throw new \InvalidArgumentException(sprintf('Too many messages in batch. %s on {$max} permitted', count($messages)));
         }
 
         foreach ($messages as $message) {

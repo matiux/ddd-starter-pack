@@ -4,8 +4,6 @@ declare(strict_types=1);
 
 namespace DDDStarterPack\Aggregate\Domain\Repository\Filter;
 
-use InvalidArgumentException;
-
 class FilterAppliers
 {
     /** @var FilterApplier[] */
@@ -35,7 +33,7 @@ class FilterAppliers
         $key = $filterApplier->key();
 
         if (isset($this->filterAppliers[$key])) {
-            throw new InvalidArgumentException("Applier for key '{$key}' is already set");
+            throw new \InvalidArgumentException("Applier for key '{$key}' is already set");
         }
 
         $this->filterAppliers[$key] = $filterApplier;
@@ -45,7 +43,7 @@ class FilterAppliers
      * @param string $key
      * @param string $default
      *
-     * @throws InvalidArgumentException
+     * @throws \InvalidArgumentException
      *
      * @return mixed
      */
@@ -58,7 +56,7 @@ class FilterAppliers
             return $this->neededFilters[$key];
         }
 
-        return !empty($default) ? $default : throw new InvalidArgumentException("Filter with key '{$key}' does not exist");
+        return !empty($default) ? $default : throw new \InvalidArgumentException("Filter with key '{$key}' does not exist");
     }
 
     public function applyToTarget(mixed $target): void

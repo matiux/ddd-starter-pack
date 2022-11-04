@@ -6,7 +6,6 @@ namespace DDDStarterPack\Type;
 
 use Doctrine\DBAL\Platforms\AbstractPlatform;
 use Doctrine\DBAL\Types\StringType;
-use Exception;
 
 class DoctrineDateTimeRFC extends StringType
 {
@@ -33,7 +32,7 @@ class DoctrineDateTimeRFC extends StringType
      * @param null|string      $value
      * @param AbstractPlatform $platform
      *
-     * @throws Exception
+     * @throws \Exception
      *
      * @return null|DateTimeRFC
      */

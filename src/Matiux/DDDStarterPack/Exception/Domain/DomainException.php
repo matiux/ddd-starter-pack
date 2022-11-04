@@ -4,17 +4,14 @@ declare(strict_types=1);
 
 namespace DDDStarterPack\Exception\Domain;
 
-use Exception;
-use Throwable;
-
 /**
  * @codeCoverageIgnore
  */
-abstract class DomainException extends Exception
+abstract class DomainException extends \Exception
 {
     public const MESSAGE = 'An error has occurred';
 
-    public function __construct(string $message = '', int $code = 0, Throwable $previous = null)
+    public function __construct(string $message = '', int $code = 0, \Throwable $previous = null)
     {
         $message = $message ?: (string) static::MESSAGE;
 
@@ -34,7 +31,7 @@ abstract class DomainException extends Exception
         ];
     }
 
-    protected static function obtainMessage(null|Throwable $previous = null): string
+    protected static function obtainMessage(null|\Throwable $previous = null): string
     {
         $msg = '';
 

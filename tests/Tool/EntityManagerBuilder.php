@@ -11,7 +11,6 @@ use Doctrine\ORM\EntityManager;
 use Doctrine\ORM\EntityRepository;
 use Doctrine\ORM\ORMSetup;
 use Doctrine\Persistence\ObjectRepository;
-use InvalidArgumentException;
 use Nyholm\Dsn\DsnParser;
 use Tests\Support\Model\Doctrine\DoctrineUuidPersonId;
 
@@ -79,7 +78,7 @@ class EntityManagerBuilder
     public function getEntityManager(string $em = 'default'): EntityManager
     {
         if (!array_key_exists($em, $this->ems)) {
-            throw new InvalidArgumentException('Invalid key for entity manager');
+            throw new \InvalidArgumentException('Invalid key for entity manager');
         }
 
         return $this->ems[$em];

@@ -6,7 +6,9 @@ namespace DDDStarterPack\Service\Domain\Response;
 
 /**
  * @template B of mixed
+ *
  * @implements ServiceResponse<B>
+ *
  * @psalm-suppress PropertyNotSetInConstructor, UnsafeGenericInstantiation
  */
 abstract class BasicServiceResponse implements ServiceResponse

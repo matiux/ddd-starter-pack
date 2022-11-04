@@ -7,7 +7,6 @@ namespace DDDStarterPack\Service\Infrastructure\Doctrine;
 use DDDStarterPack\Exception\Application\TransactionFailedException;
 use DDDStarterPack\Service\Application\TransactionalSession;
 use Doctrine\ORM\EntityManager;
-use Throwable;
 
 /**
  * @template O
@@ -34,7 +33,7 @@ class DoctrineTransactionalSession implements TransactionalSession
             $reponse = $this->entityManager->wrapInTransaction($operation);
 
             return $reponse;
-        } catch (Throwable $t) {
+        } catch (\Throwable $t) {
             throw new TransactionFailedException(sprintf('Transaction failed: %s', $t->getMessage()), (int) $t->getCode(), $t);
         }
     }

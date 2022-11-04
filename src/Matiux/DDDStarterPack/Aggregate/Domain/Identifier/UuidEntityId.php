@@ -4,9 +4,6 @@ declare(strict_types=1);
 
 namespace DDDStarterPack\Aggregate\Domain\Identifier;
 
-use Exception;
-use InvalidArgumentException;
-
 /**
  * @extends  BasicEntityId<string>
  */
@@ -22,7 +19,7 @@ abstract class UuidEntityId extends BasicEntityId
     }
 
     /**
-     * @throws Exception
+     * @throws \Exception
      *
      * @return static
      */
@@ -36,7 +33,7 @@ abstract class UuidEntityId extends BasicEntityId
     public static function createFrom($id): static
     {
         if (!$id || !self::isValidUuid($id)) {
-            throw new InvalidArgumentException(sprintf('Invalid ID: %s', $id));
+            throw new \InvalidArgumentException(sprintf('Invalid ID: %s', $id));
         }
 
         return new static($id);

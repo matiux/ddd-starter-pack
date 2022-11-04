@@ -4,7 +4,6 @@ declare(strict_types=1);
 
 namespace DDDStarterPack\Message\Infrastructure\Driver\RabbitMQ;
 
-use DateTimeImmutable;
 use DDDStarterPack\Message\Infrastructure\Message;
 
 class RabbitMQMessage implements Message
@@ -12,7 +11,7 @@ class RabbitMQMessage implements Message
     public function __construct(
         private string $body,
         private null|string $exchangeName = null,
-        private null|DateTimeImmutable $occurredAt = null,
+        private null|\DateTimeImmutable $occurredAt = null,
         private null|string $type = null,
         private $id = null
     ) {
@@ -28,7 +27,7 @@ class RabbitMQMessage implements Message
         return $this->exchangeName;
     }
 
-    public function occurredAt(): ?DateTimeImmutable
+    public function occurredAt(): ?\DateTimeImmutable
     {
         return $this->occurredAt;
     }

@@ -4,8 +4,6 @@ declare(strict_types=1);
 
 namespace Tests\Learning\SQS;
 
-use DateTimeImmutable;
-use DateTimeInterface;
 use DDDStarterPack\Message\Infrastructure\Driver\AWS\RawClient\SqsRawClient;
 use DDDStarterPack\Tool\EnvVarUtil;
 use PHPUnit\Framework\TestCase;
@@ -15,14 +13,14 @@ class SqsLearningTest extends TestCase
 {
     use SqsRawClient;
 
-    private DateTimeImmutable $occurredAt;
+    private \DateTimeImmutable $occurredAt;
 
     protected function setUp(): void
     {
         $this->setQueueUrl(EnvVarUtil::get('AWS_SQS_QUEUE_NAME'));
         $this->purgeSqsQueue();
 
-        $this->occurredAt = new DateTimeImmutable();
+        $this->occurredAt = new \DateTimeImmutable();
     }
 
     protected function tearDown(): void
@@ -32,6 +30,7 @@ class SqsLearningTest extends TestCase
 
     /**
      * @test
+     *
      * @group learning
      * @group sqs
      */
@@ -39,7 +38,7 @@ class SqsLearningTest extends TestCase
     {
         $msg = json_encode([
             'Foo' => 'Bar',
-            'occurredAt' => $this->occurredAt->format(DateTimeInterface::RFC3339_EXTENDED),
+            'occurredAt' => $this->occurredAt->format(\DateTimeInterface::RFC3339_EXTENDED),
         ]);
 
         $result = $this->getSqsClient()->sendMessage([
@@ -60,6 +59,7 @@ class SqsLearningTest extends TestCase
 
     /**
      * @test
+     *
      * @group learning
      * @group sqs
      */
@@ -74,7 +74,7 @@ class SqsLearningTest extends TestCase
             'QueueUrl' => $this->getQueueUrl(),
             'MessageBody' => json_encode([
                 'Foo' => 'Bar',
-                'occurredAt' => $this->occurredAt->format(DateTimeInterface::RFC3339_EXTENDED),
+                'occurredAt' => $this->occurredAt->format(\DateTimeInterface::RFC3339_EXTENDED),
             ]),
             'MessageGroupId' => Uuid::uuid4()->toString(),
             'MessageDeduplicationId' => Uuid::uuid4()->toString(),
@@ -109,6 +109,7 @@ class SqsLearningTest extends TestCase
 
     /**
      * @test
+     *
      * @group learning
      * @group sqs
      */
@@ -116,7 +117,7 @@ class SqsLearningTest extends TestCase
     {
         $msg = json_encode([
             'Foo' => 'Bar',
-            'occurredAt' => $this->occurredAt->format(DateTimeInterface::RFC3339_EXTENDED),
+            'occurredAt' => $this->occurredAt->format(\DateTimeInterface::RFC3339_EXTENDED),
         ]);
 
         $this->getSqsClient()->sendMessage([

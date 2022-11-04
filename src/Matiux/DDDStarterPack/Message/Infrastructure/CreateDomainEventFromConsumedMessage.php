@@ -8,7 +8,9 @@ use DDDStarterPack\Event\DomainEvent;
 
 /**
  * @codeCoverageIgnore
+ *
  * @template T
+ *
  * @extends CreateFromConsumedMessage<T>
  */
 abstract class CreateDomainEventFromConsumedMessage extends CreateFromConsumedMessage

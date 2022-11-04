@@ -14,6 +14,7 @@ class MessageConsumerFactoryTest extends TestCase
 {
     /**
      * @test
+     *
      * @group factory
      * @group sqs
      */

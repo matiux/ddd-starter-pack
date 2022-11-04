@@ -19,6 +19,7 @@ class SQSConfigurationValidatorTest extends TestCase
 
     /**
      * @test
+     *
      * @group sqs
      * @group configuration
      * @group validation
@@ -39,6 +40,7 @@ class SQSConfigurationValidatorTest extends TestCase
 
     /**
      * @test
+     *
      * @group sqs
      * @group configuration
      * @group validation
@@ -59,6 +61,7 @@ class SQSConfigurationValidatorTest extends TestCase
 
     /**
      * @test
+     *
      * @group sqs
      * @group configuration
      * @group validation

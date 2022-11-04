@@ -5,7 +5,6 @@ declare(strict_types=1);
 namespace DDDStarterPack\Event;
 
 use DDDStarterPack\Type\DateTimeRFC;
-use Exception;
 
 abstract class DomainEvent
 {
@@ -35,7 +34,7 @@ abstract class DomainEvent
     /**
      * @param string $occurredAt
      *
-     * @throws Exception
+     * @throws \Exception
      *
      * @return DateTimeRFC
      */

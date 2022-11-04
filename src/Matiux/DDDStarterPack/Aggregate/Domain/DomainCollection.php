@@ -4,15 +4,16 @@ declare(strict_types=1);
 
 namespace DDDStarterPack\Aggregate\Domain;
 
-use Countable;
 use Iterator;
 
 /**
  * @psalm-suppress UnsafeGenericInstantiation
+ *
  * @template T
+ *
  * @implements Iterator<array-key, T>
  */
-class DomainCollection implements Iterator, Countable
+class DomainCollection implements \Iterator, \Countable
 {
     private int $position = 0;
 

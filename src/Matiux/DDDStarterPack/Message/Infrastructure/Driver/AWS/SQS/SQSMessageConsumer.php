@@ -4,17 +4,13 @@ declare(strict_types=1);
 
 namespace DDDStarterPack\Message\Infrastructure\Driver\AWS\SQS;
 
-use ArrayObject;
 use Aws\Result;
-use BadMethodCallException;
-use DateTimeImmutable;
 use DDDStarterPack\Message\Infrastructure\BasicMessageService;
 use DDDStarterPack\Message\Infrastructure\Driver\AWS\AWSBasicService;
 use DDDStarterPack\Message\Infrastructure\Driver\AWS\AWSMessage;
 use DDDStarterPack\Message\Infrastructure\Driver\AWS\AWSMessageFactory;
 use DDDStarterPack\Message\Infrastructure\Message;
 use DDDStarterPack\Message\Infrastructure\MessageConsumerConnector;
-use Exception;
 use Webmozart\Assert\Assert;
 
 /**
@@ -140,7 +136,7 @@ class SQSMessageConsumer extends BasicMessageService implements MessageConsumerC
         return $messageAttributesType['Value'] ?? null;
     }
 
-    private function extractOccurredAt(array $messageAttributes): null|DateTimeImmutable
+    private function extractOccurredAt(array $messageAttributes): null|\DateTimeImmutable
     {
         if (!array_key_exists('OccurredAt', $messageAttributes)) {
             return null;
@@ -153,7 +149,7 @@ class SQSMessageConsumer extends BasicMessageService implements MessageConsumerC
 
         return match ($occurredAt) {
             null => null,
-            default => new DateTimeImmutable($occurredAt)
+            default => new \DateTimeImmutable($occurredAt)
         };
     }
 
@@ -162,7 +158,7 @@ class SQSMessageConsumer extends BasicMessageService implements MessageConsumerC
      */
     public function consumeBatch(): array
     {
-        throw new BadMethodCallException();
+        throw new \BadMethodCallException();
     }
 
     public function delete(string $messageId, null|string $queue = null): void
@@ -175,12 +171,12 @@ class SQSMessageConsumer extends BasicMessageService implements MessageConsumerC
         ]);
 
         if (!self::isAwsResultValid($result)) {
-            throw new Exception(sprintf('Unable to delete message with id %s from %s', $messageId, $this->getQueueUrlFromConfig()));
+            throw new \Exception(sprintf('Unable to delete message with id %s from %s', $messageId, $this->getQueueUrlFromConfig()));
         }
     }
 
-    public function deleteBatch(ArrayObject $messagesId): void
+    public function deleteBatch(\ArrayObject $messagesId): void
     {
-        throw new BadMethodCallException();
+        throw new \BadMethodCallException();
     }
 }

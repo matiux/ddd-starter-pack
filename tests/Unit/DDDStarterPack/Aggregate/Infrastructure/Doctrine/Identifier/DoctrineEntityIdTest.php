@@ -6,7 +6,6 @@ namespace Tests\Unit\DDDStarterPack\Aggregate\Infrastructure\Doctrine\Identifier
 
 use DDDStarterPack\Aggregate\Infrastructure\Doctrine\Identifier\DoctrineUuidEntityId;
 use Doctrine\DBAL\Platforms\AbstractPlatform;
-use Mockery;
 use PHPUnit\Framework\TestCase;
 use Tests\Support\Model\PersonId;
 
@@ -20,7 +19,7 @@ class DoctrineEntityIdTest extends TestCase
         MyIdUuid::addType('MyId', MyIdUuid::class);
         $id = MyIdUuid::getType('MyId');
 
-        $phpValue = $id->convertToPHPValue('foo_id', Mockery::mock(AbstractPlatform::class));
+        $phpValue = $id->convertToPHPValue('foo_id', \Mockery::mock(AbstractPlatform::class));
 
         self::assertSame('foo_id', $phpValue);
     }

@@ -4,8 +4,6 @@ declare(strict_types=1);
 
 namespace Integration\DDDStarterPack\Message\Infrastructure\Driver\AWS\SQS;
 
-use DateTimeImmutable;
-use DateTimeInterface;
 use DDDStarterPack\Message\Infrastructure\Driver\AWS\AWSMessage;
 use DDDStarterPack\Message\Infrastructure\Driver\AWS\RawClient\SnsRawClient;
 use DDDStarterPack\Message\Infrastructure\Driver\AWS\RawClient\SqsRawClient;
@@ -26,7 +24,7 @@ class SQSMessageConsumerTest extends TestCase
     private AWSMessage $message;
     private MessageConsumer $messageConsumer;
     private MessageProducer $messageProducer;
-    private DateTimeImmutable $occurredAt;
+    private \DateTimeImmutable $occurredAt;
 
     public function setUp(): void
     {
@@ -41,11 +39,11 @@ class SQSMessageConsumerTest extends TestCase
         $this->messageConsumer = MessageConsumerFactory::create()->obtainConsumer($configuration);
         $this->messageProducer = MessageProducerFactory::create()->obtainProducer($configuration);
 
-        $this->occurredAt = new DateTimeImmutable();
+        $this->occurredAt = new \DateTimeImmutable();
         $this->message = new AWSMessage(
             body: json_encode([
                 'Foo' => 'Bar',
-                'occurredAt' => $this->occurredAt->format(DateTimeInterface::RFC3339_EXTENDED),
+                'occurredAt' => $this->occurredAt->format(\DateTimeInterface::RFC3339_EXTENDED),
             ]),
             occurredAt: $this->occurredAt,
             type: 'MyType',
@@ -63,6 +61,7 @@ class SQSMessageConsumerTest extends TestCase
 
     /**
      * @test
+     *
      * @group sqs
      * @group producer
      */
@@ -77,7 +76,7 @@ class SQSMessageConsumerTest extends TestCase
         self::assertEquals(
             json_encode([
                 'Foo' => 'Bar',
-                'occurredAt' => $this->occurredAt->format(DateTimeInterface::RFC3339_EXTENDED),
+                'occurredAt' => $this->occurredAt->format(\DateTimeInterface::RFC3339_EXTENDED),
             ]),
             $message->body()
         );
@@ -85,8 +84,8 @@ class SQSMessageConsumerTest extends TestCase
         $occurredAt = $message->occurredAt();
         self::assertNotNull($occurredAt);
         self::assertEquals(
-            $this->occurredAt->format(DateTimeInterface::RFC3339_EXTENDED),
-            $occurredAt->format(DateTimeInterface::RFC3339_EXTENDED)
+            $this->occurredAt->format(\DateTimeInterface::RFC3339_EXTENDED),
+            $occurredAt->format(\DateTimeInterface::RFC3339_EXTENDED)
         );
 
         $id = $message->id();
@@ -97,6 +96,7 @@ class SQSMessageConsumerTest extends TestCase
 
     /**
      * @test
+     *
      * @group sqs
      * @group producer
      */

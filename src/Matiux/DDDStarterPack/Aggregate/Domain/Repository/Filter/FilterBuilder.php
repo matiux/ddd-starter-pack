@@ -4,10 +4,6 @@ declare(strict_types=1);
 
 namespace DDDStarterPack\Aggregate\Domain\Repository\Filter;
 
-use InvalidArgumentException;
-use LogicException;
-use Traversable;
-
 class FilterBuilder
 {
     /** @var FilterApplier[] */
@@ -16,11 +12,11 @@ class FilterBuilder
     protected bool $frozen = false;
 
     /**
-     * @param FilterApplier[]|Traversable<FilterApplier> $filterAppliers
+     * @param FilterApplier[]|\Traversable<FilterApplier> $filterAppliers
      */
     public function __construct($filterAppliers = [])
     {
-        if ($filterAppliers instanceof Traversable) {
+        if ($filterAppliers instanceof \Traversable) {
             $filterAppliers = iterator_to_array($filterAppliers);
         }
 
@@ -32,13 +28,13 @@ class FilterBuilder
     public function addApplier(FilterApplier $filterApplier): void
     {
         if ($this->frozen) {
-            throw new LogicException('The builder is frozen');
+            throw new \LogicException('The builder is frozen');
         }
 
         $key = $filterApplier->key();
 
         if (isset($this->filterAppliers[$key])) {
-            throw new InvalidArgumentException("Applier for key '{$key}' is already set");
+            throw new \InvalidArgumentException("Applier for key '{$key}' is already set");
         }
 
         $this->filterAppliers[$key] = $filterApplier;

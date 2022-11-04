@@ -5,8 +5,6 @@ declare(strict_types=1);
 namespace DDDStarterPack\Message\Infrastructure\Driver\AWS\SQS;
 
 use Aws\Result;
-use BadMethodCallException;
-use DateTimeInterface;
 use DDDStarterPack\Message\Infrastructure\BasicMessageService;
 use DDDStarterPack\Message\Infrastructure\Driver\AWS\AWSBasicService;
 use DDDStarterPack\Message\Infrastructure\Driver\AWS\AWSMessage;
@@ -19,6 +17,7 @@ use Webmozart\Assert\Assert;
 
 /**
  * @psalm-suppress PropertyNotSetInConstructor
+ *
  * @implements MessageProducerConnector<AWSMessage>
  */
 class SQSMessageProducer extends BasicMessageService implements MessageProducerConnector
@@ -114,7 +113,7 @@ class SQSMessageProducer extends BasicMessageService implements MessageProducerC
         if ($occurredAt = $message->occurredAt()) {
             $messageAttributes['OccurredAt'] = [
                 'DataType' => 'String',
-                'StringValue' => $occurredAt->format(DateTimeInterface::RFC3339_EXTENDED),
+                'StringValue' => $occurredAt->format(\DateTimeInterface::RFC3339_EXTENDED),
             ];
         }
 
@@ -165,11 +164,12 @@ class SQSMessageProducer extends BasicMessageService implements MessageProducerC
 
     /**
      * @return int
+     *
      * @codeCoverageIgnore
      */
     public function getBatchLimit(): int
     {
-        throw new BadMethodCallException();
+        throw new \BadMethodCallException();
     }
 
     private function isValidSent(Message $message, Result $result): bool

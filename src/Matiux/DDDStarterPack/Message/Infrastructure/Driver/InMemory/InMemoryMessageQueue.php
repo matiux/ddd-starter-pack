@@ -5,7 +5,6 @@ declare(strict_types=1);
 namespace DDDStarterPack\Message\Infrastructure\Driver\InMemory;
 
 use DDDStarterPack\Message\Infrastructure\Message;
-use InvalidArgumentException;
 
 class InMemoryMessageQueue
 {
@@ -20,7 +19,7 @@ class InMemoryMessageQueue
     public function popMessage(string $exchangeName = 'default'): ?Message
     {
         if (!array_key_exists($exchangeName, $this->messages)) {
-            throw new InvalidArgumentException("Queue '{$exchangeName}' doesn't exists");
+            throw new \InvalidArgumentException("Queue '{$exchangeName}' doesn't exists");
         }
 
         return array_pop($this->messages[$exchangeName]);
@@ -41,6 +40,6 @@ class InMemoryMessageQueue
             return count($this->messages[$exchangeName]);
         }
 
-        throw new InvalidArgumentException("Queue '{$exchangeName}' doesn't exists");
+        throw new \InvalidArgumentException("Queue '{$exchangeName}' doesn't exists");
     }
 }

@@ -5,7 +5,6 @@ declare(strict_types=1);
 namespace Tests\Unit\DDDStarterPack\Aggregate\Domain;
 
 use DDDStarterPack\Aggregate\Domain\Identifier\UuidV4EntityId;
-use InvalidArgumentException;
 use PHPUnit\Framework\TestCase;
 
 class UuidEntityIdTest extends TestCase
@@ -45,7 +44,7 @@ class UuidEntityIdTest extends TestCase
      */
     public function it_should_throw_exception_if_input_id_is_invalid(): void
     {
-        self::expectException(InvalidArgumentException::class);
+        self::expectException(\InvalidArgumentException::class);
 
         UuidV4EntityId::createFrom('');
     }

@@ -4,13 +4,12 @@ declare(strict_types=1);
 
 namespace DDDStarterPack\Aggregate\Domain\Repository\Paginator;
 
-use Countable;
 use Iterator;
 
 /**
  * @template I
  */
-interface Paginator extends Countable, Iterator
+interface Paginator extends \Countable, Iterator
 {
     /**
      * @return array<int, I>

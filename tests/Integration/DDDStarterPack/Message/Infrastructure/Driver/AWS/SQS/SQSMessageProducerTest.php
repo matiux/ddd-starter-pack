@@ -5,8 +5,6 @@ declare(strict_types=1);
 namespace Integration\DDDStarterPack\Message\Infrastructure\Driver\AWS\SQS;
 
 use Aws\Result;
-use DateTimeImmutable;
-use DateTimeInterface;
 use DDDStarterPack\Message\Infrastructure\Configuration\Configuration;
 use DDDStarterPack\Message\Infrastructure\Driver\AWS\AWSMessage;
 use DDDStarterPack\Message\Infrastructure\Driver\AWS\RawClient\SnsRawClient;
@@ -18,7 +16,6 @@ use DDDStarterPack\Message\Infrastructure\Factory\MessageConsumerFactory;
 use DDDStarterPack\Message\Infrastructure\Factory\MessageProducerFactory;
 use DDDStarterPack\Message\Infrastructure\MessageConsumer;
 use DDDStarterPack\Tool\EnvVarUtil;
-use InvalidArgumentException;
 use PHPUnit\Framework\TestCase;
 use Ramsey\Uuid\Uuid;
 
@@ -27,7 +24,7 @@ class SQSMessageProducerTest extends TestCase
     use SqsRawClient;
     use SnsRawClient;
 
-    private DateTimeImmutable $occurredAt;
+    private \DateTimeImmutable $occurredAt;
     private Configuration $SQSConfiguration;
     private MessageConsumer $messageConsumer;
 
@@ -36,7 +33,7 @@ class SQSMessageProducerTest extends TestCase
         $this->setQueueUrl(EnvVarUtil::get('AWS_SQS_QUEUE_NAME'));
         $this->purgeSqsQueue();
 
-        $this->occurredAt = new DateTimeImmutable();
+        $this->occurredAt = new \DateTimeImmutable();
 
         $this->SQSConfiguration = SQSConfigurationBuilder::create()
             ->withRegion(EnvVarUtil::get('AWS_DEFAULT_REGION'))
@@ -56,7 +53,7 @@ class SQSMessageProducerTest extends TestCase
      */
     public function it_should_throw_exception_if_driver_name_is_invalid(): void
     {
-        self::expectException(InvalidArgumentException::class);
+        self::expectException(\InvalidArgumentException::class);
 
         $configuration = Configuration::withParams('foo', []);
 
@@ -93,6 +90,7 @@ class SQSMessageProducerTest extends TestCase
 
     /**
      * @test
+     *
      * @group sqs
      * @group producer
      */
@@ -148,6 +146,7 @@ class SQSMessageProducerTest extends TestCase
 
     /**
      * @test
+     *
      * @group sqs
      * @group producer
      */
@@ -179,7 +178,7 @@ class SQSMessageProducerTest extends TestCase
             $result[] = new AWSMessage(
                 body: json_encode([
                     'Foo' => sprintf('Bar %s', $i),
-                    'occurredAt' => $this->occurredAt->format(DateTimeInterface::RFC3339_EXTENDED),
+                    'occurredAt' => $this->occurredAt->format(\DateTimeInterface::RFC3339_EXTENDED),
                 ]),
                 occurredAt: $this->occurredAt,
                 id: Uuid::uuid4()->toString(),

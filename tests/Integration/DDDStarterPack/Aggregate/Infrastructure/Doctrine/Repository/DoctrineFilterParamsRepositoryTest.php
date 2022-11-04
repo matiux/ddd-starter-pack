@@ -4,7 +4,6 @@ declare(strict_types=1);
 
 namespace Tests\Integration\DDDStarterPack\Aggregate\Infrastructure\Doctrine\Repository;
 
-use ArrayObject;
 use DDDStarterPack\Aggregate\Domain\Repository\Filter\FilterAppliers;
 use DDDStarterPack\Aggregate\Domain\Repository\Filter\FilterBuilder;
 use DDDStarterPack\Aggregate\Domain\Repository\Paginator\Paginator;
@@ -13,7 +12,6 @@ use Doctrine\Bundle\DoctrineBundle\Registry;
 use Doctrine\ORM\EntityManager;
 use Doctrine\ORM\QueryBuilder;
 use Doctrine\ORM\Tools\Pagination\Paginator as DoctrinePaginator;
-use Mockery;
 use PHPUnit\Framework\TestCase;
 use Tests\Support\Model\Doctrine\DoctrinePaginationApplier;
 use Tests\Support\Model\Doctrine\DoctrineSortApplier;
@@ -33,7 +31,7 @@ class DoctrineFilterParamsRepositoryTest extends TestCase
 
         $this->em->getConnection()->beginTransaction();
 
-        $registry = Mockery::mock(Registry::class)
+        $registry = \Mockery::mock(Registry::class)
             ->shouldReceive('getManagerForClass')->andReturn($this->em)
             ->getMock();
 
@@ -100,8 +98,8 @@ class MyFilterApplierRepository extends DoctrineFilterApplierRepository
         $res = (array) $qb->getQuery()->getResult();
         $doctrinePaginator = new DoctrinePaginator($qb);
 
-        /** @var ArrayObject<int, Person> $arrayObject */
-        $arrayObject = new ArrayObject($res);
+        /** @var \ArrayObject<int, Person> $arrayObject */
+        $arrayObject = new \ArrayObject($res);
 
         return new PersonPaginator($arrayObject, $offset, $limit, $doctrinePaginator->count());
     }

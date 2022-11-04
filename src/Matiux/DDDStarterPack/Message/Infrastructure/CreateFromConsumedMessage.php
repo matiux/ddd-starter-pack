@@ -4,23 +4,23 @@ declare(strict_types=1);
 
 namespace DDDStarterPack\Message\Infrastructure;
 
-use DateTimeImmutable;
 use DDDStarterPack\Command\DomainCommand;
 use DDDStarterPack\Event\DomainEvent;
 
 /**
  * @codeCoverageIgnore
+ *
  * @template T
  */
 abstract class CreateFromConsumedMessage
 {
     /**
-     * @param T                      $consumedMessage
-     * @param null|DateTimeImmutable $occurredAt
+     * @param T                       $consumedMessage
+     * @param null|\DateTimeImmutable $occurredAt
      *
      * @return DomainCommand|DomainEvent
      */
-    public function execute($consumedMessage, DateTimeImmutable $occurredAt = null)
+    public function execute($consumedMessage, \DateTimeImmutable $occurredAt = null)
     {
         $this->validateConsumedMessage($consumedMessage);
 

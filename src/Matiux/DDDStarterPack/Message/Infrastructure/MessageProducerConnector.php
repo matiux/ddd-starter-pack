@@ -8,6 +8,7 @@ use DDDStarterPack\Message\Infrastructure\Configuration\Configuration;
 
 /**
  * @template T
+ *
  * @extends MessageProducer<T>
  */
 interface MessageProducerConnector extends MessageProducer

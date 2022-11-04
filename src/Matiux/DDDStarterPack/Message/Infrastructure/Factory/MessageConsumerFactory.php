@@ -9,7 +9,6 @@ use DDDStarterPack\Message\Infrastructure\Driver\AWS\AWSMessageFactory;
 use DDDStarterPack\Message\Infrastructure\Driver\AWS\SQS\SQSMessageConsumer;
 use DDDStarterPack\Message\Infrastructure\MessageConsumer;
 use DDDStarterPack\Message\Infrastructure\MessageConsumerConnector;
-use RuntimeException;
 
 class MessageConsumerFactory
 {
@@ -31,7 +30,7 @@ class MessageConsumerFactory
         // TODO -> No buono parlare di infrastruttura qui
         return match ($configuration->getDriverName()) {
             SQSMessageConsumer::NAME => new SQSMessageConsumer(new AWSMessageFactory()),
-            default => throw new RuntimeException(sprintf('Invalid driver name [%s]', $configuration->getDriverName())),
+            default => throw new \RuntimeException(sprintf('Invalid driver name [%s]', $configuration->getDriverName())),
         };
     }
 }

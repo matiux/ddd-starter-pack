@@ -72,7 +72,7 @@ class RabbitMQMessageConsumer extends RabbitMQMessanger implements MessageConsum
         $this->channel->basic_ack($messageId);
     }
 
-    public function deleteBatch(ArrayObject $messagesId): void
+    public function deleteBatch(\ArrayObject $messagesId): void
     {
     }
 

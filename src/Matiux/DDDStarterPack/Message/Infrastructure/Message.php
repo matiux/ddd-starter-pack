@@ -4,8 +4,6 @@ declare(strict_types=1);
 
 namespace DDDStarterPack\Message\Infrastructure;
 
-use DateTimeImmutable;
-
 interface Message
 {
     public function exchangeName(): null|string;
@@ -16,5 +14,5 @@ interface Message
 
     public function id(): mixed;
 
-    public function occurredAt(): DateTimeImmutable|null;
+    public function occurredAt(): \DateTimeImmutable|null;
 }

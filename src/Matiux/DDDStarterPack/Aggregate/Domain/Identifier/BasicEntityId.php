@@ -6,6 +6,7 @@ namespace DDDStarterPack\Aggregate\Domain\Identifier;
 
 /**
  * @template T
+ *
  * @implements EntityId<T>
  */
 abstract class BasicEntityId implements EntityId

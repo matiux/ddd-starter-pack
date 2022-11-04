@@ -14,6 +14,7 @@ class MessageProducerFactoryTest extends TestCase
 {
     /**
      * @test
+     *
      * @group factory
      * @group sqs
      */

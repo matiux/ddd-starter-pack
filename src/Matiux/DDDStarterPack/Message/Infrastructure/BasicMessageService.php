@@ -7,10 +7,8 @@ namespace DDDStarterPack\Message\Infrastructure;
 use DDDStarterPack\Message\Infrastructure\Configuration\Configuration;
 use DDDStarterPack\Message\Infrastructure\Configuration\ConfigurationValidator;
 use DDDStarterPack\Message\Infrastructure\Exception\InvalidConfigurationException;
-use InvalidArgumentException;
 use Symfony\Component\OptionsResolver\Exception\MissingOptionsException;
 use Symfony\Component\OptionsResolver\OptionsResolver;
-use Throwable;
 
 abstract class BasicMessageService
 {
@@ -40,7 +38,7 @@ abstract class BasicMessageService
     protected function validateDriverName(Configuration $configuration): void
     {
         if ($configuration->getDriverName() !== $this->specificDriverName()) {
-            throw new InvalidArgumentException(sprintf("Configuration driver name '%s' not match with specific name '%s'", $configuration->getDriverName(), $this->specificDriverName()));
+            throw new \InvalidArgumentException(sprintf("Configuration driver name '%s' not match with specific name '%s'", $configuration->getDriverName(), $this->specificDriverName()));
         }
     }
 
@@ -57,7 +55,7 @@ abstract class BasicMessageService
 
         try {
             $resolver->resolve($configuration->getParams());
-        } catch (MissingOptionsException|Throwable $e) {
+        } catch (MissingOptionsException|\Throwable $e) {
             throw new InvalidConfigurationException($e->getMessage());
         }
     }

@@ -4,7 +4,6 @@ declare(strict_types=1);
 
 namespace DDDStarterPack\Message\Infrastructure\Driver\InMemory;
 
-use DateTimeImmutable;
 use DDDStarterPack\Message\Infrastructure\MessageFactory;
 
 /**
@@ -14,7 +13,7 @@ class InMemoryMessageFactory implements MessageFactory
 {
     public function build(
         string $body,
-        null|DateTimeImmutable $occurredAt = null,
+        null|\DateTimeImmutable $occurredAt = null,
         null|string $type = null,
         null|string $id = null,
         array $extra = [],

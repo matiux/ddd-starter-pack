@@ -4,15 +4,13 @@ declare(strict_types=1);
 
 namespace DDDStarterPack\Message\Infrastructure\Driver\AWS;
 
-use BadMethodCallException;
-use DateTimeImmutable;
 use DDDStarterPack\Message\Infrastructure\Message;
 
 class AWSMessage implements Message
 {
     public function __construct(
         private string $body,
-        private null|DateTimeImmutable $occurredAt,
+        private null|\DateTimeImmutable $occurredAt,
         private null|string $type = null,
         private null|string $id = null,
         private array $extra = []
@@ -21,11 +19,12 @@ class AWSMessage implements Message
 
     /**
      * @return null|string
+     *
      * @codeCoverageIgnore
      */
     public function exchangeName(): null|string
     {
-        throw new BadMethodCallException();
+        throw new \BadMethodCallException();
     }
 
     public function body(): string
@@ -43,7 +42,7 @@ class AWSMessage implements Message
         return $this->id;
     }
 
-    public function occurredAt(): null|DateTimeImmutable
+    public function occurredAt(): null|\DateTimeImmutable
     {
         return $this->occurredAt;
     }

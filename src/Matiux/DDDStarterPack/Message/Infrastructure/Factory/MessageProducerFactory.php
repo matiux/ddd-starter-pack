@@ -9,7 +9,6 @@ use DDDStarterPack\Message\Infrastructure\Driver\AWS\SNS\SNSMessagePubblisher;
 use DDDStarterPack\Message\Infrastructure\Driver\AWS\SQS\SQSMessageProducer;
 use DDDStarterPack\Message\Infrastructure\MessageProducer;
 use DDDStarterPack\Message\Infrastructure\MessageProducerConnector;
-use RuntimeException;
 
 class MessageProducerFactory
 {
@@ -32,7 +31,7 @@ class MessageProducerFactory
         return match ($configuration->getDriverName()) {
             SQSMessageProducer::NAME => new SQSMessageProducer(),
             SNSMessagePubblisher::NAME => new SNSMessagePubblisher(),
-            default => throw new RuntimeException(sprintf('Invalid driver name [%s]', $configuration->getDriverName())),
+            default => throw new \RuntimeException(sprintf('Invalid driver name [%s]', $configuration->getDriverName())),
         };
     }
 }

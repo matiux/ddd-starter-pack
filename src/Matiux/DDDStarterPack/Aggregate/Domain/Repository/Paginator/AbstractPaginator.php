@@ -4,26 +4,24 @@ declare(strict_types=1);
 
 namespace DDDStarterPack\Aggregate\Domain\Repository\Paginator;
 
-use ArrayIterator;
-use ArrayObject;
-
 /**
  * @template I
+ *
  * @implements Paginator<I>
  */
 abstract class AbstractPaginator implements Paginator
 {
-    /** @var ArrayIterator<int, I> */
-    private ArrayIterator $iterator;
+    /** @var \ArrayIterator<int, I> */
+    private \ArrayIterator $iterator;
 
     /**
-     * @param ArrayObject<int, I> $page
-     * @param int                 $offset
-     * @param int                 $limit
-     * @param int                 $totalResult
+     * @param \ArrayObject<int, I> $page
+     * @param int                  $offset
+     * @param int                  $limit
+     * @param int                  $totalResult
      */
     public function __construct(
-        private ArrayObject $page,
+        private \ArrayObject $page,
         private int $offset,
         private int $limit,
         private int $totalResult,

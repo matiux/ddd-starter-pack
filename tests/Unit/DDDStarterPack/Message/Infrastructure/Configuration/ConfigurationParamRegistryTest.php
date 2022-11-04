@@ -7,7 +7,6 @@ namespace Tests\Unit\DDDStarterPack\Message\Infrastructure\Configuration;
 use DDDStarterPack\Message\Infrastructure\Configuration\ConfigurationParamRegistry;
 use DDDStarterPack\Message\Infrastructure\Driver\AWS\Configuration\AccessKeyIsValidConfigurationParamConstraint;
 use PHPUnit\Framework\TestCase;
-use RuntimeException;
 
 class ConfigurationParamRegistryTest extends TestCase
 {
@@ -31,7 +30,7 @@ class ConfigurationParamRegistryTest extends TestCase
      */
     public function it_should_throw_exception_if_constraint_is_existent(): void
     {
-        self::expectException(RuntimeException::class);
+        self::expectException(\RuntimeException::class);
 
         $registry = new ConfigurationParamRegistry();
 

@@ -15,12 +15,14 @@ interface CommandService extends Service
 {
     /**
      * @param I $command
+     *
      * @psalm-assert DomainCommand $command
      */
     public function execute($command): void;
 
     /**
      * @param I $command
+     *
      * @psalm-assert DomainCommand $command
      */
     public function __invoke($command): void;

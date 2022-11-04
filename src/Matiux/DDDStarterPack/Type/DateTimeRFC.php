@@ -4,15 +4,10 @@ declare(strict_types=1);
 
 namespace DDDStarterPack\Type;
 
-use DateTimeImmutable;
-use DateTimeZone;
-use Exception;
-use InvalidArgumentException;
-
 /**
  * @psalm-immutable
  */
-class DateTimeRFC extends DateTimeImmutable
+class DateTimeRFC extends \DateTimeImmutable
 {
     /**
      * Based on DateTimeInterface::RFC3339_EXTENDED = Y-m-d\TH:i:s.vP
@@ -21,7 +16,7 @@ class DateTimeRFC extends DateTimeImmutable
      */
     public const FORMAT = 'Y-m-d\TH:i:s.uP';
 
-    final public function __construct(string $datetime = 'now', ?DateTimeZone $timezone = null)
+    final public function __construct(string $datetime = 'now', ?\DateTimeZone $timezone = null)
     {
         parent::__construct($datetime, $timezone);
     }
@@ -34,14 +29,14 @@ class DateTimeRFC extends DateTimeImmutable
     /**
      * @param string $dateTime
      *
-     * @throws Exception
+     * @throws \Exception
      *
      * @return DateTimeRFC
      */
     public static function createFrom(string $dateTime): DateTimeRFC
     {
         if (!$date = static::createFromFormat(self::FORMAT, $dateTime)) {
-            throw new InvalidArgumentException(sprintf('Data non valida: %s', $dateTime));
+            throw new \InvalidArgumentException(sprintf('Data non valida: %s', $dateTime));
         }
 
         return new static($date->format(self::FORMAT));

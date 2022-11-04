@@ -4,7 +4,6 @@ declare(strict_types=1);
 
 namespace DDDStarterPack\Message\Infrastructure\Driver\InMemory;
 
-use ArrayObject;
 use DDDStarterPack\Message\Infrastructure\Message;
 use DDDStarterPack\Message\Infrastructure\MessageConsumer;
 
@@ -22,6 +21,7 @@ class InMemoryMessageConsumer implements MessageConsumer
 
     /**
      * @return Message[]
+     *
      * @codeCoverageIgnore
      */
     public function consumeBatch(): array
@@ -31,6 +31,7 @@ class InMemoryMessageConsumer implements MessageConsumer
 
     /**
      * @param mixed $messageId
+     *
      * @codeCoverageIgnore
      */
     public function delete(string $messageId, null|string $queue = null): void
@@ -38,15 +39,17 @@ class InMemoryMessageConsumer implements MessageConsumer
     }
 
     /**
-     * @param ArrayObject $messagesId
+     * @param \ArrayObject $messagesId
+     *
      * @codeCoverageIgnore
      */
-    public function deleteBatch(ArrayObject $messagesId): void
+    public function deleteBatch(\ArrayObject $messagesId): void
     {
     }
 
     /**
      * @param string $exchangeName
+     *
      * @codeCoverageIgnore
      */
     public function open(string $exchangeName = ''): void
@@ -55,6 +58,7 @@ class InMemoryMessageConsumer implements MessageConsumer
 
     /**
      * @param string $exchangeName
+     *
      * @codeCoverageIgnore
      */
     public function close(string $exchangeName = ''): void

@@ -4,15 +4,13 @@ declare(strict_types=1);
 
 namespace DDDStarterPack\Message\Infrastructure\Driver\InMemory;
 
-use BadMethodCallException;
-use DateTimeImmutable;
 use DDDStarterPack\Message\Infrastructure\Message;
 
 class InMemoryMessage implements Message
 {
     public function __construct(
         private string $body,
-        private null|DateTimeImmutable $occurredAt,
+        private null|\DateTimeImmutable $occurredAt,
         private null|string $type = null,
         private null|string $id = null,
     ) {
@@ -20,11 +18,12 @@ class InMemoryMessage implements Message
 
     /**
      * @return string
+     *
      * @codeCoverageIgnore
      */
     public function exchangeName(): string
     {
-        throw new BadMethodCallException();
+        throw new \BadMethodCallException();
     }
 
     public function body(): string
@@ -42,7 +41,7 @@ class InMemoryMessage implements Message
         return $this->id;
     }
 
-    public function occurredAt(): DateTimeImmutable|null
+    public function occurredAt(): \DateTimeImmutable|null
     {
         return $this->occurredAt;
     }

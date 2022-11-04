@@ -6,7 +6,6 @@ namespace Tests\Unit\DDDStarterPack\Aggregate\Domain\Repository\Filter;
 
 use DDDStarterPack\Aggregate\Domain\Repository\Filter\FilterApplier;
 use DDDStarterPack\Aggregate\Domain\Repository\Filter\FilterAppliers;
-use InvalidArgumentException;
 
 /**
  * @implements FilterApplier<DummyArrayTarget>
@@ -18,7 +17,7 @@ class DummyFilterApplier implements FilterApplier
     public function __construct(string $key)
     {
         if (!$key) {
-            throw new InvalidArgumentException('the given key is empty');
+            throw new \InvalidArgumentException('the given key is empty');
         }
 
         $this->key = $key;

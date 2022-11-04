@@ -7,6 +7,7 @@ namespace DDDStarterPack\DataTransformer\Application\Type;
 /**
  * @template I
  * @template R
+ *
  * @extends DataTransformer<R>
  */
 interface ItemDataTransformer extends DataTransformer

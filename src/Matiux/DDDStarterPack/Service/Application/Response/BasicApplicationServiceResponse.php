@@ -9,6 +9,7 @@ use DDDStarterPack\Service\Domain\Response\ServiceResponse;
 
 /**
  * @template T
+ *
  * @extends BasicServiceResponse<T>
  */
 abstract class BasicApplicationServiceResponse extends BasicServiceResponse implements ServiceResponse

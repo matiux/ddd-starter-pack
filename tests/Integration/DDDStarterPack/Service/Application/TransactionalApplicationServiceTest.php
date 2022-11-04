@@ -10,8 +10,6 @@ use DDDStarterPack\Service\Application\TransactionalSession;
 use DDDStarterPack\Service\Domain\Service;
 use DDDStarterPack\Service\Infrastructure\Doctrine\DoctrineTransactionalSession;
 use Doctrine\ORM\EntityManager;
-use Exception;
-use Mockery;
 use PHPUnit\Framework\TestCase;
 use Tests\Tool\EntityManagerBuilder;
 
@@ -34,12 +32,12 @@ class TransactionalApplicationServiceTest extends TestCase
         self::expectException(TransactionFailedException::class);
         self::expectExceptionMessage('RepoA is failed so the whole transaction is failed');
 
-        $repoA = Mockery::mock(Repository::class)
+        $repoA = \Mockery::mock(Repository::class)
             ->shouldReceive('add')
-            ->andThrow(new Exception('RepoA is failed so the whole transaction is failed'))
+            ->andThrow(new \Exception('RepoA is failed so the whole transaction is failed'))
             ->getMock();
 
-        $repoB = Mockery::mock(Repository::class);
+        $repoB = \Mockery::mock(Repository::class);
 
         $atomicallyService = new AtomicallyService($repoA, $repoB);
 

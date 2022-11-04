@@ -4,7 +4,6 @@ declare(strict_types=1);
 
 namespace Tests\Unit\DDDStarterPack\Service\Domain;
 
-use DateTimeImmutable;
 use DDDStarterPack\Command\DomainCommand;
 use DDDStarterPack\Service\Domain\CommandService;
 use PHPUnit\Framework\TestCase;
@@ -33,9 +32,9 @@ class CommandServiceTest extends TestCase
 
 class MyCommand implements DomainCommand
 {
-    public function occurredAt(): DateTimeImmutable
+    public function occurredAt(): \DateTimeImmutable
     {
-        return new DateTimeImmutable();
+        return new \DateTimeImmutable();
     }
 
     public function operation(): string

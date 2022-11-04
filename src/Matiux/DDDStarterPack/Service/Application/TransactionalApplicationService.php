@@ -6,7 +6,6 @@ namespace DDDStarterPack\Service\Application;
 
 use DDDStarterPack\Exception\Application\TransactionFailedException;
 use DDDStarterPack\Service\Domain\Service;
-use Throwable;
 
 /**
  * @template I
@@ -37,7 +36,7 @@ abstract class TransactionalApplicationService
             return $this->session->executeAtomically(function () use ($request) {
                 return $this->service->execute($request);
             });
-        } catch (Throwable $exception) {
+        } catch (\Throwable $exception) {
             throw new TransactionFailedException($exception->getMessage(), intval($exception->getCode()), $exception);
         }
     }

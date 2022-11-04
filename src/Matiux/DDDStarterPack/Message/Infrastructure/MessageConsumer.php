@@ -4,8 +4,6 @@ declare(strict_types=1);
 
 namespace DDDStarterPack\Message\Infrastructure;
 
-use ArrayObject;
-
 interface MessageConsumer extends MessageService
 {
     public function consume(null|string $queue = null): null|Message;
@@ -17,5 +15,5 @@ interface MessageConsumer extends MessageService
 
     public function delete(string $messageId, null|string $queue = null): void;
 
-    public function deleteBatch(ArrayObject $messagesId): void;
+    public function deleteBatch(\ArrayObject $messagesId): void;
 }

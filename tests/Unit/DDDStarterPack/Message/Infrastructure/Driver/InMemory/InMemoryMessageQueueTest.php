@@ -4,7 +4,6 @@ declare(strict_types=1);
 
 namespace Tests\Unit\DDDStarterPack\Message\Infrastructure\Driver\InMemory;
 
-use DateTimeImmutable;
 use DDDStarterPack\Message\Infrastructure\Driver\InMemory\InMemoryMessage;
 use DDDStarterPack\Message\Infrastructure\Driver\InMemory\InMemoryMessageConsumer;
 use DDDStarterPack\Message\Infrastructure\Driver\InMemory\InMemoryMessageFactory;
@@ -35,7 +34,7 @@ class InMemoryMessageQueueTest extends TestCase
         ];
         $event = json_encode($messageBody);
 
-        $occurredAt = new DateTimeImmutable();
+        $occurredAt = new \DateTimeImmutable();
 
         $message = (new InMemoryMessageFactory())->build(
             body: $event,

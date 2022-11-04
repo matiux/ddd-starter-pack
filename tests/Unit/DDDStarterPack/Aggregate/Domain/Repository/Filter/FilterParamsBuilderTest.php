@@ -5,14 +5,13 @@ declare(strict_types=1);
 namespace Tests\Unit\DDDStarterPack\Aggregate\Domain\Repository\Filter;
 
 use DDDStarterPack\Aggregate\Domain\Repository\Filter\FilterBuilder;
-use InvalidArgumentException;
-use LogicException;
 use PHPUnit\Framework\TestCase;
 
 class FilterParamsBuilderTest extends TestCase
 {
     /**
      * @test
+     *
      * @group filter
      */
     public function it_should_create_a_filterparams_by_builder(): void
@@ -49,7 +48,7 @@ class FilterParamsBuilderTest extends TestCase
      */
     public function it_should_throw_exception_if_two_filter_params_applier_have_same_key(): void
     {
-        self::expectException(InvalidArgumentException::class);
+        self::expectException(\InvalidArgumentException::class);
         self::expectExceptionMessage('Applier for key \'name\' is already set');
 
         (new FilterBuilder(
@@ -67,11 +66,12 @@ class FilterParamsBuilderTest extends TestCase
 
     /**
      * @test
+     *
      * @group filter
      */
     public function filter_params_builder_thow_an_exception(): void
     {
-        $this->expectException(LogicException::class);
+        $this->expectException(\LogicException::class);
         $this->expectExceptionMessage('The builder is frozen');
 
         $filterParamsBuilder = new FilterBuilder();

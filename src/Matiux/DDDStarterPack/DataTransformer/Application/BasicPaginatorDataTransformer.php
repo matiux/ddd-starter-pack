@@ -11,6 +11,7 @@ use DDDStarterPack\DataTransformer\Application\Type\PaginatorDataTransformer;
 
 /**
  * @template I
+ *
  * @implements PaginatorDataTransformer<I, array>
  */
 abstract class BasicPaginatorDataTransformer implements PaginatorDataTransformer

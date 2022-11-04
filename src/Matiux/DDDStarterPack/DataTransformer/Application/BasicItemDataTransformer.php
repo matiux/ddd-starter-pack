@@ -10,6 +10,7 @@ use DDDStarterPack\DataTransformer\Application\Type\ItemDataTransformer;
 /**
  * @template I
  * @template R
+ *
  * @implements ItemDataTransformer<I, R>
  */
 abstract class BasicItemDataTransformer implements ItemDataTransformer

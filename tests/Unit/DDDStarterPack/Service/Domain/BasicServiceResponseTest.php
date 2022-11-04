@@ -49,6 +49,7 @@ class BasicServiceResponseTest extends TestCase
 
 /**
  * @template T of array<string, string>
+ *
  * @extends BasicServiceResponse<T>
  */
 class ServiceResponse extends BasicServiceResponse

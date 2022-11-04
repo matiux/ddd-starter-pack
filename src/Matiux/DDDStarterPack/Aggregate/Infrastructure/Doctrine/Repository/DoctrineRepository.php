@@ -6,7 +6,6 @@ namespace DDDStarterPack\Aggregate\Infrastructure\Doctrine\Repository;
 
 use Doctrine\Bundle\DoctrineBundle\Registry;
 use Doctrine\ORM\EntityManagerInterface;
-use InvalidArgumentException;
 use Webmozart\Assert\Assert;
 
 abstract class DoctrineRepository
@@ -28,7 +27,7 @@ abstract class DoctrineRepository
     public function __construct(Registry $registry, string $model)
     {
         if (!class_exists($model)) {
-            throw new InvalidArgumentException(sprintf('`%s` is not a valid class-string', (string) $model));
+            throw new \InvalidArgumentException(sprintf('`%s` is not a valid class-string', (string) $model));
         }
 
         $this->registry = $registry;

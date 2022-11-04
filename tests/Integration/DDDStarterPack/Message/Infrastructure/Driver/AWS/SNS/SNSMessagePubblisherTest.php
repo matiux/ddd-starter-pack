@@ -4,8 +4,6 @@ declare(strict_types=1);
 
 namespace Integration\DDDStarterPack\Message\Infrastructure\Driver\AWS\SNS;
 
-use DateTimeImmutable;
-use DateTimeInterface;
 use DDDStarterPack\Message\Infrastructure\Driver\AWS\AWSMessage;
 use DDDStarterPack\Message\Infrastructure\Driver\AWS\RawClient\SnsRawClient;
 use DDDStarterPack\Message\Infrastructure\Driver\AWS\RawClient\SqsRawClient;
@@ -23,7 +21,7 @@ class SNSMessagePubblisherTest extends TestCase
     use SqsRawClient;
     use SnsRawClient;
 
-    private DateTimeImmutable $occurredAt;
+    private \DateTimeImmutable $occurredAt;
     private MessageConsumer $messageConsumer;
 
     protected function setUp(): void
@@ -32,7 +30,7 @@ class SNSMessagePubblisherTest extends TestCase
         $this->setQueueUrl(EnvVarUtil::get('AWS_SQS_QUEUE_NAME'));
         $this->purgeSqsQueue();
 
-        $this->occurredAt = new DateTimeImmutable();
+        $this->occurredAt = new \DateTimeImmutable();
 
         $SQSconfiguration = SQSConfigurationBuilder::create()
             ->withRegion('eu-west-1')
@@ -49,6 +47,7 @@ class SNSMessagePubblisherTest extends TestCase
 
     /**
      * @test
+     *
      * @group sqs
      * @group producer
      */
@@ -64,7 +63,7 @@ class SNSMessagePubblisherTest extends TestCase
         $message = new AWSMessage(
             body: json_encode([
                 'Foo' => 'Bar',
-                'occurredAt' => $this->occurredAt->format(DateTimeInterface::RFC3339_EXTENDED),
+                'occurredAt' => $this->occurredAt->format(\DateTimeInterface::RFC3339_EXTENDED),
             ]),
             occurredAt: $this->occurredAt,
             extra: [
@@ -104,7 +103,7 @@ class SNSMessagePubblisherTest extends TestCase
         $message = new AWSMessage(
             body: json_encode([
                 'Foo' => 'Bar',
-                'occurredAt' => $this->occurredAt->format(DateTimeInterface::RFC3339_EXTENDED),
+                'occurredAt' => $this->occurredAt->format(\DateTimeInterface::RFC3339_EXTENDED),
             ]),
             occurredAt: $this->occurredAt,
             type: 'EventoAvvenuto',

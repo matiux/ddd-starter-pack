@@ -6,7 +6,6 @@ namespace DDDStarterPack\Message\Infrastructure\Driver\AWS;
 
 use Aws\Credentials\Credentials;
 use Aws\Result;
-use BadMethodCallException;
 use Webmozart\Assert\Assert;
 
 trait AWSBasicService
@@ -50,20 +49,22 @@ trait AWSBasicService
 
     /**
      * @param string $exchangeName
+     *
      * @codeCoverageIgnore
      */
     public function open(string $exchangeName = ''): void
     {
-        throw new BadMethodCallException();
+        throw new \BadMethodCallException();
     }
 
     /**
      * @param string $exchangeName
+     *
      * @codeCoverageIgnore
      */
     public function close(string $exchangeName = ''): void
     {
-        throw new BadMethodCallException();
+        throw new \BadMethodCallException();
     }
 
     public static function obtainStatusCode(Result $result): int

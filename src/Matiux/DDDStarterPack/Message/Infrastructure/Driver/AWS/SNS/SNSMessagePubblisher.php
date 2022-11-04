@@ -5,8 +5,6 @@ declare(strict_types=1);
 namespace DDDStarterPack\Message\Infrastructure\Driver\AWS\SNS;
 
 use Aws\Sns\SnsClient;
-use BadMethodCallException;
-use DateTimeInterface;
 use DDDStarterPack\Message\Infrastructure\BasicMessageService;
 use DDDStarterPack\Message\Infrastructure\Configuration\Configuration;
 use DDDStarterPack\Message\Infrastructure\Configuration\ConfigurationValidator;
@@ -23,6 +21,7 @@ use Webmozart\Assert\Assert;
 
 /**
  * @psalm-suppress PropertyNotSetInConstructor
+ *
  * @implements MessageProducerConnector<AWSMessage>
  */
 class SNSMessagePubblisher extends BasicMessageService implements MessageProducerConnector
@@ -94,7 +93,7 @@ class SNSMessagePubblisher extends BasicMessageService implements MessageProduce
             $messageAttributes = [
                 'OccurredAt' => [
                     'DataType' => 'String',
-                    'StringValue' => $occurredAt->format(DateTimeInterface::RFC3339_EXTENDED),
+                    'StringValue' => $occurredAt->format(\DateTimeInterface::RFC3339_EXTENDED),
                 ],
             ];
         }
@@ -191,19 +190,21 @@ class SNSMessagePubblisher extends BasicMessageService implements MessageProduce
      * @param array $messages
      *
      * @return MessageProducerResponse
+     *
      * @codeCoverageIgnore
      */
     public function sendBatch(array $messages): MessageProducerResponse
     {
-        throw new BadMethodCallException();
+        throw new \BadMethodCallException();
     }
 
     /**
      * @return int
+     *
      * @codeCoverageIgnore
      */
     public function getBatchLimit(): int
     {
-        throw new BadMethodCallException();
+        throw new \BadMethodCallException();
     }
 }
