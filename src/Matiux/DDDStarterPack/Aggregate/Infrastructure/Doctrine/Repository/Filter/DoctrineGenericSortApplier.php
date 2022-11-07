@@ -9,19 +9,12 @@ use Doctrine\ORM\QueryBuilder;
 
 abstract class DoctrineGenericSortApplier extends DoctrineFilterApplier
 {
-    protected const KEY = 'sorting';
-
     /** @var array<array-key, string> */
     protected array $fieldsMap;
 
     abstract protected function sortDirectionKey(): string;
 
     abstract protected function sortKey(): string;
-
-    public function supported(): string
-    {
-        return self::KEY;
-    }
 
     /**
      * @param QueryBuilder $target

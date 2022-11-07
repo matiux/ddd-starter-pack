@@ -9,22 +9,15 @@ use Doctrine\ORM\QueryBuilder;
 
 abstract class DoctrineGenericPaginationApplier extends DoctrineFilterApplier
 {
-    protected const KEY = 'pagination';
-
     abstract protected function pageKey(): string;
 
     abstract protected function perPageKey(): string;
-
-    public function supported(): string
-    {
-        return self::KEY;
-    }
 
     /**
      * @psalm-param QueryBuilder $target
      *
      * @param FilterAppliersRegistry $filterAppliers
-     * @param mixed          $target
+     * @param mixed                  $target
      */
     public function apply($target, FilterAppliersRegistry $filterAppliers): void
     {

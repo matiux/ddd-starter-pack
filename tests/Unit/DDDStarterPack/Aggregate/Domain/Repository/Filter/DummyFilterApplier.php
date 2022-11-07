@@ -24,19 +24,14 @@ class DummyFilterApplier implements FilterApplier
     }
 
     /**
-     * @param DummyArrayTarget $target
-     * @param FilterAppliersRegistry   $filterAppliers
+     * @param DummyArrayTarget       $target
+     * @param FilterAppliersRegistry $filterAppliers
      */
     public function apply($target, FilterAppliersRegistry $filterAppliers): void
     {
         $target->add([
-            $this->supported() => $filterAppliers->getFilterValueForKey($this->supported()),
+            $this->key => $filterAppliers->getFilterValueForKey($this->key),
         ]);
-    }
-
-    public function supported(): string
-    {
-        return $this->key;
     }
 
     public function supports(FilterAppliersRegistry $filterAppliers): bool
