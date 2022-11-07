@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Tests\Unit\DDDStarterPack\Aggregate\Domain\Repository\Filter;
 
-use DDDStarterPack\Aggregate\Domain\Repository\Filter\FilterAppliers;
+use DDDStarterPack\Aggregate\Domain\Repository\Filter\FilterAppliersRegistry;
 use PHPUnit\Framework\TestCase;
 
 class FilterParamsTest extends TestCase
@@ -27,7 +27,7 @@ class FilterParamsTest extends TestCase
             new DummyFilterApplier('name'),
         ];
 
-        new FilterAppliers($filterParamsApplyer, $neededFilters);
+        new FilterAppliersRegistry($filterParamsApplyer, $neededFilters);
     }
 
     /**
@@ -43,7 +43,7 @@ class FilterParamsTest extends TestCase
             'skills' => ['architecture', 'programming'],
         ];
 
-        $filterParams = new FilterAppliers([], $neededFilters);
+        $filterParams = new FilterAppliersRegistry([], $neededFilters);
 
         $filterParams->getFilterValueForKey('surname');
     }
@@ -57,7 +57,7 @@ class FilterParamsTest extends TestCase
             'name' => 'Matteo',
         ];
 
-        $filterParams = new FilterAppliers([], $neededFilters);
+        $filterParams = new FilterAppliersRegistry([], $neededFilters);
 
         self::assertFalse($filterParams->hasFilterWithKey('surname'));
     }

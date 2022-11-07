@@ -40,10 +40,10 @@ class FilterBuilder
         $this->filterAppliers[$key] = $filterApplier;
     }
 
-    public function build(array $neededFilters): FilterAppliers
+    public function build(array $neededFilters): FilterAppliersRegistry
     {
         $this->frozen = true;
 
-        return new FilterAppliers(array_values($this->filterAppliers), $neededFilters);
+        return new FilterAppliersRegistry(array_values($this->filterAppliers), $neededFilters);
     }
 }

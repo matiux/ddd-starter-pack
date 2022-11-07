@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace DDDStarterPack\Aggregate\Infrastructure\Doctrine\Repository\Filter;
 
-use DDDStarterPack\Aggregate\Domain\Repository\Filter\FilterAppliers;
+use DDDStarterPack\Aggregate\Domain\Repository\Filter\FilterAppliersRegistry;
 use Doctrine\ORM\QueryBuilder;
 
 abstract class DoctrineGenericPaginationApplier extends DoctrineFilterApplier
@@ -23,10 +23,10 @@ abstract class DoctrineGenericPaginationApplier extends DoctrineFilterApplier
     /**
      * @psalm-param QueryBuilder $target
      *
-     * @param FilterAppliers $filterAppliers
+     * @param FilterAppliersRegistry $filterAppliers
      * @param mixed          $target
      */
-    public function apply($target, FilterAppliers $filterAppliers): void
+    public function apply($target, FilterAppliersRegistry $filterAppliers): void
     {
         /** @var int $page */
         $page = $filterAppliers->getFilterValueForKey($this->pageKey(), '1');

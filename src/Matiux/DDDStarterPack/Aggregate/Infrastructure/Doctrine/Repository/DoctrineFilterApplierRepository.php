@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace DDDStarterPack\Aggregate\Infrastructure\Doctrine\Repository;
 
-use DDDStarterPack\Aggregate\Domain\Repository\Filter\FilterAppliers;
+use DDDStarterPack\Aggregate\Domain\Repository\Filter\FilterAppliersRegistry;
 use DDDStarterPack\Aggregate\Domain\Repository\Paginator\Paginator;
 use Doctrine\ORM\QueryBuilder;
 use Webmozart\Assert\Assert;
@@ -15,11 +15,11 @@ use Webmozart\Assert\Assert;
 abstract class DoctrineFilterApplierRepository extends DoctrineRepository
 {
     /**
-     * @param FilterAppliers $filterAppliers
+     * @param FilterAppliersRegistry $filterAppliers
      *
      * @return Paginator<T>
      */
-    protected function doByFilterParamsWithPagination(FilterAppliers $filterAppliers): Paginator
+    protected function doByFilterParamsWithPagination(FilterAppliersRegistry $filterAppliers): Paginator
     {
         $qb = $this->createQuery($filterAppliers);
 
@@ -29,11 +29,11 @@ abstract class DoctrineFilterApplierRepository extends DoctrineRepository
     }
 
     /**
-     * @param FilterAppliers $filterAppliers
+     * @param FilterAppliersRegistry $filterAppliers
      *
      * @return T[]
      */
-    protected function doByFilterParams(FilterAppliers $filterAppliers): array
+    protected function doByFilterParams(FilterAppliersRegistry $filterAppliers): array
     {
         $qb = $this->createQuery($filterAppliers);
 
@@ -44,7 +44,7 @@ abstract class DoctrineFilterApplierRepository extends DoctrineRepository
         return $results;
     }
 
-    private function createQuery(FilterAppliers $filterAppliers): QueryBuilder
+    private function createQuery(FilterAppliersRegistry $filterAppliers): QueryBuilder
     {
         $qb = $this->em->createQueryBuilder();
 
@@ -57,12 +57,12 @@ abstract class DoctrineFilterApplierRepository extends DoctrineRepository
     }
 
     /**
-     * @param FilterAppliers $filterAppliers
+     * @param FilterAppliersRegistry $filterAppliers
      * @param QueryBuilder   $qb
      *
      * @return list<int>
      */
-    protected function calculatePagination(FilterAppliers $filterAppliers, QueryBuilder $qb): array
+    protected function calculatePagination(FilterAppliersRegistry $filterAppliers, QueryBuilder $qb): array
     {
         $result = $qb->getQuery()->getResult();
 
@@ -92,7 +92,7 @@ abstract class DoctrineFilterApplierRepository extends DoctrineRepository
      */
     abstract protected function createPaginator(QueryBuilder $qb, int $offset, int $limit): Paginator;
 
-    private function calculateOffset(FilterAppliers $filterAppliers): int
+    private function calculateOffset(FilterAppliersRegistry $filterAppliers): int
     {
         /** @var int $page */
         $page = $filterAppliers->getFilterValueForKey('page');

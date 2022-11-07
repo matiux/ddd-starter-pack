@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace DDDStarterPack\Aggregate\Infrastructure\Doctrine\Repository\Filter;
 
-use DDDStarterPack\Aggregate\Domain\Repository\Filter\FilterAppliers;
+use DDDStarterPack\Aggregate\Domain\Repository\Filter\FilterAppliersRegistry;
 use Doctrine\ORM\QueryBuilder;
 
 abstract class DoctrineGenericSortApplier extends DoctrineFilterApplier
@@ -26,7 +26,7 @@ abstract class DoctrineGenericSortApplier extends DoctrineFilterApplier
     /**
      * @param QueryBuilder $target
      */
-    public function apply($target, FilterAppliers $filterAppliers): void
+    public function apply($target, FilterAppliersRegistry $filterAppliers): void
     {
         try {
             $sortField = (string) $filterAppliers->getFilterValueForKey($this->sortKey());

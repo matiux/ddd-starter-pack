@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace DDDStarterPack\Aggregate\Domain\Repository\Filter;
 
-class FilterAppliers
+class FilterAppliersRegistry
 {
     /** @var FilterApplier[] */
     protected array $filterAppliers = [];

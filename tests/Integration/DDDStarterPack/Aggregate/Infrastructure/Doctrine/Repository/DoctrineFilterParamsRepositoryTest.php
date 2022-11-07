@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Tests\Integration\DDDStarterPack\Aggregate\Infrastructure\Doctrine\Repository;
 
-use DDDStarterPack\Aggregate\Domain\Repository\Filter\FilterAppliers;
+use DDDStarterPack\Aggregate\Domain\Repository\Filter\FilterAppliersRegistry;
 use DDDStarterPack\Aggregate\Domain\Repository\Filter\FilterBuilder;
 use DDDStarterPack\Aggregate\Domain\Repository\Paginator\Paginator;
 use DDDStarterPack\Aggregate\Infrastructure\Doctrine\Repository\DoctrineFilterApplierRepository;
@@ -83,12 +83,12 @@ class MyFilterApplierRepository extends DoctrineFilterApplierRepository
         $this->em->flush();
     }
 
-    public function byFilterParamsWithPagination(FilterAppliers $filterParams): Paginator
+    public function byFilterParamsWithPagination(FilterAppliersRegistry $filterParams): Paginator
     {
         return $this->doByFilterParamsWithPagination($filterParams);
     }
 
-    public function byFilterParams(FilterAppliers $filterParams): array
+    public function byFilterParams(FilterAppliersRegistry $filterParams): array
     {
         return $this->doByFilterParams($filterParams);
     }
