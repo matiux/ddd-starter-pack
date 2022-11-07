@@ -6,38 +6,19 @@ namespace DDDStarterPack\Aggregate\Domain\Repository\Filter;
 
 class FilterAppliersRegistry
 {
-    /** @var FilterApplier[] */
-    protected array $filterAppliers = [];
-
     /**
      * @param array<array-key, FilterApplier> $filterAppliers
      * @param array                           $neededFilters
      */
-    public function __construct(array $filterAppliers, protected array $neededFilters)
-    {
-        $this->setAppliers($filterAppliers);
+    public function __construct(
+        private array $filterAppliers,
+        protected array $neededFilters
+    ) {
     }
 
     /**
      * @param FilterApplier[] $filterAppliers
      */
-    private function setAppliers(array $filterAppliers): void
-    {
-        foreach ($filterAppliers as $applier) {
-            $this->addApplier($applier);
-        }
-    }
-
-    public function addApplier(FilterApplier $filterApplier): void
-    {
-        $key = $filterApplier->key();
-
-        if (isset($this->filterAppliers[$key])) {
-            throw new \InvalidArgumentException("Applier for key '{$key}' is already set");
-        }
-
-        $this->filterAppliers[$key] = $filterApplier;
-    }
 
     /**
      * @param string $key

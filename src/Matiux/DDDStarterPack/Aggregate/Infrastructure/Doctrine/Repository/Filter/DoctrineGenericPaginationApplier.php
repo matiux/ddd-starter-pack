@@ -15,7 +15,7 @@ abstract class DoctrineGenericPaginationApplier extends DoctrineFilterApplier
 
     abstract protected function perPageKey(): string;
 
-    public function key(): string
+    public function supported(): string
     {
         return self::KEY;
     }

@@ -12,27 +12,6 @@ class FilterParamsTest extends TestCase
     /**
      * @test
      */
-    public function it_should_throw_exception_if_two_filter_params_applier_have_same_key(): void
-    {
-        self::expectException(\InvalidArgumentException::class);
-        self::expectExceptionMessage('Applier for key \'name\' is already set');
-
-        $neededFilters = [
-            'name' => 'Matteo',
-            'skills' => ['architecture', 'programming'],
-        ];
-
-        $filterParamsApplyer = [
-            new DummyFilterApplier('name'),
-            new DummyFilterApplier('name'),
-        ];
-
-        new FilterAppliersRegistry($filterParamsApplyer, $neededFilters);
-    }
-
-    /**
-     * @test
-     */
     public function it_should_throw_exception_if_key_does_not_exist(): void
     {
         self::expectException(\InvalidArgumentException::class);

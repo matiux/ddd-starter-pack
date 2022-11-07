@@ -45,27 +45,6 @@ class FilterParamsBuilderTest extends TestCase
 
     /**
      * @test
-     */
-    public function it_should_throw_exception_if_two_filter_params_applier_have_same_key(): void
-    {
-        self::expectException(\InvalidArgumentException::class);
-        self::expectExceptionMessage('Applier for key \'name\' is already set');
-
-        (new TestFilterBuilder(
-            [
-                new DummyFilterApplier('name'),
-                new DummyFilterApplier('name'),
-            ]
-        ))->build(
-            [
-                'name' => 'Matteo',
-                'skills' => ['architecture', 'programming'],
-            ]
-        );
-    }
-
-    /**
-     * @test
      *
      * @group filter
      */

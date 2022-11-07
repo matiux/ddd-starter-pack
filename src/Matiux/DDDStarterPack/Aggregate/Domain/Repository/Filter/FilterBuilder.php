@@ -31,13 +31,7 @@ abstract class FilterBuilder
             throw new \LogicException('The builder is frozen');
         }
 
-        $key = $filterApplier->key();
-
-        if (isset($this->filterAppliers[$key])) {
-            throw new \InvalidArgumentException("Applier for key '{$key}' is already set");
-        }
-
-        $this->filterAppliers[$key] = $filterApplier;
+        $this->filterAppliers[] = $filterApplier;
     }
 
     public function build(array $neededFilters): FilterAppliersRegistry

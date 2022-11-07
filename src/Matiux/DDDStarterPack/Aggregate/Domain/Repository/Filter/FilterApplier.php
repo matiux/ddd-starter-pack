@@ -9,7 +9,7 @@ namespace DDDStarterPack\Aggregate\Domain\Repository\Filter;
  */
 interface FilterApplier
 {
-    public function key(): string;
+    public function supported(): string;
 
     /**
      * @param T              $target

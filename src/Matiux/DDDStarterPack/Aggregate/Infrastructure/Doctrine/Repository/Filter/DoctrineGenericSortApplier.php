@@ -18,7 +18,7 @@ abstract class DoctrineGenericSortApplier extends DoctrineFilterApplier
 
     abstract protected function sortKey(): string;
 
-    public function key(): string
+    public function supported(): string
     {
         return self::KEY;
     }

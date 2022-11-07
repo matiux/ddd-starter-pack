@@ -30,11 +30,11 @@ class DummyFilterApplier implements FilterApplier
     public function apply($target, FilterAppliersRegistry $filterAppliers): void
     {
         $target->add([
-            $this->key() => $filterAppliers->getFilterValueForKey($this->key()),
+            $this->supported() => $filterAppliers->getFilterValueForKey($this->supported()),
         ]);
     }
 
-    public function key(): string
+    public function supported(): string
     {
         return $this->key;
     }
