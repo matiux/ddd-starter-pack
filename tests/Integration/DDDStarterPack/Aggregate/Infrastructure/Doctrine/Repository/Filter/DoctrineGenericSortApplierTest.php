@@ -9,6 +9,7 @@ use Doctrine\ORM\QueryBuilder;
 use PHPUnit\Framework\TestCase;
 use Tests\Support\Model\Doctrine\DoctrineSortApplier;
 use Tests\Support\Model\Person;
+use Tests\Support\TestFilterBuilder;
 use Tests\Tool\DoctrineUtil;
 use Tests\Tool\EntityManagerBuilder;
 
@@ -36,7 +37,7 @@ class DoctrineGenericSortApplierTest extends TestCase
             (string) $this->qb->getQuery()->getDQL()
         );
 
-        $filterParamsBuilder = new FilterBuilder();
+        $filterParamsBuilder = new TestFilterBuilder();
         $filterParamsBuilder->addApplier(new DoctrineSortApplier());
 
         $filterParams = $filterParamsBuilder->build(['sort_field' => 'name', 'sort_direction' => 'ASC']);
@@ -70,7 +71,7 @@ class DoctrineGenericSortApplierTest extends TestCase
             (string) $this->qb->getQuery()->getDQL()
         );
 
-        $filterParamsBuilder = new FilterBuilder();
+        $filterParamsBuilder = new TestFilterBuilder();
         $filterParamsBuilder->addApplier(new DoctrineSortApplier());
 
         $filterParams = $filterParamsBuilder->build(['sort_field' => null, 'sort_direction' => 'ASC']);
@@ -96,7 +97,7 @@ class DoctrineGenericSortApplierTest extends TestCase
             (string) $this->qb->getQuery()->getDQL()
         );
 
-        $filterParamsBuilder = new FilterBuilder();
+        $filterParamsBuilder = new TestFilterBuilder();
         $filterParamsBuilder->addApplier(new DoctrineSortApplier());
 
         $filterParams = $filterParamsBuilder->build(['sort_field' => 'name']);

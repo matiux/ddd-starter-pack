@@ -4,8 +4,8 @@ declare(strict_types=1);
 
 namespace Tests\Unit\DDDStarterPack\Aggregate\Domain\Repository\Filter;
 
-use DDDStarterPack\Aggregate\Domain\Repository\Filter\FilterBuilder;
 use PHPUnit\Framework\TestCase;
+use Tests\Support\TestFilterBuilder;
 
 class FilterParamsBuilderTest extends TestCase
 {
@@ -16,7 +16,7 @@ class FilterParamsBuilderTest extends TestCase
      */
     public function it_should_create_a_filterparams_by_builder(): void
     {
-        $filterParamsBuilder = new FilterBuilder(
+        $filterParamsBuilder = new TestFilterBuilder(
             [
                 new DummyFilterApplier('name'),
                 new DummyFilterApplier('skills'),
@@ -51,7 +51,7 @@ class FilterParamsBuilderTest extends TestCase
         self::expectException(\InvalidArgumentException::class);
         self::expectExceptionMessage('Applier for key \'name\' is already set');
 
-        (new FilterBuilder(
+        (new TestFilterBuilder(
             [
                 new DummyFilterApplier('name'),
                 new DummyFilterApplier('name'),
@@ -74,7 +74,7 @@ class FilterParamsBuilderTest extends TestCase
         $this->expectException(\LogicException::class);
         $this->expectExceptionMessage('The builder is frozen');
 
-        $filterParamsBuilder = new FilterBuilder();
+        $filterParamsBuilder = new TestFilterBuilder();
         $filterParamsBuilder->addApplier(new DummyFilterApplier('name'));
 
         $filterParamsBuilder->build([
