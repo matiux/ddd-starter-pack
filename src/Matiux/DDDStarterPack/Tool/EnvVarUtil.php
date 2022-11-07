@@ -7,8 +7,6 @@ namespace DDDStarterPack\Tool;
 class EnvVarUtil
 {
     /**
-     * @psalm-suppress PossiblyInvalidCast
-     *
      * @param non-empty-string $name
      * @param string           $default
      *
