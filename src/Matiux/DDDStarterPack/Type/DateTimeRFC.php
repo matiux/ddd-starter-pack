@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace DDDStarterPack\Type;
 
-class DateTimeRFC extends \DateTimeImmutable
+final class DateTimeRFC extends \DateTimeImmutable
 {
     /**
      * Based on DateTimeInterface::RFC3339_EXTENDED = Y-m-d\TH:i:s.vP
@@ -12,11 +12,6 @@ class DateTimeRFC extends \DateTimeImmutable
      * u = Microseconds.
      */
     public const FORMAT = 'Y-m-d\TH:i:s.uP';
-
-    final public function __construct(string $datetime = 'now', ?\DateTimeZone $timezone = null)
-    {
-        parent::__construct($datetime, $timezone);
-    }
 
     public function __toString(): string
     {
@@ -28,15 +23,15 @@ class DateTimeRFC extends \DateTimeImmutable
      *
      * @throws \Exception
      *
-     * @return DateTimeRFC
+     * @return self
      */
-    public static function createFrom(string $dateTime): DateTimeRFC
+    public static function createFrom(string $dateTime): self
     {
-        if (!$date = static::createFromFormat(self::FORMAT, $dateTime)) {
+        if (!$date = self::createFromFormat(self::FORMAT, $dateTime)) {
             throw new \InvalidArgumentException(sprintf('Data non valida: %s', $dateTime));
         }
 
-        return new static($date->format(self::FORMAT));
+        return new self($date->format(self::FORMAT));
     }
 
     public function value(): string
