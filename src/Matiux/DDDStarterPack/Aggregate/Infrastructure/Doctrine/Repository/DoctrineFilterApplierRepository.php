@@ -58,7 +58,7 @@ abstract class DoctrineFilterApplierRepository extends DoctrineRepository
 
     /**
      * @param FilterAppliersRegistry $filterAppliers
-     * @param QueryBuilder   $qb
+     * @param QueryBuilder           $qb
      *
      * @return list<int>
      */
