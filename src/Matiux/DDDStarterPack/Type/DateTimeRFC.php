@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace DDDStarterPack\Type;
 
-final class DateTimeRFC extends \DateTimeImmutable
+class DateTimeRFC extends \DateTimeImmutable
 {
     /**
      * Based on DateTimeInterface::RFC3339_EXTENDED = Y-m-d\TH:i:s.vP

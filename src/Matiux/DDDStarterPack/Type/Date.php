@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace DDDStarterPack\Type;
 
-final class Date extends \DateTimeImmutable
+class Date extends \DateTimeImmutable
 {
     public const FORMAT = 'Y-m-d';
 
