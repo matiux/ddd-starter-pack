@@ -22,7 +22,7 @@ final class Date extends \DateTimeImmutable
      */
     public static function createFrom(string $date): self
     {
-        if (!$result = self::createFromFormat(self::FORMAT, $date)) {
+        if (!$result = self::createFromFormat(self::FORMAT, $date, new \DateTimeZone('+00:00'))) {
             throw new \InvalidArgumentException(sprintf('Data non valida: %s', $date));
         }
 

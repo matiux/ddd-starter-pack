@@ -12,6 +12,7 @@ final class DateTimeRFC extends \DateTimeImmutable
      * u = Microseconds.
      */
     public const FORMAT = 'Y-m-d\TH:i:s.uP';
+    public const NO_TZ_FORMAT = 'Y-m-d H:i:s.u';
 
     public function __toString(): string
     {
