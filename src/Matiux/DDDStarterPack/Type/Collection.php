@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace DDDStarterPack\Aggregate\Domain;
+namespace DDDStarterPack\Type;
 
 use Iterator;
 
@@ -13,7 +13,7 @@ use Iterator;
  *
  * @implements Iterator<array-key, T>
  */
-class DomainCollection implements \Iterator, \Countable
+class Collection implements \Iterator, \Countable
 {
     private int $position = 0;
 
@@ -82,7 +82,7 @@ class DomainCollection implements \Iterator, \Countable
     }
 
     /**
-     * @template B of DomainCollection<T>
+     * @template B of Collection<T>
      *
      * @param B $collection
      *

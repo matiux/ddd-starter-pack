@@ -2,8 +2,9 @@
 
 declare(strict_types=1);
 
-namespace DDDStarterPack\Type;
+namespace DDDStarterPack\Type\Doctrine;
 
+use DDDStarterPack\Type\DateTimeRFC;
 use Doctrine\DBAL\Platforms\AbstractPlatform;
 use Doctrine\DBAL\Types\ConversionException;
 use Doctrine\DBAL\Types\DateTimeImmutableType;

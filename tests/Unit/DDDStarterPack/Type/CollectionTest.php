@@ -2,15 +2,15 @@
 
 declare(strict_types=1);
 
-namespace Tests\Unit\DDDStarterPack\Aggregate\Domain;
+namespace Tests\Unit\DDDStarterPack\Type;
 
-use DDDStarterPack\Aggregate\Domain\DomainCollection;
+use DDDStarterPack\Type\Collection;
 use PHPUnit\Framework\TestCase;
 
-class DomainCollectionTest extends TestCase
+class CollectionTest extends TestCase
 {
-    /** @var DomainCollection<MyData> */
-    private DomainCollection $collection;
+    /** @var Collection<MyData> */
+    private Collection $collection;
 
     protected function setUp(): void
     {
@@ -22,7 +22,7 @@ class DomainCollectionTest extends TestCase
 
         $items = [$a, $b];
 
-        $this->collection = new DomainCollection($items);
+        $this->collection = new Collection($items);
     }
 
     /**
@@ -62,7 +62,7 @@ class DomainCollectionTest extends TestCase
         $c = new MyData();
         $c->data = true;
 
-        $collection2 = new DomainCollection([$c]);
+        $collection2 = new Collection([$c]);
         $mergedCollection = $this->collection->merge($collection2);
 
         self::assertCount(3, $mergedCollection);
