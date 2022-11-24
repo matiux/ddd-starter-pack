@@ -19,7 +19,7 @@ class DoctrineDate extends DateType
      *
      * @return null|string
      */
-    public function convertToDatabaseValue($value, AbstractPlatform $platform): null|string
+    public function convertToDatabaseValue($value, AbstractPlatform $platform): mixed
     {
         if (is_null($value)) {
             return null;
@@ -38,7 +38,7 @@ class DoctrineDate extends DateType
      *
      * @return null|Date
      */
-    public function convertToPHPValue($value, AbstractPlatform $platform): null|Date
+    public function convertToPHPValue($value, AbstractPlatform $platform): mixed
     {
         if (null === $value) {
             return $value;

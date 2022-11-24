@@ -14,7 +14,7 @@ class DoctrineDateTimeRFC extends DateTimeImmutableType
     /**
      * {@inheritDoc}
      */
-    public function getSQLDeclaration(array $column, AbstractPlatform $platform)
+    public function getSQLDeclaration(array $column, AbstractPlatform $platform): mixed
     {
         return 'DATETIME(6)';
     }
@@ -27,7 +27,7 @@ class DoctrineDateTimeRFC extends DateTimeImmutableType
      *
      * @return null|string
      */
-    public function convertToDatabaseValue($value, AbstractPlatform $platform): null|string
+    public function convertToDatabaseValue($value, AbstractPlatform $platform): mixed
     {
         if (is_null($value)) {
             return null;

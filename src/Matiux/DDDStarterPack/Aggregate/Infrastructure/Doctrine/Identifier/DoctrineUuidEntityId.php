@@ -11,12 +11,12 @@ use Doctrine\DBAL\Types\GuidType;
 
 abstract class DoctrineUuidEntityId extends GuidType
 {
-    public function convertToDatabaseValue($value, AbstractPlatform $platform)
+    public function convertToDatabaseValue($value, AbstractPlatform $platform): mixed
     {
         return $value instanceof UuidEntityId ? $value->value() : $value ?? null;
     }
 
-    public function convertToPHPValue($value, AbstractPlatform $platform)
+    public function convertToPHPValue($value, AbstractPlatform $platform): mixed
     {
         $value = $this->prepareValue($value);
 
