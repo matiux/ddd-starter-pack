@@ -16,9 +16,10 @@ use DDDStarterPack\Tool\EnvVarUtil;
 use PHPUnit\Framework\TestCase;
 use Ramsey\Uuid\Uuid;
 
-class SNSMessagePubblisherTest extends TestCase
+class SNSMessagePublisherTest extends TestCase
 {
     use SqsRawClient;
+
     use SnsRawClient;
 
     private \DateTimeImmutable $occurredAt;

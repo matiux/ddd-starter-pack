@@ -24,7 +24,7 @@ use Webmozart\Assert\Assert;
  *
  * @implements MessageProducerConnector<AWSMessage>
  */
-class SNSMessagePubblisher extends BasicMessageService implements MessageProducerConnector
+class SNSMessagePublisher extends BasicMessageService implements MessageProducerConnector
 {
     use AWSBasicService;
 
