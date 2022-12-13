@@ -4,10 +4,10 @@ declare(strict_types=1);
 
 namespace Tests\Unit\DDDStarterPack\Aggregate\Domain\Repository\Paginator;
 
+use DDDStarterPack\Aggregate\Domain\Repository\Paginator\Paginator;
 use PHPUnit\Framework\TestCase;
-use Tests\Support\Model\PersonPaginator;
 
-class AbstractPaginatorTest extends TestCase
+class PaginatorTest extends TestCase
 {
     /**
      * @test
@@ -16,7 +16,7 @@ class AbstractPaginatorTest extends TestCase
     {
         $items = new \ArrayObject([0, 1, 1, 2, 3, 5]);
 
-        $paginator = new PersonPaginator(
+        $paginator = new Paginator(
             page: $items,
             offset: 0,
             limit: 3,

@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace DDDStarterPack\DataTransformer\Application\Type;
 
-use DDDStarterPack\Aggregate\Domain\Repository\Paginator\Paginator;
+use DDDStarterPack\Aggregate\Domain\Repository\Paginator\PaginatorI;
 
 /**
  * @template I
@@ -15,9 +15,9 @@ use DDDStarterPack\Aggregate\Domain\Repository\Paginator\Paginator;
 interface PaginatorDataTransformer extends DataTransformer
 {
     /**
-     * @param Paginator<I> $items
+     * @param PaginatorI<I> $items
      *
      * @return static
      */
-    public function write(Paginator $items): DataTransformer;
+    public function write(PaginatorI $items): DataTransformer;
 }

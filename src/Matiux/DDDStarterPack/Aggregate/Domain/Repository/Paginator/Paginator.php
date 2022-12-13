@@ -4,27 +4,97 @@ declare(strict_types=1);
 
 namespace DDDStarterPack\Aggregate\Domain\Repository\Paginator;
 
-use Iterator;
-
 /**
  * @template I
+ *
+ * @implements PaginatorI<I>
  */
-interface Paginator extends \Countable, Iterator
+class Paginator implements PaginatorI
 {
+    /** @var \ArrayIterator<int, I> */
+    private \ArrayIterator $iterator;
+
     /**
-     * @return array<int, I>
+     * @param \ArrayObject<int, I> $page
+     * @param int                  $offset
+     * @param int                  $limit
+     * @param int                  $totalResult
      */
-    public function getCurrentPageCollection();
+    public function __construct(
+        private \ArrayObject $page,
+        private int $offset,
+        private int $limit,
+        private int $totalResult,
+    ) {
+        $this->iterator = $page->getIterator();
+    }
 
-    public function getCurrentPage(): int;
+    /** @return I */
+    public function current(): mixed
+    {
+        return $this->iterator->current();
+    }
 
-    public function getNumberOfPages(): int;
+    public function next(): void
+    {
+        $this->iterator->next();
+    }
 
-    public function getTotalResult(): int;
+    public function key(): int
+    {
+        return $this->iterator->key();
+    }
 
-    public function getPerPageNumber(): int;
+    public function valid(): bool
+    {
+        return $this->iterator->valid();
+    }
 
-    public function getOffset(): int;
+    public function rewind(): void
+    {
+        $this->iterator->rewind();
+    }
 
-    public function getLimit(): int;
+    public function count(): int
+    {
+        return $this->page->count();
+    }
+
+    /** @return array<int, I> */
+    public function getCurrentPageCollection(): array
+    {
+        return $this->page->getArrayCopy();
+    }
+
+    public function getCurrentPage(): int
+    {
+        return 0 === $this->limit ? 1 : intval($this->offset / $this->limit) + 1;
+    }
+
+    public function getNumberOfPages(): int
+    {
+        $tot = $this->getTotalResult();
+
+        return (int) ceil($tot / $this->limit);
+    }
+
+    public function getTotalResult(): int
+    {
+        return $this->totalResult;
+    }
+
+    public function getPerPageNumber(): int
+    {
+        return $this->limit;
+    }
+
+    public function getOffset(): int
+    {
+        return $this->offset;
+    }
+
+    public function getLimit(): int
+    {
+        return $this->limit;
+    }
 }

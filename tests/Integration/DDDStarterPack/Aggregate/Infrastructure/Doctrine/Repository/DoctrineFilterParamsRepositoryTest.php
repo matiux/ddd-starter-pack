@@ -6,6 +6,7 @@ namespace Tests\Integration\DDDStarterPack\Aggregate\Infrastructure\Doctrine\Rep
 
 use DDDStarterPack\Aggregate\Domain\Repository\Filter\FilterAppliersRegistry;
 use DDDStarterPack\Aggregate\Domain\Repository\Paginator\Paginator;
+use DDDStarterPack\Aggregate\Domain\Repository\Paginator\PaginatorI;
 use DDDStarterPack\Aggregate\Infrastructure\Doctrine\Repository\DoctrineFilterApplierRepository;
 use Doctrine\Bundle\DoctrineBundle\Registry;
 use Doctrine\ORM\EntityManager;
@@ -16,7 +17,6 @@ use Tests\Support\Model\Doctrine\DoctrinePaginationApplier;
 use Tests\Support\Model\Doctrine\DoctrineSortApplier;
 use Tests\Support\Model\Person;
 use Tests\Support\Model\PersonId;
-use Tests\Support\Model\PersonPaginator;
 use Tests\Support\TestFilterBuilder;
 use Tests\Tool\EntityManagerBuilder;
 
@@ -61,7 +61,7 @@ class DoctrineFilterParamsRepositoryTest extends TestCase
 
         $items = $this->repository->byFilterParamsWithPagination($filterParams);
 
-        self::assertInstanceOf(Paginator::class, $items);
+        self::assertInstanceOf(PaginatorI::class, $items);
         self::assertCount(1, $items);
         self::assertSame($p1, $items->current());
 
@@ -83,7 +83,7 @@ class MyFilterApplierRepository extends DoctrineFilterApplierRepository
         $this->em->flush();
     }
 
-    public function byFilterParamsWithPagination(FilterAppliersRegistry $filterParams): Paginator
+    public function byFilterParamsWithPagination(FilterAppliersRegistry $filterParams): PaginatorI
     {
         return $this->doByFilterParamsWithPagination($filterParams);
     }
@@ -93,7 +93,7 @@ class MyFilterApplierRepository extends DoctrineFilterApplierRepository
         return $this->doByFilterParams($filterParams);
     }
 
-    protected function createPaginator(QueryBuilder $qb, int $offset, int $limit): PersonPaginator
+    protected function createPaginator(QueryBuilder $qb, int $offset, int $limit): Paginator
     {
         $res = (array) $qb->getQuery()->getResult();
         $doctrinePaginator = new DoctrinePaginator($qb);
@@ -101,7 +101,7 @@ class MyFilterApplierRepository extends DoctrineFilterApplierRepository
         /** @var \ArrayObject<int, Person> $arrayObject */
         $arrayObject = new \ArrayObject($res);
 
-        return new PersonPaginator($arrayObject, $offset, $limit, $doctrinePaginator->count());
+        return new Paginator($arrayObject, $offset, $limit, $doctrinePaginator->count());
     }
 
     protected function getEntityAliasName(): string
