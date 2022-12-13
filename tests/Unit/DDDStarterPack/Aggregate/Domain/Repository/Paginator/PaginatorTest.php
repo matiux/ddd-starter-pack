@@ -26,8 +26,8 @@ class PaginatorTest extends TestCase
         self::assertCount($paginator->getTotalResult(), $paginator);
 
         foreach ($paginator as $i => $value) {
-            self::assertIsInt($value);
             self::assertSame($i, $paginator->key());
+            self::assertSame($value, $paginator->current());
         }
 
         self::assertSame(0, $paginator->getOffset());

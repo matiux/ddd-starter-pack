@@ -8,6 +8,8 @@ use Iterator;
 
 /**
  * @template I
+ *
+ * @extends Iterator<int, I>
  */
 interface PaginatorI extends \Countable, Iterator
 {
