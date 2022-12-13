@@ -73,7 +73,10 @@ abstract class DoctrineFilterApplierRepository extends DoctrineRepository
         $offset = 0;
         $limit = 0 != $totalResult ? $totalResult : 1;
 
-        if (-1 != $filterAppliers->getFilterValueForKey('per_page')) {
+        if (
+            $filterAppliers->hasFilterWithKey('per_page')
+            && -1 != $filterAppliers->getFilterValueForKey('per_page')
+        ) {
             $offset = $this->calculateOffset($filterAppliers);
 
             /** @var int $limit */
