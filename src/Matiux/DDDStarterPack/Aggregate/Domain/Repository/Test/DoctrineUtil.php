@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Tests\Tool;
+namespace DDDStarterPack\Aggregate\Domain\Repository\Test;
 
 use PHPUnit\Framework\TestCase;
 

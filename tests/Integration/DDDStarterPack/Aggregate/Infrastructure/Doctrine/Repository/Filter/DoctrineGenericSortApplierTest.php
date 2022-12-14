@@ -4,12 +4,12 @@ declare(strict_types=1);
 
 namespace Tests\Integration\DDDStarterPack\Aggregate\Infrastructure\Doctrine\Repository\Filter;
 
+use DDDStarterPack\Aggregate\Domain\Repository\Test\DoctrineUtil;
 use Doctrine\ORM\QueryBuilder;
 use PHPUnit\Framework\TestCase;
 use Tests\Support\Model\Doctrine\DoctrineSortApplier;
 use Tests\Support\Model\Person;
 use Tests\Support\TestFilterBuilder;
-use Tests\Tool\DoctrineUtil;
 use Tests\Tool\EntityManagerBuilder;
 
 class DoctrineGenericSortApplierTest extends TestCase
