@@ -93,17 +93,6 @@ class MyFilterApplierRepository extends DoctrineFilterApplierRepository
         return $this->doByFilterParams($filterParams);
     }
 
-    protected function createPaginator(QueryBuilder $qb, int $offset, int $limit): Paginator
-    {
-        $res = (array) $qb->getQuery()->getResult();
-        $doctrinePaginator = new DoctrinePaginator($qb);
-
-        /** @var \ArrayObject<int, Person> $arrayObject */
-        $arrayObject = new \ArrayObject($res);
-
-        return new Paginator($arrayObject, $offset, $limit, $doctrinePaginator->count());
-    }
-
     protected function getEntityAliasName(): string
     {
         return 'p';

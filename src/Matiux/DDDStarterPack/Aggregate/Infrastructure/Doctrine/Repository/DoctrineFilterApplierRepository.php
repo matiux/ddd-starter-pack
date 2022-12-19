@@ -5,8 +5,10 @@ declare(strict_types=1);
 namespace DDDStarterPack\Aggregate\Infrastructure\Doctrine\Repository;
 
 use DDDStarterPack\Aggregate\Domain\Repository\Filter\FilterAppliersRegistry;
+use DDDStarterPack\Aggregate\Domain\Repository\Paginator\Paginator;
 use DDDStarterPack\Aggregate\Domain\Repository\Paginator\PaginatorI;
 use Doctrine\ORM\QueryBuilder;
+use Doctrine\ORM\Tools\Pagination\Paginator as DoctrinePaginator;
 use Webmozart\Assert\Assert;
 
 /**
@@ -93,7 +95,14 @@ abstract class DoctrineFilterApplierRepository extends DoctrineRepository
      *
      * @return PaginatorI<T>
      */
-    abstract protected function createPaginator(QueryBuilder $qb, int $offset, int $limit): PaginatorI;
+    protected function createPaginator(QueryBuilder $qb, int $offset, int $limit): PaginatorI
+    {
+        /** @var list<T> $res */
+        $res = $qb->getQuery()->getResult();
+        $doctrinePaginator = new DoctrinePaginator($qb);
+
+        return new Paginator(new \ArrayObject($res), $offset, $limit, $doctrinePaginator->count());
+    }
 
     private function calculateOffset(FilterAppliersRegistry $filterAppliers): int
     {
