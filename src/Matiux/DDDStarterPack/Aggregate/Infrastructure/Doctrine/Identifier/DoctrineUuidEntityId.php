@@ -41,7 +41,7 @@ abstract class DoctrineUuidEntityId extends GuidType
     {
         return match (true) {
             is_object($value), is_null($value) => null,
-            default => (string) $value
+            default => (string) $value,
         };
     }
 

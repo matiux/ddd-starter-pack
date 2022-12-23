@@ -13,7 +13,7 @@ class AWSMessage implements Message
         private null|\DateTimeImmutable $occurredAt,
         private null|string $type = null,
         private null|string $id = null,
-        private array $extra = []
+        private array $extra = [],
     ) {
     }
 

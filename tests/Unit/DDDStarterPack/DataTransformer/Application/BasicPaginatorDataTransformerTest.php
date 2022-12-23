@@ -13,6 +13,8 @@ use Tests\Support\Model\PersonId;
 class BasicPaginatorDataTransformerTest extends TestCase
 {
     /**
+     * @psalm-suppress all
+     *
      * @test
      */
     public function transform_paginator_of_person(): void

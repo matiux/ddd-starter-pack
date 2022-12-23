@@ -10,7 +10,7 @@ use DDDStarterPack\Message\Infrastructure\MessageConsumer;
 class InMemoryMessageConsumer implements MessageConsumer
 {
     public function __construct(
-        private InMemoryMessageQueue $messageQueue
+        private InMemoryMessageQueue $messageQueue,
     ) {
     }
 

@@ -36,7 +36,7 @@ abstract class DoctrineRepository
 
         Assert::notNull($em, 'Entity manager cannot be null');
 
-        /** @psalm-suppress InvalidPropertyAssignmentValue */
+        /** @psalm-suppress InvalidPropertyAssignmentValue, PropertyTypeCoercion */
         $this->em = $em;
         $this->entityClassName = $model;
     }

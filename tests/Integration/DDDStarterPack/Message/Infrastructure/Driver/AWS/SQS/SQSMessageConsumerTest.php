@@ -50,7 +50,7 @@ class SQSMessageConsumerTest extends TestCase
             extra: [
                 'MessageGroupId' => Uuid::uuid4()->toString(),
                 'MessageDeduplicationId' => Uuid::uuid4()->toString(),
-            ]
+            ],
         );
     }
 
@@ -78,14 +78,14 @@ class SQSMessageConsumerTest extends TestCase
                 'Foo' => 'Bar',
                 'occurredAt' => $this->occurredAt->format(\DateTimeInterface::RFC3339_EXTENDED),
             ]),
-            $message->body()
+            $message->body(),
         );
         self::assertEquals('MyType', $message->type());
         $occurredAt = $message->occurredAt();
         self::assertNotNull($occurredAt);
         self::assertEquals(
             $this->occurredAt->format(\DateTimeInterface::RFC3339_EXTENDED),
-            $occurredAt->format(\DateTimeInterface::RFC3339_EXTENDED)
+            $occurredAt->format(\DateTimeInterface::RFC3339_EXTENDED),
         );
 
         $id = $message->id();

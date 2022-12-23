@@ -46,14 +46,14 @@ class DoctrineDate extends DateType
 
         $converted = Date::createFromFormat(
             Date::FORMAT,
-            $value
+            $value,
         );
 
         if (!$converted) {
             throw ConversionException::conversionFailedFormat(
                 $value,
                 Date::class,
-                $platform->getDateTimeFormatString()
+                $platform->getDateTimeFormatString(),
             );
         }
 

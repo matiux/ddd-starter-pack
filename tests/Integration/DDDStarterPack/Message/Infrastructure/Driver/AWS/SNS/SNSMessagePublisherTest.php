@@ -76,7 +76,7 @@ class SNSMessagePublisherTest extends TestCase
                         'StringValue' => 'EventoAvvenuto',
                     ],
                 ],
-            ]
+            ],
         );
 
         $response = $snsMessagePublisher->send($message);
@@ -118,14 +118,14 @@ class SNSMessagePublisherTest extends TestCase
                         'StringValue' => 'EventoAvvenuto',
                     ],
                 ],
-            ]
+            ],
         );
 
         $response = MessageProducerFactory::create()
             ->obtainProducer(
                 SNSConfigurationBuilder::create()
                     ->withRegion('eu-west-1')
-                    ->build()
+                    ->build(),
             )
             ->send($message);
 

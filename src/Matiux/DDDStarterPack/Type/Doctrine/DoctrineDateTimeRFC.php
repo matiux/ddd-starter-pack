@@ -71,14 +71,14 @@ class DoctrineDateTimeRFC extends DateTimeImmutableType
         $converted = DateTimeRFC::createFromFormat(
             DateTimeRFC::NO_TZ_FORMAT,
             $value,
-            new \DateTimeZone('UTC')
+            new \DateTimeZone('UTC'),
         );
 
         if (!$converted) {
             throw ConversionException::conversionFailedFormat(
                 $value,
                 DateTimeRFC::class,
-                $platform->getDateTimeFormatString()
+                $platform->getDateTimeFormatString(),
             );
         }
 

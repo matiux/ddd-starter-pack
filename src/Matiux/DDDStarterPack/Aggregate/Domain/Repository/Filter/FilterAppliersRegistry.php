@@ -12,7 +12,7 @@ class FilterAppliersRegistry
      */
     public function __construct(
         private array $filterAppliers,
-        protected array $neededFilters
+        protected array $neededFilters,
     ) {
     }
 

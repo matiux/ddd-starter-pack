@@ -40,7 +40,7 @@ class InMemoryMessageQueueTest extends TestCase
             body: $event,
             occurredAt: $occurredAt,
             type: 'MyType',
-            id: '123'
+            id: '123',
         );
 
         $response = $this->producer->send($message);

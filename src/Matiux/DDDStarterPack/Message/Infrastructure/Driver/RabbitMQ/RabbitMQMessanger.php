@@ -39,7 +39,7 @@ abstract class RabbitMQMessanger
             $this->connectionData->host(),
             $this->connectionData->port(),
             $this->connectionData->user(),
-            $this->connectionData->password()
+            $this->connectionData->password(),
         );
 
         $this->channel = $this->connection->channel();

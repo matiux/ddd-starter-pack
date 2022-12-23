@@ -17,14 +17,14 @@ class RabbitMQMessageFactory implements MessageFactory
         null|string $type = null,
         null|string $id = null,
         array $extra = [],
-        null|string $exchangeName = null
+        null|string $exchangeName = null,
     ) {
         return new RabbitMQMessage(
             $body,
             $id,
             $id,
             $occurredAt,
-            $type
+            $type,
         );
     }
 }

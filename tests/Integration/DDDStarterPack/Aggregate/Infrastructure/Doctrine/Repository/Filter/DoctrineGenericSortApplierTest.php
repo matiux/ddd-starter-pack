@@ -33,7 +33,7 @@ class DoctrineGenericSortApplierTest extends TestCase
 
         DoctrineUtil::assertDQLEquals(
             $expected,
-            (string) $this->qb->getQuery()->getDQL()
+            (string) $this->qb->getQuery()->getDQL(),
         );
 
         $filterParamsBuilder = new TestFilterBuilder();
@@ -47,12 +47,12 @@ class DoctrineGenericSortApplierTest extends TestCase
             'p',
             Person::class,
             'p',
-            'p'
+            'p',
         );
 
         DoctrineUtil::assertDQLEquals(
             $expected,
-            (string) $this->qb->getQuery()->getDQL()
+            (string) $this->qb->getQuery()->getDQL(),
         );
     }
 
@@ -67,7 +67,7 @@ class DoctrineGenericSortApplierTest extends TestCase
 
         DoctrineUtil::assertDQLEquals(
             $expected,
-            (string) $this->qb->getQuery()->getDQL()
+            (string) $this->qb->getQuery()->getDQL(),
         );
 
         $filterParamsBuilder = new TestFilterBuilder();
@@ -78,7 +78,7 @@ class DoctrineGenericSortApplierTest extends TestCase
 
         DoctrineUtil::assertDQLEquals(
             $expected,
-            (string) $this->qb->getQuery()->getDQL()
+            (string) $this->qb->getQuery()->getDQL(),
         );
     }
 
@@ -93,7 +93,7 @@ class DoctrineGenericSortApplierTest extends TestCase
 
         DoctrineUtil::assertDQLEquals(
             $expected,
-            (string) $this->qb->getQuery()->getDQL()
+            (string) $this->qb->getQuery()->getDQL(),
         );
 
         $filterParamsBuilder = new TestFilterBuilder();
@@ -107,12 +107,12 @@ class DoctrineGenericSortApplierTest extends TestCase
             'p',
             Person::class,
             'p',
-            'p'
+            'p',
         );
 
         DoctrineUtil::assertDQLEquals(
             $expected,
-            (string) $this->qb->getQuery()->getDQL()
+            (string) $this->qb->getQuery()->getDQL(),
         );
     }
 }

@@ -10,6 +10,8 @@ use PHPUnit\Framework\TestCase;
 class PaginatorTest extends TestCase
 {
     /**
+     * @psalm-suppress all
+     *
      * @test
      */
     public function it_should_be_iterable(): void
@@ -20,7 +22,7 @@ class PaginatorTest extends TestCase
             page: $items,
             offset: 0,
             limit: 3,
-            totalResult: 6
+            totalResult: 6,
         );
 
         self::assertCount($paginator->getTotalResult(), $paginator);

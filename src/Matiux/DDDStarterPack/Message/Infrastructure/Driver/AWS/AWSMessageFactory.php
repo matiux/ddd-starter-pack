@@ -17,14 +17,14 @@ class AWSMessageFactory implements MessageFactory
         null|string $type = null,
         null|string $id = null,
         array $extra = [],
-        null|string $exchangeName = null
+        null|string $exchangeName = null,
     ) {
         return new AWSMessage(
             body: $body,
             occurredAt: $occurredAt,
             type: $type,
             id: $id,
-            extra: $extra
+            extra: $extra,
         );
     }
 }

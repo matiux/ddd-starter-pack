@@ -30,7 +30,7 @@ class SQSMessageConsumer extends BasicMessageService implements MessageConsumerC
     private array $messageAttributeNames = ['All']; // 'Type', 'OccurredAt'
 
     public function __construct(
-        private AWSMessageFactory $AWSMessageFactory
+        private AWSMessageFactory $AWSMessageFactory,
     ) {
         parent::__construct();
     }
@@ -149,7 +149,7 @@ class SQSMessageConsumer extends BasicMessageService implements MessageConsumerC
 
         return match ($occurredAt) {
             null => null,
-            default => new \DateTimeImmutable($occurredAt)
+            default => new \DateTimeImmutable($occurredAt),
         };
     }
 

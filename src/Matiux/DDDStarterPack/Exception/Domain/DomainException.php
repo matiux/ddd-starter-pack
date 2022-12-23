@@ -9,11 +9,12 @@ namespace DDDStarterPack\Exception\Domain;
  */
 abstract class DomainException extends \Exception
 {
+    /** @var string */
     public const MESSAGE = 'An error has occurred';
 
     public function __construct(string $message = '', int $code = 0, \Throwable $previous = null)
     {
-        $message = $message ?: (string) static::MESSAGE;
+        $message = $message ?: static::MESSAGE;
 
         parent::__construct($message, $code, $previous);
     }

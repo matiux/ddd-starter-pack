@@ -9,7 +9,6 @@ use DDDStarterPack\Aggregate\Domain\Repository\Paginator\Paginator;
 use DDDStarterPack\Aggregate\Domain\Repository\Paginator\PaginatorI;
 use Doctrine\ORM\QueryBuilder;
 use Doctrine\ORM\Tools\Pagination\Paginator as DoctrinePaginator;
-use Webmozart\Assert\Assert;
 
 /**
  * @template T
@@ -39,11 +38,7 @@ abstract class DoctrineFilterApplierRepository extends DoctrineRepository
     {
         $qb = $this->createQuery($filterAppliers);
 
-        $results = $qb->getQuery()->getResult();
-
-        Assert::isArray($results);
-
-        return $results;
+        return $qb->getQuery()->getResult();
     }
 
     private function createQuery(FilterAppliersRegistry $filterAppliers): QueryBuilder
@@ -62,13 +57,11 @@ abstract class DoctrineFilterApplierRepository extends DoctrineRepository
      * @param FilterAppliersRegistry $filterAppliers
      * @param QueryBuilder           $qb
      *
-     * @return list<int>
+     * @return array{0: int, 1: int}
      */
     protected function calculatePagination(FilterAppliersRegistry $filterAppliers, QueryBuilder $qb): array
     {
         $result = $qb->getQuery()->getResult();
-
-        Assert::true(is_countable($result));
 
         $totalResult = count($result);
 
@@ -81,11 +74,10 @@ abstract class DoctrineFilterApplierRepository extends DoctrineRepository
         ) {
             $offset = $this->calculateOffset($filterAppliers);
 
-            /** @var int $limit */
-            $limit = $filterAppliers->getFilterValueForKey('per_page');
+            $limit = intval($filterAppliers->getFilterValueForKey('per_page'));
         }
 
-        return [intval($offset), intval($limit)];
+        return [$offset, $limit];
     }
 
     /**
@@ -97,7 +89,7 @@ abstract class DoctrineFilterApplierRepository extends DoctrineRepository
      */
     protected function createPaginator(QueryBuilder $qb, int $offset, int $limit): PaginatorI
     {
-        /** @var list<T> $res */
+        /** @var array<int, T> $res */
         $res = $qb->getQuery()->getResult();
         $doctrinePaginator = new DoctrinePaginator($qb);
 

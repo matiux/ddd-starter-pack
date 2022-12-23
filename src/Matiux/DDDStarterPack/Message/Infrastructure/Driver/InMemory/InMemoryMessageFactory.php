@@ -17,13 +17,13 @@ class InMemoryMessageFactory implements MessageFactory
         null|string $type = null,
         null|string $id = null,
         array $extra = [],
-        null|string $exchangeName = null
+        null|string $exchangeName = null,
     ) {
         return new InMemoryMessage(
             body: $body,
             occurredAt: $occurredAt,
             type: $type,
-            id: $id
+            id: $id,
         );
     }
 }

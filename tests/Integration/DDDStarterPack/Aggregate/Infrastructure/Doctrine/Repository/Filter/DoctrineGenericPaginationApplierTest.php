@@ -46,7 +46,7 @@ class DoctrineGenericPaginationApplierTest extends TestCase
             'SELECT %s FROM %s %s',
             'p',
             Person::class,
-            'p'
+            'p',
         );
 
         /** @var string $actual */

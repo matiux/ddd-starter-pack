@@ -20,7 +20,7 @@ class FilterParamsBuilderTest extends TestCase
             [
                 new DummyFilterApplier('name'),
                 new DummyFilterApplier('skills'),
-            ]
+            ],
         );
 
         // Psalm gets angry - as it should be

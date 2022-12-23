@@ -29,7 +29,7 @@ class EventProjectorRegistry
     {
         if (isset($this->eventProjectors[$eventProjector::class])) {
             throw new \InvalidArgumentException(
-                sprintf("EventProjector for key '%s' is already set", $eventProjector::class)
+                sprintf("EventProjector for key '%s' is already set", $eventProjector::class),
             );
         }
 

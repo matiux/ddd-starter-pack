@@ -25,6 +25,6 @@ interface MessageFactory
         null|string $type = null,
         null|string $id = null,
         array $extra = [],
-        null|string $exchangeName = null
+        null|string $exchangeName = null,
     );
 }

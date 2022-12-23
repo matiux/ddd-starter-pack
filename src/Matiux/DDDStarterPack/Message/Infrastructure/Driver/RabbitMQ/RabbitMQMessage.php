@@ -13,7 +13,7 @@ class RabbitMQMessage implements Message
         private null|string $exchangeName = null,
         private null|\DateTimeImmutable $occurredAt = null,
         private null|string $type = null,
-        private $id = null
+        private $id = null,
     ) {
     }
 

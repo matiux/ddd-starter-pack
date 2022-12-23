@@ -3,13 +3,17 @@
 declare(strict_types=1);
 
 $finder = PhpCsFixer\Finder::create()
-    ->in(__DIR__)
-    //->exclude(['tests/Support'])
-    ->depth(0);
+    ->in([
+        realpath(__DIR__.'/../../src'),
+        realpath(__DIR__.'/../../tests'),
+    ])
+    // ->exclude(['dir'])
+    // ->notPath('DependencyInjection/Configuration.php')
+;
 
 $config = new PhpCsFixer\Config();
 $rules = [
-    '@PHP80Migration' => true,
+    '@Symfony' => true,
     'declare_strict_types' => true,
     '@PhpCsFixer' => true,
     'php_unit_test_class_requires_covers' => false,
@@ -18,12 +22,12 @@ $rules = [
     'array_indentation' => true,
     'no_superfluous_phpdoc_tags' => false,
     'ordered_imports' => true,
-    'phpdoc_add_missing_param_annotation' => true,
+    'phpdoc_add_missing_param_annotation' => false,
     'phpdoc_order' => true,
     'phpdoc_to_comment' => false, // Needed to support @Desc annotation
     'single_line_throw' => false,
-    'php_unit_method_casing' => ['case' => 'snake_case'],
     'return_assignment' => false,
+    'php_unit_method_casing' => ['case' => 'snake_case'],
     'blank_line_before_statement' => [
         'statements' => [
             'break',
@@ -39,6 +43,14 @@ $rules = [
     'multiline_whitespace_before_semicolons' => true,
     'phpdoc_annotation_without_dot' => true,
     'no_unused_imports' => true,
+    'trailing_comma_in_multiline' => [
+        'elements' => [
+            'arrays',
+            'arguments',
+            'parameters',
+            'match',
+        ],
+    ],
 ];
 
 return $config->setRules($rules)

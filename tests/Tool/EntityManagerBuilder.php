@@ -14,6 +14,9 @@ use Doctrine\Persistence\ObjectRepository;
 use Nyholm\Dsn\DsnParser;
 use Tests\Support\Model\Doctrine\DoctrineUuidPersonId;
 
+/**
+ * @psalm-suppress all
+ */
 class EntityManagerBuilder
 {
     /** @var list<string> */

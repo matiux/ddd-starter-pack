@@ -38,7 +38,7 @@ class SQSMessageProducer extends BasicMessageService implements MessageProducerC
     private function doSend(AWSMessage $AWSMessage): MessageProducerResponse
     {
         $result = $this->getClient()->sendMessage(
-            $this->prepareMessage($AWSMessage)
+            $this->prepareMessage($AWSMessage),
         );
 
         if (!$this->isValidSent($AWSMessage, $result)) {

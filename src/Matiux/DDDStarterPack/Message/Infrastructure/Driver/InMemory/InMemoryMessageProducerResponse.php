@@ -13,7 +13,7 @@ class InMemoryMessageProducerResponse implements MessageProducerResponse
         private int $sentMessages,
         private bool $success,
         private mixed $originalResponse,
-        private null|string $messageId = null
+        private null|string $messageId = null,
     ) {
     }
 

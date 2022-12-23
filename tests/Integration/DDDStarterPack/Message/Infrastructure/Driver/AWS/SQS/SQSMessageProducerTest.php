@@ -129,8 +129,8 @@ class SQSMessageProducerTest extends TestCase
             ->obtainProducer($SQSConfiguration)
             ->send(
                 $this->createMessage(
-                    extra: ['QueueUrl' => $this->getQueueUrl()]
-                )
+                    extra: ['QueueUrl' => $this->getQueueUrl()],
+                ),
             );
 
         self::assertTrue($response->isSuccess());
@@ -155,7 +155,7 @@ class SQSMessageProducerTest extends TestCase
         $response = MessageProducerFactory::create()
             ->obtainProducer($this->SQSConfiguration)
             ->sendBatch(
-                (array) $this->createMessage(2)
+                (array) $this->createMessage(2),
             );
 
         self::assertTrue($response->isSuccess());
@@ -191,7 +191,7 @@ class SQSMessageProducerTest extends TestCase
                             'StringValue' => 'EventoAvvenuto',
                         ],
                     ],
-                ]
+                ],
             );
         }
 

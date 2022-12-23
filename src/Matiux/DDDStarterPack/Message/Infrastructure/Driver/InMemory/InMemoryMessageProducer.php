@@ -16,7 +16,7 @@ class InMemoryMessageProducer implements MessageProducer
     public const BATCH_LIMIT = 10;
 
     public function __construct(
-        private InMemoryMessageQueue $messageQueue
+        private InMemoryMessageQueue $messageQueue,
     ) {
     }
 

@@ -48,7 +48,7 @@ class TransactionalApplicationServiceTest extends TestCase
          */
         $transactionalAtomicallyService = new TransactionalAtomicallyService(
             $atomicallyService,
-            $this->doctrineTransactionalSession
+            $this->doctrineTransactionalSession,
         );
 
         $request = new Request(['foo' => 'bar']);
@@ -60,7 +60,7 @@ class TransactionalApplicationServiceTest extends TestCase
 class Request
 {
     public function __construct(
-        private array $data
+        private array $data,
     ) {
     }
 
@@ -71,7 +71,7 @@ class Request
 }
 
 /**
- * @extends Service<Request>
+ * @extends Service<Request, void>
  */
 interface AtomicallyServiceI extends Service
 {
