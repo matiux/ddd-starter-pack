@@ -3286,12 +3286,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/matiux/php-project-autopilot.git",
-                "reference": "cfb018d4297acdd3f63fc2a05497ff7c5df88e86"
+                "reference": "080ee47fb4a5d4d6777f78481c26dccebf91f3f3"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/matiux/php-project-autopilot/zipball/cfb018d4297acdd3f63fc2a05497ff7c5df88e86",
-                "reference": "cfb018d4297acdd3f63fc2a05497ff7c5df88e86",
+                "url": "https://api.github.com/repos/matiux/php-project-autopilot/zipball/080ee47fb4a5d4d6777f78481c26dccebf91f3f3",
+                "reference": "080ee47fb4a5d4d6777f78481c26dccebf91f3f3",
                 "shasum": ""
             },
             "default-branch": true,
@@ -3310,7 +3310,7 @@
                 "issues": "https://github.com/matiux/php-project-autopilot/issues",
                 "source": "https://github.com/matiux/php-project-autopilot/tree/master"
             },
-            "time": "2022-11-30T22:41:32+00:00"
+            "time": "2022-12-23T15:17:39+00:00"
         },
         {
             "name": "mockery/mockery",

@@ -1,7 +1,6 @@
 #! /bin/bash
 
 INTERNAL_BADGE_CREATION=false
-PHPUNIT_BIN_CUSTOM=./vendor/bin/phpunit
 
 check_all() {
   coding_standard_fix --dry-run
@@ -68,4 +67,5 @@ operations["coding-standard-check-all"]='coding_standard_fix --dry-run; exit $?'
 #operations["deptrac-image-all"]='for f in $DEPTRAC_CONFIG_FILES; do deptrac_image "$f"; done; exit $?'
 #operations["infection"]='infection "$@"; exit $?'
 operations["check-all"]='check_all; exit $?'
+operations["doctrine-schema-create"]='doctrine_schema_create; exit $?'
 operations["shortlist"]='printf "%s\n" "${!operations[@]}"'

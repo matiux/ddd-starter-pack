@@ -41,7 +41,7 @@ jobs:
         run: composer install
 
       - name: Create Schema
-        run: ./tools/bin/project/project schema-create
+        run: ./tools/bin/project/project doctrine-schema-create
 
       - name: "Run unit tests (PHPUnit)"
         env:
