@@ -24,7 +24,7 @@ jobs:
           extensions: bcmath, mbstring, intl, sodium, json
 
       - name: Install dependencies
-        run: ./tools/bin/project install_dependencies
+        run: composer install
 
       - name: "running security analysis ( psalm )"
-        run: ./tools/bin/project psalm-taint
+        run: ./tools/bin/project/project psalm-taint
