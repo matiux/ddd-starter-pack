@@ -34,7 +34,7 @@ class BasicPaginatorDataTransformerTest extends TestCase
         //     new \stdClass(),
         // ];
 
-        $transformed = $dt->write(new Paginator(new \ArrayObject($people), 0, 3, 4))->read();
+        $transformed = $dt->write(new Paginator($people, 0, 3, 4))->read();
 
         self::assertNotEmpty($transformed);
         self::assertCount(2, $transformed);

@@ -16,10 +16,8 @@ class PaginatorTest extends TestCase
      */
     public function it_should_be_iterable(): void
     {
-        $items = new \ArrayObject([0, 1, 1, 2, 3, 5]);
-
         $paginator = new Paginator(
-            page: $items,
+            page: [0, 1, 1, 2, 3, 5],
             offset: 0,
             limit: 3,
             totalResult: 6,

@@ -15,18 +15,20 @@ class Paginator implements PaginatorI
     private \ArrayIterator $iterator;
 
     /**
-     * @param \ArrayObject<int, I> $page
-     * @param int                  $offset
-     * @param int                  $limit
-     * @param int                  $totalResult
+     * @param array<int, I> $page
+     * @param int           $offset
+     * @param int           $limit
+     * @param int           $totalResult
      */
     public function __construct(
-        private \ArrayObject $page,
+        private array $page,
         private int $offset,
         private int $limit,
         private int $totalResult,
     ) {
-        $this->iterator = $page->getIterator();
+        $obj = (new \ArrayObject($page));
+
+        $this->iterator = $obj->getIterator();
     }
 
     /** @return I */
@@ -57,13 +59,15 @@ class Paginator implements PaginatorI
 
     public function count(): int
     {
-        return $this->page->count();
+        return count($this->page);
     }
 
-    /** @return array<int, I> */
+    /**
+     * @return array<int, I>
+     */
     public function getCurrentPageCollection(): array
     {
-        return $this->page->getArrayCopy();
+        return $this->page;
     }
 
     public function getCurrentPage(): int

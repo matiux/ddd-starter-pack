@@ -93,7 +93,7 @@ abstract class DoctrineFilterApplierRepository extends DoctrineRepository
         $res = $qb->getQuery()->getResult();
         $doctrinePaginator = new DoctrinePaginator($qb);
 
-        return new Paginator(new \ArrayObject($res), $offset, $limit, $doctrinePaginator->count());
+        return new Paginator($res, $offset, $limit, $doctrinePaginator->count());
     }
 
     private function calculateOffset(FilterAppliersRegistry $filterAppliers): int
