@@ -20,11 +20,7 @@ class DoctrineTransactionalSession implements TransactionalSession
     }
 
     /**
-     * @param callable $operation
-     *
-     * @throws TransactionFailedException
-     *
-     * @return O
+     * {@inheritDoc}
      */
     public function executeAtomically(callable $operation)
     {
