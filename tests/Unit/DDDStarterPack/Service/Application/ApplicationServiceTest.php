@@ -40,16 +40,6 @@ class MyApplicationService implements ApplicationService
     {
         return $request->getData();
     }
-
-    /**
-     * @param MyApplicationRequest $request
-     *
-     * @return array
-     */
-    public function __invoke($request): array
-    {
-        return $this->execute($request);
-    }
 }
 
 class MyApplicationRequest

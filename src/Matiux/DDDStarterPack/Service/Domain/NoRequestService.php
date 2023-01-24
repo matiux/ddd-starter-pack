@@ -17,11 +17,4 @@ interface NoRequestService extends Service
      * @return O
      */
     public function execute($request = null);
-
-    /**
-     * @param null $request
-     *
-     * @return O
-     */
-    public function __invoke($request = null);
 }

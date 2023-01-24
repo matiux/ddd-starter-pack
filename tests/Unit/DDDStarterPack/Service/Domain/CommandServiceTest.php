@@ -60,14 +60,6 @@ class MyCommandService implements CommandService
     {
         $this->store->log($command->operation());
     }
-
-    /**
-     * @param MyCommand $command
-     */
-    public function __invoke($command): void
-    {
-        $this->execute($command);
-    }
 }
 
 class Store

@@ -36,9 +36,4 @@ class MyNoRequestService implements NoRequestService
     {
         return ['foo' => 'bar'];
     }
-
-    public function __invoke($request = null)
-    {
-        return $this->execute($request);
-    }
 }

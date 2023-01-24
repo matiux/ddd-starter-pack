@@ -101,14 +101,6 @@ class AtomicallyService implements AtomicallyServiceI
     {
         $this->repoA->add($request->data());
     }
-
-    /**
-     * {@inheritDoc}
-     */
-    public function __invoke($request): void
-    {
-        $this->execute($request);
-    }
 }
 
 /**
@@ -133,15 +125,5 @@ class TransactionalAtomicallyService extends TransactionalApplicationService imp
     public function execute($request): void
     {
         $this->executeInTransaction($request);
-    }
-
-    /**
-     * {@inheritDoc}
-     *
-     * @throws TransactionFailedException
-     */
-    public function __invoke($request): void
-    {
-        $this->execute($request);
     }
 }
