@@ -26,7 +26,7 @@ class SymfonyQueryBus extends QueryBus
             return $this->handle($query);
         } catch (HandlerFailedException $e) {
             $first = current($e->getNestedExceptions());
-            Assert::isInstanceOf($first, \Exception::class);
+            Assert::isInstanceOf($first, \Throwable::class);
 
             throw $first;
         }
