@@ -28,7 +28,7 @@ abstract class UuidEntityId extends BasicEntityId
     /**
      * @param string $id
      *
-     * @return static
+     * @throws \InvalidArgumentException
      */
     public static function createFrom($id): static
     {
