@@ -18,7 +18,7 @@ class Collection implements \Iterator, \Countable
     private int $position = 0;
 
     /** @var list<T> */
-    private array $items = [];
+    protected array $items = [];
 
     /**
      * @param array<array-key, T> $items
