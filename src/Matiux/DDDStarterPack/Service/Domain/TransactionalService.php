@@ -2,16 +2,17 @@
 
 declare(strict_types=1);
 
-namespace DDDStarterPack\Service\Application;
+namespace DDDStarterPack\Service\Domain;
 
 use DDDStarterPack\Exception\Application\TransactionFailedException;
-use DDDStarterPack\Service\Domain\Service;
 
 /**
  * @template I
  * @template O
+ *
+ * @implements Service<I, O>
  */
-abstract class TransactionalApplicationService
+class TransactionalService implements Service
 {
     /**
      * @param Service<I, O>           $service
@@ -30,7 +31,7 @@ abstract class TransactionalApplicationService
      *
      * @return O
      */
-    public function executeInTransaction($request = null)
+    public function execute($request = null)
     {
         try {
             return $this->session->executeAtomically(function () use ($request) {
@@ -39,5 +40,17 @@ abstract class TransactionalApplicationService
         } catch (\Throwable $exception) {
             throw new TransactionFailedException($exception->getMessage(), intval($exception->getCode()), $exception);
         }
+    }
+
+    /**
+     * @param I $request
+     *
+     * @throws TransactionFailedException
+     *
+     * @return O
+     */
+    public function __invoke($request = null)
+    {
+        return $this->execute($request);
     }
 }

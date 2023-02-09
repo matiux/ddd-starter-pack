@@ -2,26 +2,23 @@
 
 declare(strict_types=1);
 
-namespace Integration\DDDStarterPack\Service\Application;
+namespace Integration\DDDStarterPack\Service\Domain;
 
 use DDDStarterPack\Exception\Application\TransactionFailedException;
-use DDDStarterPack\Service\Application\TransactionalApplicationService;
-use DDDStarterPack\Service\Application\TransactionalSession;
 use DDDStarterPack\Service\Domain\Service;
+use DDDStarterPack\Service\Domain\TransactionalService;
 use DDDStarterPack\Service\Infrastructure\Doctrine\DoctrineTransactionalSession;
 use Doctrine\ORM\EntityManager;
 use PHPUnit\Framework\TestCase;
 use Tests\Tool\EntityManagerBuilder;
 
-class TransactionalApplicationServiceTest extends TestCase
+class TransactionalServiceTest extends TestCase
 {
     private EntityManager $em;
-    private DoctrineTransactionalSession $doctrineTransactionalSession;
 
     protected function setUp(): void
     {
         $this->em = EntityManagerBuilder::create()->getEntityManager();
-        $this->doctrineTransactionalSession = new DoctrineTransactionalSession($this->em);
     }
 
     /**
@@ -39,16 +36,19 @@ class TransactionalApplicationServiceTest extends TestCase
 
         $repoB = \Mockery::mock(Repository::class);
 
-        $atomicallyService = new AtomicallyService($repoA, $repoB);
+        $service = new AtomicallyService($repoA, $repoB);
+
+        /** @var DoctrineTransactionalSession<void> $doctrineTransactionalSession */
+        $doctrineTransactionalSession = new DoctrineTransactionalSession($this->em);
 
         /**
          * !!! This is only a test.
          * This kind of bind should depend on a DIC as it is an infrastructural concern.
          * This test only serves to show how transactional abstraction works.
          */
-        $transactionalAtomicallyService = new TransactionalAtomicallyService(
-            $atomicallyService,
-            $this->doctrineTransactionalSession,
+        $transactionalAtomicallyService = new TransactionalService(
+            $service,
+            $doctrineTransactionalSession,
         );
 
         $request = new Request(['foo' => 'bar']);
@@ -70,23 +70,15 @@ class Request
     }
 }
 
-/**
- * @extends Service<Request, void>
- */
-interface AtomicallyServiceI extends Service
-{
-    /**
-     * @param Request $request
-     */
-    public function execute($request): void;
-}
-
 interface Repository
 {
     public function add(array $data): void;
 }
 
-class AtomicallyService implements AtomicallyServiceI
+/**
+ * @implements Service<Request, void>
+ */
+class AtomicallyService implements Service
 {
     public function __construct(
         protected Repository $repoA,
@@ -94,36 +86,8 @@ class AtomicallyService implements AtomicallyServiceI
     ) {
     }
 
-    /**
-     * {@inheritDoc}
-     */
     public function execute($request): void
     {
         $this->repoA->add($request->data());
-    }
-}
-
-/**
- * @extends TransactionalApplicationService<Request, void>
- */
-class TransactionalAtomicallyService extends TransactionalApplicationService implements AtomicallyServiceI
-{
-    /**
-     * @param AtomicallyServiceI         $service
-     * @param TransactionalSession<void> $session
-     */
-    public function __construct(AtomicallyServiceI $service, TransactionalSession $session)
-    {
-        parent::__construct($service, $session);
-    }
-
-    /**
-     * {@inheritDoc}
-     *
-     * @throws TransactionFailedException
-     */
-    public function execute($request): void
-    {
-        $this->executeInTransaction($request);
     }
 }

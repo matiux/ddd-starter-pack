@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace DDDStarterPack\Service\Application;
+namespace DDDStarterPack\Service\Domain;
 
 use DDDStarterPack\Exception\Application\TransactionFailedException;
 
