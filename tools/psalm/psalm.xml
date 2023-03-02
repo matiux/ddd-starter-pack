@@ -6,6 +6,9 @@
         xmlns="https://getpsalm.org/schema/config"
         xsi:schemaLocation="https://getpsalm.org/schema/config ../../vendor/vimeo/psalm/config.xsd"
         phpVersion="8.0"
+        findUnusedCode="false"
+        findUnusedBaselineEntry="true"
+
 >
     <projectFiles>
         <directory name="../../src"/>
