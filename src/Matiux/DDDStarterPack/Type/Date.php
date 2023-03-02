@@ -4,9 +4,19 @@ declare(strict_types=1);
 
 namespace DDDStarterPack\Type;
 
+/**
+ * @psalm-consistent-constructor
+ */
 class Date extends \DateTimeImmutable
 {
     public const FORMAT = 'Y-m-d';
+
+    public function __construct(
+        string $datetime = 'now',
+        ?\DateTimeZone $timezone = null,
+    ) {
+        parent::__construct($datetime, $timezone);
+    }
 
     public function __toString(): string
     {
@@ -14,19 +24,15 @@ class Date extends \DateTimeImmutable
     }
 
     /**
-     * @param string $date
-     *
      * @throws \Exception
-     *
-     * @return self
      */
-    public static function createFrom(string $date): self
+    public static function createFrom(string $date): static
     {
         if (!$result = self::createFromFormat(self::FORMAT, $date, new \DateTimeZone('+00:00'))) {
             throw new \InvalidArgumentException(sprintf('Data non valida: %s', $date));
         }
 
-        return new self($result->format(self::FORMAT));
+        return new static($result->format(self::FORMAT));
     }
 
     public function value(): string
