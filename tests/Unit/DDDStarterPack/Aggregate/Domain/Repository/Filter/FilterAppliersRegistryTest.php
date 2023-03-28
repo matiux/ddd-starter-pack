@@ -17,14 +17,13 @@ class FilterAppliersRegistryTest extends TestCase
         self::expectException(\InvalidArgumentException::class);
         self::expectExceptionMessage("Filter with key 'surname' does not exist");
 
-        $neededFilters = [
+        $requestedFilters = [
             'name' => 'Matteo',
             'skills' => ['architecture', 'programming'],
         ];
 
-        $filterParams = new FilterAppliersRegistry([], $neededFilters);
-
-        $filterParams->getFilterValueForKey('surname');
+        $appliersRegistry = new FilterAppliersRegistry([], $requestedFilters);
+        $appliersRegistry->getFilterValueForKey('surname');
     }
 
     /**
@@ -32,12 +31,12 @@ class FilterAppliersRegistryTest extends TestCase
      */
     public function it_should_verify_if_key_exists(): void
     {
-        $neededFilters = [
+        $requestedFilters = [
             'name' => 'Matteo',
         ];
 
-        $filterParams = new FilterAppliersRegistry([], $neededFilters);
+        $appliersRegistry = new FilterAppliersRegistry([], $requestedFilters);
 
-        self::assertFalse($filterParams->hasFilterWithKey('surname'));
+        self::assertFalse($appliersRegistry->hasFilterWithKey('surname'));
     }
 }

@@ -11,9 +11,9 @@ interface FilterApplier
 {
     /**
      * @param T                      $target
-     * @param FilterAppliersRegistry $filterAppliers
+     * @param FilterAppliersRegistry $appliersRegistry
      */
-    public function apply($target, FilterAppliersRegistry $filterAppliers): void;
+    public function applyTo($target, FilterAppliersRegistry $appliersRegistry): void;
 
-    public function supports(FilterAppliersRegistry $filterAppliers): bool;
+    public function supports(FilterAppliersRegistry $appliersRegistry): bool;
 }

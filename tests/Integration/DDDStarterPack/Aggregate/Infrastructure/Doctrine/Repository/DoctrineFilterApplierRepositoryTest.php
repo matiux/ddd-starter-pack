@@ -8,11 +8,11 @@ use DDDStarterPack\Aggregate\Domain\Repository\Filter\FilterAppliersRegistry;
 use DDDStarterPack\Aggregate\Domain\Repository\Filter\FilterAppliersRegistryBuilder;
 use DDDStarterPack\Aggregate\Domain\Repository\Paginator\PaginatorI;
 use DDDStarterPack\Aggregate\Infrastructure\Doctrine\Repository\DoctrineFilterApplierRepository;
+use DDDStarterPack\Aggregate\Infrastructure\Doctrine\Repository\Filter\DoctrineGenericPaginationApplier;
+use DDDStarterPack\Aggregate\Infrastructure\Doctrine\Repository\Filter\DoctrineGenericSortApplier;
 use Doctrine\Bundle\DoctrineBundle\Registry;
 use Doctrine\ORM\EntityManager;
 use PHPUnit\Framework\TestCase;
-use Tests\Support\Model\Doctrine\DoctrinePaginationApplier;
-use Tests\Support\Model\Doctrine\DoctrineSortApplier;
 use Tests\Support\Model\Person;
 use Tests\Support\Model\PersonId;
 use Tests\Tool\EntityManagerBuilder;
@@ -51,8 +51,8 @@ class DoctrineFilterApplierRepositoryTest extends TestCase
         $this->repository->aggiungi(Person::crea(PersonId::create(), 'Z_Teo', 35));
 
         $registryBuilder = new FilterAppliersRegistryBuilder();
-        $registryBuilder->addApplier(new DoctrineSortApplier());
-        $registryBuilder->addApplier(new DoctrinePaginationApplier());
+        $registryBuilder->addApplier(new DoctrineGenericSortApplier(['name' => 'p.name']));
+        $registryBuilder->addApplier(new DoctrineGenericPaginationApplier());
 
         $filterAppliersRegistry = $registryBuilder->build(
             [

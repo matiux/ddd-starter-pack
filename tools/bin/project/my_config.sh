@@ -52,6 +52,7 @@ operations["check-deps-vulnerabilities"]="check_deps_vulnerabilities"
 #operations["setup-test"]="APP_RUNTIME_ENV='test' setup"
 #operations["setup-dev"]="APP_RUNTIME_ENV='dev' setup"
 operations["phpunit"]='phpunit "$@"; exit $?'
+operations["phpunit-tdox"]='phpunit "--testdox $@"; exit $?'
 operations["coverage"]='coverage; exit $?'
 operations["psalm"]='psalm "$@"; exit $?'
 operations["psalm-taint"]='psalm --taint-analysis "$@"; exit $?'

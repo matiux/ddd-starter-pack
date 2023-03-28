@@ -12,30 +12,25 @@ use DDDStarterPack\Aggregate\Domain\Repository\Filter\FilterAppliersRegistry;
  */
 class DummyFilterApplier implements FilterApplier
 {
-    private string $key;
-
-    public function __construct(string $key)
+    public function __construct(private string $key)
     {
-        if (!$key) {
+        if (empty($key)) {
             throw new \InvalidArgumentException('the given key is empty');
         }
-
-        $this->key = $key;
     }
 
     /**
-     * @param DummyArrayTarget       $target
-     * @param FilterAppliersRegistry $filterAppliers
+     * {@inheritDoc}
      */
-    public function apply($target, FilterAppliersRegistry $filterAppliers): void
+    public function applyTo($target, FilterAppliersRegistry $appliersRegistry): void
     {
-        $target->add([
-            $this->key => $filterAppliers->getFilterValueForKey($this->key),
-        ]);
+        $item = [$this->key => $appliersRegistry->getFilterValueForKey($this->key)];
+
+        $target->add($item);
     }
 
-    public function supports(FilterAppliersRegistry $filterAppliers): bool
+    public function supports(FilterAppliersRegistry $appliersRegistry): bool
     {
-        return true;
+        return $appliersRegistry->hasFilterWithKey($this->key);
     }
 }
