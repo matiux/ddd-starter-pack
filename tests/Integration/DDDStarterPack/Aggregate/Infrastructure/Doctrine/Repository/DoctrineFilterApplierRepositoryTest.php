@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Tests\Integration\DDDStarterPack\Aggregate\Infrastructure\Doctrine\Repository;
 
 use DDDStarterPack\Aggregate\Domain\Repository\Filter\FilterAppliersRegistry;
+use DDDStarterPack\Aggregate\Domain\Repository\Filter\FilterAppliersRegistryBuilder;
 use DDDStarterPack\Aggregate\Domain\Repository\Paginator\PaginatorI;
 use DDDStarterPack\Aggregate\Infrastructure\Doctrine\Repository\DoctrineFilterApplierRepository;
 use Doctrine\Bundle\DoctrineBundle\Registry;
@@ -14,7 +15,6 @@ use Tests\Support\Model\Doctrine\DoctrinePaginationApplier;
 use Tests\Support\Model\Doctrine\DoctrineSortApplier;
 use Tests\Support\Model\Person;
 use Tests\Support\Model\PersonId;
-use Tests\Support\TestFilterAppliersRegistryBuilder;
 use Tests\Tool\EntityManagerBuilder;
 
 class DoctrineFilterApplierRepositoryTest extends TestCase
@@ -50,7 +50,7 @@ class DoctrineFilterApplierRepositoryTest extends TestCase
         $this->repository->aggiungi(Person::crea(PersonId::create(), 'B_Met', 35));
         $this->repository->aggiungi(Person::crea(PersonId::create(), 'Z_Teo', 35));
 
-        $registryBuilder = new TestFilterAppliersRegistryBuilder();
+        $registryBuilder = new FilterAppliersRegistryBuilder();
         $registryBuilder->addApplier(new DoctrineSortApplier());
         $registryBuilder->addApplier(new DoctrinePaginationApplier());
 

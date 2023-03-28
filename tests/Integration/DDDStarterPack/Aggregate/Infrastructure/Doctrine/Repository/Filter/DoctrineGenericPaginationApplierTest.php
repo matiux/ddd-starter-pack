@@ -4,11 +4,11 @@ declare(strict_types=1);
 
 namespace Tests\Integration\DDDStarterPack\Aggregate\Infrastructure\Doctrine\Repository\Filter;
 
+use DDDStarterPack\Aggregate\Domain\Repository\Filter\FilterAppliersRegistryBuilder;
 use DDDStarterPack\Aggregate\Domain\Repository\Test\DoctrineUtil;
 use PHPUnit\Framework\TestCase;
 use Tests\Support\Model\Doctrine\DoctrinePaginationApplier;
 use Tests\Support\Model\Person;
-use Tests\Support\TestFilterAppliersRegistryBuilder;
 use Tests\Tool\EntityManagerBuilder;
 
 class DoctrineGenericPaginationApplierTest extends TestCase
@@ -37,7 +37,7 @@ class DoctrineGenericPaginationApplierTest extends TestCase
 
         $qb->select('p')->from(Person::class, 'p');
 
-        $registryBuilder = new TestFilterAppliersRegistryBuilder();
+        $registryBuilder = new FilterAppliersRegistryBuilder();
         $registryBuilder->addApplier(new DoctrinePaginationApplier());
         $filterAppliersRegistry = $registryBuilder->build(['page' => $page, 'per_page' => $perPage]);
         $filterAppliersRegistry->applyToTarget($qb);

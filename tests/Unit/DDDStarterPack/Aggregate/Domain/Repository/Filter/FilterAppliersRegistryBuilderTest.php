@@ -4,8 +4,8 @@ declare(strict_types=1);
 
 namespace Tests\Unit\DDDStarterPack\Aggregate\Domain\Repository\Filter;
 
+use DDDStarterPack\Aggregate\Domain\Repository\Filter\FilterAppliersRegistryBuilder;
 use PHPUnit\Framework\TestCase;
-use Tests\Support\TestFilterAppliersRegistryBuilder;
 
 class FilterAppliersRegistryBuilderTest extends TestCase
 {
@@ -16,7 +16,7 @@ class FilterAppliersRegistryBuilderTest extends TestCase
      */
     public function it_should_create_a_filterparams_by_builder(): void
     {
-        $registryBuilder = new TestFilterAppliersRegistryBuilder(
+        $registryBuilder = new FilterAppliersRegistryBuilder(
             [
                 new DummyFilterApplier('name'),
                 new DummyFilterApplier('skills'),
@@ -53,7 +53,7 @@ class FilterAppliersRegistryBuilderTest extends TestCase
         $this->expectException(\LogicException::class);
         $this->expectExceptionMessage('The builder is frozen');
 
-        $registryBuilder = new TestFilterAppliersRegistryBuilder();
+        $registryBuilder = new FilterAppliersRegistryBuilder();
         $registryBuilder->addApplier(new DummyFilterApplier('name'));
 
         $registryBuilder->build([
