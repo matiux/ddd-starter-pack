@@ -34,9 +34,6 @@ class FilterAppliersRegistryBuilder
         $this->filterAppliers[] = $filterApplier;
     }
 
-    /**
-     * @param array<string, mixed> $requestedFilters
-     */
     public function build(array $requestedFilters): FilterAppliersRegistry
     {
         $this->frozen = true;

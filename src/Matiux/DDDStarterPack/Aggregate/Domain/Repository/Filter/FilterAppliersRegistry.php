@@ -8,7 +8,7 @@ class FilterAppliersRegistry
 {
     /**
      * @param array<array-key, FilterApplier> $filterAppliers
-     * @param array<string, mixed>            $requestedFilters
+     * @param array                           $requestedFilters
      */
     public function __construct(
         private array $filterAppliers,
@@ -47,21 +47,15 @@ class FilterAppliersRegistry
                 $applier->applyTo($target, $this);
             }
         }
-
-//        /** @var mixed $requestedFilterValue */
-//        foreach ($this->requestedFilters as $requestedFilterKey => $requestedFilterValue) {
-//            foreach ($this->filterAppliers as $applier) {
-//                if ($applier->supports($this, $requestedFilterKey)) {
-//                    $applier->applyTo($target, $this, $requestedFilterKey);
-//
-//                    break; // Only one applyer can support a key
-//                }
-//            }
-//        }
     }
 
     public function hasFilterWithKey(string $key): bool
     {
         return array_key_exists($key, $this->requestedFilters);
+    }
+
+    public function requestedFilters(): array
+    {
+        return $this->requestedFilters;
     }
 }

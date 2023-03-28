@@ -6,9 +6,9 @@ namespace Tests\Integration\DDDStarterPack\Aggregate\Infrastructure\Doctrine\Rep
 
 use DDDStarterPack\Aggregate\Domain\Repository\Filter\FilterAppliersRegistryBuilder;
 use DDDStarterPack\Aggregate\Domain\Repository\Test\DoctrineUtil;
-use DDDStarterPack\Aggregate\Infrastructure\Doctrine\Repository\Filter\DoctrineGenericSortApplier;
 use Doctrine\ORM\QueryBuilder;
 use PHPUnit\Framework\TestCase;
+use Tests\Integration\DDDStarterPack\Aggregate\Infrastructure\Doctrine\Repository\DoctrinePersonSortApplier;
 use Tests\Support\Model\Person;
 use Tests\Tool\EntityManagerBuilder;
 
@@ -37,7 +37,7 @@ class DoctrineGenericSortApplierTest extends TestCase
         );
 
         $registryBuilder = new FilterAppliersRegistryBuilder();
-        $registryBuilder->addApplier(new DoctrineGenericSortApplier(['name' => 'p.name']));
+        $registryBuilder->addApplier(new DoctrinePersonSortApplier());
 
         $filterAppliersRegistry = $registryBuilder->build(['sort_field' => 'name', 'sort_direction' => 'ASC']);
         $filterAppliersRegistry->applyToTarget($this->qb);
@@ -71,7 +71,7 @@ class DoctrineGenericSortApplierTest extends TestCase
         );
 
         $filterParamsBuilder = new FilterAppliersRegistryBuilder();
-        $filterParamsBuilder->addApplier(new DoctrineGenericSortApplier(['name' => 'p.name']));
+        $filterParamsBuilder->addApplier(new DoctrinePersonSortApplier());
 
         $filterParams = $filterParamsBuilder->build(['sort_field' => null, 'sort_direction' => 'ASC']);
         $filterParams->applyToTarget($this->qb);
@@ -97,7 +97,7 @@ class DoctrineGenericSortApplierTest extends TestCase
         );
 
         $filterParamsBuilder = new FilterAppliersRegistryBuilder();
-        $filterParamsBuilder->addApplier(new DoctrineGenericSortApplier(['name' => 'p.name']));
+        $filterParamsBuilder->addApplier(new DoctrinePersonSortApplier());
 
         $filterParams = $filterParamsBuilder->build(['sort_field' => 'name']);
         $filterParams->applyToTarget($this->qb);

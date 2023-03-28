@@ -9,15 +9,8 @@ use DDDStarterPack\Aggregate\Domain\Repository\Filter\SortingKeyFilterApplier;
 use Doctrine\ORM\QueryBuilder;
 use Webmozart\Assert\Assert;
 
-class DoctrineGenericSortApplier extends DoctrineFilterApplier
+abstract class DoctrineGenericSortApplier extends DoctrineFilterApplier
 {
-    /**
-     * @param string[] $fieldsMap
-     */
-    public function __construct(protected array $fieldsMap)
-    {
-    }
-
     protected function sortDirectionKey(): string
     {
         return SortingKeyFilterApplier::SORT_DIRECTION;
@@ -37,9 +30,9 @@ class DoctrineGenericSortApplier extends DoctrineFilterApplier
             $sortField = (string) $appliersRegistry->getFilterValueForKey($this->sortKey());
             $sortDirection = (string) $appliersRegistry->getFilterValueForKey($this->sortDirectionKey(), 'ASC');
 
-            Assert::keyExists($this->fieldsMap, $sortField, sprintf('Invalid sort key: %s', $sortField));
+            Assert::keyExists($this->getFieldsMap(), $sortField, sprintf('Invalid sort key: %s', $sortField));
 
-            $target->orderBy($this->fieldsMap[$sortField], $sortDirection);
+            $target->orderBy($this->getFieldsMap()[$sortField], $sortDirection);
         } catch (\InvalidArgumentException $e) {
             return;
         }
@@ -51,4 +44,9 @@ class DoctrineGenericSortApplier extends DoctrineFilterApplier
             $appliersRegistry->hasFilterWithKey(SortingKeyFilterApplier::SORT)
             || $appliersRegistry->hasFilterWithKey(SortingKeyFilterApplier::SORT_DIRECTION);
     }
+
+    /**
+     * @return string[]
+     */
+    abstract protected function getFieldsMap(): array;
 }
