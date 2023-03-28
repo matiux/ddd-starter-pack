@@ -10,38 +10,38 @@ DDD Starter Pack
 ![Security analysis status](https://github.com/matiux/ddd-starter-pack/actions/workflows/security-analysis.yml/badge.svg)
 ![Coding standards status](https://github.com/matiux/ddd-starter-pack/actions/workflows/coding-standards.yml/badge.svg)
 
-Questa libreria contiene "concetti" per lo sviluppo di micro servizi basati su architettura esagonale e DDD.
+This library contains "concepts" to development of microservices based on hexagonal architecture and DDD.
 
-* Ramo v2: PHP < 8.0
-* Ramo v3: PHP >= 8.0
+* Branch v2: PHP < 8.0
 
-## Sviluppo
+## Development
 
-```
+```bash
 git clone git@github.com:matiux/ddd-starter-pack.git && cd ddd-starter-pack
 cp docker/docker-compose.override.dist.yml docker/docker-compose.override.yml
 rm -rf .git/hooks && ln -s ../scripts/git-hooks .git/hooks
 ```
 
-#### Entrare nel container PHP per lo sviluppo
-```
+```bash
 make build-php ARG=--no-cache
 make upd
-make project ARG=setup
+make composer ARG=install
 ```
 
 ## test
+```bash
 make build-php ARG=--no-cache
 make upd
 make test
-
-This repository uses GitHub actions to perform some checks. If you want to test the actions locally you can use [act](https://github.com/nektos/act).
-For example if you want to check the action for static analysis
 ```
+
+This repository uses GitHub actions to perform some checks. If you want to test the actions locally you can
+use [act](https://github.com/nektos/act). For example if you want to check the action for static analysis
+```bash
 act -P ubuntu-latest=shivammathur/node:latest --job static-analysis
 ```
 
-#### Moduli
+#### Modules
 
 * [Aggregate](doc/aggregate.md)
 * [Command](doc/command.md)
