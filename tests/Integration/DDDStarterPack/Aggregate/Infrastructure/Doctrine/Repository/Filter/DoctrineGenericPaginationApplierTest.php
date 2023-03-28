@@ -8,7 +8,7 @@ use DDDStarterPack\Aggregate\Domain\Repository\Test\DoctrineUtil;
 use PHPUnit\Framework\TestCase;
 use Tests\Support\Model\Doctrine\DoctrinePaginationApplier;
 use Tests\Support\Model\Person;
-use Tests\Support\TestFilterBuilder;
+use Tests\Support\TestFilterAppliersRegistryBuilder;
 use Tests\Tool\EntityManagerBuilder;
 
 class DoctrineGenericPaginationApplierTest extends TestCase
@@ -37,10 +37,10 @@ class DoctrineGenericPaginationApplierTest extends TestCase
 
         $qb->select('p')->from(Person::class, 'p');
 
-        $filterParamsBuilder = new TestFilterBuilder();
-        $filterParamsBuilder->addApplier(new DoctrinePaginationApplier());
-        $filterParams = $filterParamsBuilder->build(['page' => $page, 'per_page' => $perPage]);
-        $filterParams->applyToTarget($qb);
+        $registryBuilder = new TestFilterAppliersRegistryBuilder();
+        $registryBuilder->addApplier(new DoctrinePaginationApplier());
+        $filterAppliersRegistry = $registryBuilder->build(['page' => $page, 'per_page' => $perPage]);
+        $filterAppliersRegistry->applyToTarget($qb);
 
         $expected = sprintf(
             'SELECT %s FROM %s %s',

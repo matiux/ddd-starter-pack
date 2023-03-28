@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace DDDStarterPack\Aggregate\Domain\Repository\Filter\Test;
 
-use DDDStarterPack\Aggregate\Domain\Repository\Filter\FilterBuilder;
+use DDDStarterPack\Aggregate\Domain\Repository\Filter\FilterAppliersRegistryBuilder;
 use DDDStarterPack\Aggregate\Domain\Repository\Test\DoctrineUtil;
 use Doctrine\ORM\Query\Parameter;
 use Doctrine\ORM\QueryBuilder;
@@ -19,7 +19,7 @@ class FilterApplierScenario
 
     public function __construct(
         private TestCase $testCase,
-        private FilterBuilder $filterParamBuilder,
+        private FilterAppliersRegistryBuilder $registryBuilder,
         private QueryBuilder $queryBuilder,
     ) {
     }
@@ -28,8 +28,8 @@ class FilterApplierScenario
     {
         $this->filters = $filters;
 
-        $filterParams = $this->filterParamBuilder->build($filters);
-        $filterParams->applyToTarget($this->queryBuilder);
+        $filterAppliersRegistry = $this->registryBuilder->build($filters);
+        $filterAppliersRegistry->applyToTarget($this->queryBuilder);
 
         return $this;
     }

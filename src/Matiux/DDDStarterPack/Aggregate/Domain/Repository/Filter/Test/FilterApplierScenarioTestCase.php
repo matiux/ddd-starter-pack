@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace DDDStarterPack\Aggregate\Domain\Repository\Filter\Test;
 
-use DDDStarterPack\Aggregate\Domain\Repository\Filter\FilterBuilder;
+use DDDStarterPack\Aggregate\Domain\Repository\Filter\FilterAppliersRegistryBuilder;
 use Doctrine\ORM\EntityManagerInterface;
 use Doctrine\ORM\QueryBuilder;
 use Symfony\Bundle\FrameworkBundle\Test\KernelTestCase;
@@ -32,7 +32,7 @@ abstract class FilterApplierScenarioTestCase extends KernelTestCase
         );
     }
 
-    abstract protected function createFilterParamBuilder(): FilterBuilder;
+    abstract protected function createFilterParamBuilder(): FilterAppliersRegistryBuilder;
 
     abstract protected function createQueryBuilder(): QueryBuilder;
 }

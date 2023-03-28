@@ -9,7 +9,7 @@ use Doctrine\ORM\QueryBuilder;
 use PHPUnit\Framework\TestCase;
 use Tests\Support\Model\Doctrine\DoctrineSortApplier;
 use Tests\Support\Model\Person;
-use Tests\Support\TestFilterBuilder;
+use Tests\Support\TestFilterAppliersRegistryBuilder;
 use Tests\Tool\EntityManagerBuilder;
 
 class DoctrineGenericSortApplierTest extends TestCase
@@ -36,11 +36,11 @@ class DoctrineGenericSortApplierTest extends TestCase
             (string) $this->qb->getQuery()->getDQL(),
         );
 
-        $filterParamsBuilder = new TestFilterBuilder();
-        $filterParamsBuilder->addApplier(new DoctrineSortApplier());
+        $registryBuilder = new TestFilterAppliersRegistryBuilder();
+        $registryBuilder->addApplier(new DoctrineSortApplier());
 
-        $filterParams = $filterParamsBuilder->build(['sort_field' => 'name', 'sort_direction' => 'ASC']);
-        $filterParams->applyToTarget($this->qb);
+        $filterAppliersRegistry = $registryBuilder->build(['sort_field' => 'name', 'sort_direction' => 'ASC']);
+        $filterAppliersRegistry->applyToTarget($this->qb);
 
         $expected = sprintf(
             'SELECT %s FROM %s %s ORDER BY %s.name ASC',
@@ -70,7 +70,7 @@ class DoctrineGenericSortApplierTest extends TestCase
             (string) $this->qb->getQuery()->getDQL(),
         );
 
-        $filterParamsBuilder = new TestFilterBuilder();
+        $filterParamsBuilder = new TestFilterAppliersRegistryBuilder();
         $filterParamsBuilder->addApplier(new DoctrineSortApplier());
 
         $filterParams = $filterParamsBuilder->build(['sort_field' => null, 'sort_direction' => 'ASC']);
@@ -96,7 +96,7 @@ class DoctrineGenericSortApplierTest extends TestCase
             (string) $this->qb->getQuery()->getDQL(),
         );
 
-        $filterParamsBuilder = new TestFilterBuilder();
+        $filterParamsBuilder = new TestFilterAppliersRegistryBuilder();
         $filterParamsBuilder->addApplier(new DoctrineSortApplier());
 
         $filterParams = $filterParamsBuilder->build(['sort_field' => 'name']);

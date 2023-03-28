@@ -7,7 +7,7 @@ namespace Tests\Unit\DDDStarterPack\Aggregate\Domain\Repository\Filter;
 use DDDStarterPack\Aggregate\Domain\Repository\Filter\FilterAppliersRegistry;
 use PHPUnit\Framework\TestCase;
 
-class FilterParamsTest extends TestCase
+class FilterAppliersRegistryTest extends TestCase
 {
     /**
      * @test

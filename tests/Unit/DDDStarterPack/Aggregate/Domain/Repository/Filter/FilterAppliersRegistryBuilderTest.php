@@ -5,9 +5,9 @@ declare(strict_types=1);
 namespace Tests\Unit\DDDStarterPack\Aggregate\Domain\Repository\Filter;
 
 use PHPUnit\Framework\TestCase;
-use Tests\Support\TestFilterBuilder;
+use Tests\Support\TestFilterAppliersRegistryBuilder;
 
-class FilterParamsBuilderTest extends TestCase
+class FilterAppliersRegistryBuilderTest extends TestCase
 {
     /**
      * @test
@@ -16,7 +16,7 @@ class FilterParamsBuilderTest extends TestCase
      */
     public function it_should_create_a_filterparams_by_builder(): void
     {
-        $filterParamsBuilder = new TestFilterBuilder(
+        $registryBuilder = new TestFilterAppliersRegistryBuilder(
             [
                 new DummyFilterApplier('name'),
                 new DummyFilterApplier('skills'),
@@ -24,16 +24,16 @@ class FilterParamsBuilderTest extends TestCase
         );
 
         // Psalm gets angry - as it should be
-        // $filterParamsBuilder->addApplier(new \stdClass());
+        // $registryBuilder->addApplier(new \stdClass());
 
-        $filterParams = $filterParamsBuilder->build([
+        $filterAppliersRegistry = $registryBuilder->build([
             'name' => 'Matteo',
             'skills' => ['architecture', 'programming'],
         ]);
 
         $target = new DummyArrayTarget();
 
-        $filterParams->applyToTarget($target);
+        $filterAppliersRegistry->applyToTarget($target);
 
         $this->assertEquals([
             ['name' => 'Matteo'],
@@ -53,15 +53,15 @@ class FilterParamsBuilderTest extends TestCase
         $this->expectException(\LogicException::class);
         $this->expectExceptionMessage('The builder is frozen');
 
-        $filterParamsBuilder = new TestFilterBuilder();
-        $filterParamsBuilder->addApplier(new DummyFilterApplier('name'));
+        $registryBuilder = new TestFilterAppliersRegistryBuilder();
+        $registryBuilder->addApplier(new DummyFilterApplier('name'));
 
-        $filterParamsBuilder->build([
+        $registryBuilder->build([
             'name' => 'Matteo',
             'skills' => ['architecture', 'programming'],
         ]);
 
-        $filterParamsBuilder->addApplier(new DummyFilterApplier('skills'));
+        $registryBuilder->addApplier(new DummyFilterApplier('skills'));
     }
 }
 

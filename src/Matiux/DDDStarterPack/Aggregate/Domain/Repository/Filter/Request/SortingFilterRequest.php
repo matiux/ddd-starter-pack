@@ -2,7 +2,9 @@
 
 declare(strict_types=1);
 
-namespace DDDStarterPack\Aggregate\Domain\Repository\Filter;
+namespace DDDStarterPack\Aggregate\Domain\Repository\Filter\Request;
+
+use DDDStarterPack\Aggregate\Domain\Repository\Filter\SortingKeyFilterApplier;
 
 trait SortingFilterRequest
 {

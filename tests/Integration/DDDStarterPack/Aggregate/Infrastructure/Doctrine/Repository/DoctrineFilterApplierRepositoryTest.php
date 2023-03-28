@@ -14,10 +14,10 @@ use Tests\Support\Model\Doctrine\DoctrinePaginationApplier;
 use Tests\Support\Model\Doctrine\DoctrineSortApplier;
 use Tests\Support\Model\Person;
 use Tests\Support\Model\PersonId;
-use Tests\Support\TestFilterBuilder;
+use Tests\Support\TestFilterAppliersRegistryBuilder;
 use Tests\Tool\EntityManagerBuilder;
 
-class DoctrineFilterParamsRepositoryTest extends TestCase
+class DoctrineFilterApplierRepositoryTest extends TestCase
 {
     private MyFilterApplierRepository $repository;
     private EntityManager $em;
@@ -50,19 +50,26 @@ class DoctrineFilterParamsRepositoryTest extends TestCase
         $this->repository->aggiungi(Person::crea(PersonId::create(), 'B_Met', 35));
         $this->repository->aggiungi(Person::crea(PersonId::create(), 'Z_Teo', 35));
 
-        $filterParamsBuilder = new TestFilterBuilder();
-        $filterParamsBuilder->addApplier(new DoctrineSortApplier());
-        $filterParamsBuilder->addApplier(new DoctrinePaginationApplier());
+        $registryBuilder = new TestFilterAppliersRegistryBuilder();
+        $registryBuilder->addApplier(new DoctrineSortApplier());
+        $registryBuilder->addApplier(new DoctrinePaginationApplier());
 
-        $filterParams = $filterParamsBuilder->build(['sort_field' => 'name', 'sort_direction' => 'DESC', 'page' => 2, 'per_page' => 2]);
+        $filterAppliersRegistry = $registryBuilder->build(
+            [
+                'sort_field' => 'name',
+                'sort_direction' => 'DESC',
+                'page' => 2,
+                'per_page' => 2,
+            ],
+        );
 
-        $items = $this->repository->byFilterParamsWithPagination($filterParams);
+        $items = $this->repository->byFilterParamsWithPagination($filterAppliersRegistry);
 
         self::assertInstanceOf(PaginatorI::class, $items);
         self::assertCount(1, $items);
         self::assertSame($p1, $items->current());
 
-        $items = $this->repository->byFilterParams($filterParams);
+        $items = $this->repository->byFilterParams($filterAppliersRegistry);
 
         self::assertCount(1, $items);
         self::assertSame($p1, $items[0]);
