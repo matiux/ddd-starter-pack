@@ -10,10 +10,6 @@ abstract class DoctrineWhereEqualsFilterApplier extends DoctrineFilterApplier
 {
     public function applyTo($target, FilterAppliersRegistry $appliersRegistry): void
     {
-        /**
-         * @var string                $key
-         * @var bool|float|int|string $value //scalar
-         */
         foreach ($this->getSupportedFilters() as $key) {
             if ($appliersRegistry->hasFilterWithKey($key)) {
                 $target->andWhere(
@@ -32,5 +28,8 @@ abstract class DoctrineWhereEqualsFilterApplier extends DoctrineFilterApplier
 
     abstract protected function getModelAlias(): string;
 
+    /**
+     * @return string[]
+     */
     abstract protected function getSupportedFilters(): array;
 }
