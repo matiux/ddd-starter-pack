@@ -5,27 +5,30 @@ declare(strict_types=1);
 namespace DDDStarterPack\Aggregate\Infrastructure\Doctrine\Repository\Filter;
 
 use DDDStarterPack\Aggregate\Domain\Repository\Filter\FilterAppliersRegistry;
-use Doctrine\ORM\QueryBuilder;
+use DDDStarterPack\Aggregate\Domain\Repository\Filter\PaginationKeyFilterApplier;
 
-abstract class DoctrineGenericPaginationApplier extends DoctrineFilterApplier
+class DoctrineGenericPaginationApplier extends DoctrineFilterApplier
 {
-    abstract protected function pageKey(): string;
+    protected function pageKey(): string
+    {
+        return PaginationKeyFilterApplier::PAGE;
+    }
 
-    abstract protected function perPageKey(): string;
+    protected function perPageKey(): string
+    {
+        return PaginationKeyFilterApplier::PER_PAGE;
+    }
 
     /**
-     * @psalm-param QueryBuilder $target
-     *
-     * @param FilterAppliersRegistry $filterAppliers
-     * @param mixed                  $target
+     * {@inheritDoc}
      */
-    public function apply($target, FilterAppliersRegistry $filterAppliers): void
+    public function applyTo($target, FilterAppliersRegistry $appliersRegistry): void
     {
         /** @var int $page */
-        $page = $filterAppliers->getFilterValueForKey($this->pageKey(), '1');
+        $page = $appliersRegistry->getFilterValueForKey($this->pageKey(), '1');
 
         /** @var int $perPage */
-        $perPage = $filterAppliers->getFilterValueForKey($this->perPageKey());
+        $perPage = $appliersRegistry->getFilterValueForKey($this->perPageKey());
 
         if (-1 !== $perPage) {
             $offset = ($page - 1) * $perPage;
@@ -34,5 +37,16 @@ abstract class DoctrineGenericPaginationApplier extends DoctrineFilterApplier
             $limit = $perPage;
             $target->setMaxResults($limit);
         }
+    }
+
+    public function supports(FilterAppliersRegistry $appliersRegistry): bool
+    {
+        return
+            (
+                $appliersRegistry->hasFilterWithKey(PaginationKeyFilterApplier::PAGE)
+                || $appliersRegistry->hasFilterWithKey(PaginationKeyFilterApplier::PER_PAGE)
+            )
+            && (int) $appliersRegistry->getFilterValueForKey(PaginationKeyFilterApplier::PER_PAGE) > 0
+            && (int) $appliersRegistry->getFilterValueForKey(PaginationKeyFilterApplier::PAGE) > 0;
     }
 }
