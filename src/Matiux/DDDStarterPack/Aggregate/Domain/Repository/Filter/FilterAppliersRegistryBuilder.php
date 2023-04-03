@@ -34,10 +34,10 @@ class FilterAppliersRegistryBuilder
         $this->filterAppliers[] = $filterApplier;
     }
 
-    public function build(array $neededFilters): FilterAppliersRegistry
+    public function build(array $requestedFilters): FilterAppliersRegistry
     {
         $this->frozen = true;
 
-        return new FilterAppliersRegistry(array_values($this->filterAppliers), $neededFilters);
+        return new FilterAppliersRegistry(array_values($this->filterAppliers), $requestedFilters);
     }
 }

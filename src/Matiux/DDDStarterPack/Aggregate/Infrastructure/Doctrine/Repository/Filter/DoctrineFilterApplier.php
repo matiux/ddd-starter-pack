@@ -14,8 +14,7 @@ use Doctrine\ORM\QueryBuilder;
 abstract class DoctrineFilterApplier implements FilterApplier
 {
     /**
-     * @param QueryBuilder           $target
-     * @param FilterAppliersRegistry $filterAppliers
+     * @param QueryBuilder $target
      */
-    abstract public function apply($target, FilterAppliersRegistry $filterAppliers): void;
+    abstract public function applyTo($target, FilterAppliersRegistry $appliersRegistry): void;
 }

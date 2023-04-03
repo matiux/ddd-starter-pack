@@ -8,8 +8,6 @@ use DDDStarterPack\Message\Infrastructure\Exception\MessageInvalidException;
 
 /**
  * @template T
- *
- * @extends MessageService
  */
 interface MessageProducer extends MessageService
 {

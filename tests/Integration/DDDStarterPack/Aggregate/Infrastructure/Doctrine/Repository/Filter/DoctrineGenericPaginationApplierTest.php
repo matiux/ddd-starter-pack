@@ -6,8 +6,8 @@ namespace Tests\Integration\DDDStarterPack\Aggregate\Infrastructure\Doctrine\Rep
 
 use DDDStarterPack\Aggregate\Domain\Repository\Filter\FilterAppliersRegistryBuilder;
 use DDDStarterPack\Aggregate\Domain\Repository\Test\DoctrineUtil;
+use DDDStarterPack\Aggregate\Infrastructure\Doctrine\Repository\Filter\DoctrineGenericPaginationApplier;
 use PHPUnit\Framework\TestCase;
-use Tests\Support\Model\Doctrine\DoctrinePaginationApplier;
 use Tests\Support\Model\Person;
 use Tests\Tool\EntityManagerBuilder;
 
@@ -38,7 +38,7 @@ class DoctrineGenericPaginationApplierTest extends TestCase
         $qb->select('p')->from(Person::class, 'p');
 
         $registryBuilder = new FilterAppliersRegistryBuilder();
-        $registryBuilder->addApplier(new DoctrinePaginationApplier());
+        $registryBuilder->addApplier(new DoctrineGenericPaginationApplier());
         $filterAppliersRegistry = $registryBuilder->build(['page' => $page, 'per_page' => $perPage]);
         $filterAppliersRegistry->applyToTarget($qb);
 

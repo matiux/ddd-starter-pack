@@ -24,6 +24,9 @@ class FilterApplierScenario
     ) {
     }
 
+    /**
+     * @param array<string, mixed> $filters
+     */
     public function whenFiltersApplied(array $filters): self
     {
         $this->filters = $filters;
