@@ -87,7 +87,6 @@ class SQSMessageConsumer extends BasicMessageService implements MessageConsumerC
             $messageAttributes = (array) $body['MessageAttributes'];
             $body = (string) $body['Message'];
         } else {
-            // Invio diretto di un messaggio su cosa SQS
             // Opzione della sottoscrizione "Enable raw message delivery" attivata
             $messageAttributes = (array) $message['MessageAttributes'];
             $body = (string) json_encode($body);
