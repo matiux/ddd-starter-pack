@@ -56,11 +56,17 @@ class SNSMessagePublisher extends BasicMessageService implements MessageProducer
         );
     }
 
+    /**
+     * {@inheritDoc}
+     */
     public function send($message): MessageProducerResponse
     {
         return $this->doSend($message);
     }
 
+    /**
+     * @throws MessageInvalidException
+     */
     private function doSend(AWSMessage $message): MessageProducerResponse
     {
         $messageAttributes = $this->createMessageAttributes($message);
@@ -76,7 +82,11 @@ class SNSMessagePublisher extends BasicMessageService implements MessageProducer
             $args['TopicArn'] = $this->getTopicArnFromConfig();
         }
 
-        $result = $this->getClient()->publish($args);
+        try {
+            $result = $this->getClient()->publish($args);
+        } catch (\Throwable $exception) {
+            throw new MessageInvalidException($exception->getMessage(), (int) $exception->getCode(), $exception);
+        }
 
         if (!self::isAwsResultValid($result)) {
             throw new MessageInvalidException('Message sent but corrupt');
