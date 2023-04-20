@@ -4,11 +4,13 @@ DDD Starter Pack
 ![check dependencies](https://github.com/matiux/ddd-starter-pack/actions/workflows/check-dependencies.yml/badge.svg)
 ![check deps vulnerability](https://github.com/matiux/ddd-starter-pack/actions/workflows/dependencies-vulnerability.yml/badge.svg)
 ![test](https://github.com/matiux/ddd-starter-pack/actions/workflows/tests.yml/badge.svg)
-[![codecov](https://codecov.io/gh/matiux/ddd-starter-pack/branch/v3/graph/badge.svg)](https://codecov.io/gh/matiux/ddd-starter-pack)
+[![codecov](https://codecov.io/gh/matiux/ddd-starter-pack/branch/develop/graph/badge.svg)](https://codecov.io/gh/matiux/ddd-starter-pack)
 [![type coverage](https://shepherd.dev/github/matiux/ddd-starter-pack/coverage.svg)](https://shepherd.dev/github/matiux/ddd-starter-pack)
 [![psalm level](https://shepherd.dev/github/matiux/ddd-starter-pack/level.svg)](https://shepherd.dev/github/matiux/ddd-starter-pack)
 ![Security analysis status](https://github.com/matiux/ddd-starter-pack/actions/workflows/security-analysis.yml/badge.svg)
 ![Coding standards status](https://github.com/matiux/ddd-starter-pack/actions/workflows/coding-standards.yml/badge.svg)
+![packagist](https://img.shields.io/packagist/v/matiux/ddd-starter-pack)
+![packagist php version](https://img.shields.io/packagist/dependency-v/matiux/ddd-starter-pack/php)
 
 This library contains "concepts" to development of microservices based on hexagonal architecture and DDD.
 
