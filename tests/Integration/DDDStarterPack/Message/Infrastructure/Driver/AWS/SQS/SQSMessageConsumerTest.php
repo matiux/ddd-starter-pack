@@ -100,6 +100,49 @@ class SQSMessageConsumerTest extends TestCase
      * @group sqs
      * @group producer
      */
+    public function message_consumer_can_receive_message_without_message_attributes(): void
+    {
+        $awsMessage = new AWSMessage(
+            body: json_encode([
+                'Foo' => 'Bar',
+                'occurredAt' => $this->occurredAt->format(\DateTimeInterface::RFC3339_EXTENDED),
+            ]),
+            occurredAt: null,
+            type: null,
+            extra: [
+                'MessageGroupId' => Uuid::uuid4()->toString(),
+                'MessageDeduplicationId' => Uuid::uuid4()->toString(),
+            ],
+        );
+
+        $this->messageProducer->send($awsMessage);
+
+        $message = $this->messageConsumer->consume();
+
+        self::assertInstanceOf(AWSMessage::class, $message);
+
+        self::assertEquals(
+            json_encode([
+                'Foo' => 'Bar',
+                'occurredAt' => $this->occurredAt->format(\DateTimeInterface::RFC3339_EXTENDED),
+            ]),
+            $message->body(),
+        );
+        self::assertNull($message->type());
+        self::assertNull($message->occurredAt());
+
+        $id = $message->id();
+        self::assertNotNull($id);
+
+        $this->deleteMessage($id);
+    }
+
+    /**
+     * @test
+     *
+     * @group sqs
+     * @group producer
+     */
     public function message_consumer_can_delete_message(): void
     {
         $this->messageProducer->send($this->message);

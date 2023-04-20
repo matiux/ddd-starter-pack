@@ -9,6 +9,7 @@ use DDDStarterPack\Message\Infrastructure\Driver\AWS\RawClient\SnsRawClient;
 use DDDStarterPack\Message\Infrastructure\Driver\AWS\RawClient\SqsRawClient;
 use DDDStarterPack\Message\Infrastructure\Driver\AWS\SNS\Configuration\SNSConfigurationBuilder;
 use DDDStarterPack\Message\Infrastructure\Driver\AWS\SQS\Configuration\SQSConfigurationBuilder;
+use DDDStarterPack\Message\Infrastructure\Exception\MessageInvalidException;
 use DDDStarterPack\Message\Infrastructure\Factory\MessageConsumerFactory;
 use DDDStarterPack\Message\Infrastructure\Factory\MessageProducerFactory;
 use DDDStarterPack\Message\Infrastructure\MessageConsumer;
@@ -140,5 +141,42 @@ class SNSMessagePublisherTest extends TestCase
         self::assertNotNull($receiptHandle);
 
         $this->deleteMessage($receiptHandle);
+    }
+
+    /**
+     * @test
+     *
+     * @group sqs
+     * @group producer
+     */
+    public function it_should_throw_an_exception_if_the_message_cannot_be_published(): void
+    {
+        self::expectException(MessageInvalidException::class);
+        self::expectExceptionMessageMatches('/Invalid parameter\: The MessageGroupId parameter is required for FIFO topics/i');
+
+        $configuration = SNSConfigurationBuilder::create()
+            ->withRegion('eu-west-1')
+            ->withTopicArn($this->getSnsTopicArn())
+            ->build();
+
+        $snsMessagePublisher = MessageProducerFactory::create()->obtainProducer($configuration);
+
+        $message = new AWSMessage(
+            body: json_encode([
+                'Foo' => 'Bar',
+                'occurredAt' => $this->occurredAt->format(\DateTimeInterface::RFC3339_EXTENDED),
+            ]),
+            occurredAt: $this->occurredAt,
+            extra: [
+                'MessageAttributes' => [
+                    'Evento' => [
+                        'DataType' => 'String',
+                        'StringValue' => 'EventoAvvenuto',
+                    ],
+                ],
+            ],
+        );
+
+        $snsMessagePublisher->send($message);
     }
 }

@@ -80,22 +80,24 @@ class SQSMessageConsumer extends BasicMessageService implements MessageConsumerC
      */
     private function parseMessage(array $message): array
     {
-        $body = (array) json_decode((string) $message['Body'], true);
+        $originalBody = (array) json_decode((string) $message['Body'], true);
 
-        if (array_key_exists('MessageAttributes', $body)) {
-            // Opzione della sottoscrizione "Enable raw message delivery" disabilitata
-            $messageAttributes = (array) $body['MessageAttributes'];
-            $body = (string) $body['Message'];
+        if ($this->isSnsRawMessageDeliveryEnabled($originalBody)) {
+            $body = (string) $originalBody['Message'];
+            $messageAttributes = (array) ($originalBody['MessageAttributes'] ?? []);
         } else {
-            // Invio diretto di un messaggio su cosa SQS
-            // Opzione della sottoscrizione "Enable raw message delivery" attivata
-            $messageAttributes = (array) $message['MessageAttributes'];
-            $body = (string) json_encode($body);
+            $body = (string) json_encode($originalBody);
+            $messageAttributes = (array) ($message['MessageAttributes'] ?? []);
         }
 
         $messageAttributes = $this->prepareMessageAttributes($messageAttributes);
 
         return [$body, $messageAttributes];
+    }
+
+    private function isSnsRawMessageDeliveryEnabled(array $originalBody): bool
+    {
+        return array_key_exists('MessageId', $originalBody) && array_key_exists('Message', $originalBody);
     }
 
     /**
