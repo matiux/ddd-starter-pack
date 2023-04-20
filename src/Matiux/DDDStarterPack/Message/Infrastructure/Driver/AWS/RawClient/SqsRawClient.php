@@ -9,6 +9,9 @@ use Aws\Sqs\SqsClient;
 use DDDStarterPack\Tool\EnvVarUtil;
 use Webmozart\Assert\Assert;
 
+/**
+ * @codeCoverageIgnore
+ */
 trait SqsRawClient
 {
     use AWSCredentials;

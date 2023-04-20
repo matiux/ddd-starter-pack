@@ -8,6 +8,9 @@ use Aws\Sns\SnsClient;
 use DDDStarterPack\Tool\EnvVarUtil;
 use Webmozart\Assert\Assert;
 
+/**
+ * @codeCoverageIgnore
+ */
 trait SnsRawClient
 {
     use AWSCredentials;
