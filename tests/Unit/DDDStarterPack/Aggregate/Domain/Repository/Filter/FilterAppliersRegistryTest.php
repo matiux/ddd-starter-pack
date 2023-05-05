@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Tests\Unit\DDDStarterPack\Aggregate\Domain\Repository\Filter;
 
 use DDDStarterPack\Aggregate\Domain\Repository\Filter\FilterAppliersRegistry;
+use DDDStarterPack\Aggregate\Domain\Repository\Filter\FilterAppliersRegistryBuilder;
 use PHPUnit\Framework\TestCase;
 
 class FilterAppliersRegistryTest extends TestCase
@@ -38,5 +39,39 @@ class FilterAppliersRegistryTest extends TestCase
         $appliersRegistry = new FilterAppliersRegistry([], $requestedFilters);
 
         self::assertFalse($appliersRegistry->hasFilterWithKey('surname'));
+    }
+
+    /**
+     * @return array<array-key, array<array-key, mixed>>
+     */
+    public function provideValidEmptyValues(): array
+    {
+        return [
+            'int(0)' => [0],
+            'string("0")' => ['0'],
+            'string("")' => [''],
+            'bool(false)' => [false],
+            'null' => [null],
+            'empty array' => [[]],
+        ];
+    }
+
+    /**
+     * @test
+     *
+     * @dataProvider provideValidEmptyValues
+     */
+    public function it_should_not_fail_when_filter_applies_an_empty_value(mixed $value): void
+    {
+        $requestedFilters = ['some-value' => $value];
+        $appliersRegistry = (new FilterAppliersRegistryBuilder())->build($requestedFilters);
+        $target = new DummyArrayTarget();
+
+        (new DummyFilterApplier('some-value'))
+            ->applyTo($target, $appliersRegistry);
+
+        self::assertSame([
+            ['some-value' => $value],
+        ], $target->get());
     }
 }
