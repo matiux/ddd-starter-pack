@@ -9,35 +9,51 @@ use Iterator;
 /**
  * @psalm-suppress UnsafeGenericInstantiation
  *
+ * @psalm-immutable
+ *
  * @template T
  *
  * @implements Iterator<array-key, T>
  */
 class Collection implements \Iterator, \Countable
 {
-    private int $position = 0;
-
     /** @var list<T> */
     protected array $items = [];
 
     /**
-     * @param array<array-key, T> $items
+     * @param list<T> $items
      */
-    final public function __construct(array $items = [])
+    final private function __construct(array $items = [])
     {
+        $this->items = $items;
+    }
+
+    /**
+     * @template B
+     *
+     * @param array<array-key, B> $items
+     *
+     * @return static<B>
+     */
+    final public static function create(array $items = []): static
+    {
+        $instance = new self();
+
         foreach ($items as $item) {
-            $this->add($item);
+            $instance = $instance->add($item);
         }
+
+        return $instance;
     }
 
     /**
      * @param T $item
      */
-    public function add($item): void
+    final public function add($item): static
     {
         $this->validateItem($item);
 
-        $this->items[] = $item;
+        return new static([...$this->items, $item]);
     }
 
     /**
@@ -45,27 +61,27 @@ class Collection implements \Iterator, \Countable
      */
     public function current(): mixed
     {
-        return $this->items[$this->position];
+        return current($this->items);
     }
 
     public function next(): void
     {
-        ++$this->position;
+        next($this->items);
     }
 
-    public function key(): int
+    public function key(): int|null
     {
-        return $this->position;
+        return key($this->items);
     }
 
     public function valid(): bool
     {
-        return isset($this->items[$this->position]);
+        return null !== key($this->items);
     }
 
     public function rewind(): void
     {
-        $this->position = 0;
+        reset($this->items);
     }
 
     public function count(): int
@@ -88,7 +104,7 @@ class Collection implements \Iterator, \Countable
      *
      * @return static
      */
-    final public function merge($collection): static
+    final public function merge(Collection $collection): static
     {
         $items = array_merge($this->items, $collection->items);
 

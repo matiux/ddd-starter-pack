@@ -34,6 +34,7 @@ make composer ARG=install
 ```bash
 make build-php ARG=--no-cache
 make upd
+make create-schema
 make test
 ```
 

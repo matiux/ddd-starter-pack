@@ -109,6 +109,10 @@ phpunit: ## Esegue tutta la suite di test generando anche il badge. Oppure uno s
 coverage: ## Esegue tutta la suite di test e verifica la coverage generando anche il badge
 	$(COMPOSE_EXEC_PHP) $(PROJECT_TOOL) coverage
 
+.PHONY: create-schema
+create-schema: ## Create database schema for test execution
+	$(COMPOSE_EXEC_PHP) $(PROJECT_TOOL) doctrine-schema-create
+
 # Static analysis ——————————————————————————————————————————————————————————————————————————————————————————————————————
 
 .PHONY: psalm
@@ -131,7 +135,7 @@ check-deps-vulnerabilities: ## Check per le vulnerabilità sulle dipendenze
 deptrac-table-all: ## Esegue deptrac per la verifica dei vincoli architetturali
 	$(COMPOSE_EXEC_PHP_NO_PSEUSO_TTY) $(PROJECT_TOOL) deptrac-table-all $$ARG
 
-# Deptrac ——————————————————————————————————————————————————————————————————————————————————————————————————————————————
+# Infection ————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
 .PHONY: infection
 infection: ## Esegue infection per test di mutazione
