@@ -22,7 +22,38 @@ class CollectionTest extends TestCase
 
         $items = [$a, $b];
 
-        $this->collection = new Collection($items);
+        $this->collection = Collection::create($items);
+    }
+
+    /**
+     * @test
+     */
+    public function it_should_create_an_empty_collection(): void
+    {
+        $collection = Collection::create();
+
+        self::assertCount(0, $collection);
+    }
+
+    /**
+     * @test
+     */
+    public function it_should_create_a_collection_with_a_given_list_of_items(): void
+    {
+        $collection = Collection::create([1, 2, 3]);
+
+        self::assertCount(3, $collection);
+    }
+
+    /**
+     * @test
+     */
+    public function it_should_add_an_item_into_the_collection(): void
+    {
+        /** @var Collection<string> $collection */
+        $collection = Collection::create();
+
+        self::assertCount(1, $collection->add('some-item'));
     }
 
     /**
@@ -62,7 +93,7 @@ class CollectionTest extends TestCase
         $c = new MyData();
         $c->data = true;
 
-        $collection2 = new Collection([$c]);
+        $collection2 = Collection::create([$c]);
         $mergedCollection = $this->collection->merge($collection2);
 
         self::assertCount(3, $mergedCollection);

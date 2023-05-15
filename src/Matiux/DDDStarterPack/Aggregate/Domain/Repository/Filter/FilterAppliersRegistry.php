@@ -21,23 +21,17 @@ class FilterAppliersRegistry
      */
 
     /**
-     * @param string $key
-     * @param string $default
-     *
      * @throws \InvalidArgumentException
      *
      * @return mixed
      */
-    public function getFilterValueForKey(string $key, string $default = ''): mixed
+    public function getFilterValueForKey(string $key, string $default = null): mixed
     {
-        if (
-            isset($this->requestedFilters[$key])
-            && !empty($this->requestedFilters[$key])
-        ) {
+        if (array_key_exists($key, $this->requestedFilters)) {
             return $this->requestedFilters[$key];
         }
 
-        return !empty($default) ? $default : throw new \InvalidArgumentException("Filter with key '{$key}' does not exist");
+        return $default ?? throw new \InvalidArgumentException("Filter with key '{$key}' does not exist");
     }
 
     public function applyToTarget(mixed $target): void
