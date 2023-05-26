@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace DDDStarterPack\Service\Domain;
 
-use DDDStarterPack\Exception\Application\TransactionFailedException;
+use DDDStarterPack\Exception\TransactionFailedException;
 
 /**
  * @template O

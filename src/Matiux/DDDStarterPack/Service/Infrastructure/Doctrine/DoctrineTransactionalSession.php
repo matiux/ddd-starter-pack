@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace DDDStarterPack\Service\Infrastructure\Doctrine;
 
-use DDDStarterPack\Exception\Application\TransactionFailedException;
+use DDDStarterPack\Exception\TransactionFailedException;
 use DDDStarterPack\Service\Domain\TransactionalSession;
 use Doctrine\ORM\EntityManager;
 

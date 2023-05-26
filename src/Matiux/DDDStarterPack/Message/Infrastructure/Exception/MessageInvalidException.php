@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace DDDStarterPack\Message\Infrastructure\Exception;
 
-use DDDStarterPack\Exception\Application\ApplicationException;
+use DDDStarterPack\Exception\ApplicationException;
 
 class MessageInvalidException extends ApplicationException
 {

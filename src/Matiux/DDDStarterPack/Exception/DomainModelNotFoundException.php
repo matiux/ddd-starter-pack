@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace DDDStarterPack\Exception\Domain;
+namespace DDDStarterPack\Exception;
 
 /**
  * @codeCoverageIgnore

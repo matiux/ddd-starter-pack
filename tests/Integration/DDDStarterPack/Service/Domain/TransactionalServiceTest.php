@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Integration\DDDStarterPack\Service\Domain;
 
-use DDDStarterPack\Exception\Application\TransactionFailedException;
+use DDDStarterPack\Exception\TransactionFailedException;
 use DDDStarterPack\Service\Domain\Service;
 use DDDStarterPack\Service\Domain\TransactionalService;
 use DDDStarterPack\Service\Infrastructure\Doctrine\DoctrineTransactionalSession;
