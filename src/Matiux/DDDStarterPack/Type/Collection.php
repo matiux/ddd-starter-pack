@@ -37,7 +37,7 @@ class Collection implements \Iterator, \Countable
      */
     final public static function create(array $items = []): static
     {
-        $instance = new self();
+        $instance = new static();
 
         foreach ($items as $item) {
             $instance = $instance->add($item);
