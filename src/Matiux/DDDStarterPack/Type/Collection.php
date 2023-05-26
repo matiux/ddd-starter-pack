@@ -11,7 +11,7 @@ use Iterator;
  *
  * @psalm-immutable
  *
- * @template T
+ * @template T of mixed
  *
  * @implements Iterator<array-key, T>
  */
@@ -29,7 +29,7 @@ class Collection implements \Iterator, \Countable
     }
 
     /**
-     * @template B
+     * @template B of T
      *
      * @param array<array-key, B> $items
      *
@@ -37,6 +37,7 @@ class Collection implements \Iterator, \Countable
      */
     final public static function create(array $items = []): static
     {
+        /** @var static<B> $instance */
         $instance = new static();
 
         foreach ($items as $item) {
@@ -48,6 +49,8 @@ class Collection implements \Iterator, \Countable
 
     /**
      * @param T $item
+     *
+     * @return static<T>
      */
     final public function add($item): static
     {
