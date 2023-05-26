@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace DDDStarterPack\DataTransformer\Application\Type;
+namespace DDDStarterPack\DataTransformer\Type;
 
 /**
  * @template I

@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Tests\Unit\DDDStarterPack\DataTransformer\Application;
+namespace Tests\Unit\DDDStarterPack\DataTransformer;
 
 use PHPUnit\Framework\TestCase;
 use Tests\Support\Model\Person;

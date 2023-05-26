@@ -2,10 +2,10 @@
 
 declare(strict_types=1);
 
-namespace DDDStarterPack\DataTransformer\Application;
+namespace DDDStarterPack\DataTransformer;
 
-use DDDStarterPack\DataTransformer\Application\Type\DataTransformer;
-use DDDStarterPack\DataTransformer\Application\Type\ItemDataTransformer;
+use DDDStarterPack\DataTransformer\Type\DataTransformer;
+use DDDStarterPack\DataTransformer\Type\ItemDataTransformer;
 
 /**
  * @template I

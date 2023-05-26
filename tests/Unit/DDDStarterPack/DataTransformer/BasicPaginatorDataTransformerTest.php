@@ -2,9 +2,9 @@
 
 declare(strict_types=1);
 
-namespace Tests\Unit\DDDStarterPack\DataTransformer\Application;
+namespace Tests\Unit\DDDStarterPack\DataTransformer;
 
-use DDDStarterPack\DataTransformer\Application\BasicPaginatorDataTransformer;
+use DDDStarterPack\DataTransformer\BasicPaginatorDataTransformer;
 use DDDStarterPack\Repository\Paginator\Paginator;
 use PHPUnit\Framework\TestCase;
 use Tests\Support\Model\Person;
