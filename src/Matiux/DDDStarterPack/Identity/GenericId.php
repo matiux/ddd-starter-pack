@@ -2,12 +2,12 @@
 
 declare(strict_types=1);
 
-namespace DDDStarterPack\Aggregate\Domain\Identifier;
+namespace DDDStarterPack\Identity;
 
 /**
  * @template I of mixed
  */
-interface EntityId
+interface GenericId
 {
     public static function create(): static;
 
@@ -34,5 +34,5 @@ interface EntityId
      */
     public function value();
 
-    public function equals(EntityId $entityId): bool;
+    public function equals(GenericId $entityId): bool;
 }

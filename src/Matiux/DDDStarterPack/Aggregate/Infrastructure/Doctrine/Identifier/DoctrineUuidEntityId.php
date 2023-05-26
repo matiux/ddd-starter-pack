@@ -4,8 +4,7 @@ declare(strict_types=1);
 
 namespace DDDStarterPack\Aggregate\Infrastructure\Doctrine\Identifier;
 
-use DDDStarterPack\Aggregate\Domain\Identifier\EntityId;
-use DDDStarterPack\Aggregate\Domain\Identifier\UuidEntityId;
+use DDDStarterPack\Identity\Uuid;
 use Doctrine\DBAL\Platforms\AbstractPlatform;
 use Doctrine\DBAL\Types\GuidType;
 
@@ -13,7 +12,7 @@ abstract class DoctrineUuidEntityId extends GuidType
 {
     public function convertToDatabaseValue($value, AbstractPlatform $platform): mixed
     {
-        return $value instanceof UuidEntityId ? $value->value() : $value ?? null;
+        return $value instanceof Uuid ? $value->value() : $value ?? null;
     }
 
     public function convertToPHPValue($value, AbstractPlatform $platform): mixed
@@ -52,7 +51,7 @@ abstract class DoctrineUuidEntityId extends GuidType
      */
     private function isValidUuid(string $value): bool
     {
-        return UuidEntityId::isValidUuid($value);
+        return Uuid::isValidUuid($value);
     }
 
     protected function isCustomValid(): bool
@@ -61,7 +60,7 @@ abstract class DoctrineUuidEntityId extends GuidType
     }
 
     /**
-     * @return class-string<EntityId>
+     * @return class-string<Uuid>
      */
     abstract protected function getFQCN(): string;
 }

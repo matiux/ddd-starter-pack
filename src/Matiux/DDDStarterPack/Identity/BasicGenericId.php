@@ -2,14 +2,14 @@
 
 declare(strict_types=1);
 
-namespace DDDStarterPack\Aggregate\Domain\Identifier;
+namespace DDDStarterPack\Identity;
 
 /**
  * @template T
  *
- * @implements EntityId<T>
+ * @implements GenericId<T>
  */
-abstract class BasicEntityId implements EntityId
+abstract class BasicGenericId implements GenericId
 {
     /**
      * @param T $id
@@ -18,7 +18,7 @@ abstract class BasicEntityId implements EntityId
     {
     }
 
-    public function equals(EntityId $entityId): bool
+    public function equals(GenericId $entityId): bool
     {
         return $this->value() === $entityId->value();
     }

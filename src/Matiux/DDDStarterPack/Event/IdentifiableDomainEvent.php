@@ -4,11 +4,11 @@ declare(strict_types=1);
 
 namespace DDDStarterPack\Event;
 
-use DDDStarterPack\Aggregate\Domain\Identifier\BasicEntityId;
+use DDDStarterPack\Identity\Uuid;
 use DDDStarterPack\Type\DateTimeRFC;
 
 /**
- * @template I of BasicEntityId
+ * @template I of Uuid
  */
 abstract class IdentifiableDomainEvent extends DomainEvent
 {

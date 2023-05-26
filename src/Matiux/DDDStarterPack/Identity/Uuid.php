@@ -2,12 +2,12 @@
 
 declare(strict_types=1);
 
-namespace DDDStarterPack\Aggregate\Domain\Identifier;
+namespace DDDStarterPack\Identity;
 
 /**
- * @extends  BasicEntityId<string>
+ * @extends  BasicGenericId<string>
  */
-abstract class UuidEntityId extends BasicEntityId
+abstract class Uuid extends BasicGenericId
 {
     // public const UUID_PATTERN = '/^[0-9a-f]{8}-[0-9a-f]{4}-4[0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$/';
     // See https://github.com/ramsey/uuid/blob/4.x/src/Validator/GenericValidator.php#L32
