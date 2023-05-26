@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace DDDStarterPack\Query\Infrastructure\Symfony;
+namespace DDDStarterPack\Query\Symfony;
 
 use DDDStarterPack\Query\Query;
 use DDDStarterPack\Query\QueryBus;
