@@ -2,9 +2,7 @@
 
 declare(strict_types=1);
 
-namespace DDDStarterPack\Service\Application;
-
-use DDDStarterPack\Service\Domain\NoRequestService;
+namespace DDDStarterPack\Service;
 
 /**
  * @template O

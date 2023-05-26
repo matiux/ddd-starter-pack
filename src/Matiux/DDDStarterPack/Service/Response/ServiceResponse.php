@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace DDDStarterPack\Service\Domain\Response;
+namespace DDDStarterPack\Service\Response;
 
 /**
  * @template B of mixed

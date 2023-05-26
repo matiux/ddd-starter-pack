@@ -2,9 +2,9 @@
 
 declare(strict_types=1);
 
-namespace Tests\Unit\DDDStarterPack\Service\Domain;
+namespace Tests\Unit\DDDStarterPack\Service;
 
-use DDDStarterPack\Service\Domain\Service;
+use DDDStarterPack\Service\Service;
 use PHPUnit\Framework\TestCase;
 
 class ServiceTest extends TestCase

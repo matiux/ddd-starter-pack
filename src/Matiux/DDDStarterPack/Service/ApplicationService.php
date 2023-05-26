@@ -2,9 +2,7 @@
 
 declare(strict_types=1);
 
-namespace DDDStarterPack\Service\Application;
-
-use DDDStarterPack\Service\Domain\Service;
+namespace DDDStarterPack\Service;
 
 /**
  * @template I

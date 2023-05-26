@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace DDDStarterPack\Service\Domain;
+namespace DDDStarterPack\Service;
 
 use DDDStarterPack\Command\DomainCommand;
 

@@ -2,9 +2,7 @@
 
 declare(strict_types=1);
 
-namespace DDDStarterPack\Service\Application\Response;
-
-use DDDStarterPack\Service\Domain\Response\BasicServiceResponse;
+namespace DDDStarterPack\Service\Response;
 
 /**
  * @template T

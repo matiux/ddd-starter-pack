@@ -2,9 +2,9 @@
 
 declare(strict_types=1);
 
-namespace Tests\Unit\DDDStarterPack\Service\Domain;
+namespace Tests\Unit\DDDStarterPack\Service;
 
-use DDDStarterPack\Service\Domain\NoRequestService;
+use DDDStarterPack\Service\NoRequestService;
 use PHPUnit\Framework\TestCase;
 
 class NoRequestServiceTest extends TestCase

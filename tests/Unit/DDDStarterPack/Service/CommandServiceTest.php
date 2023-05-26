@@ -2,10 +2,10 @@
 
 declare(strict_types=1);
 
-namespace Tests\Unit\DDDStarterPack\Service\Domain;
+namespace Tests\Unit\DDDStarterPack\Service;
 
 use DDDStarterPack\Command\DomainCommand;
-use DDDStarterPack\Service\Domain\CommandService;
+use DDDStarterPack\Service\CommandService;
 use PHPUnit\Framework\TestCase;
 
 class CommandServiceTest extends TestCase

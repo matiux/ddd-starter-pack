@@ -2,10 +2,10 @@
 
 declare(strict_types=1);
 
-namespace DDDStarterPack\Service\Infrastructure\Doctrine;
+namespace DDDStarterPack\Service\Doctrine;
 
 use DDDStarterPack\Exception\TransactionFailedException;
-use DDDStarterPack\Service\Domain\TransactionalSession;
+use DDDStarterPack\Service\TransactionalSession;
 use Doctrine\ORM\EntityManager;
 
 /**

@@ -2,12 +2,12 @@
 
 declare(strict_types=1);
 
-namespace Integration\DDDStarterPack\Service\Domain;
+namespace Tests\Integration\DDDStarterPack\Service;
 
 use DDDStarterPack\Exception\TransactionFailedException;
-use DDDStarterPack\Service\Domain\Service;
-use DDDStarterPack\Service\Domain\TransactionalService;
-use DDDStarterPack\Service\Infrastructure\Doctrine\DoctrineTransactionalSession;
+use DDDStarterPack\Service\Doctrine\DoctrineTransactionalSession;
+use DDDStarterPack\Service\Service;
+use DDDStarterPack\Service\TransactionalService;
 use Doctrine\ORM\EntityManager;
 use PHPUnit\Framework\TestCase;
 use Tests\Tool\EntityManagerBuilder;
