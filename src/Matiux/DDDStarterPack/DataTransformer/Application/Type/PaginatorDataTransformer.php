@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace DDDStarterPack\DataTransformer\Application\Type;
 
-use DDDStarterPack\Aggregate\Domain\Repository\Paginator\PaginatorI;
+use DDDStarterPack\Repository\Paginator\PaginatorI;
 
 /**
  * @template I

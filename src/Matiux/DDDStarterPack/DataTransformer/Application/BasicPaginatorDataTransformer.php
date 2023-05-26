@@ -4,10 +4,10 @@ declare(strict_types=1);
 
 namespace DDDStarterPack\DataTransformer\Application;
 
-use DDDStarterPack\Aggregate\Domain\Repository\Paginator\PaginatorI;
 use DDDStarterPack\DataTransformer\Application\Type\DataTransformer;
 use DDDStarterPack\DataTransformer\Application\Type\ItemDataTransformer;
 use DDDStarterPack\DataTransformer\Application\Type\PaginatorDataTransformer;
+use DDDStarterPack\Repository\Paginator\PaginatorI;
 
 /**
  * @template I

@@ -31,7 +31,7 @@ abstract class IdentifiableDomainEvent extends DomainEvent
     protected function basicSerialize(): array
     {
         return [
-            self::AGGREGATE_ID_KEY => (string) $this->aggregateId->value(),
+            self::AGGREGATE_ID_KEY => $this->aggregateId->value(),
         ] + parent::basicSerialize();
     }
 

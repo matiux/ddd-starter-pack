@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Tests\Support\Model\Doctrine;
 
-use DDDStarterPack\Aggregate\Infrastructure\Doctrine\Identifier\DoctrineUuidEntityId;
+use DDDStarterPack\Repository\Doctrine\Identifier\DoctrineUuidEntityId;
 use Tests\Support\Model\PersonId;
 
 class DoctrineUuidPersonId extends DoctrineUuidEntityId
