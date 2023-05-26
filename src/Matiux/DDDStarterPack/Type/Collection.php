@@ -21,30 +21,14 @@ class Collection implements \Iterator, \Countable
     protected array $items = [];
 
     /**
-     * @param list<T> $items
+     * @param array<array-key, T> $items
      */
-    final private function __construct(array $items = [])
+    final public function __construct(array $items = [])
     {
-        $this->items = $items;
-    }
-
-    /**
-     * @template B of T
-     *
-     * @param array<array-key, B> $items
-     *
-     * @return static<B>
-     */
-    final public static function create(array $items = []): static
-    {
-        /** @var static<B> $instance */
-        $instance = new static();
-
         foreach ($items as $item) {
-            $instance = $instance->add($item);
+            $this->validateItem($item);
+            $this->items[] = $item;
         }
-
-        return $instance;
     }
 
     /**
