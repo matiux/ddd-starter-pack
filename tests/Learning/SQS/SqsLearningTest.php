@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Tests\Learning\SQS;
 
-use DDDStarterPack\Message\Infrastructure\Driver\AWS\RawClient\SqsRawClient;
+use DDDStarterPack\Message\Driver\AWS\RawClient\SqsRawClient;
 use DDDStarterPack\Tool\EnvVarUtil;
 use PHPUnit\Framework\TestCase;
 use Ramsey\Uuid\Uuid;
