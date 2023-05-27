@@ -23,14 +23,14 @@ abstract class Uuid extends BasicGenericId
      *
      * @return static
      */
-    abstract public static function create(): static;
+    abstract public static function new(): static;
 
     /**
      * @param string $id
      *
      * @throws \InvalidArgumentException
      */
-    public static function createFrom($id): static
+    public static function from($id): static
     {
         if (!$id || !self::isValidUuid($id)) {
             throw new \InvalidArgumentException(sprintf('Invalid ID: %s', $id));
@@ -44,14 +44,14 @@ abstract class Uuid extends BasicGenericId
      *
      * @return null|static
      */
-    public static function tryCreateFrom($id): null|static
+    public static function tryFrom($id): null|static
     {
         if (is_null($id)) {
             return null;
         }
 
         try {
-            return self::createFrom($id);
+            return self::from($id);
         } catch (\Exception $e) {
             return null;
         }

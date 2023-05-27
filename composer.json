@@ -8,11 +8,12 @@
     "domain",
     "message",
     "aggregate",
-    "message publisher"
+    "message publisher",
+    "message consumer"
   ],
   "description": "Basic Domain Driven Design utils",
   "require": {
-    "php": ">=8.0",
+    "php": ">=8.2",
     "ext-json": "*",
     "ramsey/uuid": "^3.7|^4.0",
     "symfony/options-resolver": "^5.0 | ^4.0 | ^6.0 | ^6.1",

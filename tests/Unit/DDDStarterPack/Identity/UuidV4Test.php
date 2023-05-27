@@ -14,7 +14,7 @@ class UuidV4Test extends TestCase
      */
     public function create_randomic_uuid(): void
     {
-        self::assertMatchesRegularExpression(UuidV4::UUID_PATTERN, (string) UuidV4::create());
+        self::assertMatchesRegularExpression(UuidV4::UUID_PATTERN, (string) UuidV4::new());
     }
 
     /**
@@ -22,7 +22,7 @@ class UuidV4Test extends TestCase
      */
     public function create_specific_uuid(): void
     {
-        $myId = UuidV4::createFrom('79fe4c6b-87f6-4093-98f9-ce6a193ab2a5');
+        $myId = UuidV4::from('79fe4c6b-87f6-4093-98f9-ce6a193ab2a5');
 
         self::assertEquals('79fe4c6b-87f6-4093-98f9-ce6a193ab2a5', $myId->value());
         self::assertIsString($myId->value());
@@ -35,7 +35,7 @@ class UuidV4Test extends TestCase
     {
         self::expectException(\InvalidArgumentException::class);
 
-        UuidV4::createFrom('');
+        UuidV4::from('');
     }
 
     /**

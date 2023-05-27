@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace DDDStarterPack\Message;
 
-use DDDStarterPack\Command\DomainCommand;
+use DDDStarterPack\Command\Command;
 
 /**
  * @codeCoverageIgnore
@@ -18,7 +18,7 @@ abstract class CreateDomainCommandFromConsumedMessage extends CreateFromConsumed
     /**
      * @param T $consumedMessage
      *
-     * @return DomainCommand
+     * @return Command
      */
-    abstract protected function create($consumedMessage): DomainCommand;
+    abstract protected function create($consumedMessage): Command;
 }

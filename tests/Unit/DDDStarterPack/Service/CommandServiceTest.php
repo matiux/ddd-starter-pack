@@ -4,8 +4,12 @@ declare(strict_types=1);
 
 namespace Tests\Unit\DDDStarterPack\Service;
 
-use DDDStarterPack\Command\DomainCommand;
+use DDDStarterPack\Command\Command;
+use DDDStarterPack\Command\CommandId;
+use DDDStarterPack\Identity\AggregateId;
+use DDDStarterPack\Identity\Trace\DomainTrace;
 use DDDStarterPack\Service\CommandService;
+use DDDStarterPack\Type\DateTimeRFC;
 use PHPUnit\Framework\TestCase;
 
 class CommandServiceTest extends TestCase
@@ -24,22 +28,35 @@ class CommandServiceTest extends TestCase
         // $service->execute(2);
         // $service->execute([]);
 
-        $service->execute(new MyCommand());
+        $service->execute(MyCommand::init());
 
-        self::assertSame('operation', $store->getLog());
+        self::assertSame('foo-bar', $store->getLog());
     }
 }
 
-class MyCommand implements DomainCommand
+readonly class MyCommand extends Command
 {
-    public function occurredAt(): \DateTimeImmutable
-    {
-        return new \DateTimeImmutable();
+    public function __construct(
+        CommandId $commandId,
+        AggregateId $aggregateId,
+        DomainTrace $domainTrace,
+        DateTimeRFC $occurredAt,
+        public string $data,
+    ) {
+        parent::__construct($commandId, $aggregateId, $domainTrace, $occurredAt);
     }
 
-    public function operation(): string
+    public static function init(): self
     {
-        return 'operation';
+        $commandId = CommandId::new();
+
+        return new self(
+            $commandId,
+            AggregateId::new(),
+            DomainTrace::init($commandId),
+            new DateTimeRFC(),
+            'foo-bar',
+        );
     }
 }
 
@@ -58,7 +75,7 @@ class MyCommandService implements CommandService
      */
     public function execute($command): void
     {
-        $this->store->log($command->operation());
+        $this->store->log($command->data);
     }
 }
 

@@ -22,10 +22,10 @@ class BasicPaginatorDataTransformerTest extends TestCase
         $dt = new PeoplePaginatorDataTransformer();
 
         $people = [
-            Person::crea(PersonId::create(), 'Mat', 34),
-            Person::crea(PersonId::create(), 'Teo', 28),
-            Person::crea(PersonId::create(), 'Iux', 85),
-            Person::crea(PersonId::create(), 'Foo', 43),
+            Person::crea(PersonId::new(), 'Mat', 34),
+            Person::crea(PersonId::new(), 'Teo', 28),
+            Person::crea(PersonId::new(), 'Iux', 85),
+            Person::crea(PersonId::new(), 'Foo', 43),
         ];
 
         // Psalm gets angry - as it should be

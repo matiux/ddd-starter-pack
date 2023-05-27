@@ -4,42 +4,36 @@ declare(strict_types=1);
 
 namespace DDDStarterPack\Event;
 
+use DDDStarterPack\Identity\AggregateId;
+use DDDStarterPack\Identity\Trace\DomainTrace;
 use DDDStarterPack\Type\DateTimeRFC;
 
-abstract class DomainEvent
+abstract readonly class DomainEvent
 {
-    /**
-     * @param DateTimeRFC $occurredAt
-     */
+    public string $eventName;
+
     public function __construct(
-        private DateTimeRFC $occurredAt,
+        public EventId $eventId,
+        public AggregateId $aggregateId,
+        public DomainTrace $domainTrace,
+        public DateTimeRFC $occurredAt,
     ) {
+        $this->eventName = (new \ReflectionClass($this))->getShortName();
     }
 
-    /**
-     * @return string[]
-     */
-    protected function basicSerialize(): array
+    public function serialize(): array
     {
         return [
+            'event_id' => $this->eventId->value(),
+            'aggregate_id' => $this->aggregateId->value(),
+            'event_data' => $this->serializeEventData(),
+            'domain_trace' => [
+                'correlation_id' => $this->domainTrace->correlationId,
+                'causation_id' => $this->domainTrace->causationId,
+            ],
             'occurred_at' => $this->occurredAt->value(),
         ];
     }
 
-    public function occurredAt(): DateTimeRFC
-    {
-        return $this->occurredAt;
-    }
-
-    /**
-     * @param string $occurredAt
-     *
-     * @throws \Exception
-     *
-     * @return DateTimeRFC
-     */
-    protected static function createOccurredAt(string $occurredAt): DateTimeRFC
-    {
-        return DateTimeRFC::createFrom($occurredAt);
-    }
+    abstract protected function serializeEventData(): array;
 }

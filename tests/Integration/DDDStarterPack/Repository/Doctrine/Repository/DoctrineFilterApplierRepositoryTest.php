@@ -45,9 +45,9 @@ class DoctrineFilterApplierRepositoryTest extends TestCase
      */
     public function it_should_use_filterparams_in_repository(): void
     {
-        $this->repository->aggiungi($p1 = Person::crea(PersonId::create(), 'A_Mat', 35));
-        $this->repository->aggiungi(Person::crea(PersonId::create(), 'B_Met', 35));
-        $this->repository->aggiungi(Person::crea(PersonId::create(), 'Z_Teo', 35));
+        $this->repository->aggiungi($p1 = Person::crea(PersonId::new(), 'A_Mat', 35));
+        $this->repository->aggiungi(Person::crea(PersonId::new(), 'B_Met', 35));
+        $this->repository->aggiungi(Person::crea(PersonId::new(), 'Z_Teo', 35));
 
         $registryBuilder = new FilterAppliersRegistryBuilder();
         $registryBuilder->addApplier(new DoctrinePersonSortApplier());

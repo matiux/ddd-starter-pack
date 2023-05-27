@@ -9,7 +9,7 @@ namespace DDDStarterPack\Identity;
  */
 interface GenericId
 {
-    public static function create(): static;
+    public static function new(): static;
 
     /**
      * @template T of I
@@ -18,7 +18,7 @@ interface GenericId
      *
      * @return static
      */
-    public static function createFrom($id): static;
+    public static function from($id): static;
 
     /**
      * @template T of I
@@ -27,7 +27,7 @@ interface GenericId
      *
      * @return null|static
      */
-    public static function tryCreateFrom($id): null|static;
+    public static function tryFrom($id): null|static;
 
     /**
      * @return I

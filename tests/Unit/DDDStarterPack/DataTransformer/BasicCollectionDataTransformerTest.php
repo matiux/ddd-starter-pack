@@ -19,8 +19,8 @@ class BasicCollectionDataTransformerTest extends TestCase
         $dt = new PeopleDataTransformer();
 
         $people = [
-            Person::crea(PersonId::create(), 'Mat', 34),
-            Person::crea(PersonId::create(), 'Teo', 28),
+            Person::crea(PersonId::new(), 'Mat', 34),
+            Person::crea(PersonId::new(), 'Teo', 28),
         ];
 
         $transformed = $dt->write($people)->read();

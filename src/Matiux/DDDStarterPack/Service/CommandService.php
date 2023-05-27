@@ -4,10 +4,10 @@ declare(strict_types=1);
 
 namespace DDDStarterPack\Service;
 
-use DDDStarterPack\Command\DomainCommand;
+use DDDStarterPack\Command\Command;
 
 /**
- * @template I of DomainCommand
+ * @template I of Command
  *
  * @extends Service<I, void>
  */
@@ -16,7 +16,7 @@ interface CommandService extends Service
     /**
      * @param I $command
      *
-     * @psalm-assert DomainCommand $command
+     * @psalm-assert Command $command
      */
     public function execute($command): void;
 }

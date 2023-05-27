@@ -28,7 +28,7 @@ abstract class DoctrineUuidEntityId extends GuidType
 
         $className = $this->getFQCN();
 
-        return $className::createFrom($value);
+        return $className::from($value);
     }
 
     /**

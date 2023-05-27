@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace DDDStarterPack\Message;
 
-use DDDStarterPack\Command\DomainCommand;
+use DDDStarterPack\Command\Command;
 use DDDStarterPack\Event\DomainEvent;
 
 /**
@@ -18,7 +18,7 @@ abstract class CreateFromConsumedMessage
      * @param T                       $consumedMessage
      * @param null|\DateTimeImmutable $occurredAt
      *
-     * @return DomainCommand|DomainEvent
+     * @return Command|DomainEvent
      */
     public function execute($consumedMessage, \DateTimeImmutable $occurredAt = null)
     {
@@ -35,7 +35,7 @@ abstract class CreateFromConsumedMessage
     /**
      * @param T $consumedMessage
      *
-     * @return DomainCommand|DomainEvent
+     * @return Command|DomainEvent
      */
-    abstract protected function create($consumedMessage): DomainCommand|DomainEvent;
+    abstract protected function create($consumedMessage): Command|DomainEvent;
 }

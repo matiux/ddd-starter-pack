@@ -16,7 +16,7 @@ class BasicItemDataTransformerTest extends TestCase
     public function transform_item(): void
     {
         $dt = new PersonDataTransformer();
-        $transformed = $dt->write(Person::crea(PersonId::create(), 'Mat', 34))->read();
+        $transformed = $dt->write(Person::crea(PersonId::new(), 'Mat', 34))->read();
 
         // Psalm gets angry - as it should be
         // $transformed= $dt->write(new \stdClass());
