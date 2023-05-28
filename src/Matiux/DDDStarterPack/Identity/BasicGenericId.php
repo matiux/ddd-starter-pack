@@ -9,12 +9,12 @@ namespace DDDStarterPack\Identity;
  *
  * @implements GenericId<T>
  */
-abstract class BasicGenericId implements GenericId
+abstract readonly class BasicGenericId implements GenericId
 {
     /**
      * @param T $id
      */
-    final protected function __construct(private $id)
+    final protected function __construct(private mixed $id)
     {
     }
 

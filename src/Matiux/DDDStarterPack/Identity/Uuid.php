@@ -7,7 +7,7 @@ namespace DDDStarterPack\Identity;
 /**
  * @extends  BasicGenericId<string>
  */
-abstract class Uuid extends BasicGenericId
+abstract readonly class Uuid extends BasicGenericId
 {
     // public const UUID_PATTERN = '/^[0-9a-f]{8}-[0-9a-f]{4}-4[0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$/';
     // See https://github.com/ramsey/uuid/blob/4.x/src/Validator/GenericValidator.php#L32

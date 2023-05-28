@@ -6,6 +6,6 @@ namespace Tests\Support\Model;
 
 use DDDStarterPack\Identity\UuidV4;
 
-class PersonId extends UuidV4
+readonly class PersonId extends UuidV4
 {
 }

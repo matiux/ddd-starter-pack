@@ -6,7 +6,7 @@ namespace DDDStarterPack\Identity;
 
 use Ramsey\Uuid\Uuid as RamseyUuid;
 
-class UuidV6 extends Uuid
+readonly class UuidV6 extends Uuid
 {
     public static function new(): static
     {
