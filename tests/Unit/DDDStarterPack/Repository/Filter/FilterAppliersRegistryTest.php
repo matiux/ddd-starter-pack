@@ -44,7 +44,7 @@ class FilterAppliersRegistryTest extends TestCase
     /**
      * @return array<array-key, array<array-key, mixed>>
      */
-    public function provideValidEmptyValues(): array
+    public static function provideValidEmptyValues(): array
     {
         return [
             'int(0)' => [0],

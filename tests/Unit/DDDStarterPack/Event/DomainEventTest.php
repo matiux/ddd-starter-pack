@@ -16,7 +16,7 @@ class DomainEventTest extends TestCase
     /**
      * @test
      */
-    public function name(): void
+    public function it_shoud_serialize_event(): void
     {
         $eventId = EventId::new();
         $aggregateId = AggregateId::new();

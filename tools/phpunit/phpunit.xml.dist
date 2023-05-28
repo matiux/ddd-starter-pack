@@ -1,23 +1,25 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <phpunit xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-         xsi:noNamespaceSchemaLocation="https://schema.phpunit.de/9.5/phpunit.xsd"
+         xsi:noNamespaceSchemaLocation="https://schema.phpunit.de/10.1/phpunit.xsd"
          backupGlobals="false"
          colors="true"
          bootstrap="../../vendor/autoload.php"
-         convertErrorsToExceptions="true"
-         convertNoticesToExceptions="true"
-         convertWarningsToExceptions="true"
-         processIsolation="false"
-         stopOnFailure="true">
+         stopOnFailure="true"
+         stopOnError="true"
+         displayDetailsOnTestsThatTriggerWarnings="true"
+         stopOnWarning="true"
+         failOnWarning="true"
+>
 
-    <coverage processUncoveredFiles="true">
+
+    <source>
         <include>
             <directory suffix=".php">../../src</directory>
         </include>
         <exclude>
             <directory>../../src/Matiux/DDDStarterPack/Message/Infrastructure/RabbitMQ</directory>
         </exclude>
-    </coverage>
+    </source>
 
     <php>
         <ini name="error_reporting" value="-1"/>

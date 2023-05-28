@@ -16,7 +16,7 @@ class DoctrineGenericPaginationApplierTest extends TestCase
     /**
      * @return array<array-key, array<array-key, int>>
      */
-    public function paginationDataProvider(): array
+    public static function paginationDataProvider(): array
     {
         return [
             [1, 10, 0],
