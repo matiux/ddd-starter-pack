@@ -18,7 +18,13 @@ abstract readonly class DomainEvent
         public DomainTrace $domainTrace,
         public DateTimeRFC $occurredAt,
     ) {
-        $this->eventName = (new \ReflectionClass($this))->getShortName();
+        $this->eventName = strtolower(
+            preg_replace(
+                '/(?<!^)[A-Z]/',
+                '_$0',
+                (new \ReflectionClass($this))->getShortName(),
+            ),
+        );
     }
 
     public function serialize(): array
@@ -26,7 +32,7 @@ abstract readonly class DomainEvent
         return [
             'event_id' => $this->eventId->value(),
             'aggregate_id' => $this->aggregateId->value(),
-            'event_data' => $this->serializeEventData(),
+            'event_payload' => $this->serializeEventPayload(),
             'domain_trace' => [
                 'correlation_id' => $this->domainTrace->correlationId,
                 'causation_id' => $this->domainTrace->causationId,
@@ -35,5 +41,5 @@ abstract readonly class DomainEvent
         ];
     }
 
-    abstract protected function serializeEventData(): array;
+    abstract protected function serializeEventPayload(): array;
 }

@@ -34,7 +34,7 @@ class DomainEventTest extends TestCase
         $expectedSerializedEvent = [
             'event_id' => $eventId->value(),
             'aggregate_id' => $aggregateId->value(),
-            'event_data' => [
+            'event_payload' => [
                 'name' => 'Matiux',
             ],
             'domain_trace' => [
@@ -45,6 +45,7 @@ class DomainEventTest extends TestCase
         ];
 
         self::assertEquals($expectedSerializedEvent, $event->serialize());
+        self::assertEquals('something_happened', $event->eventName);
     }
 }
 
@@ -55,12 +56,12 @@ readonly class SomethingHappened extends DomainEvent
         AggregateId $aggregateId,
         DomainTrace $domainTrace,
         DateTimeRFC $occurredAt,
-        private string $name,
+        public string $name,
     ) {
         parent::__construct($eventId, $aggregateId, $domainTrace, $occurredAt);
     }
 
-    protected function serializeEventData(): array
+    protected function serializeEventPayload(): array
     {
         return [
             'name' => $this->name,

@@ -18,6 +18,12 @@ abstract readonly class Command
         public DomainTrace $domainTrace,
         public DateTimeRFC $occurredAt,
     ) {
-        $this->commandName = (new \ReflectionClass($this))->getShortName();
+        $this->commandName = strtolower(
+            preg_replace(
+                '/(?<!^)[A-Z]/',
+                '_$0',
+                (new \ReflectionClass($this))->getShortName(),
+            ),
+        );
     }
 }
