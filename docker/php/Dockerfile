@@ -1,4 +1,4 @@
-FROM matiux/php:fpm-8.0-bullseye-dev
+FROM matiux/php:fpm-8.2-bullseye-dev
 
 USER root
 

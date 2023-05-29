@@ -4,8 +4,8 @@ declare(strict_types=1);
 
 namespace Tests\Support\Model;
 
-use DDDStarterPack\Aggregate\Domain\Identifier\UuidV4EntityId;
+use DDDStarterPack\Identity\UuidV4;
 
-class PersonId extends UuidV4EntityId
+readonly class PersonId extends UuidV4
 {
 }
