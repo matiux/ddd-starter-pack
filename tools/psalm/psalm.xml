@@ -5,7 +5,7 @@
         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
         xmlns="https://getpsalm.org/schema/config"
         xsi:schemaLocation="https://getpsalm.org/schema/config ../../vendor/vimeo/psalm/config.xsd"
-        phpVersion="8.0"
+        phpVersion="8.2"
         findUnusedCode="false"
         findUnusedBaselineEntry="true"
 
@@ -15,7 +15,7 @@
         <directory name="../../tests"/>
         <ignoreFiles>
             <directory name="../../vendor"/>
-            <directory name="../../src/Matiux/DDDStarterPack/Message/Infrastructure/Driver/RabbitMQ"/>
+            <directory name="../../src/Matiux/DDDStarterPack/Message/Driver/RabbitMQ"/>
         </ignoreFiles>
     </projectFiles>
     <plugins>
@@ -25,6 +25,12 @@
     </plugins>
 
     <issueHandlers>
+        <MethodSignatureMismatch>
+            <errorLevel type="suppress">
+                <file name="../../src/Matiux/DDDStarterPack/Type/DateTimeRFC.php" />
+                <file name="../../src/Matiux/DDDStarterPack/Type/Date.php" />
+            </errorLevel>
+        </MethodSignatureMismatch>
         <ParamNameMismatch errorLevel="suppress"/>
         <MissingConstructor>
             <errorLevel type="suppress">
