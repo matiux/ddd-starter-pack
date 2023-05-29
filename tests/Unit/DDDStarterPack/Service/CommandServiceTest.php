@@ -34,6 +34,9 @@ class CommandServiceTest extends TestCase
     }
 }
 
+/**
+ * @extends Command<AggregateId>
+ */
 readonly class MyCommand extends Command
 {
     public function __construct(

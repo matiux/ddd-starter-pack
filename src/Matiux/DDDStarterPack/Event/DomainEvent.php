@@ -8,14 +8,21 @@ use DDDStarterPack\Identity\AggregateId;
 use DDDStarterPack\Identity\Trace\DomainTrace;
 use DDDStarterPack\Type\DateTimeRFC;
 
+/**
+ * @template I of AggregateId
+ */
 abstract readonly class DomainEvent
 {
     public string $eventName;
 
+    /**
+     * @param I $aggregateId
+     */
     public function __construct(
         public EventId $eventId,
-        public AggregateId $aggregateId,
+        public mixed $aggregateId,
         public DomainTrace $domainTrace,
+        public DomainEventVersion $version,
         public DateTimeRFC $occurredAt,
     ) {
         $this->eventName = strtolower(
@@ -33,6 +40,7 @@ abstract readonly class DomainEvent
             'event_id' => $this->eventId->value(),
             'aggregate_id' => $this->aggregateId->value(),
             'event_payload' => $this->serializeEventPayload(),
+            'event_version' => $this->version->v,
             'domain_trace' => [
                 'correlation_id' => $this->domainTrace->correlationId,
                 'causation_id' => $this->domainTrace->causationId,

@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Tests\Unit\DDDStarterPack\Event;
 
 use DDDStarterPack\Event\DomainEvent;
+use DDDStarterPack\Event\DomainEventVersion;
 use DDDStarterPack\Event\EventId;
 use DDDStarterPack\Identity\AggregateId;
 use DDDStarterPack\Identity\Trace\DomainTrace;
@@ -42,6 +43,7 @@ class DomainEventTest extends TestCase
                 'causation_id' => $domainTrace->causationId,
             ],
             'occurred_at' => $occurredAt->value(),
+            'event_version' => 1,
         ];
 
         self::assertEquals($expectedSerializedEvent, $event->serialize());
@@ -49,6 +51,9 @@ class DomainEventTest extends TestCase
     }
 }
 
+/**
+ * @extends DomainEvent<AggregateId>
+ */
 readonly class SomethingHappened extends DomainEvent
 {
     public function __construct(
@@ -58,7 +63,13 @@ readonly class SomethingHappened extends DomainEvent
         DateTimeRFC $occurredAt,
         public string $name,
     ) {
-        parent::__construct($eventId, $aggregateId, $domainTrace, $occurredAt);
+        parent::__construct(
+            $eventId,
+            $aggregateId,
+            $domainTrace,
+            new DomainEventVersion(1),
+            $occurredAt,
+        );
     }
 
     protected function serializeEventPayload(): array
