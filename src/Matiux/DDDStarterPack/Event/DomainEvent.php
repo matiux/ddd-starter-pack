@@ -18,7 +18,7 @@ abstract readonly class DomainEvent
     /**
      * @param I $aggregateId
      */
-    public function __construct(
+    protected function __construct(
         public EventId $eventId,
         public mixed $aggregateId,
         public DomainTrace $domainTrace,
@@ -42,12 +42,14 @@ abstract readonly class DomainEvent
             'event_payload' => $this->serializeEventPayload(),
             'event_version' => $this->version->v,
             'domain_trace' => [
-                'correlation_id' => $this->domainTrace->correlationId,
-                'causation_id' => $this->domainTrace->causationId,
+                'correlation_id' => $this->domainTrace->correlationId->value(),
+                'causation_id' => $this->domainTrace->causationId->value(),
             ],
             'occurred_at' => $this->occurredAt->value(),
         ];
     }
 
     abstract protected function serializeEventPayload(): array;
+
+    abstract public function enrich(EnrichOptions $enrichOptions): self;
 }
