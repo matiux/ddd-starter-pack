@@ -8,15 +8,21 @@ use DDDStarterPack\Identity\AggregateId;
 use DDDStarterPack\Identity\Trace\DomainTrace;
 use DDDStarterPack\Type\DateTimeRFC;
 
+/**
+ * @template I of AggregateId
+ */
 abstract readonly class Command
 {
     public string $commandName;
 
+    /**
+     * @param I $aggregateId
+     */
     public function __construct(
         public CommandId $commandId,
-        public AggregateId $aggregateId,
+        public mixed $aggregateId,
         public DomainTrace $domainTrace,
-        public DateTimeRFC $occurredAt,
+        public DateTimeRFC $operationDate,
     ) {
         $this->commandName = strtolower(
             preg_replace(

@@ -30,6 +30,10 @@ class CommandTest extends TestCase
         self::assertEquals('create_user_command', $command->commandName);
     }
 }
+
+/**
+ * @extends Command<AggregateId>
+ */
 readonly class CreateUserCommand extends Command
 {
 }
