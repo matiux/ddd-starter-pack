@@ -9,7 +9,7 @@ use DDDStarterPack\Event\EventId;
 
 final readonly class DomainTrace
 {
-    public function __construct(
+    private function __construct(
         public CorrelationId $correlationId,
         public CausationId $causationId,
     ) {
@@ -17,11 +17,16 @@ final readonly class DomainTrace
 
     public static function init(EventId|CommandId $id): self
     {
-        return new self(CorrelationId::from($id->value()), CausationId::from($id->value()));
+        return self::fromIds(CorrelationId::from($id->value()), CausationId::from($id->value()));
     }
 
-    public static function createFrom(DomainTrace $domainTrace, EventId|CommandId $id): self
+    public static function from(DomainTrace $domainTrace, EventId|CommandId $id): self
     {
         return new self($domainTrace->correlationId, CausationId::from($id->value()));
+    }
+
+    public static function fromIds(CorrelationId $correlationId, CausationId $causationId): self
+    {
+        return new self($correlationId, $causationId);
     }
 }

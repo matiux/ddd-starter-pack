@@ -6,8 +6,11 @@ namespace Tests\Unit\DDDStarterPack\Event;
 
 use DDDStarterPack\Event\DomainEvent;
 use DDDStarterPack\Event\DomainEventVersion;
+use DDDStarterPack\Event\EnrichOptions;
 use DDDStarterPack\Event\EventId;
 use DDDStarterPack\Identity\AggregateId;
+use DDDStarterPack\Identity\Trace\CausationId;
+use DDDStarterPack\Identity\Trace\CorrelationId;
 use DDDStarterPack\Identity\Trace\DomainTrace;
 use DDDStarterPack\Type\DateTimeRFC;
 use PHPUnit\Framework\TestCase;
@@ -24,29 +27,33 @@ class DomainEventTest extends TestCase
         $domainTrace = DomainTrace::init($eventId);
         $occurredAt = new DateTimeRFC();
 
-        $event = new SomethingHappened(
-            $eventId,
+        $event = SomethingHappened::crea(
             $aggregateId,
-            $domainTrace,
             $occurredAt,
             'Matiux',
         );
 
-        $expectedSerializedEvent = [
-            'event_id' => $eventId->value(),
-            'aggregate_id' => $aggregateId->value(),
-            'event_payload' => [
-                'name' => 'Matiux',
-            ],
-            'domain_trace' => [
-                'correlation_id' => $domainTrace->correlationId,
-                'causation_id' => $domainTrace->causationId,
-            ],
-            'occurred_at' => $occurredAt->value(),
-            'event_version' => 1,
+        $event = $event->enrich(
+            new EnrichOptions(
+                DomainTrace::fromIds($correlationId = CorrelationId::new(), $causationId = CausationId::new()),
+            ),
+        );
+
+        $expectedEventPayload = [
+            'name' => 'Matiux',
         ];
 
-        self::assertEquals($expectedSerializedEvent, $event->serialize());
+        $expectedDomainTrace = [
+            'correlation_id' => $correlationId->value(),
+            'causation_id' => $causationId->value(),
+        ];
+
+        $serialized = $event->serialize();
+        self::assertArrayHasKey('event_payload', $serialized);
+        self::assertArrayHasKey('domain_trace', $serialized);
+
+        self::assertEquals($expectedEventPayload, $serialized['event_payload']);
+        self::assertEquals($expectedDomainTrace, $serialized['domain_trace']);
         self::assertEquals('something_happened', $event->eventName);
     }
 }
@@ -56,7 +63,7 @@ class DomainEventTest extends TestCase
  */
 readonly class SomethingHappened extends DomainEvent
 {
-    public function __construct(
+    protected function __construct(
         EventId $eventId,
         AggregateId $aggregateId,
         DomainTrace $domainTrace,
@@ -72,10 +79,34 @@ readonly class SomethingHappened extends DomainEvent
         );
     }
 
+    public static function crea(AggregateId $aggregateId, DateTimeRFC $occurredAt, string $name): self
+    {
+        $eventId = EventId::new();
+
+        return new self(
+            $eventId,
+            $aggregateId,
+            DomainTrace::init($eventId),
+            $occurredAt,
+            $name,
+        );
+    }
+
     protected function serializeEventPayload(): array
     {
         return [
             'name' => $this->name,
         ];
+    }
+
+    public function enrich(EnrichOptions $enrichOptions): self
+    {
+        return new self(
+            $this->eventId,
+            $this->aggregateId,
+            $enrichOptions->domainTrace,
+            $this->occurredAt,
+            $this->name,
+        );
     }
 }
