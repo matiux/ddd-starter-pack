@@ -8,7 +8,7 @@ use DDDStarterPack\Identity\Trace\DomainTrace;
 
 readonly class EnrichOptions
 {
-    public function __construct(public DomainTrace $domainTrace)
+    public function __construct(public DomainTrace $domainTrace, public null|EventId $eventId = null)
     {
     }
 }
