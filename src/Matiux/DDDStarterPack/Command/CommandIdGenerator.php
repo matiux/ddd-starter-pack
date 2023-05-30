@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace DDDStarterPack\Command;
 
-interface CommaindIdGenerator
+interface CommandIdGenerator
 {
     public function generate(): CommandId;
 }
