@@ -4,8 +4,8 @@ declare(strict_types=1);
 
 namespace DDDStarterPack\Event;
 
-use DDDStarterPack\Identity\AggregateId;
+use DDDStarterPack\Identity\UuidV4;
 
-readonly class EventId extends AggregateId
+readonly class EventId extends UuidV4
 {
 }
