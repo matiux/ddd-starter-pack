@@ -20,9 +20,9 @@ final readonly class DomainTrace
         return self::fromIds(CorrelationId::from($id->value()), CausationId::from($id->value()));
     }
 
-    public static function from(DomainTrace $domainTrace, EventId|CommandId $id): self
+    public static function from(DomainTrace $domainTraceForCorrelation, EventId|CommandId $causation): self
     {
-        return new self($domainTrace->correlationId, CausationId::from($id->value()));
+        return new self($domainTraceForCorrelation->correlationId, CausationId::from($causation->value()));
     }
 
     public static function fromIds(CorrelationId $correlationId, CausationId $causationId): self
