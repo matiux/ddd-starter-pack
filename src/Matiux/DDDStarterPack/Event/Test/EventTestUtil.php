@@ -8,11 +8,16 @@ trait EventTestUtil
 {
     public static function assertIsDomainEventSerialized(array $serialized): void
     {
-        self::assertArrayHasKey('event_id', $serialized);
-        self::assertArrayHasKey('occurred_at', $serialized);
         self::assertArrayHasKey('aggregate_id', $serialized);
+        self::assertArrayHasKey('occurred_at', $serialized);
         self::assertArrayHasKey('event_payload', $serialized);
-        self::assertArrayHasKey('event_version', $serialized);
-        self::assertArrayHasKey('domain_trace', $serialized);
+
+        self::assertArrayHasKey('meta', $serialized);
+
+        $meta = $serialized['meta'];
+
+        self::assertArrayHasKey('event_id', $meta);
+        self::assertArrayHasKey('event_version', $meta);
+        self::assertArrayHasKey('domain_trace', $meta);
     }
 }

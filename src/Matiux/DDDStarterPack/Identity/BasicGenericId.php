@@ -9,7 +9,7 @@ namespace DDDStarterPack\Identity;
  *
  * @implements GenericId<T>
  */
-abstract readonly class BasicGenericId implements GenericId
+abstract readonly class BasicGenericId implements GenericId, \JsonSerializable
 {
     /**
      * @param T $id
@@ -34,5 +34,13 @@ abstract readonly class BasicGenericId implements GenericId
     public function __toString(): string
     {
         return (string) $this->value();
+    }
+
+    /**
+     * @return T
+     */
+    public function jsonSerialize(): mixed
+    {
+        return $this->id;
     }
 }

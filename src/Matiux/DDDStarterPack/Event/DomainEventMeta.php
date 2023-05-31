@@ -6,10 +6,12 @@ namespace DDDStarterPack\Event;
 
 use DDDStarterPack\Identity\Trace\DomainTrace;
 
-readonly class EnrichOptions
+final readonly class DomainEventMeta
 {
     public function __construct(
+        public EventId $eventId,
         public DomainTrace $domainTrace,
+        public DomainEventVersion $version,
     ) {
     }
 }
