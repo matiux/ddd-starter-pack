@@ -87,7 +87,7 @@ abstract readonly class DomainEvent
     protected function enrichedDomainEventMeta(EnrichOptions $enrichOptions): DomainEventMeta
     {
         return new DomainEventMeta(
-            $this->meta->eventId,
+            $enrichOptions->eventId ?? $this->meta->eventId,
             $enrichOptions->domainTrace,
             $this->meta->version,
         );
