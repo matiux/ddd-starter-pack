@@ -14,11 +14,11 @@ use DDDStarterPack\Type\DateTimeRFC;
  * @template-covariant I of AggregateId
  *
  * @psalm-type SerializedDomainEvent = array{
+ *   event_name: string,
  *   aggregate_id: string,
  *   event_payload: array,
  *   occurred_at: string,
  *   meta: array{
- *      event_name: string,
  *      event_id: string,
  *      event_version: int,
  *      domain_trace: array{correlation_id: string, causation_id: string}
@@ -50,11 +50,11 @@ abstract readonly class DomainEvent
     public function serialize(): array
     {
         return [
+            'event_name' => $this->eventName,
             'aggregate_id' => $this->aggregateId->value(),
             'event_payload' => $this->serializeEventPayload(),
             'occurred_at' => $this->occurredAt->value(),
             'meta' => [
-                'event_name' => $this->eventName,
                 'event_id' => $this->meta->eventId->value(),
                 'event_version' => $this->meta->version->v,
                 'domain_trace' => [

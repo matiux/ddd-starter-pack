@@ -14,4 +14,14 @@ final readonly class DomainEventMeta
         public DomainEventVersion $version,
     ) {
     }
+
+    public function toArray(): array
+    {
+        return [
+            'event_id' => $this->eventId->value(),
+            'correlation_id' => $this->domainTrace->correlationId->value(),
+            'causation_id' => $this->domainTrace->causationId->value(),
+            'event_version' => $this->version->v,
+        ];
+    }
 }
