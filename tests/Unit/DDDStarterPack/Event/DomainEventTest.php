@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Tests\Unit\DDDStarterPack\Event;
 
 use DDDStarterPack\Event\DomainEvent;
+use DDDStarterPack\Event\DomainEventMeta;
 use DDDStarterPack\Event\DomainEventVersion;
 use DDDStarterPack\Event\EnrichOptions;
 use DDDStarterPack\Event\EventId;
@@ -22,9 +23,7 @@ class DomainEventTest extends TestCase
      */
     public function it_shoud_serialize_event(): void
     {
-        $eventId = EventId::new();
         $aggregateId = AggregateId::new();
-        $domainTrace = DomainTrace::init($eventId);
         $occurredAt = new DateTimeRFC();
 
         $event = SomethingHappened::crea(
@@ -50,33 +49,50 @@ class DomainEventTest extends TestCase
 
         $serialized = $event->serialize();
         self::assertArrayHasKey('event_payload', $serialized);
-        self::assertArrayHasKey('domain_trace', $serialized);
+        self::assertArrayHasKey('meta', $serialized);
+
+        $meta = $serialized['meta'];
 
         self::assertEquals($expectedEventPayload, $serialized['event_payload']);
-        self::assertEquals($expectedDomainTrace, $serialized['domain_trace']);
+        self::assertEquals($expectedDomainTrace, $meta['domain_trace']);
         self::assertEquals('something_happened', $event->eventName);
+    }
+
+    /**
+     * @test
+     */
+    public function it_should_deserialize(): void
+    {
+        $aggregateId = AggregateId::new();
+        $occurredAt = new DateTimeRFC();
+
+        $serializedEvent = SomethingHappened::crea(
+            $aggregateId,
+            $occurredAt,
+            'Matiux',
+        )->serialize();
+
+        $event = SomethingHappened::deserialize($serializedEvent);
+
+        self::assertTrue($event->aggregateId->equals($aggregateId));
+        self::assertEquals($occurredAt, $event->occurredAt);
     }
 }
 
 /**
+ * @psalm-import-type SerializedDomainEvent from DomainEvent
+ *
  * @extends DomainEvent<AggregateId>
  */
 readonly class SomethingHappened extends DomainEvent
 {
     protected function __construct(
-        EventId $eventId,
         AggregateId $aggregateId,
-        DomainTrace $domainTrace,
         DateTimeRFC $occurredAt,
+        DomainEventMeta $domainEventMeta,
         public string $name,
     ) {
-        parent::__construct(
-            $eventId,
-            $aggregateId,
-            $domainTrace,
-            new DomainEventVersion(1),
-            $occurredAt,
-        );
+        parent::__construct($aggregateId, $occurredAt, $domainEventMeta);
     }
 
     public static function crea(AggregateId $aggregateId, DateTimeRFC $occurredAt, string $name): self
@@ -84,11 +100,25 @@ readonly class SomethingHappened extends DomainEvent
         $eventId = EventId::new();
 
         return new self(
-            $eventId,
             $aggregateId,
-            DomainTrace::init($eventId),
             $occurredAt,
+            new DomainEventMeta($eventId, DomainTrace::init($eventId), new DomainEventVersion(1)),
             $name,
+        );
+    }
+
+    /**
+     * @param SerializedDomainEvent $data
+     *
+     * @throws \Exception
+     */
+    public static function deserialize(array $data): self
+    {
+        return new self(
+            AggregateId::from($data['aggregate_id']),
+            DateTimeRFC::createFrom($data['occurred_at']),
+            self::deserializeMeta($data['meta']),
+            (string) $data['event_payload']['name'],
         );
     }
 
@@ -102,10 +132,9 @@ readonly class SomethingHappened extends DomainEvent
     public function enrich(EnrichOptions $enrichOptions): self
     {
         return new self(
-            $this->eventId,
             $this->aggregateId,
-            $enrichOptions->domainTrace,
             $this->occurredAt,
+            $this->enrichedDomainEventMeta($enrichOptions),
             $this->name,
         );
     }
