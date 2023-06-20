@@ -13,6 +13,7 @@ class InMemoryMessage implements Message
         private null|\DateTimeImmutable $occurredAt,
         private null|string $type = null,
         private null|string $id = null,
+        private array $extra = [],
     ) {
     }
 
@@ -44,5 +45,10 @@ class InMemoryMessage implements Message
     public function occurredAt(): \DateTimeImmutable|null
     {
         return $this->occurredAt;
+    }
+
+    public function extra(): array
+    {
+        return $this->extra;
     }
 }

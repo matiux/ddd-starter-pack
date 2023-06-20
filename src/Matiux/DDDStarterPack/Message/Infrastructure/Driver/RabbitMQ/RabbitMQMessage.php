@@ -14,6 +14,7 @@ class RabbitMQMessage implements Message
         private null|\DateTimeImmutable $occurredAt = null,
         private null|string $type = null,
         private $id = null,
+        private array $extra = [],
     ) {
     }
 
@@ -40,5 +41,10 @@ class RabbitMQMessage implements Message
     public function id(): mixed
     {
         return $this->id;
+    }
+
+    public function extra(): array
+    {
+        return $this->extra;
     }
 }

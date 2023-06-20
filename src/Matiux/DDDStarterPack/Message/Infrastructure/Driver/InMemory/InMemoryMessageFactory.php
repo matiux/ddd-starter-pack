@@ -24,6 +24,7 @@ class InMemoryMessageFactory implements MessageFactory
             occurredAt: $occurredAt,
             type: $type,
             id: $id,
+            extra: $extra,
         );
     }
 }
