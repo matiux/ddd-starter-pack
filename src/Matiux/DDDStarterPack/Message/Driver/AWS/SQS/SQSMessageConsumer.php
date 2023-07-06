@@ -59,7 +59,7 @@ class SQSMessageConsumer extends BasicMessageService implements MessageConsumerC
         Assert::isArray($response['Messages']);
         $message = (array) $response['Messages'][0];
 
-        [$body, $messageAttributes] = $this->parseMessage($message);
+        [$body, $messageAttributes, $attributes] = $this->parseMessage($message);
 
         $type = $this->extractType($messageAttributes);
         $occurredAt = $this->extractOccurredAt($messageAttributes);
@@ -69,14 +69,17 @@ class SQSMessageConsumer extends BasicMessageService implements MessageConsumerC
             occurredAt: $occurredAt,
             type: $type,
             id: (string) $message['ReceiptHandle'],
-            extra: ['MessageAttributes' => $messageAttributes],
+            extra: [
+                'MessageAttributes' => $messageAttributes,
+                'Attributes' => $attributes,
+            ],
         );
     }
 
     /**
      * @param array $message
      *
-     * @return array{0: string, 1: array}
+     * @return array{0: string, 1: array, 2: array}
      */
     private function parseMessage(array $message): array
     {
@@ -92,7 +95,9 @@ class SQSMessageConsumer extends BasicMessageService implements MessageConsumerC
 
         $messageAttributes = $this->prepareMessageAttributes($messageAttributes);
 
-        return [$body, $messageAttributes];
+        $attributes = (array) ($message['Attributes'] ?? []);
+
+        return [$body, $messageAttributes, $attributes];
     }
 
     private function isSnsRawMessageDeliveryEnabled(array $originalBody): bool

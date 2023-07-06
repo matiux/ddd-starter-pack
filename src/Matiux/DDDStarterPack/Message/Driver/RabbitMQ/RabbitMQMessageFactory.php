@@ -20,11 +20,11 @@ class RabbitMQMessageFactory implements MessageFactory
         null|string $exchangeName = null,
     ) {
         return new RabbitMQMessage(
-            $body,
-            $id,
-            $id,
-            $occurredAt,
-            $type,
+            body: $body,
+            occurredAt: $occurredAt,
+            type: $type,
+            id: $id,
+            extra: $extra,
         );
     }
 }

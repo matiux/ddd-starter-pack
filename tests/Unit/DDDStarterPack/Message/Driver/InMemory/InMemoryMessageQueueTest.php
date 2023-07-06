@@ -41,6 +41,7 @@ class InMemoryMessageQueueTest extends TestCase
             occurredAt: $occurredAt,
             type: 'MyType',
             id: '123',
+            extra: ['Key1' => 'Value1'],
         );
 
         $response = $this->producer->send($message);
@@ -57,6 +58,7 @@ class InMemoryMessageQueueTest extends TestCase
         self::assertSame('MyType', $consumedMessage->type());
         self::assertSame($occurredAt, $consumedMessage->occurredAt());
         self::assertSame('123', $consumedMessage->id());
+        self::assertSame($message->extra(), $consumedMessage->extra());
 
         self::assertInstanceOf(InMemoryMessage::class, $consumedMessage);
         $body = json_decode($consumedMessage->body(), true);
