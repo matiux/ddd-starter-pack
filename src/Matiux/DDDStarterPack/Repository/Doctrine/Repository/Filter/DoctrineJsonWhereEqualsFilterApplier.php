@@ -6,7 +6,7 @@ namespace DDDStarterPack\Repository\Doctrine\Repository\Filter;
 
 use DDDStarterPack\Repository\Filter\FilterAppliersRegistry;
 
-abstract class DoctrineJsonWhereLikeFilterApplier extends DoctrineFilterApplier
+abstract class DoctrineJsonWhereEqualsFilterApplier extends DoctrineFilterApplier
 {
     public function applyTo($target, FilterAppliersRegistry $appliersRegistry): void
     {
@@ -20,7 +20,7 @@ abstract class DoctrineJsonWhereLikeFilterApplier extends DoctrineFilterApplier
                 $alias = $this->getModelAlias();
 
                 $target->andWhere("JSON_SEARCH({$alias}.{$conf['column']}, 'one', :{$key}, NULL, '{$conf['path']}') IS NOT NULL")
-                    ->setParameter($key, "%{$val}%");
+                    ->setParameter($key, $val);
             }
         }
     }

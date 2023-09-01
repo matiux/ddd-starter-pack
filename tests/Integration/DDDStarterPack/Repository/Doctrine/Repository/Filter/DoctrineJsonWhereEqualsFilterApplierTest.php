@@ -4,14 +4,14 @@ declare(strict_types=1);
 
 namespace Tests\Integration\DDDStarterPack\Repository\Doctrine\Repository\Filter;
 
-use DDDStarterPack\Repository\Doctrine\Repository\Filter\DoctrineJsonWhereLikeFilterApplier;
+use DDDStarterPack\Repository\Doctrine\Repository\Filter\DoctrineJsonWhereEqualsFilterApplier;
 use DDDStarterPack\Repository\Filter\FilterAppliersRegistryBuilder;
 use DDDStarterPack\Repository\Test\DoctrineUtil;
 use PHPUnit\Framework\TestCase;
 use Tests\Support\Model\Person;
 use Tests\Tool\EntityManagerBuilder;
 
-class DoctrineJsonWhereLikeFilterApplierTest extends TestCase
+class DoctrineJsonWhereEqualsFilterApplierTest extends TestCase
 {
     /**
      * @test
@@ -22,7 +22,7 @@ class DoctrineJsonWhereLikeFilterApplierTest extends TestCase
         $registryBuilder = new FilterAppliersRegistryBuilder();
         $appliersRegistry = $registryBuilder->build($requestedFilters);
 
-        $applier = new DoctrinePersonJsonWhereLikeFilterApplier();
+        $applier = new DoctrinePersonJsonWhereEqualsFilterApplier();
         self::assertTrue($applier->supports($appliersRegistry));
     }
 
@@ -35,7 +35,7 @@ class DoctrineJsonWhereLikeFilterApplierTest extends TestCase
         $registryBuilder = new FilterAppliersRegistryBuilder();
         $appliersRegistry = $registryBuilder->build($requestedFilters);
 
-        $applier = new DoctrinePersonJsonWhereLikeFilterApplier();
+        $applier = new DoctrinePersonJsonWhereEqualsFilterApplier();
         self::assertFalse($applier->supports($appliersRegistry));
     }
 
@@ -44,12 +44,12 @@ class DoctrineJsonWhereLikeFilterApplierTest extends TestCase
      *
      * @test
      */
-    public function it_should_apply_where_like_filters(): void
+    public function it_should_apply_where_equals_filters(): void
     {
         $requestedFilters = ['address' => 'connell', 'vat' => '56789'];
         $registryBuilder = new FilterAppliersRegistryBuilder();
         $appliersRegistry = $registryBuilder->build($requestedFilters);
-        $applier = new DoctrinePersonJsonWhereLikeFilterApplier();
+        $applier = new DoctrinePersonJsonWhereEqualsFilterApplier();
 
         $em = EntityManagerBuilder::create()->getEntityManager();
         $qb = $em->createQueryBuilder();
@@ -67,10 +67,10 @@ class DoctrineJsonWhereLikeFilterApplierTest extends TestCase
         DoctrineUtil::assertDQLEquals($expected, $actual);
 
         $addressValue = $qb->getQuery()->getParameters()->getIterator()->offsetGet(0)->getValue();
-        self::assertEquals('%connell%', $addressValue);
+        self::assertEquals('connell', $addressValue);
 
         $vatValue = $qb->getQuery()->getParameters()->getIterator()->offsetGet(1)->getValue();
-        self::assertEquals('%56789%', $vatValue);
+        self::assertEquals('56789', $vatValue);
     }
 
     /**
@@ -81,12 +81,12 @@ class DoctrineJsonWhereLikeFilterApplierTest extends TestCase
     public function it_should_throw_an_exception_if_the_filter_value_is_not_valid(): void
     {
         self::expectException(\InvalidArgumentException::class);
-        self::expectExceptionMessage('When using the WhereLike applier, the filter value must be an integer, float, or string. [key: address - val type: array - val: ["foo"]]');
+        self::expectExceptionMessage('When using the WhereEquals applier, the filter value must be an integer, float, or string. [key: address - val type: array - val: ["foo"]]');
 
         $requestedFilters = ['address' => ['foo']];
         $registryBuilder = new FilterAppliersRegistryBuilder();
         $appliersRegistry = $registryBuilder->build($requestedFilters);
-        $applier = new DoctrinePersonJsonWhereLikeFilterApplier();
+        $applier = new DoctrinePersonJsonWhereEqualsFilterApplier();
 
         $em = EntityManagerBuilder::create()->getEntityManager();
         $qb = $em->createQueryBuilder();
@@ -96,7 +96,7 @@ class DoctrineJsonWhereLikeFilterApplierTest extends TestCase
     }
 }
 
-class DoctrinePersonJsonWhereLikeFilterApplier extends DoctrineJsonWhereLikeFilterApplier
+class DoctrinePersonJsonWhereEqualsFilterApplier extends DoctrineJsonWhereEqualsFilterApplier
 {
     protected function getModelAlias(): string
     {
