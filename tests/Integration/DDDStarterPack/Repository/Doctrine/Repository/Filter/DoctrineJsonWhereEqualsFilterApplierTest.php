@@ -81,7 +81,7 @@ class DoctrineJsonWhereEqualsFilterApplierTest extends TestCase
     public function it_should_throw_an_exception_if_the_filter_value_is_not_valid(): void
     {
         self::expectException(\InvalidArgumentException::class);
-        self::expectExceptionMessage('When using the WhereEquals applier, the filter value must be an integer, float, or string. [key: address - val type: array - val: ["foo"]]');
+        self::expectExceptionMessage('When using the JsonWhereEquals applier, the filter value must be an integer, float, or string. [key: address - val type: array - val: ["foo"]]');
 
         $requestedFilters = ['address' => ['foo']];
         $registryBuilder = new FilterAppliersRegistryBuilder();
