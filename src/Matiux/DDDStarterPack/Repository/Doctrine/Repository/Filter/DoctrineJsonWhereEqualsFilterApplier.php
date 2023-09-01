@@ -50,7 +50,7 @@ abstract class DoctrineJsonWhereEqualsFilterApplier extends DoctrineFilterApplie
 
         throw new \InvalidArgumentException(
             sprintf(
-                'When using the WhereLike applier, the filter value must be an integer, float, or string. [key: %s - val type: %s - val: %s]',
+                'When using the JsonWhereEquals applier, the filter value must be an integer, float, or string. [key: %s - val type: %s - val: %s]',
                 $key,
                 gettype($val),
                 is_array($val) ? json_encode($val) : (string) $val,
