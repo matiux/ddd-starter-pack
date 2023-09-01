@@ -58,7 +58,7 @@ class DoctrineJsonWhereLikeFilterApplierTest extends TestCase
         $applier->applyTo($qb, $appliersRegistry);
 
         $expected = sprintf(
-            "SELECT p FROM %s p WHERE JSON_SEARCH(p.data, 'all', :address, NULL, '$[*].address') IS NOT NULL AND JSON_SEARCH(p.data, 'all', :vat, NULL, '$[*].general.vat') IS NOT NULL",
+            "SELECT p FROM %s p WHERE JSON_SEARCH(p.data, 'one', :address, NULL, '$[*].address') IS NOT NULL AND JSON_SEARCH(p.data, 'one', :vat, NULL, '$[*].general.vat') IS NOT NULL",
             Person::class,
         );
 

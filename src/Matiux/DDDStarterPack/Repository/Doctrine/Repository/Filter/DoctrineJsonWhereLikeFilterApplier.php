@@ -19,7 +19,7 @@ abstract class DoctrineJsonWhereLikeFilterApplier extends DoctrineFilterApplier
 
                 $alias = $this->getModelAlias();
 
-                $target->andWhere("JSON_SEARCH({$alias}.{$conf['column']}, 'all', :{$key}, NULL, '{$conf['path']}') IS NOT NULL")
+                $target->andWhere("JSON_SEARCH({$alias}.{$conf['column']}, 'one', :{$key}, NULL, '{$conf['path']}') IS NOT NULL")
                     ->setParameter($key, "%{$val}%");
             }
         }
