@@ -13,17 +13,19 @@ use DDDStarterPack\Type\DateTimeRFC;
 /**
  * @template-covariant I of AggregateId
  *
+ * @psalm-type SerializedMeta = array{
+ *   event_id: string,
+ *   event_version: int,
+ *   context: null|string,
+ *   domain_trace: array{correlation_id: string, causation_id: string}
+ * }
  * @psalm-type SerializedDomainEvent = array{
  *   event_name: string,
  *   aggregate_id: string,
  *   event_payload: array,
  *   occurred_at: string,
- *   meta: array{
- *      event_id: string,
- *      event_version: int,
- *      domain_trace: array{correlation_id: string, causation_id: string}
- *   }
- *  }
+ *   meta: SerializedMeta
+ * }
  */
 abstract readonly class DomainEvent
 {
@@ -57,6 +59,7 @@ abstract readonly class DomainEvent
             'meta' => [
                 'event_id' => $this->meta->eventId->value(),
                 'event_version' => $this->meta->version->v,
+                'context' => $this->meta->context(),
                 'domain_trace' => [
                     'correlation_id' => $this->meta->domainTrace->correlationId->value(),
                     'causation_id' => $this->meta->domainTrace->causationId->value(),
@@ -65,11 +68,17 @@ abstract readonly class DomainEvent
         ];
     }
 
+    /**
+     * @param SerializedMeta $meta
+     *
+     * @return DomainEventMeta
+     */
     protected static function deserializeMeta(array $meta): DomainEventMeta
     {
         /** @var string[] $domainTrace */
         $domainTrace = $meta['domain_trace'];
 
+        /** @psalm-suppress RedundantCastGivenDocblockType */
         return new DomainEventMeta(
             EventId::from((string) $meta['event_id']),
             DomainTrace::fromIds(
@@ -77,6 +86,7 @@ abstract readonly class DomainEvent
                 CausationId::from($domainTrace['causation_id']),
             ),
             new DomainEventVersion((int) $meta['event_version']),
+            $meta['context'],
         );
     }
 
@@ -90,6 +100,7 @@ abstract readonly class DomainEvent
             $enrichOptions->eventId ?? $this->meta->eventId,
             $enrichOptions->domainTrace,
             $this->meta->version,
+            $enrichOptions->context ?? $this->meta->context(),
         );
     }
 }

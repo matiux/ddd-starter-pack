@@ -16,4 +16,16 @@ class EnvVarUtil
     {
         return getenv($name) ?: (string) ($_ENV[$name] ?? $default);
     }
+
+    /**
+     * @param non-empty-string $name
+     *
+     * @return null|string
+     */
+    public static function getOrNull(string $name): null|string
+    {
+        $value = getenv($name) ?: $_ENV[$name] ?? null;
+
+        return !$value ? null : (string) $value;
+    }
 }

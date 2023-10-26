@@ -28,10 +28,12 @@ class DomainEventMetaTest extends TestCase
             'correlation_id' => $eventId->value(),
             'causation_id' => $eventId->value(),
             'event_version' => 1,
+            'context' => null,
         ];
 
         $encoded = $meta->toArray();
 
         self::assertEquals($expected, $encoded);
+        self::assertNull($meta->context());
     }
 }

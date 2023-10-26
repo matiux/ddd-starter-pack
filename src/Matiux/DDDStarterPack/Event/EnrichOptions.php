@@ -11,6 +11,6 @@ readonly class EnrichOptions
     public function __construct(
         public DomainTrace $domainTrace,
         public null|EventId $eventId = null,
-    ) {
-    }
+        public null|string $context = null,
+    ) {}
 }
