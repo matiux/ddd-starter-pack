@@ -18,15 +18,22 @@ final class DomainEventMeta
         $this->context ??= EnvVarUtil::getOrNull('SERVICE_NAME');
     }
 
-    public function toArray(): array
+    public function toArray(bool $camelCase = false): array
     {
-        return [
-            'event_id' => $this->eventId->value(),
-            'correlation_id' => $this->domainTrace->correlationId->value(),
-            'causation_id' => $this->domainTrace->causationId->value(),
-            'event_version' => $this->version->v,
-            'context' => $this->context,
+        $camelCaseKeys = ['eventId', 'correlationId', 'causationId', 'eventVersion', 'context'];
+        $snakeCaseKeys = ['event_id', 'correlation_id', 'causation_id', 'event_version', 'context'];
+
+        $values = [
+            $this->eventId->value(),
+            $this->domainTrace->correlationId->value(),
+            $this->domainTrace->causationId->value(),
+            $this->version->v,
+            $this->context,
         ];
+
+        $keys = $camelCase ? $camelCaseKeys : $snakeCaseKeys;
+
+        return array_combine($keys, $values);
     }
 
     public function context(): null|string
