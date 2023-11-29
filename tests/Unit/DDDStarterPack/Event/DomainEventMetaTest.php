@@ -13,9 +13,30 @@ use PHPUnit\Framework\TestCase;
 class DomainEventMetaTest extends TestCase
 {
     /**
-     * @test
+     * @return array<array-key, array{0: string[], 1: bool}>
      */
-    public function it_should_encode(): void
+    public static function provideExpectedKeys(): array
+    {
+        return [
+            'snake case' => [
+                ['event_id', 'correlation_id', 'causation_id', 'event_version', 'context'],
+                false,
+            ],
+            'camel case' => [
+                ['eventId', 'correlationId', 'causationId', 'eventVersion', 'context'],
+                true,
+            ],
+        ];
+    }
+
+    /**
+     * @test
+     *
+     * @dataProvider provideExpectedKeys
+     *
+     * @param string[] $expectedKeys
+     */
+    public function it_should_encode(array $expectedKeys, bool $requestCamelCaseEncoding): void
     {
         $eventId = EventId::new();
         $domainTrace = DomainTrace::init($eventId);
@@ -23,15 +44,16 @@ class DomainEventMetaTest extends TestCase
 
         $meta = new DomainEventMeta($eventId, $domainTrace, $v);
 
-        $expected = [
-            'event_id' => $eventId->value(),
-            'correlation_id' => $eventId->value(),
-            'causation_id' => $eventId->value(),
-            'event_version' => 1,
-            'context' => null,
+        $expectedValues = [
+            $eventId->value(),
+            $eventId->value(),
+            $eventId->value(),
+            1,
+            null,
         ];
+        $expected = array_combine($expectedKeys, $expectedValues);
 
-        $encoded = $meta->toArray();
+        $encoded = $meta->toArray($requestCamelCaseEncoding);
 
         self::assertEquals($expected, $encoded);
         self::assertNull($meta->context());
