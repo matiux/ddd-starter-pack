@@ -14,13 +14,13 @@ abstract readonly class BasicGenericId implements GenericId, \JsonSerializable
     /**
      * @param T $id
      */
-    final protected function __construct(private mixed $id)
-    {
-    }
+    final protected function __construct(private mixed $id) {}
 
-    public function equals(GenericId $entityId): bool
+    public function equals(GenericId $entityId, bool $string = true): bool
     {
-        return $this == $entityId;
+        return $string ?
+            $this == $entityId :
+            $this->value() == $entityId->value();
     }
 
     /**
