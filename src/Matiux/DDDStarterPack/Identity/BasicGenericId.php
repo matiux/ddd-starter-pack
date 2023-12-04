@@ -20,7 +20,7 @@ abstract readonly class BasicGenericId implements GenericId, \JsonSerializable
 
     public function equals(GenericId $entityId): bool
     {
-        return $this->value() === $entityId->value();
+        return $this == $entityId;
     }
 
     /**
