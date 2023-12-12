@@ -15,8 +15,7 @@ class RabbitMQMessage implements Message
         private null|string $type = null,
         private $id = null,
         private array $extra = [],
-    ) {
-    }
+    ) {}
 
     public function body(): string
     {

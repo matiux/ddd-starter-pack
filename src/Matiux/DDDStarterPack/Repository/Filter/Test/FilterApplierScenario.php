@@ -21,8 +21,7 @@ class FilterApplierScenario
         private TestCase $testCase,
         private FilterAppliersRegistryBuilder $registryBuilder,
         private QueryBuilder $queryBuilder,
-    ) {
-    }
+    ) {}
 
     /**
      * @param array<string, mixed> $filters

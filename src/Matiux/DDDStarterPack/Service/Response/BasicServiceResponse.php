@@ -23,9 +23,7 @@ abstract class BasicServiceResponse implements ServiceResponse
 
     private int $code;
 
-    final protected function __construct()
-    {
-    }
+    final protected function __construct() {}
 
     /**
      * @template T of B | null

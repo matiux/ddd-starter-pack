@@ -21,8 +21,7 @@ class TransactionalService implements Service
     public function __construct(
         protected Service $service,
         protected TransactionalSession $session,
-    ) {
-    }
+    ) {}
 
     /**
      * @param I $request

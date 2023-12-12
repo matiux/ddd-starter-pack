@@ -34,6 +34,4 @@ class CommandTest extends TestCase
 /**
  * @extends Command<AggregateId>
  */
-readonly class CreateUserCommand extends Command
-{
-}
+readonly class CreateUserCommand extends Command {}

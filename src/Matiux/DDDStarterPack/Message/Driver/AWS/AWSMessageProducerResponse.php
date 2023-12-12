@@ -15,8 +15,7 @@ class AWSMessageProducerResponse implements MessageProducerResponse
     public function __construct(
         private int $sentMessages,
         private Result $originalResponse,
-    ) {
-    }
+    ) {}
 
     public function sentMessages(): int
     {

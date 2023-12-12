@@ -61,8 +61,7 @@ class Request
 {
     public function __construct(
         private array $data,
-    ) {
-    }
+    ) {}
 
     public function data(): array
     {
@@ -83,8 +82,7 @@ class AtomicallyService implements Service
     public function __construct(
         protected Repository $repoA,
         protected Repository $repoB,
-    ) {
-    }
+    ) {}
 
     public function execute($request): void
     {

@@ -8,9 +8,7 @@ use DDDStarterPack\Message\Configuration\ConfigurationBuilder;
 
 abstract class AWSConfigurationBuilder extends ConfigurationBuilder
 {
-    final public function __construct()
-    {
-    }
+    final public function __construct() {}
 
     /**
      * @param string $driverName

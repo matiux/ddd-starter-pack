@@ -14,8 +14,7 @@ class TransactionalCommandBus implements CommandBus
     public function __construct(
         protected CommandBus $commandBus,
         protected TransactionalSession $session,
-    ) {
-    }
+    ) {}
 
     public function dispatch($command): void
     {

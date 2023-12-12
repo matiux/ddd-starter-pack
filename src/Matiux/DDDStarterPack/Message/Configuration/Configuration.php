@@ -13,8 +13,7 @@ class Configuration
     private function __construct(
         private string $driverName,
         private array $params,
-    ) {
-    }
+    ) {}
 
     /**
      * @param string                    $driverName

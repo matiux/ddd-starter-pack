@@ -13,8 +13,7 @@ class FilterAppliersRegistry
     public function __construct(
         private array $filterAppliers,
         private array $requestedFilters,
-    ) {
-    }
+    ) {}
 
     /**
      * @param FilterApplier[] $filterAppliers

@@ -14,8 +14,7 @@ class InMemoryMessageProducerResponse implements MessageProducerResponse
         private bool $success,
         private mixed $originalResponse,
         private null|string $messageId = null,
-    ) {
-    }
+    ) {}
 
     public function isSuccess(): bool
     {

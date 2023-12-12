@@ -6,6 +6,4 @@ namespace DDDStarterPack\Command;
 
 use DDDStarterPack\Identity\UuidV4;
 
-readonly class CommandId extends UuidV4
-{
-}
+readonly class CommandId extends UuidV4 {}

@@ -10,8 +10,7 @@ abstract class AWSConfiguration
         private string $region,
         private null|string $accessKey = null,
         private null|string $secretKey = null,
-    ) {
-    }
+    ) {}
 
     public function region(): string
     {

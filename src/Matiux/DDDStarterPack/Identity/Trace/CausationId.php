@@ -6,6 +6,4 @@ namespace DDDStarterPack\Identity\Trace;
 
 use DDDStarterPack\Identity\UuidV4;
 
-readonly class CausationId extends UuidV4
-{
-}
+readonly class CausationId extends UuidV4 {}

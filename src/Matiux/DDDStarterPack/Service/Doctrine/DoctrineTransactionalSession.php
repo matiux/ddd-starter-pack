@@ -15,9 +15,7 @@ use Doctrine\ORM\EntityManager;
  */
 class DoctrineTransactionalSession implements TransactionalSession
 {
-    public function __construct(private EntityManager $entityManager)
-    {
-    }
+    public function __construct(private EntityManager $entityManager) {}
 
     /**
      * {@inheritDoc}
