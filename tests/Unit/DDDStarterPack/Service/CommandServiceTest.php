@@ -70,8 +70,7 @@ class MyCommandService implements CommandService
 {
     public function __construct(
         private Store $store,
-    ) {
-    }
+    ) {}
 
     /**
      * @param MyCommand $command

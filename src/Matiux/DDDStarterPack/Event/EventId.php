@@ -6,6 +6,4 @@ namespace DDDStarterPack\Event;
 
 use DDDStarterPack\Identity\UuidV4;
 
-readonly class EventId extends UuidV4
-{
-}
+readonly class EventId extends UuidV4 {}

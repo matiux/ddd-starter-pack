@@ -17,17 +17,14 @@ class InMemoryMessageProducer implements MessageProducer
 
     public function __construct(
         private InMemoryMessageQueue $messageQueue,
-    ) {
-    }
+    ) {}
 
     /**
      * @param string $exchangeName
      *
      * @codeCoverageIgnore
      */
-    public function open(string $exchangeName = ''): void
-    {
-    }
+    public function open(string $exchangeName = ''): void {}
 
     public function send($message): MessageProducerResponse
     {
@@ -47,9 +44,7 @@ class InMemoryMessageProducer implements MessageProducer
      *
      * @codeCoverageIgnore
      */
-    public function close(string $exchangeName = ''): void
-    {
-    }
+    public function close(string $exchangeName = ''): void {}
 
     /**
      * @param InMemoryMessage[] $messages

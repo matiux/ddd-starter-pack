@@ -9,6 +9,4 @@ namespace DDDStarterPack\Service;
  *
  * @extends NoRequestService<O>
  */
-interface NoRequestApplicationService extends NoRequestService
-{
-}
+interface NoRequestApplicationService extends NoRequestService {}

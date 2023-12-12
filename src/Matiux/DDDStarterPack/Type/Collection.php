@@ -101,7 +101,5 @@ class Collection implements \Iterator, \Countable
     /**
      * @param T $item
      */
-    protected function validateItem($item): void
-    {
-    }
+    protected function validateItem($item): void {}
 }

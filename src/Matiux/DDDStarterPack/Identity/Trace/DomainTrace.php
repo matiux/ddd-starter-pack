@@ -12,8 +12,7 @@ final readonly class DomainTrace
     private function __construct(
         public CorrelationId $correlationId,
         public CausationId $causationId,
-    ) {
-    }
+    ) {}
 
     public static function init(EventId|CommandId $id): self
     {

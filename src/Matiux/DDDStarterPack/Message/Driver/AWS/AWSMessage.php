@@ -14,8 +14,7 @@ class AWSMessage implements Message
         private null|string $type = null,
         private null|string $id = null,
         private array $extra = [],
-    ) {
-    }
+    ) {}
 
     /**
      * @return null|string

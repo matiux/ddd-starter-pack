@@ -6,6 +6,4 @@ namespace DDDStarterPack\Message\Exception;
 
 use DDDStarterPack\Exception\ApplicationException;
 
-class MessageInvalidException extends ApplicationException
-{
-}
+class MessageInvalidException extends ApplicationException {}

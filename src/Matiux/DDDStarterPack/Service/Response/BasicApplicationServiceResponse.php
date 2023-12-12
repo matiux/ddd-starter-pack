@@ -9,6 +9,4 @@ namespace DDDStarterPack\Service\Response;
  *
  * @extends BasicServiceResponse<T>
  */
-abstract class BasicApplicationServiceResponse extends BasicServiceResponse
-{
-}
+abstract class BasicApplicationServiceResponse extends BasicServiceResponse {}

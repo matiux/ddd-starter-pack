@@ -10,6 +10,4 @@ namespace DDDStarterPack\Service;
  *
  * @extends Service<I, O>
  */
-interface ApplicationService extends Service
-{
-}
+interface ApplicationService extends Service {}

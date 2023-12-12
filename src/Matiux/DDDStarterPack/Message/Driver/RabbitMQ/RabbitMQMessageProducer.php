@@ -34,11 +34,7 @@ class RabbitMQMessageProducer extends RabbitMQMessanger implements MessageProduc
      *
      * @return MessageProducerResponse
      */
-    public function sendBatch(array $messages): MessageProducerResponse
-    {
-    }
+    public function sendBatch(array $messages): MessageProducerResponse {}
 
-    public function getBatchLimit(): int
-    {
-    }
+    public function getBatchLimit(): int {}
 }

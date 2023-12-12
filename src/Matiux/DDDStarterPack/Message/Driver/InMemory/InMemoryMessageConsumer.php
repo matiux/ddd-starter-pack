@@ -11,8 +11,7 @@ class InMemoryMessageConsumer implements MessageConsumer
 {
     public function __construct(
         private InMemoryMessageQueue $messageQueue,
-    ) {
-    }
+    ) {}
 
     public function consume(null|string $queue = null): null|Message
     {
@@ -34,34 +33,26 @@ class InMemoryMessageConsumer implements MessageConsumer
      *
      * @codeCoverageIgnore
      */
-    public function delete(string $messageId, null|string $queue = null): void
-    {
-    }
+    public function delete(string $messageId, null|string $queue = null): void {}
 
     /**
      * @param \ArrayObject $messagesId
      *
      * @codeCoverageIgnore
      */
-    public function deleteBatch(\ArrayObject $messagesId): void
-    {
-    }
+    public function deleteBatch(\ArrayObject $messagesId): void {}
 
     /**
      * @param string $exchangeName
      *
      * @codeCoverageIgnore
      */
-    public function open(string $exchangeName = ''): void
-    {
-    }
+    public function open(string $exchangeName = ''): void {}
 
     /**
      * @param string $exchangeName
      *
      * @codeCoverageIgnore
      */
-    public function close(string $exchangeName = ''): void
-    {
-    }
+    public function close(string $exchangeName = ''): void {}
 }
