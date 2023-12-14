@@ -102,4 +102,9 @@ class Collection implements \Iterator, \Countable
      * @param T $item
      */
     protected function validateItem($item): void {}
+
+    public function empty(): bool
+    {
+        return 0 === $this->count();
+    }
 }

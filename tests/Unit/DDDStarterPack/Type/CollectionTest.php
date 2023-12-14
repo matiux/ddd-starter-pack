@@ -98,6 +98,18 @@ class CollectionTest extends TestCase
 
         self::assertCount(3, $mergedCollection);
     }
+
+    /**
+     * @test
+     */
+    public function it_should_verify_the_emptiness(): void
+    {
+        $collection1 = new Collection([1, 2, 3]);
+        self::assertFalse($collection1->empty());
+
+        $collection2 = new Collection();
+        self::assertTrue($collection2->empty());
+    }
 }
 class MyData
 {
