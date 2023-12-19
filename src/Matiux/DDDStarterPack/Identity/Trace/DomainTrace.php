@@ -14,12 +14,12 @@ final readonly class DomainTrace
         public CausationId $causationId,
     ) {}
 
-    public static function init(EventId|CommandId $id): self
+    public static function init(CommandId|EventId $id): self
     {
         return self::fromIds(CorrelationId::from($id->value()), CausationId::from($id->value()));
     }
 
-    public static function from(DomainTrace $domainTraceForCorrelation, EventId|CommandId $causation): self
+    public static function from(DomainTrace $domainTraceForCorrelation, CommandId|EventId $causation): self
     {
         return new self($domainTraceForCorrelation->correlationId, CausationId::from($causation->value()));
     }

@@ -14,7 +14,7 @@ interface Message
 
     public function id(): mixed;
 
-    public function occurredAt(): \DateTimeImmutable|null;
+    public function occurredAt(): null|\DateTimeImmutable;
 
     public function extra(): array;
 }

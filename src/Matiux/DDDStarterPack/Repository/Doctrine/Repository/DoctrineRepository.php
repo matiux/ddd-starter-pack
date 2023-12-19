@@ -27,7 +27,7 @@ abstract class DoctrineRepository
     public function __construct(Registry $registry, string $model)
     {
         if (!class_exists($model)) {
-            throw new \InvalidArgumentException(sprintf('`%s` is not a valid class-string', (string) $model));
+            throw new \InvalidArgumentException(sprintf('`%s` is not a valid class-string', $model));
         }
 
         $this->registry = $registry;
