@@ -16,7 +16,7 @@
     "php": ">=8.2",
     "ext-json": "*",
     "ramsey/uuid": "^3.7|^4.0",
-    "symfony/options-resolver": "^5.0 | ^4.0 | ^6.0 | ^6.1",
+    "symfony/options-resolver": "*",
     "webmozart/assert": "^1.9"
   },
   "require-dev": {
@@ -31,7 +31,7 @@
     "psalm/plugin-mockery": "^1.1",
     "psalm/plugin-phpunit": "^0.18",
     "roave/security-advisories": "dev-latest",
-    "symfony/messenger": "^6.0",
+    "symfony/messenger": "^7.0",
     "symfony/orm-pack": "^1.0",
     "vimeo/psalm": "^5.0",
     "weirdan/doctrine-psalm-plugin": "^2.7"
