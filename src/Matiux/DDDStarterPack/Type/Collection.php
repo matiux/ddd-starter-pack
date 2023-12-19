@@ -56,7 +56,7 @@ class Collection implements \Iterator, \Countable
         next($this->items);
     }
 
-    public function key(): int|null
+    public function key(): null|int
     {
         return key($this->items);
     }

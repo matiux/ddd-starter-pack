@@ -41,7 +41,7 @@ class InMemoryMessage implements Message
         return $this->id;
     }
 
-    public function occurredAt(): \DateTimeImmutable|null
+    public function occurredAt(): null|\DateTimeImmutable
     {
         return $this->occurredAt;
     }

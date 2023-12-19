@@ -26,7 +26,8 @@ class SymfonyQueryBus extends QueryBus
             return $this->handle($query);
         } catch (HandlerFailedException $e) {
             /**
-             * SF7 uses getWrappedExceptions() instead getNestedExceptions()
+             * SF7 uses getWrappedExceptions() instead getNestedExceptions().
+             *
              * @psalm-suppress UndefinedMethod
              *
              * @var \Throwable[] $es
