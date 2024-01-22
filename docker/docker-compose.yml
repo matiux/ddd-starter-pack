@@ -33,8 +33,8 @@ services:
     networks:
       - ddd-starter-pack-network
 
-  ddd-starter-pack-nodejs:
-    image: ddd-starter-pack-nodejs
+  conventional-commit-nodejs:
+    image: conventional-commit-nodejs
     build: nodejs
     working_dir: /var/www/app
     #command: "commitlint -e --from=HEAD"
