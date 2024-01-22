@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace DDDStarterPack\Service;
 
+use DDDStarterPack\Exception\DomainException;
 use DDDStarterPack\Exception\TransactionFailedException;
 
 /**
@@ -37,7 +38,9 @@ class TransactionalService implements Service
                 return $this->service->execute($request);
             });
         } catch (\Throwable $exception) {
-            throw new TransactionFailedException($exception->getMessage(), intval($exception->getCode()), $exception);
+            $context = $exception instanceof DomainException ? $exception->getContext() : [];
+
+            throw TransactionFailedException::fromOriginalException($exception, $context);
         }
     }
 
