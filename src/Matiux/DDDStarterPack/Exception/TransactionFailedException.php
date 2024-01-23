@@ -8,10 +8,12 @@ use function Symfony\Component\String\u;
 
 class TransactionFailedException extends ApplicationException
 {
-    public static function fromOriginalException(\Throwable $originalException, array $context = []): static
+    public static function fromOriginalException(\Throwable $originalException): static
     {
+        $context = $originalException instanceof DomainException ? $originalException->getContext() : [];
+
         $e = new static(
-            $originalException->getMessage(),
+            'Transaction failed: '.$originalException->getMessage(),
             intval($originalException->getCode()),
             $originalException,
         );
