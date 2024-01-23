@@ -47,6 +47,10 @@ abstract class DomainException extends \Exception
         ];
     }
 
+    public function enrichContext(array $context): void {
+        $this->context = array_merge($this->context, $context);
+    }
+
     protected static function obtainMessage(null|\Throwable $previous = null): string
     {
         $msg = '';
