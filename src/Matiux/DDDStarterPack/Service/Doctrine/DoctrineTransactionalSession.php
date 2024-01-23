@@ -13,13 +13,11 @@ use Doctrine\ORM\EntityManager;
  *
  * @implements TransactionalSession<O>
  */
-class DoctrineTransactionalSession implements TransactionalSession
+readonly class DoctrineTransactionalSession implements TransactionalSession
 {
     public function __construct(private EntityManager $entityManager) {}
 
-    /**
-     * {@inheritDoc}
-     */
+    /** {@inheritDoc} */
     public function executeAtomically(callable $operation)
     {
         try {
@@ -27,8 +25,8 @@ class DoctrineTransactionalSession implements TransactionalSession
             $reponse = $this->entityManager->wrapInTransaction($operation);
 
             return $reponse;
-        } catch (\Throwable $t) {
-            throw new TransactionFailedException(sprintf('Transaction failed: %s', $t->getMessage()), (int) $t->getCode(), $t);
+        } catch (\Throwable $exception) {
+            throw TransactionFailedException::fromOriginalException($exception);
         }
     }
 }

@@ -16,13 +16,10 @@ class TransactionalCommandBus implements CommandBus
         protected TransactionalSession $session,
     ) {}
 
+    /** @throws TransactionFailedException */
     public function dispatch($command): void
     {
-        try {
-            $this->session->executeAtomically(fn () => $this->commandBus->dispatch($command));
-        } catch (\Throwable $exception) {
-            throw new TransactionFailedException($exception->getMessage(), intval($exception->getCode()), $exception);
-        }
+        $this->session->executeAtomically(fn () => $this->commandBus->dispatch($command));
     }
 
     public function subscribe(CommandHandler $handler): void
