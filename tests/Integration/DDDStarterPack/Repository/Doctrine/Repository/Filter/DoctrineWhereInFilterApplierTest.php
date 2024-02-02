@@ -18,7 +18,7 @@ class DoctrineWhereInFilterApplierTest extends TestCase
      */
     public function it_should_supports_multiple_filters(): void
     {
-        $requestedFilters = ['colors' => ['red', 'green', 'white']];
+        $requestedFilters = ['height' => [1.5, 1.8, 2.0]];
         $registryBuilder = new FilterAppliersRegistryBuilder();
         $appliersRegistry = $registryBuilder->build($requestedFilters);
 
@@ -31,7 +31,7 @@ class DoctrineWhereInFilterApplierTest extends TestCase
      */
     public function it_should_return_false_if_not_supports(): void
     {
-        $requestedFilters = ['height' => 176];
+        $requestedFilters = ['weight' => 90];
         $registryBuilder = new FilterAppliersRegistryBuilder();
         $appliersRegistry = $registryBuilder->build($requestedFilters);
 
@@ -46,7 +46,7 @@ class DoctrineWhereInFilterApplierTest extends TestCase
      */
     public function it_should_apply_where_in_filters(): void
     {
-        $requestedFilters = ['colors' => ['red', 'green', 'white']];
+        $requestedFilters = ['height' => [1.5, 1.8, 2.0], 'color' => ['red', 'green', 'white']];
         $registryBuilder = new FilterAppliersRegistryBuilder();
         $appliersRegistry = $registryBuilder->build($requestedFilters);
         $applier = new DoctrinePersonWhereInFilterApplier();
@@ -58,7 +58,7 @@ class DoctrineWhereInFilterApplierTest extends TestCase
         $applier->applyTo($qb, $appliersRegistry);
 
         $expected = sprintf(
-            'SELECT p FROM %s p WHERE p.colors IN (:colors)',
+            'SELECT p FROM %s p WHERE p.color IN (:color) AND p.height IN (:height)',
             Person::class,
         );
 
@@ -66,9 +66,13 @@ class DoctrineWhereInFilterApplierTest extends TestCase
         $actual = $qb->getQuery()->getDQL();
         DoctrineUtil::assertDQLEquals($expected, $actual);
 
-        $colors = $qb->getQuery()->getParameters()->getIterator()->offsetGet(0)->getValue();
-        self::assertIsArray($colors);
-        self::assertEquals(['red', 'green', 'white'], $colors);
+        $colorValues = $qb->getQuery()->getParameters()->getIterator()->offsetGet(0)->getValue();
+        self::assertIsArray($colorValues);
+        self::assertEquals(['red', 'green', 'white'], $colorValues);
+
+        $heightValues = $qb->getQuery()->getParameters()->getIterator()->offsetGet(1)->getValue();
+        self::assertIsArray($heightValues);
+        self::assertEquals([150, 180, 200], $heightValues);
     }
 }
 
@@ -81,6 +85,11 @@ class DoctrinePersonWhereInFilterApplier extends DoctrineWhereInFilterApplier
 
     protected function getSupportedFilters(): array
     {
-        return ['colors'];
+        return [
+            'color',
+            'height' => [
+                'preProcessor' => fn (float $height) => (int) ($height * 100),
+            ],
+        ];
     }
 }
