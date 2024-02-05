@@ -15,6 +15,9 @@ abstract class DoctrineJsonWhereEqualsFilterApplier extends DoctrineFilterApplie
                 /** @var float|int|string $val */
                 $val = $appliersRegistry->getFilterValueForKey($key);
 
+                /** @var float|int|string $val */
+                $val = (isset($conf['preProcessor'])) ? $conf['preProcessor']($val) : $val;
+
                 self::assertValueTypeIsCorrect($key, $val);
 
                 $alias = $this->getModelAlias();
@@ -38,7 +41,7 @@ abstract class DoctrineJsonWhereEqualsFilterApplier extends DoctrineFilterApplie
     abstract protected function getModelAlias(): string;
 
     /**
-     * @return array<string, array{path: string, column: string}>
+     * @return array<string, array{path: string, column: string, preProcessor?: callable}>
      */
     abstract protected function getSupportedFilters(): array;
 

@@ -20,7 +20,7 @@ class DoctrineJsonWhereInFilterApplierTest extends TestCase
      */
     public function it_should_supports_multiple_filters(): void
     {
-        $requestedFilters = ['colors' => ['red', 'green', 'white']];
+        $requestedFilters = ['height' => [1.5, 1.8, 2.0]];
         $registryBuilder = new FilterAppliersRegistryBuilder();
         $appliersRegistry = $registryBuilder->build($requestedFilters);
 
@@ -33,7 +33,7 @@ class DoctrineJsonWhereInFilterApplierTest extends TestCase
      */
     public function it_should_return_false_if_not_supports(): void
     {
-        $requestedFilters = ['height' => 176];
+        $requestedFilters = ['weight' => 90];
         $registryBuilder = new FilterAppliersRegistryBuilder();
         $appliersRegistry = $registryBuilder->build($requestedFilters);
 
@@ -48,7 +48,7 @@ class DoctrineJsonWhereInFilterApplierTest extends TestCase
      */
     public function it_should_apply_where_in_filters(): void
     {
-        $requestedFilters = ['colors' => ['red', 'green', 'white'], 'address' => 'connell'];
+        $requestedFilters = ['height' => [1.5, 1.8, 2.0], 'address' => 'connell'];
 
         $registryBuilder = new FilterAppliersRegistryBuilder();
         $registryBuilder->addApplier(new DoctrinePersonJsonWhereInFilterApplier());
@@ -62,11 +62,13 @@ class DoctrineJsonWhereInFilterApplierTest extends TestCase
         $appliersRegistry->applyToTarget($qb);
 
         $expected = sprintf(
-            "SELECT p FROM %s p WHERE (JSON_SEARCH(p.data, 'one', :val0, NULL, '$[*].color') IS NOT NULL 
+            "SELECT p FROM %s p WHERE (JSON_SEARCH(p.data, 'one', :val0, NULL, '$[*].height') IS NOT NULL 
                     OR
-                JSON_SEARCH(p.data, 'one', :val1, NULL, '$[*].color') IS NOT NULL
+                JSON_SEARCH(p.data, 'one', :val1, NULL, '$[*].height') IS NOT NULL
                     OR
-                JSON_SEARCH(p.data, 'one', :val2, NULL, '$[*].color') IS NOT NULL) AND JSON_SEARCH(p.data, 'one', :address, NULL, '$[*].address') IS NOT NULL",
+                JSON_SEARCH(p.data, 'one', :val2, NULL, '$[*].height') IS NOT NULL) 
+                     AND 
+               JSON_SEARCH(p.data, 'one', :address, NULL, '$[*].address') IS NOT NULL",
             Person::class,
         );
 
@@ -76,7 +78,7 @@ class DoctrineJsonWhereInFilterApplierTest extends TestCase
         DoctrineUtil::assertDQLEquals($expected, $actual);
 
         $colors = array_map(fn (Parameter $parameter) => $parameter->getValue(), $qb->getQuery()->getParameters()->toArray());
-        self::assertEquals(['red', 'green', 'white', 'connell'], $colors);
+        self::assertEquals([150, 180, 200, 'connell'], $colors);
     }
 }
 
@@ -90,7 +92,11 @@ class DoctrinePersonJsonWhereInFilterApplier extends DoctrineJsonWhereInFilterAp
     protected function getSupportedFilters(): array
     {
         return [
-            'colors' => ['column' => 'data', 'path' => '$[*].color'],
+            'height' => [
+                'path' => '$[*].height',
+                'column' => 'data',
+                'preProcessor' => fn (float $height) => (int) ($height * 100),
+            ],
         ];
     }
 }
@@ -105,8 +111,14 @@ class PersonJsonWhereEqualsFilterApplier extends DoctrineJsonWhereEqualsFilterAp
     protected function getSupportedFilters(): array
     {
         return [
-            'address' => ['column' => 'data', 'path' => '$[*].address'],
-            'vat' => ['column' => 'data', 'path' => '$[*].general.vat'],
+            'address' => [
+                'path' => '$[*].address',
+                'column' => 'data',
+            ],
+            'vat' => [
+                'path' => '$[*].general.vat',
+                'column' => 'data',
+            ],
         ];
     }
 }

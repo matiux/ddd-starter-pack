@@ -10,18 +10,35 @@ abstract class DoctrineWhereEqualsFilterApplier extends DoctrineFilterApplier
 {
     public function applyTo($target, FilterAppliersRegistry $appliersRegistry): void
     {
-        foreach ($this->getSupportedFilters() as $key) {
+        foreach ($this->getSupportedFilters() as $key => $conf) {
+            if (is_string($conf)) {
+                $key = $conf;
+                $conf = [];
+            }
+
+            /** @var string $key */
             if ($appliersRegistry->hasFilterWithKey($key)) {
+                /** @var mixed $val */
+                $val = $appliersRegistry->getFilterValueForKey($key);
+
+                /** @var mixed $val */
+                $val = (isset($conf['preProcessor'])) ? $conf['preProcessor']($val) : $val;
+
                 $target->andWhere(
                     sprintf('%s.%s = :%s', $this->getModelAlias(), $key, $key),
-                )->setParameter($key, $appliersRegistry->getFilterValueForKey($key));
+                )->setParameter($key, $val);
             }
         }
     }
 
     public function supports(FilterAppliersRegistry $appliersRegistry): bool
     {
-        $diff = array_intersect_key(array_flip($this->getSupportedFilters()), $appliersRegistry->requestedFilters());
+        $supportedFilters = [];
+        foreach ($this->getSupportedFilters() as $key => $conf) {
+            $supportedFilters[] = (is_string($conf)) ? $conf : $key;
+        }
+
+        $diff = array_intersect_key(array_flip($supportedFilters), $appliersRegistry->requestedFilters());
 
         return !empty($diff);
     }
@@ -29,7 +46,7 @@ abstract class DoctrineWhereEqualsFilterApplier extends DoctrineFilterApplier
     abstract protected function getModelAlias(): string;
 
     /**
-     * @return string[]
+     * @return array<int, string>|array<string, array{preProcessor?: callable}>
      */
     abstract protected function getSupportedFilters(): array;
 }

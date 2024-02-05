@@ -31,7 +31,7 @@ class DoctrineWhereEqualsFilterApplierTest extends TestCase
      */
     public function it_should_return_false_if_not_supports(): void
     {
-        $requestedFilters = ['height' => 176];
+        $requestedFilters = ['weight' => 90];
         $registryBuilder = new FilterAppliersRegistryBuilder();
         $appliersRegistry = $registryBuilder->build($requestedFilters);
 
@@ -46,7 +46,7 @@ class DoctrineWhereEqualsFilterApplierTest extends TestCase
      */
     public function it_should_apply_where_equals_filters(): void
     {
-        $requestedFilters = ['surname' => 'Galacci', 'name' => 'Matteo'];
+        $requestedFilters = ['surname' => 'Galacci', 'name' => 'Matteo', 'height' => 1.80];
         $registryBuilder = new FilterAppliersRegistryBuilder();
         $appliersRegistry = $registryBuilder->build($requestedFilters);
         $applier = new DoctrinePersonWhereEqualsFilterApplier();
@@ -58,7 +58,7 @@ class DoctrineWhereEqualsFilterApplierTest extends TestCase
         $applier->applyTo($qb, $appliersRegistry);
 
         $expected = sprintf(
-            'SELECT p FROM %s p WHERE p.name = :name AND p.surname = :surname ',
+            'SELECT p FROM %s p WHERE p.name = :name AND p.surname = :surname AND p.height = :height',
             Person::class,
         );
 
@@ -71,6 +71,9 @@ class DoctrineWhereEqualsFilterApplierTest extends TestCase
 
         $surnameValue = $qb->getQuery()->getParameters()->getIterator()->offsetGet(1)->getValue();
         self::assertEquals('Galacci', $surnameValue);
+
+        $heightValue = $qb->getQuery()->getParameters()->getIterator()->offsetGet(2)->getValue();
+        self::assertEquals(180, $heightValue);
     }
 }
 
@@ -83,6 +86,12 @@ class DoctrinePersonWhereEqualsFilterApplier extends DoctrineWhereEqualsFilterAp
 
     protected function getSupportedFilters(): array
     {
-        return ['name', 'surname', 'age'];
+        return [
+            'name',
+            'surname',
+            'height' => [
+                'preProcessor' => fn (float $height) => (int) ($height * 100),
+            ],
+        ];
     }
 }
