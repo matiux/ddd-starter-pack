@@ -31,7 +31,7 @@ class DoctrineJsonWhereEqualsFilterApplierTest extends TestCase
      */
     public function it_should_return_false_if_not_supports(): void
     {
-        $requestedFilters = ['height' => 176];
+        $requestedFilters = ['weight' => 90];
         $registryBuilder = new FilterAppliersRegistryBuilder();
         $appliersRegistry = $registryBuilder->build($requestedFilters);
 
@@ -46,7 +46,7 @@ class DoctrineJsonWhereEqualsFilterApplierTest extends TestCase
      */
     public function it_should_apply_where_equals_filters(): void
     {
-        $requestedFilters = ['address' => 'connell', 'vat' => '56789'];
+        $requestedFilters = ['address' => 'connell', 'height' => 1.80];
         $registryBuilder = new FilterAppliersRegistryBuilder();
         $appliersRegistry = $registryBuilder->build($requestedFilters);
         $applier = new DoctrinePersonJsonWhereEqualsFilterApplier();
@@ -58,7 +58,7 @@ class DoctrineJsonWhereEqualsFilterApplierTest extends TestCase
         $applier->applyTo($qb, $appliersRegistry);
 
         $expected = sprintf(
-            "SELECT p FROM %s p WHERE JSON_SEARCH(p.data, 'one', :address, NULL, '$[*].address') IS NOT NULL AND JSON_SEARCH(p.data, 'one', :vat, NULL, '$[*].general.vat') IS NOT NULL",
+            "SELECT p FROM %s p WHERE JSON_SEARCH(p.data, 'one', :address, NULL, '$[*].address') IS NOT NULL AND JSON_SEARCH(p.data, 'one', :height, NULL, '$[*].general.height') IS NOT NULL",
             Person::class,
         );
 
@@ -69,8 +69,8 @@ class DoctrineJsonWhereEqualsFilterApplierTest extends TestCase
         $addressValue = $qb->getQuery()->getParameters()->getIterator()->offsetGet(0)->getValue();
         self::assertEquals('connell', $addressValue);
 
-        $vatValue = $qb->getQuery()->getParameters()->getIterator()->offsetGet(1)->getValue();
-        self::assertEquals('56789', $vatValue);
+        $heightValue = $qb->getQuery()->getParameters()->getIterator()->offsetGet(1)->getValue();
+        self::assertEquals(180, $heightValue);
     }
 
     /**
@@ -106,8 +106,15 @@ class DoctrinePersonJsonWhereEqualsFilterApplier extends DoctrineJsonWhereEquals
     protected function getSupportedFilters(): array
     {
         return [
-            'address' => ['column' => 'data', 'path' => '$[*].address'],
-            'vat' => ['column' => 'data', 'path' => '$[*].general.vat'],
+            'address' => [
+                'path' => '$[*].address',
+                'column' => 'data',
+            ],
+            'height' => [
+                'path' => '$[*].general.height',
+                'column' => 'data',
+                'preProcessor' => fn (float $height) => (int) ($height * 100),
+            ],
         ];
     }
 }

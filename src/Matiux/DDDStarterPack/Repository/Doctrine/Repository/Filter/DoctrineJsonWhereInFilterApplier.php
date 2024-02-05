@@ -30,6 +30,9 @@ abstract class DoctrineJsonWhereInFilterApplier extends DoctrineFilterApplier
                 );
 
                 foreach ($vals as $counter => $val) {
+                    /** @var float|int|string $val */
+                    $val = (isset($conf['preProcessor'])) ? $conf['preProcessor']($val) : $val;
+
                     $target->setParameter(":val{$counter}", $val);
                 }
             }
@@ -49,7 +52,7 @@ abstract class DoctrineJsonWhereInFilterApplier extends DoctrineFilterApplier
     abstract protected function getModelAlias(): string;
 
     /**
-     * @return array<string, array{path: string, column: string}>
+     * @return array<string, array{path: string, column: string, preProcessor?: callable}>
      */
     abstract protected function getSupportedFilters(): array;
 }

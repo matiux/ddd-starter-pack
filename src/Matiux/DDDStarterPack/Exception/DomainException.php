@@ -47,7 +47,8 @@ abstract class DomainException extends \Exception
         ];
     }
 
-    public function enrichContext(array $context): void {
+    public function enrichContext(array $context): void
+    {
         $this->context = array_merge($this->context, $context);
     }
 

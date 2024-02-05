@@ -8,6 +8,7 @@ use DDDStarterPack\Repository\Doctrine\Repository\Filter\DoctrineWhereLikeFilter
 use DDDStarterPack\Repository\Filter\FilterAppliersRegistryBuilder;
 use DDDStarterPack\Repository\Test\DoctrineUtil;
 use PHPUnit\Framework\TestCase;
+use Tests\Support\Model\Person;
 use Tests\Tool\EntityManagerBuilder;
 
 class DoctrineWhereLikeFilterApplierTest extends TestCase
@@ -30,7 +31,7 @@ class DoctrineWhereLikeFilterApplierTest extends TestCase
      */
     public function it_should_return_false_if_not_supports(): void
     {
-        $requestedFilters = ['height' => 176];
+        $requestedFilters = ['weight' => 90];
         $registryBuilder = new FilterAppliersRegistryBuilder();
         $appliersRegistry = $registryBuilder->build($requestedFilters);
 
@@ -45,7 +46,7 @@ class DoctrineWhereLikeFilterApplierTest extends TestCase
      */
     public function it_should_apply_where_like_filters(): void
     {
-        $requestedFilters = ['address' => 'connell', 'vat' => '56789'];
+        $requestedFilters = ['address' => 'connell', 'height' => 1.80];
         $registryBuilder = new FilterAppliersRegistryBuilder();
         $appliersRegistry = $registryBuilder->build($requestedFilters);
         $applier = new DoctrinePersonWhereLikeFilterApplier();
@@ -57,7 +58,7 @@ class DoctrineWhereLikeFilterApplierTest extends TestCase
         $applier->applyTo($qb, $appliersRegistry);
 
         $expected = sprintf(
-            'SELECT p FROM %s p WHERE p.address LIKE :address AND p.vat LIKE :vat',
+            'SELECT p FROM %s p WHERE p.address LIKE :address AND p.height LIKE :height',
             Person::class,
         );
 
@@ -68,8 +69,8 @@ class DoctrineWhereLikeFilterApplierTest extends TestCase
         $addressValue = $qb->getQuery()->getParameters()->getIterator()->offsetGet(0)->getValue();
         self::assertEquals('%connell%', $addressValue);
 
-        $vatValue = $qb->getQuery()->getParameters()->getIterator()->offsetGet(1)->getValue();
-        self::assertEquals('%56789%', $vatValue);
+        $heightValue = $qb->getQuery()->getParameters()->getIterator()->offsetGet(1)->getValue();
+        self::assertEquals('%180%', $heightValue);
     }
 
     /**
@@ -104,6 +105,11 @@ class DoctrinePersonWhereLikeFilterApplier extends DoctrineWhereLikeFilterApplie
 
     protected function getSupportedFilters(): array
     {
-        return ['address', 'vat'];
+        return [
+            'address',
+            'height' => [
+                'preProcessor' => fn (float $height) => (int) ($height * 100),
+            ],
+        ];
     }
 }

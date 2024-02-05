@@ -10,10 +10,19 @@ abstract class DoctrineWhereLikeFilterApplier extends DoctrineFilterApplier
 {
     public function applyTo($target, FilterAppliersRegistry $appliersRegistry): void
     {
-        foreach ($this->getSupportedFilters() as $key) {
+        foreach ($this->getSupportedFilters() as $key => $conf) {
+            if (is_string($conf)) {
+                $key = $conf;
+                $conf = [];
+            }
+
+            /** @var string $key */
             if ($appliersRegistry->hasFilterWithKey($key)) {
                 /** @var float|int|string $val */
                 $val = $appliersRegistry->getFilterValueForKey($key);
+
+                /** @var float|int|string $val */
+                $val = (isset($conf['preProcessor'])) ? $conf['preProcessor']($val) : $val;
 
                 self::assertValueTypeIsCorrect($key, $val);
 
@@ -26,7 +35,12 @@ abstract class DoctrineWhereLikeFilterApplier extends DoctrineFilterApplier
 
     public function supports(FilterAppliersRegistry $appliersRegistry): bool
     {
-        $diff = array_intersect_key(array_flip($this->getSupportedFilters()), $appliersRegistry->requestedFilters());
+        $supportedFilters = [];
+        foreach ($this->getSupportedFilters() as $key => $conf) {
+            $supportedFilters[] = (is_string($conf)) ? $conf : $key;
+        }
+
+        $diff = array_intersect_key(array_flip($supportedFilters), $appliersRegistry->requestedFilters());
 
         return !empty($diff);
     }
@@ -34,7 +48,7 @@ abstract class DoctrineWhereLikeFilterApplier extends DoctrineFilterApplier
     abstract protected function getModelAlias(): string;
 
     /**
-     * @return string[]
+     * @return array<int, string>|array<string, array{preProcessor?: callable}>
      */
     abstract protected function getSupportedFilters(): array;
 
