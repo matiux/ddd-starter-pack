@@ -46,7 +46,7 @@ class DoctrineJsonWhereLikeFilterApplierTest extends TestCase
      */
     public function it_should_apply_where_like_filters(): void
     {
-        $requestedFilters = ['address' => 'connell', 'height' => 1.80];
+        $requestedFilters = ['address' => 'Connell', 'height' => 1.80, 'surname' => 'Galacci'];
         $registryBuilder = new FilterAppliersRegistryBuilder();
         $appliersRegistry = $registryBuilder->build($requestedFilters);
         $applier = new DoctrinePersonJsonWhereLikeFilterApplier();
@@ -58,7 +58,12 @@ class DoctrineJsonWhereLikeFilterApplierTest extends TestCase
         $applier->applyTo($qb, $appliersRegistry);
 
         $expected = sprintf(
-            "SELECT p FROM %s p WHERE JSON_SEARCH(p.data, 'one', :address, NULL, '$[*].address') IS NOT NULL AND JSON_SEARCH(p.data, 'one', :height, NULL, '$[*].general.height') IS NOT NULL",
+            "SELECT p 
+            FROM %s p 
+            WHERE 
+                JSON_SEARCH(LOWER(p.data), 'one', :address, NULL, LOWER('$[*].address')) IS NOT NULL 
+                AND JSON_SEARCH(LOWER(p.data), 'one', :height, NULL, LOWER('$[*].general.height')) IS NOT NULL
+                AND JSON_SEARCH(p.data, 'one', :surname, NULL, '$[*].general.surname') IS NOT NULL",
             Person::class,
         );
 
@@ -71,6 +76,9 @@ class DoctrineJsonWhereLikeFilterApplierTest extends TestCase
 
         $vatValue = $qb->getQuery()->getParameters()->getIterator()->offsetGet(1)->getValue();
         self::assertEquals('%180%', $vatValue);
+
+        $surnameValue = $qb->getQuery()->getParameters()->getIterator()->offsetGet(2)->getValue();
+        self::assertEquals('%Galacci%', $surnameValue);
     }
 
     /**
@@ -114,6 +122,11 @@ class DoctrinePersonJsonWhereLikeFilterApplier extends DoctrineJsonWhereLikeFilt
                 'path' => '$[*].general.height',
                 'column' => 'data',
                 'preProcessor' => fn (float $height) => (int) ($height * 100),
+            ],
+            'surname' => [
+                'path' => '$[*].general.surname',
+                'column' => 'data',
+                'caseSensitive' => true,
             ],
         ];
     }
