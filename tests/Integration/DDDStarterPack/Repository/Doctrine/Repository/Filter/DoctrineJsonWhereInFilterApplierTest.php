@@ -48,7 +48,7 @@ class DoctrineJsonWhereInFilterApplierTest extends TestCase
      */
     public function it_should_apply_where_in_filters(): void
     {
-        $requestedFilters = ['height' => [1.5, 1.8, 2.0], 'address' => 'connell'];
+        $requestedFilters = ['height' => [1.5, 1.8, 2.0], 'address' => 'Connell', 'surname' => ['Rossi', 'Galacci', 'Verdi']];
 
         $registryBuilder = new FilterAppliersRegistryBuilder();
         $registryBuilder->addApplier(new DoctrinePersonJsonWhereInFilterApplier());
@@ -62,13 +62,16 @@ class DoctrineJsonWhereInFilterApplierTest extends TestCase
         $appliersRegistry->applyToTarget($qb);
 
         $expected = sprintf(
-            "SELECT p FROM %s p WHERE (JSON_SEARCH(p.data, 'one', :val0, NULL, '$[*].height') IS NOT NULL 
-                    OR
-                JSON_SEARCH(p.data, 'one', :val1, NULL, '$[*].height') IS NOT NULL
-                    OR
-                JSON_SEARCH(p.data, 'one', :val2, NULL, '$[*].height') IS NOT NULL) 
-                     AND 
-               JSON_SEARCH(p.data, 'one', :address, NULL, '$[*].address') IS NOT NULL",
+            "SELECT p 
+            FROM %s p 
+            WHERE 
+                (JSON_SEARCH(LOWER(p.data), 'one', :valheight0, NULL, LOWER('$[*].height')) IS NOT NULL 
+                    OR JSON_SEARCH(LOWER(p.data), 'one', :valheight1, NULL, LOWER('$[*].height')) IS NOT NULL
+                    OR JSON_SEARCH(LOWER(p.data), 'one', :valheight2, NULL, LOWER('$[*].height')) IS NOT NULL) 
+                AND (JSON_SEARCH(p.data, 'one', :valsurname0, NULL, '$[*].general.surname') IS NOT NULL 
+                    OR JSON_SEARCH(p.data, 'one', :valsurname1, NULL, '$[*].general.surname') IS NOT NULL
+                    OR JSON_SEARCH(p.data, 'one', :valsurname2, NULL, '$[*].general.surname') IS NOT NULL)
+                AND JSON_SEARCH(LOWER(p.data), 'one', :address, NULL, LOWER('$[*].address')) IS NOT NULL",
             Person::class,
         );
 
@@ -77,8 +80,8 @@ class DoctrineJsonWhereInFilterApplierTest extends TestCase
 
         DoctrineUtil::assertDQLEquals($expected, $actual);
 
-        $colors = array_map(fn (Parameter $parameter) => $parameter->getValue(), $qb->getQuery()->getParameters()->toArray());
-        self::assertEquals([150, 180, 200, 'connell'], $colors);
+        $searchedParameterValues = array_map(fn (Parameter $parameter) => $parameter->getValue(), $qb->getQuery()->getParameters()->toArray());
+        self::assertEquals([150, 180, 200, 'Rossi', 'Galacci', 'Verdi', 'connell'], $searchedParameterValues);
     }
 }
 
@@ -96,6 +99,11 @@ class DoctrinePersonJsonWhereInFilterApplier extends DoctrineJsonWhereInFilterAp
                 'path' => '$[*].height',
                 'column' => 'data',
                 'preProcessor' => fn (float $height) => (int) ($height * 100),
+            ],
+            'surname' => [
+                'path' => '$[*].general.surname',
+                'column' => 'data',
+                'caseSensitive' => true,
             ],
         ];
     }
