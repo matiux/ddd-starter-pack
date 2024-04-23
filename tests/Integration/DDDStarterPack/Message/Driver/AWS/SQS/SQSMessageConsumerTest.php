@@ -22,6 +22,7 @@ class SQSMessageConsumerTest extends TestCase
     use SnsRawClient;
 
     private AWSMessage $message;
+    private AWSMessage $message2;
     private MessageConsumer $messageConsumer;
     private MessageProducer $messageProducer;
     private \DateTimeImmutable $occurredAt;
@@ -47,6 +48,21 @@ class SQSMessageConsumerTest extends TestCase
             ]),
             occurredAt: $this->occurredAt,
             type: 'MyType',
+            id: Uuid::uuid4()->toString(),
+            extra: [
+                'MessageGroupId' => Uuid::uuid4()->toString(),
+                'MessageDeduplicationId' => Uuid::uuid4()->toString(),
+            ],
+        );
+
+        $this->message2 = new AWSMessage(
+            body: json_encode([
+                'Foo' => 'Bar',
+                'occurredAt' => $this->occurredAt->format(\DateTimeInterface::RFC3339_EXTENDED),
+            ]),
+            occurredAt: null,
+            type: null,
+            id: Uuid::uuid4()->toString(),
             extra: [
                 'MessageGroupId' => Uuid::uuid4()->toString(),
                 'MessageDeduplicationId' => Uuid::uuid4()->toString(),
@@ -63,7 +79,7 @@ class SQSMessageConsumerTest extends TestCase
      * @test
      *
      * @group sqs
-     * @group producer
+     * @group consumer
      */
     public function message_consumer_can_receive_message(): void
     {
@@ -98,24 +114,11 @@ class SQSMessageConsumerTest extends TestCase
      * @test
      *
      * @group sqs
-     * @group producer
+     * @group consumer
      */
     public function message_consumer_can_receive_message_without_message_attributes(): void
     {
-        $awsMessage = new AWSMessage(
-            body: json_encode([
-                'Foo' => 'Bar',
-                'occurredAt' => $this->occurredAt->format(\DateTimeInterface::RFC3339_EXTENDED),
-            ]),
-            occurredAt: null,
-            type: null,
-            extra: [
-                'MessageGroupId' => Uuid::uuid4()->toString(),
-                'MessageDeduplicationId' => Uuid::uuid4()->toString(),
-            ],
-        );
-
-        $this->messageProducer->send($awsMessage);
+        $this->messageProducer->send($this->message2);
 
         $message = $this->messageConsumer->consume();
 
@@ -141,7 +144,7 @@ class SQSMessageConsumerTest extends TestCase
      * @test
      *
      * @group sqs
-     * @group producer
+     * @group consumer
      */
     public function message_consumer_can_delete_message(): void
     {
@@ -160,5 +163,39 @@ class SQSMessageConsumerTest extends TestCase
         $message = $this->messageConsumer->consume();
 
         self::assertNull($message);
+    }
+
+    /**
+     * @test
+     *
+     * @group sqs
+     * @group consumer
+     */
+    public function message_consumer_can_receive_multiple_messages(): void
+    {
+        $this->messageProducer->sendBatch([$this->message, $this->message2]);
+
+        $messages = $this->messageConsumer->consumeBatch(maxNumberOfMessages: 10);
+
+        self::assertCount(2, $messages);
+        self::assertContainsOnlyInstancesOf(AWSMessage::class, $messages);
+
+        foreach ($messages as $message) {
+            $this->deleteMessage((string) $message->id());
+        }
+    }
+
+    /**
+     * @test
+     *
+     * @group sqs
+     * @group consumer
+     */
+    public function message_consumer_cannot_receive_more_than_10_messages_in_a_single_batch(): void
+    {
+        self::expectException(\InvalidArgumentException::class);
+        self::expectExceptionMessage('Exceed max batch size of 10 messages');
+
+        $this->messageConsumer->consumeBatch(maxNumberOfMessages: 11);
     }
 }
