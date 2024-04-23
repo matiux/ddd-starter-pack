@@ -37,43 +37,63 @@ class SQSMessageConsumer extends BasicMessageService implements MessageConsumerC
 
     public function consume(null|string $queue = null): null|Message
     {
+        $messages = $this->doConsume($queue, 1);
+
+        return !empty($messages) ? current($messages) : null;
+    }
+
+    /** @return AWSMessage[] */
+    private function doConsume(null|string $queue = null, int $maxNumberOfMessages): array
+    {
         $queue ??= $this->getQueueUrlFromConfig();
+
+        if (10 < $maxNumberOfMessages) {
+            throw new \InvalidArgumentException('Exceed max batch size of 10 messages');
+        }
 
         $args = [
             'QueueUrl' => $queue,
             'AttributeNames' => $this->attributeNames,
             'MessageAttributeNames' => $this->messageAttributeNames,
+            'MaxNumberOfMessages' => $maxNumberOfMessages,
         ];
 
         $response = $this->getClient()->receiveMessage($args);
 
-        return $this->extractSqsMessageFromResponse($response);
+        return $this->extractSqsMessagesFromResponse($response);
     }
 
-    private function extractSqsMessageFromResponse(Result $response): null|AWSMessage
+    /** @return AWSMessage[] */
+    private function extractSqsMessagesFromResponse(Result $response): array
     {
-        if (empty($response['Messages'])) {
-            return null;
+        if (null === $response['Messages']) {
+            return [];
         }
 
         Assert::isArray($response['Messages']);
-        $message = (array) $response['Messages'][0];
 
-        [$body, $messageAttributes, $attributes] = $this->parseMessage($message);
+        $sqsMessages = [];
 
-        $type = $this->extractType($messageAttributes);
-        $occurredAt = $this->extractOccurredAt($messageAttributes);
+        /** @var array $message */
+        foreach ($response['Messages'] as $message) {
+            [$body, $messageAttributes, $attributes] = $this->parseMessage($message);
 
-        return $this->AWSMessageFactory->build(
-            body: $body,
-            occurredAt: $occurredAt,
-            type: $type,
-            id: (string) $message['ReceiptHandle'],
-            extra: [
-                'MessageAttributes' => $messageAttributes,
-                'Attributes' => $attributes,
-            ],
-        );
+            $type = $this->extractType($messageAttributes);
+            $occurredAt = $this->extractOccurredAt($messageAttributes);
+
+            $sqsMessages[] = $this->AWSMessageFactory->build(
+                body: $body,
+                occurredAt: $occurredAt,
+                type: $type,
+                id: (string) $message['ReceiptHandle'],
+                extra: [
+                    'MessageAttributes' => $messageAttributes,
+                    'Attributes' => $attributes,
+                ],
+            );
+        }
+
+        return $sqsMessages;
     }
 
     /**
@@ -163,9 +183,9 @@ class SQSMessageConsumer extends BasicMessageService implements MessageConsumerC
     /**
      * {@inheritDoc}
      */
-    public function consumeBatch(): array
+    public function consumeBatch(null|string $queue = null, int $maxNumberOfMessages = 1): array
     {
-        throw new \BadMethodCallException();
+        return $this->doConsume($queue, $maxNumberOfMessages);
     }
 
     public function delete(string $messageId, null|string $queue = null): void
