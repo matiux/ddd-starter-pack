@@ -11,7 +11,7 @@ interface MessageConsumer extends MessageService
     /**
      * @return Message[]
      */
-    public function consumeBatch(): array;
+    public function consumeBatch(null|string $queue = null, int $maxNumberOfMessages = 1): array;
 
     public function delete(string $messageId, null|string $queue = null): void;
 

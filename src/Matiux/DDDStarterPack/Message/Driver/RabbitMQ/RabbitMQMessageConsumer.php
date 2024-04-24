@@ -73,5 +73,5 @@ class RabbitMQMessageConsumer extends RabbitMQMessanger implements MessageConsum
 
     public function deleteBatch(\ArrayObject $messagesId): void {}
 
-    public function consumeBatch(): array {}
+    public function consumeBatch(null|string $queue = null, int $maxNumberOfMessages = 1): array {}
 }

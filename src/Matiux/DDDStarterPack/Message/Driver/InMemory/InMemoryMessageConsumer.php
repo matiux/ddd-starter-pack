@@ -23,7 +23,7 @@ class InMemoryMessageConsumer implements MessageConsumer
      *
      * @codeCoverageIgnore
      */
-    public function consumeBatch(): array
+    public function consumeBatch(null|string $queue = null, int $maxNumberOfMessages = 1): array
     {
         return [];
     }
