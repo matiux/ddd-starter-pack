@@ -4,7 +4,7 @@ PROJECT_PREFIX=ddd-starter-pack
 # Static ———————————————————————————————————————————————————————————————————————————————————————————————————————————————
 .DEFAULT_GOAL := help
 PHP_IMAGE=$(PROJECT_PREFIX)-php
-NODEJS_IMAGE=$(PROJECT_PREFIX)-nodejs
+NODEJS_IMAGE=conventional-commit-nodejs
 PROJECT_NAME=$(shell basename $$(pwd) | tr '[:upper:]' '[:lower:]')
 PHP_USER=utente
 WORKDIR=/var/www/app

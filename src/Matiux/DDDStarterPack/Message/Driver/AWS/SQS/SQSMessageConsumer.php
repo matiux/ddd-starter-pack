@@ -43,7 +43,7 @@ class SQSMessageConsumer extends BasicMessageService implements MessageConsumerC
     }
 
     /** @return AWSMessage[] */
-    private function doConsume(null|string $queue = null, int $maxNumberOfMessages): array
+    private function doConsume(null|string $queue, int $maxNumberOfMessages): array
     {
         $queue ??= $this->getQueueUrlFromConfig();
 
