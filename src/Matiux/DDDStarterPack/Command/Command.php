@@ -9,7 +9,7 @@ use DDDStarterPack\Identity\Trace\DomainTrace;
 use DDDStarterPack\Type\DateTimeRFC;
 
 /**
- * @template I of AggregateId
+ * @template-covariant I of AggregateId
  */
 abstract readonly class Command
 {
