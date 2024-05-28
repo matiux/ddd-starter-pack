@@ -14,7 +14,7 @@ class DateTimeRFC extends \DateTimeImmutable
     public const FORMAT = 'Y-m-d\TH:i:s.uP';
     public const NO_TZ_FORMAT = 'Y-m-d H:i:s.u';
 
-    final public function __construct(string $datetime = 'now', ?\DateTimeZone $timezone = null)
+    public function __construct(string $datetime = 'now', ?\DateTimeZone $timezone = null)
     {
         parent::__construct($datetime, $timezone);
     }
@@ -32,7 +32,10 @@ class DateTimeRFC extends \DateTimeImmutable
         return self::create($dateTime, $timezone);
     }
 
-    public static function create(string $dateTime, ?\DateTimeZone $timezone = null): static
+    /**
+     * @psalm-suppress UnsafeInstantiation
+     */
+    final public static function create(string $dateTime, ?\DateTimeZone $timezone = null): static
     {
         if (!$date = static::createFromFormat(self::FORMAT, $dateTime, $timezone)) {
             throw new \InvalidArgumentException(sprintf('Data non valida: %s', $dateTime));
@@ -41,7 +44,10 @@ class DateTimeRFC extends \DateTimeImmutable
         return new static($date->format(self::FORMAT), $timezone);
     }
 
-    public static function createUTC(string $dateTime): static
+    /**
+     * @psalm-suppress UnsafeInstantiation
+     */
+    final public static function createUTC(string $dateTime): static
     {
         $tz = new \DateTimeZone('UTC');
 
