@@ -25,19 +25,31 @@ class DateTimeRFC extends \DateTimeImmutable
     }
 
     /**
-     * @param string $dateTime
-     *
-     * @throws \Exception
-     *
-     * @return static
+     * @deprecated use DateTimeRFC::create() instead
      */
     public static function createFrom(string $dateTime, ?\DateTimeZone $timezone = null): static
+    {
+        return self::create($dateTime, $timezone);
+    }
+
+    public static function create(string $dateTime, ?\DateTimeZone $timezone = null): static
     {
         if (!$date = static::createFromFormat(self::FORMAT, $dateTime, $timezone)) {
             throw new \InvalidArgumentException(sprintf('Data non valida: %s', $dateTime));
         }
 
         return new static($date->format(self::FORMAT), $timezone);
+    }
+
+    public static function createUTC(string $dateTime = 'now'): static
+    {
+        $tz = new \DateTimeZone('UTC');
+
+        if (!$date = static::createFromFormat(self::FORMAT, $dateTime, $tz)) {
+            throw new \InvalidArgumentException(sprintf('Data non valida: %s', $dateTime));
+        }
+
+        return new static($date->format(self::FORMAT), $tz);
     }
 
     public function value(): string
