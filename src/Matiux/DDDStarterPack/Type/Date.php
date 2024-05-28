@@ -26,13 +26,13 @@ class Date extends \DateTimeImmutable
     /**
      * @throws \Exception
      */
-    public static function createFrom(string $date): static
+    public static function createFrom(string $date, ?\DateTimeZone $timezone = null): static
     {
-        if (!$result = self::createFromFormat(self::FORMAT, $date, new \DateTimeZone('+00:00'))) {
+        if (!$result = self::createFromFormat(self::FORMAT, $date, $timezone)) {
             throw new \InvalidArgumentException(sprintf('Data non valida: %s', $date));
         }
 
-        return new static($result->format(self::FORMAT));
+        return new static($result->format(self::FORMAT), $timezone);
     }
 
     public function value(): string
