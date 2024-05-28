@@ -41,7 +41,7 @@ class DateTimeRFC extends \DateTimeImmutable
         return new static($date->format(self::FORMAT), $timezone);
     }
 
-    public static function createUTC(string $dateTime = 'now'): static
+    public static function createUTC(string $dateTime): static
     {
         $tz = new \DateTimeZone('UTC');
 
