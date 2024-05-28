@@ -31,13 +31,13 @@ class DateTimeRFC extends \DateTimeImmutable
      *
      * @return static
      */
-    public static function createFrom(string $dateTime): static
+    public static function createFrom(string $dateTime, ?\DateTimeZone $timezone = null): static
     {
-        if (!$date = static::createFromFormat(self::FORMAT, $dateTime)) {
+        if (!$date = static::createFromFormat(self::FORMAT, $dateTime, $timezone)) {
             throw new \InvalidArgumentException(sprintf('Data non valida: %s', $dateTime));
         }
 
-        return new static($date->format(self::FORMAT));
+        return new static($date->format(self::FORMAT), $timezone);
     }
 
     public function value(): string
