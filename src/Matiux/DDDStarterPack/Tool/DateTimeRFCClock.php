@@ -10,11 +10,11 @@ class DateTimeRFCClock implements Clock
 {
     public function getCurrentTime(\DateTimeZone $dateTimeZone = null): DateTimeRFC
     {
-        return DateTimeRFC::create('now', $dateTimeZone);
+        return new DateTimeRFC(timezone: $dateTimeZone);
     }
 
     public function getCurrentTimeUTC(): DateTimeRFC
     {
-        return DateTimeRFC::createUTC();
+        return new DateTimeRFC(timezone: new \DateTimeZone('UTC'));
     }
 }
