@@ -10,5 +10,5 @@ interface Clock
 {
     public function getCurrentTime(\DateTimeZone $dateTimeZone = null): DateTimeRFC;
 
-    public function getUTCCurrentTime(): DateTimeRFC;
+    public function getCurrentTimeUTC(): DateTimeRFC;
 }
