@@ -19,9 +19,9 @@ class DateTimeRFC extends \DateTimeImmutable
         parent::__construct($datetime, $timezone);
     }
 
-    public static function nowUTC(): static
+    public static function UTC(string $datetime = 'now'): static
     {
-        return new static('now',new \DateTimeZone('UTC'));
+        return new static($datetime,new \DateTimeZone('UTC'));
     }
 
     /**
