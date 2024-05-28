@@ -14,28 +14,25 @@ class DateTimeRFC extends \DateTimeImmutable
     public const FORMAT = 'Y-m-d\TH:i:s.uP';
     public const NO_TZ_FORMAT = 'Y-m-d H:i:s.u';
 
-    public function __construct(string $datetime = 'now', ?\DateTimeZone $timezone = null)
+    final public function __construct(string $datetime = 'now', ?\DateTimeZone $timezone = null)
     {
         parent::__construct($datetime, $timezone);
     }
 
-    public function __toString(): string
+    public static function nowUTC(): static
     {
-        return $this->format(self::FORMAT);
+        return new static('now',new \DateTimeZone('UTC'));
     }
 
     /**
-     * @deprecated use DateTimeRFC::create() instead
+     * @deprecated use DateTimeRFC::from() instead
      */
     public static function createFrom(string $dateTime, ?\DateTimeZone $timezone = null): static
     {
-        return self::create($dateTime, $timezone);
+        return self::from($dateTime, $timezone);
     }
 
-    /**
-     * @psalm-suppress UnsafeInstantiation
-     */
-    final public static function create(string $dateTime, ?\DateTimeZone $timezone = null): static
+    public static function from(string $dateTime, ?\DateTimeZone $timezone = null): static
     {
         if (!$date = static::createFromFormat(self::FORMAT, $dateTime, $timezone)) {
             throw new \InvalidArgumentException(sprintf('Data non valida: %s', $dateTime));
@@ -44,10 +41,7 @@ class DateTimeRFC extends \DateTimeImmutable
         return new static($date->format(self::FORMAT), $timezone);
     }
 
-    /**
-     * @psalm-suppress UnsafeInstantiation
-     */
-    final public static function createUTC(string $dateTime): static
+    public static function UTCfrom(string $dateTime): static
     {
         $tz = new \DateTimeZone('UTC');
 
@@ -61,5 +55,10 @@ class DateTimeRFC extends \DateTimeImmutable
     public function value(): string
     {
         return $this->__toString();
+    }
+
+    public function __toString(): string
+    {
+        return $this->format(self::FORMAT);
     }
 }

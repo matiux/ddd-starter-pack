@@ -15,6 +15,6 @@ class DateTimeRFCClock implements Clock
 
     public function getCurrentTimeUTC(): DateTimeRFC
     {
-        return new DateTimeRFC(timezone: new \DateTimeZone('UTC'));
+        return DateTimeRFC::nowUTC();
     }
 }
