@@ -7,6 +7,7 @@ namespace DDDStarterPack\Service\Doctrine;
 use DDDStarterPack\Exception\TransactionFailedException;
 use DDDStarterPack\Service\TransactionalSession;
 use Doctrine\ORM\EntityManager;
+use Doctrine\Persistence\ManagerRegistry;
 
 /**
  * @template O
@@ -15,17 +16,22 @@ use Doctrine\ORM\EntityManager;
  */
 readonly class DoctrineTransactionalSession implements TransactionalSession
 {
-    public function __construct(private EntityManager $entityManager) {}
+    public function __construct(
+        private EntityManager $entityManager,
+        private ManagerRegistry $managerRegistry,
+    ) {}
 
     /** {@inheritDoc} */
     public function executeAtomically(callable $operation)
     {
         try {
-            /** @var O $reponse */
-            $reponse = $this->entityManager->wrapInTransaction($operation);
+            /** @var O $response */
+            $response = $this->entityManager->wrapInTransaction($operation);
 
-            return $reponse;
+            return $response;
         } catch (\Throwable $exception) {
+            $this->managerRegistry->resetManager();
+
             throw TransactionFailedException::fromOriginalException($exception);
         }
     }

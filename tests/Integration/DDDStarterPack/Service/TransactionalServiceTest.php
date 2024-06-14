@@ -9,6 +9,7 @@ use DDDStarterPack\Service\Doctrine\DoctrineTransactionalSession;
 use DDDStarterPack\Service\Service;
 use DDDStarterPack\Service\TransactionalService;
 use Doctrine\ORM\EntityManager;
+use Doctrine\Persistence\ManagerRegistry;
 use PHPUnit\Framework\TestCase;
 use Tests\Tool\EntityManagerBuilder;
 
@@ -35,11 +36,14 @@ class TransactionalServiceTest extends TestCase
             ->getMock();
 
         $repoB = \Mockery::mock(Repository::class);
+        $registry = \Mockery::mock(ManagerRegistry::class)
+            ->shouldReceive('resetManager')
+            ->getMock();
 
         $service = new AtomicallyService($repoA, $repoB);
 
         /** @var DoctrineTransactionalSession<void> $doctrineTransactionalSession */
-        $doctrineTransactionalSession = new DoctrineTransactionalSession($this->em);
+        $doctrineTransactionalSession = new DoctrineTransactionalSession($this->em, $registry);
 
         /**
          * !!! This is only a test.
