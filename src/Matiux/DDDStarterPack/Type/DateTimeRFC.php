@@ -19,9 +19,9 @@ class DateTimeRFC extends \DateTimeImmutable
         parent::__construct($datetime, $timezone);
     }
 
-    public static function UTC(string $datetime = 'now'): static
+    public static function UTC(): static
     {
-        return new static($datetime,new \DateTimeZone('UTC'));
+        return new static(timezone: new \DateTimeZone('UTC'));
     }
 
     /**
@@ -43,11 +43,13 @@ class DateTimeRFC extends \DateTimeImmutable
 
     public static function UTCfrom(string $dateTime): static
     {
-        $tz = new \DateTimeZone('UTC');
-
-        if (!$date = static::createFromFormat(self::FORMAT, $dateTime, $tz)) {
+        if (!$date = static::createFromFormat(self::FORMAT, $dateTime)) {
             throw new \InvalidArgumentException(sprintf('Data non valida: %s', $dateTime));
         }
+
+        $tz = new \DateTimeZone('UTC');
+
+        $date = $date->setTimezone($tz);
 
         return new static($date->format(self::FORMAT), $tz);
     }
