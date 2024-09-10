@@ -21,7 +21,7 @@ class DomainEventTest extends TestCase
     /**
      * @test
      */
-    public function it_shoud_serialize_event(): void
+    public function it_should_serialize_event(): void
     {
         $aggregateId = AggregateId::new();
         $occurredAt = new DateTimeRFC();
@@ -76,6 +76,19 @@ class DomainEventTest extends TestCase
 
         self::assertTrue($event->aggregateId->equals($aggregateId));
         self::assertEquals($occurredAt, $event->occurredAt);
+    }
+
+    /**
+     * @test
+     */
+    public function it_should_remove_version_if_present(): void
+    {
+        $aggregateId = AggregateId::new();
+        $occurredAt = new DateTimeRFC();
+
+        $serializedEvent = SomethingHappenedV2::crea($aggregateId, $occurredAt)->serialize();
+
+        self::assertEquals('something_happened', $serializedEvent['event_name']);
     }
 }
 
@@ -136,6 +149,53 @@ readonly class SomethingHappened extends DomainEvent
             $this->occurredAt,
             $this->enrichedDomainEventMeta($enrichOptions),
             $this->name,
+        );
+    }
+}
+
+/**
+ * @psalm-import-type SerializedDomainEvent from DomainEvent
+ *
+ * @extends DomainEvent<AggregateId>
+ */
+readonly class SomethingHappenedV2 extends DomainEvent
+{
+    public static function crea(AggregateId $aggregateId, DateTimeRFC $occurredAt): self
+    {
+        $eventId = EventId::new();
+
+        return new self(
+            $aggregateId,
+            $occurredAt,
+            new DomainEventMeta($eventId, DomainTrace::init($eventId), new DomainEventVersion(2)),
+        );
+    }
+
+    /**
+     * @param SerializedDomainEvent $data
+     *
+     * @throws \Exception
+     */
+    public static function deserialize(array $data): self
+    {
+        return new self(
+            AggregateId::from($data['aggregate_id']),
+            DateTimeRFC::from($data['occurred_at']),
+            self::deserializeMeta($data['meta']),
+        );
+    }
+
+    protected function serializeEventPayload(): array
+    {
+        return [];
+    }
+
+    public function enrich(EnrichOptions $enrichOptions): self
+    {
+        return new self(
+            $this->aggregateId,
+            $this->occurredAt,
+            $this->enrichedDomainEventMeta($enrichOptions),
         );
     }
 }
