@@ -20,7 +20,7 @@ abstract class CreateFromConsumedMessage
      *
      * @return Command|DomainEvent
      */
-    public function execute($consumedMessage, \DateTimeImmutable $occurredAt = null)
+    public function execute($consumedMessage, null|\DateTimeImmutable $occurredAt = null)
     {
         $this->validateConsumedMessage($consumedMessage);
 

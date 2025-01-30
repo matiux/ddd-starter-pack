@@ -12,7 +12,7 @@ class RabbitMQMessageProducerResponse implements MessageProducerResponse
     private $sentMessages;
     private $originalProducedMessage;
 
-    public function __construct(int $sentMessages, AMQPMessage $originalProducedMessage = null)
+    public function __construct(int $sentMessages, null|AMQPMessage $originalProducedMessage = null)
     {
         $this->sentMessages = $sentMessages;
         $this->originalProducedMessage = $originalProducedMessage;

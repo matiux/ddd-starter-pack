@@ -13,7 +13,7 @@ abstract class DomainException extends \Exception
     public const MESSAGE = 'An error has occurred';
     protected array $context = [];
 
-    final public function __construct(string $message = '', int $code = 0, \Throwable $previous = null)
+    final public function __construct(string $message = '', int $code = 0, null|\Throwable $previous = null)
     {
         $message = $message ?: static::MESSAGE;
 
@@ -36,7 +36,9 @@ abstract class DomainException extends \Exception
 
     public function toJson(): string
     {
-        return json_encode($this->toArray());
+        return ($res = json_encode($this->toArray())) === false
+            ? throw new \LogicException('toJson must return a string')
+            : $res;
     }
 
     public function toArray(): array

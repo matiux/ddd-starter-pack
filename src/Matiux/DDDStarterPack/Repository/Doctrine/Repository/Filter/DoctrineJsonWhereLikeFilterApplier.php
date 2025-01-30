@@ -105,7 +105,7 @@ abstract class DoctrineJsonWhereLikeFilterApplier extends DoctrineFilterApplier
                 'When using the JsonWhereLike applier, the filter value must be an integer, float, or string. [key: %s - val type: %s - val: %s]',
                 $key,
                 gettype($val),
-                is_array($val) ? json_encode($val) : (string) $val,
+                (string) (is_array($val) ? json_encode($val) : (string) $val),
             ),
         );
     }

@@ -28,7 +28,7 @@ trait SqsRawClient
 
     protected function getSqsClient(null|string $queueUrl = null): SqsClient
     {
-        if ($queueUrl) {
+        if (!\is_null($queueUrl) && strlen($queueUrl) > 0) {
             $this->setQueueUrl($queueUrl);
         }
 
@@ -47,7 +47,7 @@ trait SqsRawClient
 
     protected function purgeSqsQueue(null|string $queueUrl = null): void
     {
-        if ($queueUrl) {
+        if (!\is_null($queueUrl) && strlen($queueUrl) > 0) {
             $this->setQueueUrl($queueUrl);
         }
 
@@ -76,7 +76,7 @@ trait SqsRawClient
 
     protected function pullFromSqsQueue(int $amountOfMessagesToFetch = 1, null|string $queueUrl = null): Result
     {
-        if ($queueUrl) {
+        if (!\is_null($queueUrl) && strlen($queueUrl) > 0) {
             $this->setQueueUrl($queueUrl);
         }
 

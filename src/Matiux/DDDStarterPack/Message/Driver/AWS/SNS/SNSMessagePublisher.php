@@ -108,7 +108,9 @@ class SNSMessagePublisher extends BasicMessageService implements MessageProducer
             ];
         }
 
-        if ($message->type()) {
+        $type = $message->type();
+
+        if (is_string($type) && strlen($type) > 0) {
             $messageAttributes['Type'] = [
                 'DataType' => 'String',
                 'StringValue' => (string) $message->type(),
@@ -176,7 +178,7 @@ class SNSMessagePublisher extends BasicMessageService implements MessageProducer
     {
         $this->topicArn = $this->configuration->topicArn();
 
-        if (!$this->topicArn || 0 === strlen(trim($this->topicArn))) {
+        if (is_null($this->topicArn) || 0 === strlen(trim($this->topicArn))) {
             throw new InvalidConfigurationException('Topic Arn missing');
         }
     }

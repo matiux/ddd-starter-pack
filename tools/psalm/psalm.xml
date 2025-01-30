@@ -25,12 +25,6 @@
     </plugins>
 
     <issueHandlers>
-        <MethodSignatureMismatch>
-            <errorLevel type="suppress">
-                <file name="../../src/Matiux/DDDStarterPack/Type/DateTimeRFC.php" />
-                <file name="../../src/Matiux/DDDStarterPack/Type/Date.php" />
-            </errorLevel>
-        </MethodSignatureMismatch>
         <ParamNameMismatch errorLevel="suppress"/>
         <MissingConstructor>
             <errorLevel type="suppress">

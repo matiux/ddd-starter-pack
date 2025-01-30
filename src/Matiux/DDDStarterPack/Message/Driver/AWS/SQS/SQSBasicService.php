@@ -71,7 +71,7 @@ trait SQSBasicService
     {
         $this->queueUrl = $this->configuration->queueUrl();
 
-        if (!$this->queueUrl || 0 === strlen(trim($this->queueUrl))) {
+        if (is_null($this->queueUrl) || 0 === strlen(trim($this->queueUrl))) {
             throw new InvalidConfigurationException('Queue url missing');
         }
     }

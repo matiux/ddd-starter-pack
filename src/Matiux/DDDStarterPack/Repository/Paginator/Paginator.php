@@ -44,7 +44,7 @@ class Paginator implements PaginatorI
 
     public function key(): int
     {
-        return $this->iterator->key();
+        return $this->iterator->key() ?? throw new \LogicException('Key is not set');
     }
 
     public function valid(): bool

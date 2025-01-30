@@ -16,6 +16,9 @@ use DDDStarterPack\Tool\EnvVarUtil;
 use PHPUnit\Framework\TestCase;
 use Ramsey\Uuid\Uuid;
 
+/**
+ * @psalm-suppress PossiblyFalseArgument
+ */
 class SQSMessageConsumerTest extends TestCase
 {
     use SqsRawClient;

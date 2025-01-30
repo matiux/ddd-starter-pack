@@ -9,6 +9,9 @@ use DDDStarterPack\Tool\EnvVarUtil;
 use PHPUnit\Framework\TestCase;
 use Ramsey\Uuid\Uuid;
 
+/**
+ * @psalm-suppress PossiblyFalseArgument
+ */
 class SqsLearningTest extends TestCase
 {
     use SqsRawClient;

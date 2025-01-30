@@ -1,17 +1,20 @@
 <?php
 
 declare(strict_types=1);
+use PhpCsFixer\Config;
+use PhpCsFixer\Finder;
+use PhpCsFixer\Runner\Parallel\ParallelConfig;
 
-$finder = PhpCsFixer\Finder::create()
+$finder = Finder::create()
     ->in([
         realpath(__DIR__.'/../../src'),
         realpath(__DIR__.'/../../tests'),
-    ])
-    // ->exclude(['dir'])
-    // ->notPath('DependencyInjection/Configuration.php')
-;
+    ]);
+// ->exclude(['dir'])
+// ->notPath('DependencyInjection/Configuration.php')
 
-$config = new PhpCsFixer\Config();
+$config = (new Config())->setParallelConfig(new ParallelConfig(4, 20));
+
 $rules = [
     '@Symfony' => true,
     'declare_strict_types' => true,
@@ -51,6 +54,7 @@ $rules = [
             'match',
         ],
     ],
+    'nullable_type_declaration' => ['syntax' => 'union'],
 ];
 
 return $config->setRules($rules)
