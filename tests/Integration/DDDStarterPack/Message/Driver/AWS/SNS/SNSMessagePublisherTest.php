@@ -17,6 +17,9 @@ use DDDStarterPack\Tool\EnvVarUtil;
 use PHPUnit\Framework\TestCase;
 use Ramsey\Uuid\Uuid;
 
+/**
+ * @psalm-suppress PossiblyFalseArgument
+ */
 class SNSMessagePublisherTest extends TestCase
 {
     use SqsRawClient;
@@ -63,10 +66,10 @@ class SNSMessagePublisherTest extends TestCase
         $snsMessagePublisher = MessageProducerFactory::create()->obtainProducer($configuration);
 
         $message = new AWSMessage(
-            body: json_encode([
+            body: false === ($res = json_encode([
                 'Foo' => 'Bar',
                 'occurredAt' => $this->occurredAt->format(\DateTimeInterface::RFC3339_EXTENDED),
-            ]),
+            ])) ? throw new \LogicException('toJson must return a string') : $res,
             occurredAt: $this->occurredAt,
             extra: [
                 'MessageGroupId' => Uuid::uuid4()->toString(),

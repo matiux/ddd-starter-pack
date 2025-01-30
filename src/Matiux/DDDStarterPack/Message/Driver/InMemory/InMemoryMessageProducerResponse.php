@@ -42,6 +42,6 @@ class InMemoryMessageProducerResponse implements MessageProducerResponse
 
     public function sentMessageId(): string
     {
-        return $this->messageId ?: (string) Uuid::uuid4();
+        return \is_string($this->messageId) ? $this->messageId : (string) Uuid::uuid4();
     }
 }

@@ -40,12 +40,16 @@ abstract readonly class DomainEvent
         public DomainEventMeta $meta,
     ) {
         $name = strtolower(
-            preg_replace('/(?<!^)[A-Z]/', '_$0', (new \ReflectionClass($this))->getShortName()), // Camel case to snake case
+            preg_replace(
+                '/(?<!^)[A-Z]/',
+                '_$0',
+                (new \ReflectionClass($this))->getShortName(),
+            ) ?? '', // Camel case to snake case
         );
 
         $path = "/_v{$this->meta->version->v}\$/";
 
-        $this->eventName = preg_replace($path, '', $name); // Remove version from the end of the name
+        $this->eventName = preg_replace($path, '', $name) ?? ''; // Remove version from the end of the name
     }
 
     /** @return SerializedDomainEvent */

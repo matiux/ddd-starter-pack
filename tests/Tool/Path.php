@@ -8,6 +8,6 @@ class Path
 {
     public static function test(): string
     {
-        return realpath(__DIR__.'/..');
+        return (string) realpath(__DIR__.'/..');
     }
 }

@@ -14,7 +14,19 @@ class EnvVarUtil
      */
     public static function get(string $name, string $default = ''): string
     {
-        return getenv($name) ?: (string) ($_ENV[$name] ?? $default);
+        $env = getenv($name);
+
+        if (static::valid($env)) {
+            return (string) $env;
+        }
+
+        $env = $_ENV[$name] ?? null;
+
+        if (static::valid($env)) {
+            return (string) $env;
+        }
+
+        return $default;
     }
 
     /**
@@ -24,8 +36,13 @@ class EnvVarUtil
      */
     public static function getOrNull(string $name): null|string
     {
-        $value = getenv($name) ?: $_ENV[$name] ?? null;
+        $value = static::get($name);
 
-        return !$value ? null : (string) $value;
+        return '' === $value ? null : $value;
+    }
+
+    private static function valid(mixed $val): bool
+    {
+        return \is_string($val) && strlen($val) > 0;
     }
 }

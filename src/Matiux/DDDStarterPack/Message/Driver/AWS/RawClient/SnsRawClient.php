@@ -25,7 +25,7 @@ trait SnsRawClient
         return $this->snsTopicArn;
     }
 
-    protected function setSnsTopicArn(string $snsTopicArn = null): void
+    protected function setSnsTopicArn(null|string $snsTopicArn = null): void
     {
         //  ?? EnvVarUtil::get('AWS_SNS_TOPIC_ARN');
         $this->snsTopicArn = $snsTopicArn;
@@ -33,7 +33,7 @@ trait SnsRawClient
 
     protected function getSnsClient(null|string $snsTopicArn = null): SnsClient
     {
-        if ($snsTopicArn) {
+        if (!\is_null($snsTopicArn) && strlen($snsTopicArn) > 0) {
             $this->setSnsTopicArn($snsTopicArn);
         }
 

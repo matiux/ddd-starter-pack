@@ -9,9 +9,7 @@ use Iterator;
 /**
  * @psalm-suppress UnsafeGenericInstantiation
  *
- * @psalm-immutable
- *
- * @template T of mixed
+ * @template T of mixed|false
  *
  * @implements Iterator<array-key, T>
  */

@@ -117,7 +117,9 @@ class SQSMessageProducer extends BasicMessageService implements MessageProducerC
             ];
         }
 
-        if ($message->type()) {
+        $type = $message->type();
+
+        if (is_string($type) && strlen($type) > 0) {
             $messageAttributes['Type'] = [
                 'DataType' => 'String',
                 'StringValue' => (string) $message->type(),

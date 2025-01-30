@@ -38,7 +38,7 @@ trait AWSBasicService
         $accessKey = $this->configuration->accessKey();
         $secretKey = $this->configuration->secretKey();
 
-        if ($accessKey && $secretKey) {
+        if (\is_string($accessKey) && \is_string($secretKey)) {
             $credentials = new Credentials($accessKey, $secretKey);
 
             return ['credentials' => $credentials];

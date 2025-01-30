@@ -15,7 +15,7 @@ class DoctrineUtil
                 "\n" => '',
             ]);
 
-            return preg_replace('/[\s]+/', ' ', $dql);
+            return preg_replace('/[\s]+/', ' ', $dql) ?? throw new \LogicException('DQL is empty');
         };
         $expected = $clear($expected);
         $actual = $clear($actual);

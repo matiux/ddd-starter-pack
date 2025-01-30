@@ -9,8 +9,12 @@ use DDDStarterPack\Message\Driver\InMemory\InMemoryMessageConsumer;
 use DDDStarterPack\Message\Driver\InMemory\InMemoryMessageFactory;
 use DDDStarterPack\Message\Driver\InMemory\InMemoryMessageProducer;
 use DDDStarterPack\Message\Driver\InMemory\InMemoryMessageQueue;
+use PHPUnit\Framework\Attributes\Test;
 use PHPUnit\Framework\TestCase;
 
+/**
+ * @psalm-suppress PossiblyFalseArgument
+ */
 class InMemoryMessageQueueTest extends TestCase
 {
     private InMemoryMessageQueue $queue;
@@ -24,9 +28,7 @@ class InMemoryMessageQueueTest extends TestCase
         $this->consumer = new InMemoryMessageConsumer($this->queue);
     }
 
-    /**
-     * @test
-     */
+    #[Test]
     public function it_should_handle_in_memory_message(): void
     {
         $messageBody = [
