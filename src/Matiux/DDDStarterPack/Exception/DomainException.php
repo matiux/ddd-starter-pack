@@ -13,7 +13,7 @@ abstract class DomainException extends \Exception
     public const MESSAGE = 'An error has occurred';
     protected array $context = [];
 
-    final public function __construct(string $message = '', int $code = 0, \Throwable $previous = null)
+    final public function __construct(string $message = '', int $code = 0, null|\Throwable $previous = null)
     {
         $message = $message ?: static::MESSAGE;
 

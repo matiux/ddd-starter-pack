@@ -8,7 +8,7 @@ use DDDStarterPack\Type\DateTimeRFC;
 
 class DateTimeRFCClock implements Clock
 {
-    public function getCurrentTime(\DateTimeZone $dateTimeZone = null): DateTimeRFC
+    public function getCurrentTime(null|\DateTimeZone $dateTimeZone = null): DateTimeRFC
     {
         return new DateTimeRFC(timezone: $dateTimeZone);
     }

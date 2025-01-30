@@ -24,7 +24,7 @@ class FilterAppliersRegistry
      *
      * @return mixed
      */
-    public function getFilterValueForKey(string $key, string $default = null): mixed
+    public function getFilterValueForKey(string $key, null|string $default = null): mixed
     {
         if (array_key_exists($key, $this->requestedFilters)) {
             return $this->requestedFilters[$key];
