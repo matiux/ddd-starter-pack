@@ -22,17 +22,17 @@ class RabbitMQMessage implements Message
         return $this->body;
     }
 
-    public function exchangeName(): ?string
+    public function exchangeName(): null|string
     {
         return $this->exchangeName;
     }
 
-    public function occurredAt(): ?\DateTimeImmutable
+    public function occurredAt(): null|\DateTimeImmutable
     {
         return $this->occurredAt;
     }
 
-    public function type(): ?string
+    public function type(): null|string
     {
         return $this->type;
     }

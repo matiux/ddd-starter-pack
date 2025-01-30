@@ -16,7 +16,7 @@ class InMemoryMessageQueue
         $this->messages['default'] = [];
     }
 
-    public function popMessage(string $exchangeName = 'default'): ?Message
+    public function popMessage(string $exchangeName = 'default'): null|Message
     {
         if (!array_key_exists($exchangeName, $this->messages)) {
             throw new \InvalidArgumentException("Queue '{$exchangeName}' doesn't exists");

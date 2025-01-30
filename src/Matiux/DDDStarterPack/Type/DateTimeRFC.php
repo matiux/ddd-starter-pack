@@ -14,7 +14,7 @@ class DateTimeRFC extends \DateTimeImmutable
     public const FORMAT = 'Y-m-d\TH:i:s.uP';
     public const NO_TZ_FORMAT = 'Y-m-d H:i:s.u';
 
-    final public function __construct(string $datetime = 'now', ?\DateTimeZone $timezone = null)
+    final public function __construct(string $datetime = 'now', null|\DateTimeZone $timezone = null)
     {
         parent::__construct($datetime, $timezone);
     }
@@ -27,12 +27,12 @@ class DateTimeRFC extends \DateTimeImmutable
     /**
      * @deprecated use DateTimeRFC::from() instead
      */
-    public static function createFrom(string $dateTime, ?\DateTimeZone $timezone = null): static
+    public static function createFrom(string $dateTime, null|\DateTimeZone $timezone = null): static
     {
         return self::from($dateTime, $timezone);
     }
 
-    public static function from(string $dateTime, ?\DateTimeZone $timezone = null): static
+    public static function from(string $dateTime, null|\DateTimeZone $timezone = null): static
     {
         if (!$date = static::createFromFormat(self::FORMAT, $dateTime, $timezone)) {
             throw new \InvalidArgumentException(sprintf('Data non valida: %s', $dateTime));
