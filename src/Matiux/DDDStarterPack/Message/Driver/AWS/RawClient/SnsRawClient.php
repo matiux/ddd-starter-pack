@@ -42,6 +42,7 @@ trait SnsRawClient
                 'version' => 'latest',
                 'region' => EnvVarUtil::get('AWS_DEFAULT_REGION'),
                 'debug' => false,
+                'retries' => 3,
             ];
 
             $this->snsClient = new SnsClient($args + $this->createCredentials());

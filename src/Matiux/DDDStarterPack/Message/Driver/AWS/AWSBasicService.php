@@ -30,6 +30,7 @@ trait AWSBasicService
             'version' => 'latest',
             'access_key' => '',
             'secret_key' => '',
+            'retries' => 3,
         ];
     }
 
