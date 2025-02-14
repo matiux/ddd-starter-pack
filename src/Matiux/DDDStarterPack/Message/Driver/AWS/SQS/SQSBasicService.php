@@ -48,6 +48,7 @@ trait SQSBasicService
                 'version' => 'latest',
                 'region' => $this->configuration->region(),
                 'debug' => false,
+                'retries' => 3,
             ];
 
             $this->client = new SqsClient($args + $this->createCredentials());
