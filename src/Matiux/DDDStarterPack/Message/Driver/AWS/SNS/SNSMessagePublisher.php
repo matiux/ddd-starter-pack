@@ -190,6 +190,7 @@ class SNSMessagePublisher extends BasicMessageService implements MessageProducer
                 'version' => 'latest',
                 'region' => $this->configuration->region(),
                 'debug' => false,
+                'retries' => 3,
             ];
 
             $this->client = new SnsClient($args + $this->createCredentials());

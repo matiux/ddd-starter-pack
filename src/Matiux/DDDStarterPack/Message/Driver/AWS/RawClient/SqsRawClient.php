@@ -37,6 +37,7 @@ trait SqsRawClient
                 'version' => 'latest',
                 'region' => EnvVarUtil::get('AWS_DEFAULT_REGION', 'eu-west-1'),
                 'debug' => false,
+                'retries' => 3,
             ];
 
             $this->sqsClient = new SqsClient($args + $this->createCredentials());
