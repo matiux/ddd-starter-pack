@@ -10,7 +10,7 @@ trait SortingFilterRequest
 {
     private array $sortingFilters = [];
 
-    public function withSorting(null|string $sortingField, null|string $sortingDirection): self
+    public function withSorting(null|string $sortingField, null|string $sortingDirection): static
     {
         if ($sortingField && $sortingDirection) {
             $this->sortingFilters[SortingKeyFilterApplier::SORT] = $sortingField;
