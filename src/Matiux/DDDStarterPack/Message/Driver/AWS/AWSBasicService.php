@@ -10,6 +10,7 @@ use Webmozart\Assert\Assert;
 
 trait AWSBasicService
 {
+    #[\Override]
     protected function specificDriverName(): string
     {
         return self::NAME;
@@ -18,6 +19,7 @@ trait AWSBasicService
     /**
      * @psalm-return list<string>
      */
+    #[\Override]
     protected function requiredParams(): array
     {
         return ['region'];
@@ -53,6 +55,7 @@ trait AWSBasicService
      *
      * @codeCoverageIgnore
      */
+    #[\Override]
     public function open(string $exchangeName = ''): void
     {
         throw new \BadMethodCallException();
@@ -63,6 +66,7 @@ trait AWSBasicService
      *
      * @codeCoverageIgnore
      */
+    #[\Override]
     public function close(string $exchangeName = ''): void
     {
         throw new \BadMethodCallException();

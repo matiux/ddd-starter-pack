@@ -108,6 +108,7 @@ abstract class BasicServiceResponse implements ServiceResponse
         return $this;
     }
 
+    #[\Override]
     public function isSuccess(): bool
     {
         return $this->success;
@@ -116,11 +117,13 @@ abstract class BasicServiceResponse implements ServiceResponse
     /**
      * @return B
      */
+    #[\Override]
     public function body()
     {
         return $this->body;
     }
 
+    #[\Override]
     public function code(): int
     {
         return $this->code;

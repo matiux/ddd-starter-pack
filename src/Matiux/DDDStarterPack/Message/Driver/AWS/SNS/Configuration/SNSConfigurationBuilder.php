@@ -5,9 +5,11 @@ declare(strict_types=1);
 namespace DDDStarterPack\Message\Driver\AWS\SNS\Configuration;
 
 use DDDStarterPack\Message\Driver\AWS\Configuration\AWSConfigurationBuilder;
+use Override;
 
 class SNSConfigurationBuilder extends AWSConfigurationBuilder
 {
+    #[Override]
     public static function create(string $driverName = 'SNS'): static
     {
         return parent::create($driverName);

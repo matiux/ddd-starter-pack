@@ -22,6 +22,7 @@ class DoctrineGenericPaginationApplier extends DoctrineFilterApplier
     /**
      * {@inheritDoc}
      */
+    #[\Override]
     public function applyTo($target, FilterAppliersRegistry $appliersRegistry): void
     {
         /** @var int $page */
@@ -39,6 +40,7 @@ class DoctrineGenericPaginationApplier extends DoctrineFilterApplier
         }
     }
 
+    #[\Override]
     public function supports(FilterAppliersRegistry $appliersRegistry): bool
     {
         return

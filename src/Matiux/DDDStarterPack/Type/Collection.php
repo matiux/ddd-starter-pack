@@ -44,31 +44,37 @@ class Collection implements \Iterator, \Countable
     /**
      * @return T
      */
+    #[\Override]
     public function current(): mixed
     {
         return current($this->items);
     }
 
+    #[\Override]
     public function next(): void
     {
         next($this->items);
     }
 
+    #[\Override]
     public function key(): null|int
     {
         return key($this->items);
     }
 
+    #[\Override]
     public function valid(): bool
     {
         return null !== key($this->items);
     }
 
+    #[\Override]
     public function rewind(): void
     {
         reset($this->items);
     }
 
+    #[\Override]
     public function count(): int
     {
         return count($this->items);

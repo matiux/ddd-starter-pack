@@ -16,5 +16,6 @@ abstract class DoctrineFilterApplier implements FilterApplier
     /**
      * @param QueryBuilder $target
      */
+    #[\Override]
     abstract public function applyTo($target, FilterAppliersRegistry $appliersRegistry): void;
 }

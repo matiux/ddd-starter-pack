@@ -5,11 +5,13 @@ declare(strict_types=1);
 namespace DDDStarterPack\Message\Driver\AWS\SNS\Configuration;
 
 use DDDStarterPack\Message\Configuration\ConfigurationParamConstraint;
+use Override;
 
 class TopicArnIsValidConfigurationParamConstraint extends ConfigurationParamConstraint
 {
     private const PARAM_NAME = 'sns_topic_arn';
 
+    #[Override]
     public function name(): string
     {
         return self::PARAM_NAME;

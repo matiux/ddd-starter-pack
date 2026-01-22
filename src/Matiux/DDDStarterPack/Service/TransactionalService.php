@@ -30,6 +30,7 @@ class TransactionalService implements Service
      *
      * @return O
      */
+    #[\Override]
     public function execute($request = null)
     {
         return $this->session->executeAtomically(

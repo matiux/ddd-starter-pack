@@ -8,6 +8,7 @@ use DDDStarterPack\Message\Driver\AWS\Configuration\AWSConfigurationBuilder;
 
 class SQSConfigurationBuilder extends AWSConfigurationBuilder
 {
+    #[\Override]
     public static function create(string $driverName = 'SQS'): static
     {
         return parent::create($driverName);

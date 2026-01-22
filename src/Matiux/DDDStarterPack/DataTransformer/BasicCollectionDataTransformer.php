@@ -6,6 +6,7 @@ namespace DDDStarterPack\DataTransformer;
 
 use DDDStarterPack\DataTransformer\Type\CollectionDataTransformer;
 use DDDStarterPack\DataTransformer\Type\DataTransformer;
+use Override;
 
 /**
  * @template I
@@ -32,6 +33,7 @@ abstract class BasicCollectionDataTransformer implements CollectionDataTransform
      *
      * @return static
      */
+    #[Override]
     public function write($items, int $total = 0): DataTransformer
     {
         $this->items = $items;

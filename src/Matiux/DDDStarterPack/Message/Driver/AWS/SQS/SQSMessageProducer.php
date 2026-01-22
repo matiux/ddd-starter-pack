@@ -30,6 +30,7 @@ class SQSMessageProducer extends BasicMessageService implements MessageProducerC
     /**
      * {@inheritDoc}
      */
+    #[\Override]
     public function send($message): MessageProducerResponse
     {
         return $this->doSend($message);
@@ -136,6 +137,7 @@ class SQSMessageProducer extends BasicMessageService implements MessageProducerC
     /**
      * {@inheritDoc}
      */
+    #[\Override]
     public function sendBatch(array $messages): MessageProducerResponse
     {
         $toSendMessages = [];
@@ -169,6 +171,7 @@ class SQSMessageProducer extends BasicMessageService implements MessageProducerC
      *
      * @codeCoverageIgnore
      */
+    #[\Override]
     public function getBatchLimit(): int
     {
         throw new \BadMethodCallException();

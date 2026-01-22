@@ -16,21 +16,25 @@ class InMemoryMessageProducerResponse implements MessageProducerResponse
         private null|string $messageId = null,
     ) {}
 
+    #[\Override]
     public function isSuccess(): bool
     {
         return $this->success;
     }
 
+    #[\Override]
     public function sentMessages(): int
     {
         return $this->sentMessages;
     }
 
+    #[\Override]
     public function originalResponse(): mixed
     {
         return $this->originalResponse;
     }
 
+    #[\Override]
     public function body(): mixed
     {
         if ($this->success) {
@@ -40,6 +44,7 @@ class InMemoryMessageProducerResponse implements MessageProducerResponse
         return ['success' => false];
     }
 
+    #[\Override]
     public function sentMessageId(): string
     {
         return \is_string($this->messageId) ? $this->messageId : (string) Uuid::uuid4();

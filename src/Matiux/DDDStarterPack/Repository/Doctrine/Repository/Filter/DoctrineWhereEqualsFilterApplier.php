@@ -8,6 +8,7 @@ use DDDStarterPack\Repository\Filter\FilterAppliersRegistry;
 
 abstract class DoctrineWhereEqualsFilterApplier extends DoctrineFilterApplier
 {
+    #[\Override]
     public function applyTo($target, FilterAppliersRegistry $appliersRegistry): void
     {
         foreach ($this->getSupportedFilters() as $key => $conf) {
@@ -31,6 +32,7 @@ abstract class DoctrineWhereEqualsFilterApplier extends DoctrineFilterApplier
         }
     }
 
+    #[\Override]
     public function supports(FilterAppliersRegistry $appliersRegistry): bool
     {
         $supportedFilters = [];

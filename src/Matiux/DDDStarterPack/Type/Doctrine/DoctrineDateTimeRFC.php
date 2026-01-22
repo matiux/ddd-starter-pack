@@ -8,25 +8,26 @@ use DDDStarterPack\Type\DateTimeRFC;
 use Doctrine\DBAL\Platforms\AbstractPlatform;
 use Doctrine\DBAL\Types\ConversionException;
 use Doctrine\DBAL\Types\DateTimeImmutableType;
+use Override;
 
 class DoctrineDateTimeRFC extends DateTimeImmutableType
 {
     /**
      * {@inheritDoc}
      */
+    #[Override]
     public function getSQLDeclaration(array $column, AbstractPlatform $platform): mixed
     {
         return 'DATETIME(6)';
     }
 
     /**
-     * @psalm-suppress MoreSpecificImplementedParamType
-     *
      * @param null|DateTimeRFC $value
      * @param AbstractPlatform $platform
      *
      * @return null|string
      */
+    #[Override]
     public function convertToDatabaseValue($value, AbstractPlatform $platform): mixed
     {
         if (is_null($value)) {
@@ -40,16 +41,7 @@ class DoctrineDateTimeRFC extends DateTimeImmutableType
         return $value->format(DateTimeRFC::NO_TZ_FORMAT);
     }
 
-    /**
-     * @psalm-suppress all
-     *
-     * @param null|string      $value
-     * @param AbstractPlatform $platform
-     *
-     * @throws \Exception
-     *
-     * @return null|DateTimeRFC
-     */
+    #[Override]
     public function convertToPHPValue($value, AbstractPlatform $platform): null|DateTimeRFC
     {
         if (null === $value) {
@@ -65,7 +57,7 @@ class DoctrineDateTimeRFC extends DateTimeImmutableType
 
             $date = \DateTimeImmutable::createFromInterface($value);
 
-            return DateTimeRFC::createFrom($date->format(DateTimeRFC::FORMAT));
+            return DateTimeRFC::from($date->format(DateTimeRFC::FORMAT));
         }
 
         $converted = DateTimeRFC::createFromFormat(
@@ -84,6 +76,6 @@ class DoctrineDateTimeRFC extends DateTimeImmutableType
 
         $date = $converted->setTimezone($tz);
 
-        return DateTimeRFC::createFrom($date->format(DateTimeRFC::FORMAT));
+        return DateTimeRFC::from($date->format(DateTimeRFC::FORMAT));
     }
 }

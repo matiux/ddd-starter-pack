@@ -35,6 +35,7 @@ class SQSMessageConsumer extends BasicMessageService implements MessageConsumerC
         parent::__construct();
     }
 
+    #[\Override]
     public function consume(null|string $queue = null): null|Message
     {
         $messages = $this->doConsume($queue, 1);
@@ -183,11 +184,13 @@ class SQSMessageConsumer extends BasicMessageService implements MessageConsumerC
     /**
      * {@inheritDoc}
      */
+    #[\Override]
     public function consumeBatch(null|string $queue = null, int $maxNumberOfMessages = 1): array
     {
         return $this->doConsume($queue, $maxNumberOfMessages);
     }
 
+    #[\Override]
     public function delete(string $messageId, null|string $queue = null): void
     {
         $queue ??= $this->getQueueUrlFromConfig();
@@ -202,6 +205,7 @@ class SQSMessageConsumer extends BasicMessageService implements MessageConsumerC
         }
     }
 
+    #[\Override]
     public function deleteBatch(\ArrayObject $messagesId): void
     {
         throw new \BadMethodCallException();

@@ -12,13 +12,12 @@ use Doctrine\DBAL\Types\DateType;
 class DoctrineDate extends DateType
 {
     /**
-     * @psalm-suppress MoreSpecificImplementedParamType
-     *
      * @param null|Date        $value
      * @param AbstractPlatform $platform
      *
      * @return null|string
      */
+    #[\Override]
     public function convertToDatabaseValue($value, AbstractPlatform $platform): mixed
     {
         if (is_null($value)) {
@@ -29,8 +28,6 @@ class DoctrineDate extends DateType
     }
 
     /**
-     * @psalm-suppress all
-     *
      * @param null|string      $value
      * @param AbstractPlatform $platform
      *
@@ -38,6 +35,7 @@ class DoctrineDate extends DateType
      *
      * @return null|Date
      */
+    #[\Override]
     public function convertToPHPValue($value, AbstractPlatform $platform): mixed
     {
         if (null === $value) {

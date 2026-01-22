@@ -24,6 +24,7 @@ abstract class DoctrineGenericSortApplier extends DoctrineFilterApplier
     /**
      * @param QueryBuilder $target
      */
+    #[\Override]
     public function applyTo($target, FilterAppliersRegistry $appliersRegistry): void
     {
         try {
@@ -38,6 +39,7 @@ abstract class DoctrineGenericSortApplier extends DoctrineFilterApplier
         }
     }
 
+    #[\Override]
     public function supports(FilterAppliersRegistry $appliersRegistry): bool
     {
         return

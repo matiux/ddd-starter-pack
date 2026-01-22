@@ -20,6 +20,7 @@ class SymfonyQueryBus extends QueryBus
         $this->messageBus = $queryBus;
     }
 
+    #[\Override]
     public function query(Query $query): mixed
     {
         try {

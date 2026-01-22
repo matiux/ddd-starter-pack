@@ -18,16 +18,19 @@ trait SQSBasicService
     private null|string $queueUrl = null;
     private null|SqsClient $client = null;
 
+    #[\Override]
     protected function defaultsParams(): array
     {
         return $this->customDefaultsParams() + ['queue_url' => null];
     }
 
+    #[\Override]
     protected function obtainConfigurationValidator(): ConfigurationValidator
     {
         return new SQSConfigurationValidator();
     }
 
+    #[\Override]
     protected function setSpecificConfiguration(Configuration $configuration): void
     {
         /** @var string[] $params */

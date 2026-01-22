@@ -13,6 +13,7 @@ class InMemoryMessageConsumer implements MessageConsumer
         private InMemoryMessageQueue $messageQueue,
     ) {}
 
+    #[\Override]
     public function consume(null|string $queue = null): null|Message
     {
         return $this->messageQueue->popMessage();
@@ -23,6 +24,7 @@ class InMemoryMessageConsumer implements MessageConsumer
      *
      * @codeCoverageIgnore
      */
+    #[\Override]
     public function consumeBatch(null|string $queue = null, int $maxNumberOfMessages = 1): array
     {
         return [];
@@ -33,6 +35,7 @@ class InMemoryMessageConsumer implements MessageConsumer
      *
      * @codeCoverageIgnore
      */
+    #[\Override]
     public function delete(string $messageId, null|string $queue = null): void {}
 
     /**
@@ -40,6 +43,7 @@ class InMemoryMessageConsumer implements MessageConsumer
      *
      * @codeCoverageIgnore
      */
+    #[\Override]
     public function deleteBatch(\ArrayObject $messagesId): void {}
 
     /**
@@ -47,6 +51,7 @@ class InMemoryMessageConsumer implements MessageConsumer
      *
      * @codeCoverageIgnore
      */
+    #[\Override]
     public function open(string $exchangeName = ''): void {}
 
     /**
@@ -54,5 +59,6 @@ class InMemoryMessageConsumer implements MessageConsumer
      *
      * @codeCoverageIgnore
      */
+    #[\Override]
     public function close(string $exchangeName = ''): void {}
 }

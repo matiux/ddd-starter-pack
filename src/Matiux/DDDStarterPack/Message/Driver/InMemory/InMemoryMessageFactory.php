@@ -11,6 +11,7 @@ use DDDStarterPack\Message\MessageFactory;
  */
 class InMemoryMessageFactory implements MessageFactory
 {
+    #[\Override]
     public function build(
         string $body,
         null|\DateTimeImmutable $occurredAt = null,

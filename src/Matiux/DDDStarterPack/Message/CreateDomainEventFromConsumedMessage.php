@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace DDDStarterPack\Message;
 
 use DDDStarterPack\Event\DomainEvent;
+use Override;
 
 /**
  * @codeCoverageIgnore
@@ -20,5 +21,6 @@ abstract class CreateDomainEventFromConsumedMessage extends CreateFromConsumedMe
      *
      * @return DomainEvent
      */
+    #[Override]
     abstract protected function create($rawMessage): DomainEvent;
 }

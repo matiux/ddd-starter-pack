@@ -4,6 +4,8 @@ declare(strict_types=1);
 
 namespace DDDStarterPack\Identity;
 
+use Override;
+
 /**
  * @template T
  *
@@ -16,6 +18,7 @@ abstract readonly class BasicGenericId implements GenericId, \JsonSerializable
      */
     final protected function __construct(private mixed $id) {}
 
+    #[Override]
     public function equals(GenericId $entityId, bool $string = true): bool
     {
         return $string ?
@@ -26,6 +29,7 @@ abstract readonly class BasicGenericId implements GenericId, \JsonSerializable
     /**
      * @return T
      */
+    #[Override]
     public function value()
     {
         return $this->id;
@@ -39,6 +43,7 @@ abstract readonly class BasicGenericId implements GenericId, \JsonSerializable
     /**
      * @return T
      */
+    #[Override]
     public function jsonSerialize(): mixed
     {
         return $this->id;

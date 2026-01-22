@@ -12,6 +12,7 @@ abstract class DoctrineJsonWhereEqualsFilterApplier extends DoctrineFilterApplie
     private QueryBuilder $target;
     private FilterAppliersRegistry $appliersRegistry;
 
+    #[\Override]
     public function applyTo($target, FilterAppliersRegistry $appliersRegistry): void
     {
         $this->target = $target;
@@ -77,6 +78,7 @@ abstract class DoctrineJsonWhereEqualsFilterApplier extends DoctrineFilterApplie
             ->setParameter($key, $val);
     }
 
+    #[\Override]
     public function supports(FilterAppliersRegistry $appliersRegistry): bool
     {
         $supportedFilters = array_flip(array_keys($this->getSupportedFilters()));

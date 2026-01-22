@@ -14,6 +14,7 @@ abstract class FilterApplierScenarioTestCase extends KernelTestCase
     protected FilterApplierScenario $scenario;
     protected EntityManagerInterface $em;
 
+    #[\Override]
     protected function setUp(): void
     {
         /**

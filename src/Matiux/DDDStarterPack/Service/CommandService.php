@@ -18,5 +18,6 @@ interface CommandService extends Service
      *
      * @psalm-assert Command $command
      */
+    #[\Override]
     public function execute($command): void;
 }

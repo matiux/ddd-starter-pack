@@ -5,12 +5,14 @@ declare(strict_types=1);
 namespace DDDStarterPack\Message\Driver\AWS;
 
 use DDDStarterPack\Message\MessageFactory;
+use Override;
 
 /**
  * @implements MessageFactory<AWSMessage>
  */
 class AWSMessageFactory implements MessageFactory
 {
+    #[Override]
     public function build(
         string $body,
         null|\DateTimeImmutable $occurredAt = null,

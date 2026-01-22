@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace DDDStarterPack\Message\Driver\AWS\Configuration;
 
 use DDDStarterPack\Message\Configuration\ConfigurationBuilder;
+use Override;
 
 abstract class AWSConfigurationBuilder extends ConfigurationBuilder
 {
@@ -15,6 +16,7 @@ abstract class AWSConfigurationBuilder extends ConfigurationBuilder
      *
      * @return static
      */
+    #[Override]
     public static function create(string $driverName): static
     {
         $builder = new static();
