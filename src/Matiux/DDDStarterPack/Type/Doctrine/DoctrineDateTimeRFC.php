@@ -8,14 +8,13 @@ use DDDStarterPack\Type\DateTimeRFC;
 use Doctrine\DBAL\Platforms\AbstractPlatform;
 use Doctrine\DBAL\Types\ConversionException;
 use Doctrine\DBAL\Types\DateTimeImmutableType;
-use Override;
 
 class DoctrineDateTimeRFC extends DateTimeImmutableType
 {
     /**
      * {@inheritDoc}
      */
-    #[Override]
+    #[\Override]
     public function getSQLDeclaration(array $column, AbstractPlatform $platform): mixed
     {
         return 'DATETIME(6)';
@@ -27,7 +26,7 @@ class DoctrineDateTimeRFC extends DateTimeImmutableType
      *
      * @return null|string
      */
-    #[Override]
+    #[\Override]
     public function convertToDatabaseValue($value, AbstractPlatform $platform): mixed
     {
         if (is_null($value)) {
@@ -41,8 +40,8 @@ class DoctrineDateTimeRFC extends DateTimeImmutableType
         return $value->format(DateTimeRFC::NO_TZ_FORMAT);
     }
 
-    #[Override]
-    public function convertToPHPValue($value, AbstractPlatform $platform): null|DateTimeRFC
+    #[\Override]
+    public function convertToPHPValue($value, AbstractPlatform $platform): DateTimeRFC|null
     {
         if (null === $value) {
             return $value;

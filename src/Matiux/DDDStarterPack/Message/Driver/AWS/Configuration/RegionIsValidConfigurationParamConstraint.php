@@ -5,13 +5,12 @@ declare(strict_types=1);
 namespace DDDStarterPack\Message\Driver\AWS\Configuration;
 
 use DDDStarterPack\Message\Configuration\ConfigurationParamConstraint;
-use Override;
 
 class RegionIsValidConfigurationParamConstraint extends ConfigurationParamConstraint
 {
     private const PARAM_NAME = 'region';
 
-    #[Override]
+    #[\Override]
     public function name(): string
     {
         return self::PARAM_NAME;

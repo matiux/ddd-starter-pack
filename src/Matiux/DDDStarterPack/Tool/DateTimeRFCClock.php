@@ -9,7 +9,7 @@ use DDDStarterPack\Type\DateTimeRFC;
 class DateTimeRFCClock implements Clock
 {
     #[\Override]
-    public function getCurrentTime(null|\DateTimeZone $dateTimeZone = null): DateTimeRFC
+    public function getCurrentTime(\DateTimeZone|null $dateTimeZone = null): DateTimeRFC
     {
         return new DateTimeRFC(timezone: $dateTimeZone);
     }

@@ -20,7 +20,7 @@ class ConfigurationParamRegistry
         $this->configConstraints[$configConstraintName] = $configurationParamConstraint;
     }
 
-    public function resolve(string $configurationParamConstraintName): null|ConfigurationParamConstraint
+    public function resolve(string $configurationParamConstraintName): ConfigurationParamConstraint|null
     {
         return $this->configConstraints[$configurationParamConstraintName] ?? null;
     }

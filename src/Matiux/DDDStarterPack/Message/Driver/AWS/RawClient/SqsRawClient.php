@@ -16,8 +16,8 @@ trait SqsRawClient
 {
     use AWSCredentials;
 
-    private null|SqsClient $sqsClient = null;
-    private null|string $queueUrl = null;
+    private SqsClient|null $sqsClient = null;
+    private string|null $queueUrl = null;
 
     public function getQueueUrl(): string
     {
@@ -26,7 +26,7 @@ trait SqsRawClient
         return $this->queueUrl;
     }
 
-    protected function getSqsClient(null|string $queueUrl = null): SqsClient
+    protected function getSqsClient(string|null $queueUrl = null): SqsClient
     {
         if (!\is_null($queueUrl) && strlen($queueUrl) > 0) {
             $this->setQueueUrl($queueUrl);
@@ -46,7 +46,7 @@ trait SqsRawClient
         return $this->sqsClient;
     }
 
-    protected function purgeSqsQueue(null|string $queueUrl = null): void
+    protected function purgeSqsQueue(string|null $queueUrl = null): void
     {
         if (!\is_null($queueUrl) && strlen($queueUrl) > 0) {
             $this->setQueueUrl($queueUrl);
@@ -75,7 +75,7 @@ trait SqsRawClient
         $this->queueUrl = $queueUrl;
     }
 
-    protected function pullFromSqsQueue(int $amountOfMessagesToFetch = 1, null|string $queueUrl = null): Result
+    protected function pullFromSqsQueue(int $amountOfMessagesToFetch = 1, string|null $queueUrl = null): Result
     {
         if (!\is_null($queueUrl) && strlen($queueUrl) > 0) {
             $this->setQueueUrl($queueUrl);

@@ -15,8 +15,8 @@ use Webmozart\Assert\Assert;
 trait SQSBasicService
 {
     private SQSConfiguration $configuration;
-    private null|string $queueUrl = null;
-    private null|SqsClient $client = null;
+    private string|null $queueUrl = null;
+    private SqsClient|null $client = null;
 
     #[\Override]
     protected function defaultsParams(): array

@@ -13,7 +13,7 @@ trait PaginationFilterRequest
         'per_page' => -1,
     ];
 
-    public function withPagination(null|int $page, null|int $perPage): static
+    public function withPagination(int|null $page, int|null $perPage): static
     {
         if ($page && $perPage) {
             $this->paginationFilters[PaginationKeyFilterApplier::PAGE] = $page;

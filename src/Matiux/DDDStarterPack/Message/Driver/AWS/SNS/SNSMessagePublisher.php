@@ -16,7 +16,6 @@ use DDDStarterPack\Message\Driver\AWS\SNS\Configuration\SNSConfigurationValidato
 use DDDStarterPack\Message\Exception\MessageInvalidException;
 use DDDStarterPack\Message\MessageProducerConnector;
 use DDDStarterPack\Message\MessageProducerResponse;
-use Override;
 use Symfony\Component\Config\Definition\Exception\InvalidConfigurationException;
 use Webmozart\Assert\Assert;
 
@@ -31,22 +30,22 @@ class SNSMessagePublisher extends BasicMessageService implements MessageProducer
 
     public const NAME = 'SNS';
     private SNSConfiguration $configuration;
-    private null|string $topicArn = null;
-    private null|SnsClient $client = null;
+    private string|null $topicArn = null;
+    private SnsClient|null $client = null;
 
-    #[Override]
+    #[\Override]
     protected function defaultsParams(): array
     {
         return $this->customDefaultsParams() + ['sns_topic_arn' => null];
     }
 
-    #[Override]
+    #[\Override]
     protected function obtainConfigurationValidator(): ConfigurationValidator
     {
         return new SNSConfigurationValidator();
     }
 
-    #[Override]
+    #[\Override]
     protected function setSpecificConfiguration(Configuration $configuration): void
     {
         /** @var string[] $params */
@@ -63,7 +62,7 @@ class SNSMessagePublisher extends BasicMessageService implements MessageProducer
     /**
      * {@inheritDoc}
      */
-    #[Override]
+    #[\Override]
     public function send($message): MessageProducerResponse
     {
         return $this->doSend($message);
@@ -211,7 +210,7 @@ class SNSMessagePublisher extends BasicMessageService implements MessageProducer
      *
      * @codeCoverageIgnore
      */
-    #[Override]
+    #[\Override]
     public function sendBatch(array $messages): MessageProducerResponse
     {
         throw new \BadMethodCallException();
@@ -222,7 +221,7 @@ class SNSMessagePublisher extends BasicMessageService implements MessageProducer
      *
      * @codeCoverageIgnore
      */
-    #[Override]
+    #[\Override]
     public function getBatchLimit(): int
     {
         throw new \BadMethodCallException();

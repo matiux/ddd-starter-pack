@@ -5,11 +5,10 @@ declare(strict_types=1);
 namespace DDDStarterPack\Message\Driver\AWS\Configuration;
 
 use DDDStarterPack\Message\Configuration\ConfigurationValidator;
-use Override;
 
 abstract class AWSConfigurationValidator extends ConfigurationValidator
 {
-    #[Override]
+    #[\Override]
     protected function buildRegistry(): void
     {
         $this->configurationParamRegistry->addConstraint(new AccessKeyIsValidConfigurationParamConstraint());

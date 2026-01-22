@@ -5,7 +5,6 @@ declare(strict_types=1);
 namespace DDDStarterPack\Message\Driver\AWS\SQS\Configuration;
 
 use DDDStarterPack\Message\Configuration\ConfigurationParamConstraint;
-use Override;
 
 class QueueNameIsValidConfigurationParamConstraint extends ConfigurationParamConstraint
 {

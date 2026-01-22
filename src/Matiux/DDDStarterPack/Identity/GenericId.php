@@ -27,7 +27,7 @@ interface GenericId
      *
      * @return null|static
      */
-    public static function tryFrom($id): null|static;
+    public static function tryFrom($id): static|null;
 
     /**
      * @return I

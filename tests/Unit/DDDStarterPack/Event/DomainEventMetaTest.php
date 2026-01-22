@@ -13,23 +13,6 @@ use PHPUnit\Framework\TestCase;
 class DomainEventMetaTest extends TestCase
 {
     /**
-     * @return array<array-key, array{0: string[], 1: bool}>
-     */
-    public static function provideExpectedKeys(): array
-    {
-        return [
-            'snake case' => [
-                ['event_id', 'correlation_id', 'causation_id', 'event_version', 'context'],
-                false,
-            ],
-            'camel case' => [
-                ['eventId', 'correlationId', 'causationId', 'eventVersion', 'context'],
-                true,
-            ],
-        ];
-    }
-
-    /**
      * @test
      *
      * @dataProvider provideExpectedKeys
@@ -57,5 +40,22 @@ class DomainEventMetaTest extends TestCase
 
         self::assertEquals($expected, $encoded);
         self::assertNull($meta->context());
+    }
+
+    /**
+     * @return array<array-key, array{0: string[], 1: bool}>
+     */
+    public static function provideExpectedKeys(): array
+    {
+        return [
+            'snake case' => [
+                ['event_id', 'correlation_id', 'causation_id', 'event_version', 'context'],
+                false,
+            ],
+            'camel case' => [
+                ['eventId', 'correlationId', 'causationId', 'eventVersion', 'context'],
+                true,
+            ],
+        ];
     }
 }

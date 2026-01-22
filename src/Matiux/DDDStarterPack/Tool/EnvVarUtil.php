@@ -34,7 +34,7 @@ class EnvVarUtil
      *
      * @return null|string
      */
-    public static function getOrNull(string $name): null|string
+    public static function getOrNull(string $name): string|null
     {
         $value = static::get($name);
 

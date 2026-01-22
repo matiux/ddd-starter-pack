@@ -10,10 +10,10 @@ use DDDStarterPack\Tool\EnvVarUtil;
 final class DomainEventMeta
 {
     public function __construct(
-        readonly public EventId $eventId,
-        readonly public DomainTrace $domainTrace,
-        readonly public DomainEventVersion $version,
-        private null|string $context = null,
+        public readonly EventId $eventId,
+        public readonly DomainTrace $domainTrace,
+        public readonly DomainEventVersion $version,
+        private string|null $context = null,
     ) {
         $this->context ??= EnvVarUtil::getOrNull('SERVICE_NAME');
     }
@@ -36,7 +36,7 @@ final class DomainEventMeta
         return array_combine($keys, $values);
     }
 
-    public function context(): null|string
+    public function context(): string|null
     {
         return $this->context;
     }

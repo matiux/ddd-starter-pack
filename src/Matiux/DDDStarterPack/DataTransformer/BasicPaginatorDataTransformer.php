@@ -8,7 +8,6 @@ use DDDStarterPack\DataTransformer\Type\DataTransformer;
 use DDDStarterPack\DataTransformer\Type\ItemDataTransformer;
 use DDDStarterPack\DataTransformer\Type\PaginatorDataTransformer;
 use DDDStarterPack\Repository\Paginator\PaginatorI;
-use Override;
 
 /**
  * @template I
@@ -31,7 +30,7 @@ abstract class BasicPaginatorDataTransformer implements PaginatorDataTransformer
     /** @var array<int, I> */
     protected array $page = [];
 
-    #[Override]
+    #[\Override]
     public function read(): array
     {
         foreach ($this->page as $item) {
@@ -39,9 +38,9 @@ abstract class BasicPaginatorDataTransformer implements PaginatorDataTransformer
 
             $deps = $this->getDeps();
 
-            $itemDataTransformer = empty($deps) ?
-                new $ns() :
-                new $ns(...$deps);
+            $itemDataTransformer = empty($deps)
+                ? new $ns()
+                : new $ns(...$deps);
 
             $this->paginationData['data'][] = $itemDataTransformer->write($item)->read();
         }
@@ -54,7 +53,7 @@ abstract class BasicPaginatorDataTransformer implements PaginatorDataTransformer
      *
      * @return static
      */
-    #[Override]
+    #[\Override]
     public function write(PaginatorI $items): DataTransformer
     {
         $this->paginationData['data'] = [];

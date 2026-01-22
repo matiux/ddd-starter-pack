@@ -42,21 +42,6 @@ class FilterAppliersRegistryTest extends TestCase
     }
 
     /**
-     * @return array<array-key, array<array-key, mixed>>
-     */
-    public static function provideValidEmptyValues(): array
-    {
-        return [
-            'int(0)' => [0],
-            'string("0")' => ['0'],
-            'string("")' => [''],
-            'bool(false)' => [false],
-            'null' => [null],
-            'empty array' => [[]],
-        ];
-    }
-
-    /**
      * @test
      *
      * @dataProvider provideValidEmptyValues
@@ -73,5 +58,20 @@ class FilterAppliersRegistryTest extends TestCase
         self::assertSame([
             ['some-value' => $value],
         ], $target->get());
+    }
+
+    /**
+     * @return array<array-key, array<array-key, mixed>>
+     */
+    public static function provideValidEmptyValues(): array
+    {
+        return [
+            'int(0)' => [0],
+            'string("0")' => ['0'],
+            'string("")' => [''],
+            'bool(false)' => [false],
+            'null' => [null],
+            'empty array' => [[]],
+        ];
     }
 }

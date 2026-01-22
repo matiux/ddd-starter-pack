@@ -4,8 +4,6 @@ declare(strict_types=1);
 
 namespace DDDStarterPack\Exception;
 
-use Override;
-
 /**
  * @codeCoverageIgnore
  */
@@ -15,7 +13,7 @@ abstract class DomainException extends \Exception
     public const MESSAGE = 'An error has occurred';
     protected array $context = [];
 
-    final public function __construct(string $message = '', int $code = 0, null|\Throwable $previous = null)
+    final public function __construct(string $message = '', int $code = 0, \Throwable|null $previous = null)
     {
         $message = $message ?: static::MESSAGE;
 
@@ -56,7 +54,7 @@ abstract class DomainException extends \Exception
         $this->context = array_merge($this->context, $context);
     }
 
-    protected static function obtainMessage(null|\Throwable $previous = null): string
+    protected static function obtainMessage(\Throwable|null $previous = null): string
     {
         $msg = '';
 

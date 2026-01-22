@@ -6,7 +6,6 @@ namespace DDDStarterPack\Message\Driver\AWS;
 
 use Aws\Result;
 use DDDStarterPack\Message\MessageProducerResponse;
-use Override;
 use Webmozart\Assert\Assert;
 
 class AWSMessageProducerResponse implements MessageProducerResponse
@@ -18,31 +17,31 @@ class AWSMessageProducerResponse implements MessageProducerResponse
         private Result $originalResponse,
     ) {}
 
-    #[Override]
+    #[\Override]
     public function sentMessages(): int
     {
         return $this->sentMessages;
     }
 
-    #[Override]
+    #[\Override]
     public function originalResponse(): Result
     {
         return $this->originalResponse;
     }
 
-    #[Override]
+    #[\Override]
     public function body(): mixed
     {
         return $this->originalResponse->toArray();
     }
 
-    #[Override]
+    #[\Override]
     public function sentMessageId(): mixed
     {
         return $this->originalResponse['MessageId'] ?? null;
     }
 
-    #[Override]
+    #[\Override]
     public function isSuccess(): bool
     {
         Assert::notEmpty($this->originalResponse);

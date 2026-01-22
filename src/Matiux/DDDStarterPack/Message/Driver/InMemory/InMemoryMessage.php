@@ -10,9 +10,9 @@ class InMemoryMessage implements Message
 {
     public function __construct(
         private string $body,
-        private null|\DateTimeImmutable $occurredAt,
-        private null|string $type = null,
-        private null|string $id = null,
+        private \DateTimeImmutable|null $occurredAt,
+        private string|null $type = null,
+        private string|null $id = null,
         private array $extra = [],
     ) {}
 
@@ -34,7 +34,7 @@ class InMemoryMessage implements Message
     }
 
     #[\Override]
-    public function type(): null|string
+    public function type(): string|null
     {
         return $this->type;
     }
@@ -46,7 +46,7 @@ class InMemoryMessage implements Message
     }
 
     #[\Override]
-    public function occurredAt(): null|\DateTimeImmutable
+    public function occurredAt(): \DateTimeImmutable|null
     {
         return $this->occurredAt;
     }

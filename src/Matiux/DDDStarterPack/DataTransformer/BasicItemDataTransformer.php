@@ -6,7 +6,6 @@ namespace DDDStarterPack\DataTransformer;
 
 use DDDStarterPack\DataTransformer\Type\DataTransformer;
 use DDDStarterPack\DataTransformer\Type\ItemDataTransformer;
-use Override;
 
 /**
  * @template I
@@ -24,7 +23,7 @@ abstract class BasicItemDataTransformer implements ItemDataTransformer
      *
      * @return static<I, R>
      */
-    #[Override]
+    #[\Override]
     public function write($item): DataTransformer
     {
         $this->item = $item;

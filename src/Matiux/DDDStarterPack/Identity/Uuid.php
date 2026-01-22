@@ -4,8 +4,6 @@ declare(strict_types=1);
 
 namespace DDDStarterPack\Identity;
 
-use Override;
-
 /**
  * @extends  BasicGenericId<string>
  */
@@ -25,7 +23,7 @@ abstract readonly class Uuid extends BasicGenericId
      *
      * @return static
      */
-    #[Override]
+    #[\Override]
     abstract public static function new(): static;
 
     /**
@@ -33,7 +31,7 @@ abstract readonly class Uuid extends BasicGenericId
      *
      * @throws \InvalidArgumentException
      */
-    #[Override]
+    #[\Override]
     public static function from($id): static
     {
         if (!$id || !self::isValidUuid($id)) {
@@ -48,8 +46,8 @@ abstract readonly class Uuid extends BasicGenericId
      *
      * @return null|static
      */
-    #[Override]
-    public static function tryFrom($id): null|static
+    #[\Override]
+    public static function tryFrom($id): static|null
     {
         if (is_null($id)) {
             return null;

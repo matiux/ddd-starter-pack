@@ -36,7 +36,7 @@ class SQSMessageConsumer extends BasicMessageService implements MessageConsumerC
     }
 
     #[\Override]
-    public function consume(null|string $queue = null): null|Message
+    public function consume(string|null $queue = null): Message|null
     {
         $messages = $this->doConsume($queue, 1);
 
@@ -44,7 +44,7 @@ class SQSMessageConsumer extends BasicMessageService implements MessageConsumerC
     }
 
     /** @return AWSMessage[] */
-    private function doConsume(null|string $queue, int $maxNumberOfMessages): array
+    private function doConsume(string|null $queue, int $maxNumberOfMessages): array
     {
         $queue ??= $this->getQueueUrlFromConfig();
 
@@ -152,7 +152,7 @@ class SQSMessageConsumer extends BasicMessageService implements MessageConsumerC
         return $attributes;
     }
 
-    private function extractType(array $messageAttributes): null|string
+    private function extractType(array $messageAttributes): string|null
     {
         if (!array_key_exists('Type', $messageAttributes)) {
             return null;
@@ -164,7 +164,7 @@ class SQSMessageConsumer extends BasicMessageService implements MessageConsumerC
         return $messageAttributesType['Value'] ?? null;
     }
 
-    private function extractOccurredAt(array $messageAttributes): null|\DateTimeImmutable
+    private function extractOccurredAt(array $messageAttributes): \DateTimeImmutable|null
     {
         if (!array_key_exists('OccurredAt', $messageAttributes)) {
             return null;
@@ -185,13 +185,13 @@ class SQSMessageConsumer extends BasicMessageService implements MessageConsumerC
      * {@inheritDoc}
      */
     #[\Override]
-    public function consumeBatch(null|string $queue = null, int $maxNumberOfMessages = 1): array
+    public function consumeBatch(string|null $queue = null, int $maxNumberOfMessages = 1): array
     {
         return $this->doConsume($queue, $maxNumberOfMessages);
     }
 
     #[\Override]
-    public function delete(string $messageId, null|string $queue = null): void
+    public function delete(string $messageId, string|null $queue = null): void
     {
         $queue ??= $this->getQueueUrlFromConfig();
 

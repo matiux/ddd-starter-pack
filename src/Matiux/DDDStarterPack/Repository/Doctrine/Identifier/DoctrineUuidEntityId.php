@@ -38,7 +38,7 @@ abstract class DoctrineUuidEntityId extends GuidType
      *
      * @return null|string
      */
-    private function prepareValue(mixed $value): null|string
+    private function prepareValue(mixed $value): string|null
     {
         return match (true) {
             is_object($value), is_null($value) => null,
