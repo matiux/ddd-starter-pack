@@ -10,24 +10,35 @@ on:
 jobs:
   static-analysis:
     name: "static analysis"
-    runs-on: "ubuntu-latest"
-    steps:
-      - name: "checkout"
-        uses: "actions/checkout@v2"
+    runs-on: ubuntu-latest
 
-      - name: "installing PHP"
-        uses: "shivammathur/setup-php@v2"
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Installing PHP
+        uses: shivammathur/setup-php@v2
         with:
-          php-version: "8.2"
+          php-version: "8.5"
           ini-values: memory_limit=-1
           tools: composer:v2, cs2pr
           extensions: bcmath, mbstring, intl, sodium, json
 
-      - name: Install dependencies
-        run: composer install
+      - name: Cache Composer
+        uses: actions/cache@v4
+        with:
+          path: |
+            ~/.composer/cache/files
+            vendor
+          key: ${{ runner.os }}-php-8.5-composer-${{ hashFiles('**/composer.lock') }}
+          restore-keys: |
+            ${{ runner.os }}-php-8.5-composer-
 
-      - name: "running static analysis"
+      - name: Install dependencies
+        run: composer install --no-interaction --no-progress --prefer-dist
+
+      - name: Running static analysis
         run: ./tools/bin/project/project psalm
 
-      - name: "calculating type coverage"
+      - name: Calculating type coverage
         run: ./tools/bin/project/project type-coverage
