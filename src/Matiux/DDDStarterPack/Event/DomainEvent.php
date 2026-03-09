@@ -5,9 +5,6 @@ declare(strict_types=1);
 namespace DDDStarterPack\Event;
 
 use DDDStarterPack\Identity\AggregateId;
-use DDDStarterPack\Identity\Trace\CausationId;
-use DDDStarterPack\Identity\Trace\CorrelationId;
-use DDDStarterPack\Identity\Trace\DomainTrace;
 use DDDStarterPack\Type\DateTimeRFC;
 
 /**
@@ -35,7 +32,7 @@ abstract readonly class DomainEvent
      * @param I $aggregateId
      */
     protected function __construct(
-        public mixed $aggregateId,
+        public AggregateId $aggregateId,
         public DateTimeRFC $occurredAt,
         public DomainEventMeta $meta,
     ) {
@@ -60,38 +57,8 @@ abstract readonly class DomainEvent
             'aggregate_id' => $this->aggregateId->value(),
             'event_payload' => $this->serializeEventPayload(),
             'occurred_at' => $this->occurredAt->value(),
-            'meta' => [
-                'event_id' => $this->meta->eventId->value(),
-                'event_version' => $this->meta->version->v,
-                'context' => $this->meta->context(),
-                'domain_trace' => [
-                    'correlation_id' => $this->meta->domainTrace->correlationId->value(),
-                    'causation_id' => $this->meta->domainTrace->causationId->value(),
-                ],
-            ],
+            'meta' => $this->meta->serialize(),
         ];
-    }
-
-    /**
-     * @param SerializedMeta $meta
-     *
-     * @return DomainEventMeta
-     */
-    protected static function deserializeMeta(array $meta): DomainEventMeta
-    {
-        /** @var string[] $domainTrace */
-        $domainTrace = $meta['domain_trace'];
-
-        /** @psalm-suppress RedundantCastGivenDocblockType */
-        return new DomainEventMeta(
-            EventId::from((string) $meta['event_id']),
-            DomainTrace::fromIds(
-                CorrelationId::from($domainTrace['correlation_id']),
-                CausationId::from($domainTrace['causation_id']),
-            ),
-            new DomainEventVersion((int) $meta['event_version']),
-            $meta['context'],
-        );
     }
 
     abstract protected function serializeEventPayload(): array;

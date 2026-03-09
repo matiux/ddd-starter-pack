@@ -130,7 +130,7 @@ readonly class SomethingHappened extends DomainEvent
         return new self(
             AggregateId::from($data['aggregate_id']),
             DateTimeRFC::from($data['occurred_at']),
-            self::deserializeMeta($data['meta']),
+            DomainEventMeta::deserialize($data['meta']),
             (string) $data['event_payload']['name'],
         );
     }
@@ -181,7 +181,7 @@ readonly class SomethingHappenedV2 extends DomainEvent
         return new self(
             AggregateId::from($data['aggregate_id']),
             DateTimeRFC::from($data['occurred_at']),
-            self::deserializeMeta($data['meta']),
+            DomainEventMeta::deserialize($data['meta']),
         );
     }
 
