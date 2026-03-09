@@ -10,6 +10,7 @@ class TopicArnIsValidConfigurationParamConstraint extends ConfigurationParamCons
 {
     private const PARAM_NAME = 'sns_topic_arn';
 
+    #[\Override]
     public function name(): string
     {
         return self::PARAM_NAME;

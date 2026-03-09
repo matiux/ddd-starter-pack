@@ -15,19 +15,22 @@ use Webmozart\Assert\Assert;
 trait SQSBasicService
 {
     private SQSConfiguration $configuration;
-    private null|string $queueUrl = null;
-    private null|SqsClient $client = null;
+    private string|null $queueUrl = null;
+    private SqsClient|null $client = null;
 
+    #[\Override]
     protected function defaultsParams(): array
     {
         return $this->customDefaultsParams() + ['queue_url' => null];
     }
 
+    #[\Override]
     protected function obtainConfigurationValidator(): ConfigurationValidator
     {
         return new SQSConfigurationValidator();
     }
 
+    #[\Override]
     protected function setSpecificConfiguration(Configuration $configuration): void
     {
         /** @var string[] $params */

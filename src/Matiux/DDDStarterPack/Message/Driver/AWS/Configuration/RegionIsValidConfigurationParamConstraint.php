@@ -10,6 +10,7 @@ class RegionIsValidConfigurationParamConstraint extends ConfigurationParamConstr
 {
     private const PARAM_NAME = 'region';
 
+    #[\Override]
     public function name(): string
     {
         return self::PARAM_NAME;

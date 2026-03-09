@@ -20,5 +20,6 @@ abstract class CreateDomainEventFromConsumedMessage extends CreateFromConsumedMe
      *
      * @return DomainEvent
      */
+    #[\Override]
     abstract protected function create($rawMessage): DomainEvent;
 }

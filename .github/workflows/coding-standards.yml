@@ -1,30 +1,38 @@
 name: "Coding standards"
 
 on:
-  pull_request: ~
-  push:
-    branches:
-      - develop
+  workflow_call: ~
   workflow_dispatch: ~
 
 jobs:
   coding-standards:
     name: "coding standards"
-    runs-on: "ubuntu-latest"
+    runs-on: ubuntu-latest
+
     steps:
       - name: Checkout
-        uses: "actions/checkout@v2"
+        uses: actions/checkout@v4
 
-      - name: "installing PHP"
-        uses: "shivammathur/setup-php@v2"
+      - name: "Installing PHP"
+        uses: shivammathur/setup-php@v2
         with:
-          php-version: "8.2"
+          php-version: "8.5"
           ini-values: memory_limit=-1
           tools: composer:v2, cs2pr
           extensions: bcmath, mbstring, intl, sodium, json
 
+      - name: Cache Composer
+        uses: actions/cache@v4
+        with:
+          path: |
+            ~/.composer/cache/files
+            vendor
+          key: ${{ runner.os }}-php-8.5-composer-${{ hashFiles('**/composer.lock') }}
+          restore-keys: |
+            ${{ runner.os }}-php-8.5-composer-
+
       - name: Install dependencies
-        run: composer install
+        run: composer install --no-interaction --no-progress --prefer-dist
 
       - name: "coding-standard-check"
         run: ./tools/bin/project/project coding-standard-fix-all

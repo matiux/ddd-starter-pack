@@ -23,6 +23,7 @@ abstract class BasicItemDataTransformer implements ItemDataTransformer
      *
      * @return static<I, R>
      */
+    #[\Override]
     public function write($item): DataTransformer
     {
         $this->item = $item;

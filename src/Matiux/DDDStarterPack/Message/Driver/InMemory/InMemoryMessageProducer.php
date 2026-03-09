@@ -24,8 +24,10 @@ class InMemoryMessageProducer implements MessageProducer
      *
      * @codeCoverageIgnore
      */
+    #[\Override]
     public function open(string $exchangeName = ''): void {}
 
+    #[\Override]
     public function send($message): MessageProducerResponse
     {
         $this->messageQueue->appendMessage($message);
@@ -44,6 +46,7 @@ class InMemoryMessageProducer implements MessageProducer
      *
      * @codeCoverageIgnore
      */
+    #[\Override]
     public function close(string $exchangeName = ''): void {}
 
     /**
@@ -51,6 +54,7 @@ class InMemoryMessageProducer implements MessageProducer
      *
      * @return MessageProducerResponse
      */
+    #[\Override]
     public function sendBatch(array $messages): MessageProducerResponse
     {
         if (count($messages) > self::BATCH_LIMIT) {
@@ -64,6 +68,7 @@ class InMemoryMessageProducer implements MessageProducer
         return new InMemoryMessageProducerResponse($this->messageQueue->count(), true, []);
     }
 
+    #[\Override]
     public function getBatchLimit(): int
     {
         return self::BATCH_LIMIT;

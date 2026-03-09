@@ -10,6 +10,7 @@ class SecretKeyIsValidConfigurationParamConstraint extends ConfigurationParamCon
 {
     private const PARAM_NAME = 'secret_key';
 
+    #[\Override]
     public function name(): string
     {
         return self::PARAM_NAME;

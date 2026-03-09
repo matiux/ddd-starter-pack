@@ -10,9 +10,9 @@ class RabbitMQMessage implements Message
 {
     public function __construct(
         private string $body,
-        private null|string $exchangeName = null,
-        private null|\DateTimeImmutable $occurredAt = null,
-        private null|string $type = null,
+        private string|null $exchangeName = null,
+        private \DateTimeImmutable|null $occurredAt = null,
+        private string|null $type = null,
         private $id = null,
         private array $extra = [],
     ) {}
@@ -22,17 +22,17 @@ class RabbitMQMessage implements Message
         return $this->body;
     }
 
-    public function exchangeName(): null|string
+    public function exchangeName(): string|null
     {
         return $this->exchangeName;
     }
 
-    public function occurredAt(): null|\DateTimeImmutable
+    public function occurredAt(): \DateTimeImmutable|null
     {
         return $this->occurredAt;
     }
 
-    public function type(): null|string
+    public function type(): string|null
     {
         return $this->type;
     }

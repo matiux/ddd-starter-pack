@@ -8,6 +8,7 @@ use DDDStarterPack\Message\Configuration\ConfigurationValidator;
 
 abstract class AWSConfigurationValidator extends ConfigurationValidator
 {
+    #[\Override]
     protected function buildRegistry(): void
     {
         $this->configurationParamRegistry->addConstraint(new AccessKeyIsValidConfigurationParamConstraint());

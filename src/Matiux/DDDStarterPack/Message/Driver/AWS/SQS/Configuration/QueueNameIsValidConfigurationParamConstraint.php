@@ -10,6 +10,7 @@ class QueueNameIsValidConfigurationParamConstraint extends ConfigurationParamCon
 {
     private const PARAM_NAME = 'queue_url';
 
+    #[\Override]
     public function name(): string
     {
         return self::PARAM_NAME;

@@ -8,6 +8,7 @@ use DDDStarterPack\Message\Driver\AWS\Configuration\AWSConfigurationValidator;
 
 class SNSConfigurationValidator extends AWSConfigurationValidator
 {
+    #[\Override]
     protected function buildRegistry(): void
     {
         parent::buildRegistry();

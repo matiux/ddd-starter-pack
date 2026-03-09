@@ -15,6 +15,7 @@ abstract class AWSConfigurationBuilder extends ConfigurationBuilder
      *
      * @return static
      */
+    #[\Override]
     public static function create(string $driverName): static
     {
         $builder = new static();

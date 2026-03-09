@@ -10,14 +10,14 @@ class SQSConfiguration extends AWSConfiguration
 {
     public function __construct(
         private string $region,
-        private null|string $accessKey = null,
-        private null|string $secretKey = null,
-        private null|string $queueUrl = null,
+        private string|null $accessKey = null,
+        private string|null $secretKey = null,
+        private string|null $queueUrl = null,
     ) {
         parent::__construct($this->region, $this->accessKey, $this->secretKey);
     }
 
-    public function queueUrl(): null|string
+    public function queueUrl(): string|null
     {
         return $this->queueUrl;
     }

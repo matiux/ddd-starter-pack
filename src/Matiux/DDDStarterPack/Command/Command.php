@@ -20,7 +20,7 @@ abstract readonly class Command
      */
     public function __construct(
         public CommandId $commandId,
-        public mixed $aggregateId,
+        public AggregateId $aggregateId,
         public DomainTrace $domainTrace,
         public DateTimeRFC $operationDate,
     ) {

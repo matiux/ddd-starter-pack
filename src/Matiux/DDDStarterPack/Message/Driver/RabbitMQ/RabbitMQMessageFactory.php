@@ -13,11 +13,11 @@ class RabbitMQMessageFactory implements MessageFactory
 {
     public function build(
         string $body,
-        null|\DateTimeImmutable $occurredAt = null,
-        null|string $type = null,
-        null|string $id = null,
+        \DateTimeImmutable|null $occurredAt = null,
+        string|null $type = null,
+        string|null $id = null,
         array $extra = [],
-        null|string $exchangeName = null,
+        string|null $exchangeName = null,
     ) {
         return new RabbitMQMessage(
             body: $body,

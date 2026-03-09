@@ -4,14 +4,12 @@ declare(strict_types=1);
 
 namespace DDDStarterPack\Type;
 
-use Iterator;
-
 /**
  * @psalm-suppress UnsafeGenericInstantiation
  *
  * @template T of mixed|false
  *
- * @implements Iterator<array-key, T>
+ * @implements \Iterator<array-key, T>
  */
 class Collection implements \Iterator, \Countable
 {
@@ -44,31 +42,37 @@ class Collection implements \Iterator, \Countable
     /**
      * @return T
      */
+    #[\Override]
     public function current(): mixed
     {
         return current($this->items);
     }
 
+    #[\Override]
     public function next(): void
     {
         next($this->items);
     }
 
-    public function key(): null|int
+    #[\Override]
+    public function key(): int|null
     {
         return key($this->items);
     }
 
+    #[\Override]
     public function valid(): bool
     {
         return null !== key($this->items);
     }
 
+    #[\Override]
     public function rewind(): void
     {
         reset($this->items);
     }
 
+    #[\Override]
     public function count(): int
     {
         return count($this->items);

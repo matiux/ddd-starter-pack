@@ -10,11 +10,13 @@ use Doctrine\DBAL\Types\GuidType;
 
 abstract class DoctrineUuidEntityId extends GuidType
 {
+    #[\Override]
     public function convertToDatabaseValue($value, AbstractPlatform $platform): mixed
     {
         return $value instanceof Uuid ? $value->value() : $value ?? null;
     }
 
+    #[\Override]
     public function convertToPHPValue($value, AbstractPlatform $platform): mixed
     {
         $value = $this->prepareValue($value);
@@ -36,7 +38,7 @@ abstract class DoctrineUuidEntityId extends GuidType
      *
      * @return null|string
      */
-    private function prepareValue(mixed $value): null|string
+    private function prepareValue(mixed $value): string|null
     {
         return match (true) {
             is_object($value), is_null($value) => null,

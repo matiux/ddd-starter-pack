@@ -1,0 +1,50 @@
+name: "CI"
+
+on:
+  pull_request: ~
+  push:
+    branches:
+      - develop
+  workflow_dispatch: ~
+
+jobs:
+  check-dependencies:
+    name: "Check dependencies"
+    uses: ./.github/workflows/check-dependencies.yml
+    secrets: inherit
+
+  dependencies-vulnerability:
+    name: "Dependencies vulnerability"
+    needs:
+      - check-dependencies
+    uses: ./.github/workflows/dependencies-vulnerability.yml
+    secrets: inherit
+
+  security-analysis:
+    name: "Security analysis"
+    needs:
+      - dependencies-vulnerability
+    uses: ./.github/workflows/security-analysis.yml
+    secrets: inherit
+
+  static-analysis:
+    name: "Static analysis"
+    needs:
+      - dependencies-vulnerability
+    uses: ./.github/workflows/static-analysis.yml
+    secrets: inherit
+
+  coding-standards:
+    name: "Coding standards"
+    needs:
+      - security-analysis
+      - static-analysis
+    uses: ./.github/workflows/coding-standards.yml
+    secrets: inherit
+
+  tests:
+    name: "Tests matrix"
+    needs:
+      - coding-standards
+    uses: ./.github/workflows/tests.yml
+    secrets: inherit

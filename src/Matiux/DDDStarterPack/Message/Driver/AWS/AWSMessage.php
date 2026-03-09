@@ -10,9 +10,9 @@ class AWSMessage implements Message
 {
     public function __construct(
         private string $body,
-        private null|\DateTimeImmutable $occurredAt,
-        private null|string $type = null,
-        private null|string $id = null,
+        private \DateTimeImmutable|null $occurredAt,
+        private string|null $type = null,
+        private string|null $id = null,
         private array $extra = [],
     ) {}
 
@@ -21,31 +21,37 @@ class AWSMessage implements Message
      *
      * @codeCoverageIgnore
      */
-    public function exchangeName(): null|string
+    #[\Override]
+    public function exchangeName(): string|null
     {
         throw new \BadMethodCallException();
     }
 
+    #[\Override]
     public function body(): string
     {
         return $this->body;
     }
 
-    public function type(): null|string
+    #[\Override]
+    public function type(): string|null
     {
         return $this->type;
     }
 
-    public function id(): null|string
+    #[\Override]
+    public function id(): string|null
     {
         return $this->id;
     }
 
-    public function occurredAt(): null|\DateTimeImmutable
+    #[\Override]
+    public function occurredAt(): \DateTimeImmutable|null
     {
         return $this->occurredAt;
     }
 
+    #[\Override]
     public function extra(): array
     {
         return $this->extra;

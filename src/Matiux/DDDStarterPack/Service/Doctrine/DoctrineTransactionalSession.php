@@ -22,6 +22,7 @@ readonly class DoctrineTransactionalSession implements TransactionalSession
     ) {}
 
     /** {@inheritDoc} */
+    #[\Override]
     public function executeAtomically(callable $operation)
     {
         try {

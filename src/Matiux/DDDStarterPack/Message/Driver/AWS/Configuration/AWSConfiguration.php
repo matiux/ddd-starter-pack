@@ -8,8 +8,8 @@ abstract class AWSConfiguration
 {
     public function __construct(
         private string $region,
-        private null|string $accessKey = null,
-        private null|string $secretKey = null,
+        private string|null $accessKey = null,
+        private string|null $secretKey = null,
     ) {}
 
     public function region(): string
@@ -17,12 +17,12 @@ abstract class AWSConfiguration
         return $this->region;
     }
 
-    public function accessKey(): null|string
+    public function accessKey(): string|null
     {
         return $this->accessKey;
     }
 
-    public function secretKey(): null|string
+    public function secretKey(): string|null
     {
         return $this->secretKey;
     }

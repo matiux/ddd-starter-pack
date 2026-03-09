@@ -32,6 +32,7 @@ abstract class BasicCollectionDataTransformer implements CollectionDataTransform
      *
      * @return static
      */
+    #[\Override]
     public function write($items, int $total = 0): DataTransformer
     {
         $this->items = $items;

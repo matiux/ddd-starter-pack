@@ -17,11 +17,13 @@ class TransactionalCommandBus implements CommandBus
     ) {}
 
     /** @throws TransactionFailedException */
+    #[\Override]
     public function dispatch($command): void
     {
         $this->session->executeAtomically(fn () => $this->commandBus->dispatch($command));
     }
 
+    #[\Override]
     public function subscribe(CommandHandler $handler): void
     {
         $this->commandBus->subscribe($handler);

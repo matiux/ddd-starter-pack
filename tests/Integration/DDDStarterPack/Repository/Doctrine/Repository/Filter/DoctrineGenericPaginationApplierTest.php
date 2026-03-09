@@ -14,18 +14,6 @@ use Tests\Tool\EntityManagerBuilder;
 class DoctrineGenericPaginationApplierTest extends TestCase
 {
     /**
-     * @return array<array-key, array<array-key, int>>
-     */
-    public static function paginationDataProvider(): array
-    {
-        return [
-            [1, 10, 0],
-            [2, 10, 10],
-            [3, 10, 20],
-        ];
-    }
-
-    /**
      * @test
      *
      * @dataProvider paginationDataProvider
@@ -55,5 +43,17 @@ class DoctrineGenericPaginationApplierTest extends TestCase
 
         self::assertEquals($offset, $qb->getFirstResult());
         self::assertEquals($perPage, $qb->getMaxResults());
+    }
+
+    /**
+     * @return array<array-key, array<array-key, int>>
+     */
+    public static function paginationDataProvider(): array
+    {
+        return [
+            [1, 10, 0],
+            [2, 10, 10],
+            [3, 10, 20],
+        ];
     }
 }

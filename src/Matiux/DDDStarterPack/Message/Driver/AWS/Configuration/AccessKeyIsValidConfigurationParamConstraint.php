@@ -10,6 +10,7 @@ class AccessKeyIsValidConfigurationParamConstraint extends ConfigurationParamCon
 {
     private const PARAM_NAME = 'access_key';
 
+    #[\Override]
     public function name(): string
     {
         return self::PARAM_NAME;

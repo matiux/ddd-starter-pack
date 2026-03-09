@@ -13,30 +13,9 @@ use PHPUnit\Framework\TestCase;
 class DomainEventMetaTest extends TestCase
 {
     /**
-     * @return array<array-key, array{0: string[], 1: bool}>
-     */
-    public static function provideExpectedKeys(): array
-    {
-        return [
-            'snake case' => [
-                ['event_id', 'correlation_id', 'causation_id', 'event_version', 'context'],
-                false,
-            ],
-            'camel case' => [
-                ['eventId', 'correlationId', 'causationId', 'eventVersion', 'context'],
-                true,
-            ],
-        ];
-    }
-
-    /**
      * @test
-     *
-     * @dataProvider provideExpectedKeys
-     *
-     * @param string[] $expectedKeys
      */
-    public function it_should_encode(array $expectedKeys, bool $requestCamelCaseEncoding): void
+    public function it_should_serialize(): void
     {
         $eventId = EventId::new();
         $domainTrace = DomainTrace::init($eventId);
@@ -44,18 +23,41 @@ class DomainEventMetaTest extends TestCase
 
         $meta = new DomainEventMeta($eventId, $domainTrace, $v);
 
-        $expectedValues = [
-            $eventId->value(),
-            $eventId->value(),
-            $eventId->value(),
-            1,
-            null,
+        $expected = [
+            'event_id' => $eventId->value(),
+            'event_version' => 1,
+            'context' => null,
+            'domain_trace' => [
+                'correlation_id' => $eventId->value(),
+                'causation_id' => null,
+            ],
         ];
-        $expected = array_combine($expectedKeys, $expectedValues);
 
-        $encoded = $meta->toArray($requestCamelCaseEncoding);
+        $encoded = $meta->serialize();
 
         self::assertEquals($expected, $encoded);
+        self::assertNull($meta->context());
+    }
+
+    /**
+     * @test
+     */
+    public function it_should_deserialize(): void
+    {
+        $eventId = EventId::new();
+        $serialized = [
+            'event_id' => $eventId->value(),
+            'event_version' => 1,
+            'context' => null,
+            'domain_trace' => [
+                'correlation_id' => $eventId->value(),
+                'causation_id' => $eventId->value(),
+            ],
+        ];
+
+        $meta = DomainEventMeta::deserialize($serialized);
+
+        self::assertSame($serialized, $meta->serialize());
         self::assertNull($meta->context());
     }
 }

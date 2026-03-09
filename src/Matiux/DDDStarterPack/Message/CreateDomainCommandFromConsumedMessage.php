@@ -20,5 +20,6 @@ abstract class CreateDomainCommandFromConsumedMessage extends CreateFromConsumed
      *
      * @return Command
      */
+    #[\Override]
     abstract protected function create($consumedMessage): Command;
 }
