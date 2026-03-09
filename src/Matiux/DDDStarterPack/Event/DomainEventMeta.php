@@ -56,7 +56,7 @@ final class DomainEventMeta
                     ? CausationId::from($data['domain_trace']['causation_id'])
                     : null,
             ),
-            new DomainEventVersion((int) $data['event_version']),
+            new DomainEventVersion($data['event_version']),
             $data['context'],
         );
     }

@@ -14,7 +14,7 @@ use DDDStarterPack\Type\DateTimeRFC;
  *   event_id: string,
  *   event_version: int,
  *   context: null|string,
- *   domain_trace: array{correlation_id: string, causation_id: string}
+ *   domain_trace: array{correlation_id: string, causation_id: null|string}
  * }
  * @psalm-type SerializedDomainEvent = array{
  *   event_name: string,
