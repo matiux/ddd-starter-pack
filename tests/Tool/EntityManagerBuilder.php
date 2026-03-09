@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Tests\Tool;
 
 use DDDStarterPack\Tool\EnvVarUtil;
+use Doctrine\DBAL\DriverManager;
 use Doctrine\DBAL\Types\Type;
 use Doctrine\ORM\Configuration;
 use Doctrine\ORM\EntityManager;
@@ -73,7 +74,10 @@ class EntityManagerBuilder
             Type::addType('PersonId', DoctrineUuidPersonId::class);
         }
 
-        $builder->ems['default'] = EntityManager::create($builder->connectionParams, $builder->config);
+        $builder->ems['default'] = new EntityManager(
+            DriverManager::getConnection($builder->connectionParams, $builder->config),
+            $builder->config,
+        );
 
         return $builder;
     }
